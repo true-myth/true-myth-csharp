@@ -11,8 +11,8 @@ namespace TrueMyth
         public Some(TValue value)
         {
             if (value == null)
-                throw new Exception("Tried to construct `Some` with `null`");
-            
+                throw new ArgumentNullException(nameof(value), "Tried to construct `Some` with `null`");
+
             _value = value;
         }
 
