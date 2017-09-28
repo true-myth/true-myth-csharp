@@ -11,9 +11,7 @@ namespace TrueMyth
         public Some(TValue value)
         {
             if (value == null)
-            {
                 throw new Exception("Tried to construct `Some` with `null`");
-            }
             
             _value = value;
         }
