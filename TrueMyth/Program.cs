@@ -14,14 +14,14 @@ namespace TrueMyth
         }
 
         private static int Length(string s) => s.Length;
-        int Double(int n) => n * 2;
+        static int Double(int n) => n * 2;
 
         private static void DemoStatic()
         {
             var someNumber = Maybe.Of(42);
             
             var doubled = Maybe.Map(Double, someNumber);
-            Console.WriteLine(Maybe.Unwrap(doubled));
+            Console.WriteLine(Maybe.UnsafelyUnwrap(doubled));
         }
 
         private static void DemoMatching()
@@ -37,8 +37,8 @@ namespace TrueMyth
         {
             switch (something)
             {
-                case Some<TValue> s:
-                    Console.WriteLine("Some({0})", s.Unwrap());
+                case Just<TValue> s:
+                    Console.WriteLine("Some({0})", s.UnsafelyUnwrap());
                     break;
                 case Nothing<TValue> _:
                     Console.WriteLine("`Nothing` to see here");
@@ -53,7 +53,7 @@ namespace TrueMyth
             var someString = Maybe.Of("waffles");
 
             var mappedToLength = someString.Map(Length);
-            Console.WriteLine(mappedToLength.Unwrap());
+            Console.WriteLine(mappedToLength.UnsafelyUnwrap());
             Console.WriteLine(mappedToLength.UnwrapOr(int.MinValue));
         }
 
@@ -65,7 +65,7 @@ namespace TrueMyth
             // GROSS, DO NOT WANT
             try
             {
-                mappedNothing.Unwrap();
+                mappedNothing.UnsafelyUnwrap();
             } 
             catch (Exception ex)
             {
@@ -75,7 +75,7 @@ namespace TrueMyth
             var anotherNothing = new Nothing<string>();
             try
             {
-                Console.WriteLine(anotherNothing.Unwrap());
+                Console.WriteLine(anotherNothing.UnsafelyUnwrap());
             }
             catch (Exception ex)
             {
