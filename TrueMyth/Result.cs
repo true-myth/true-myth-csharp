@@ -6,8 +6,9 @@ namespace TrueMyth
     {
         TValue UnsafelyUnwrap();
         TError UnsafelyUnwrapErr();
-        IResult<TMapped, TError> Select<TMapped>(Func<TValue, TMapped> selector);
+        IResult<TSelected, TError> Select<TSelected>(Func<TValue, TSelected> selector);
         IResult<TSelected, TError> SelectMany<TSelected>(Func<TValue, IResult<TSelected, TError>> selector);
+        IResult<TValue, TSelectedError> SelectErr<TSelectedError>(Func<TError, TSelectedError> selector);
         bool IsOk();
         bool IsErr();
     }
@@ -19,12 +20,12 @@ namespace TrueMyth
         public static bool IsOk<TValue, TError>(IResult<TValue, TError> result) => result.IsOk();
         public static bool IsErr<TValue, TError>(IResult<TValue, TError> result) => result.IsErr();
 
-        public static IResult<TMapped, TError> Select<TValue, TMapped, TError>(
-            Func<TValue, TMapped> selector,
+        public static IResult<TSelected, TError> Select<TValue, TSelected, TError>(
+            Func<TValue, TSelected> selector,
             IResult<TValue, TError> result
         ) => IsOk(result)
-            ? new Ok<TMapped, TError>(selector(UnsafelyUnwrap(result)))
-            : result as IResult<TMapped, TError>;
+            ? new Ok<TSelected, TError>(selector(UnsafelyUnwrap(result)))
+            : result as IResult<TSelected, TError>;
 
         public static IResult<TSelected, TError> SelectMany<TValue, TSelected, TError>(
             Func<TValue, IResult<TSelected, TError>> selector,
@@ -33,7 +34,16 @@ namespace TrueMyth
             ? selector(UnsafelyUnwrap(result))
             : result as IResult<TSelected, TError>;
 
+        public static IResult<TValue, TSelectedError> SelectErr<TValue, TError, TSelectedError>(
+            Func<TError, TSelectedError> selector,
+            IResult<TValue, TError> result
+        ) => IsErr(result)
+            ? new Err<TValue, TSelectedError>(selector(UnsafelyUnwrapErr(result)))
+            : result as IResult<TValue, TSelectedError>;
+
         public static TValue UnsafelyUnwrap<TValue, TError>(IResult<TValue, TError> result) => result.UnsafelyUnwrap();
+        public static TError UnsafelyUnwrapErr<TValue, TError>(IResult<TValue, TError> result) => 
+            result.UnsafelyUnwrapErr();
     }
 
     public class Ok<TValue, TError> : IResult<TValue, TError>
@@ -56,6 +66,9 @@ namespace TrueMyth
         
         public IResult<TSelected, TError> SelectMany<TSelected>(Func<TValue, IResult<TSelected, TError>> selector) =>
             Result.SelectMany(selector, this);
+
+        public IResult<TValue, TSelectedError> SelectErr<TSelectedError>(Func<TError, TSelectedError> selector) =>
+            Result.SelectErr(selector, this);
 
         public TValue UnsafelyUnwrap() => _value;
 
@@ -85,6 +98,9 @@ namespace TrueMyth
 
         public IResult<TSelected, TError> SelectMany<TSelected>(Func<TValue, IResult<TSelected, TError>> selector) =>
             Result.SelectMany(selector, this);
+        
+        public IResult<TValue, TSelectedError> SelectErr<TSelectedError>(Func<TError, TSelectedError> selector) =>
+            Result.SelectErr(selector, this);
 
         public TValue UnsafelyUnwrap()
         {

@@ -44,8 +44,10 @@ namespace TrueMyth
 
         public static IMaybe<TValue> Nothing<TValue>() => new Nothing<TValue>();
 
-        public static IMaybe<TMapped> Map<TValue, TMapped>(Func<TValue, TMapped> mapFunc, IMaybe<TValue> maybeValue) =>
-            IsJust(maybeValue) ? Of(mapFunc(Unwrap(maybeValue))) : new Nothing<TMapped>();
+        public static IMaybe<TMapped> Select<TValue, TMapped>(
+            IMaybe<TValue> maybeValue, 
+            Func<TValue, TMapped> mapFunc
+        ) => IsJust(maybeValue) ? Of(mapFunc(Unwrap(maybeValue))) : new Nothing<TMapped>();
 
         public static TResult MapOr<TValue, TResult>(TResult orU, Func<TValue, TResult> mapFn, IMaybe<TValue> maybe) =>
             IsJust(maybe) ? mapFn(Unwrap(maybe)) : orU;
