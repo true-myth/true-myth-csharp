@@ -14,22 +14,20 @@ namespace TrueMyth
 
         bool IsJust();
         bool IsNothing();
-        IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> mapFn);
-        TResult MapOr<TResult>(TResult orU, Func<TValue, TResult> mapFn);
-        TResult MapOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> mapFn);
-        IMaybe<TValue> Or(IMaybe<TValue> mOr);
+        IMaybe<TMapped> Select<TMapped>(Func<TValue, TMapped> selector);
+        TResult SelectOr<TResult>(TResult orU, Func<TValue, TResult> selector);
+        TResult SelectOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector);
+        IMaybe<TValue> Or(IMaybe<TValue> orMaybe);
         IMaybe<TValue> OrElse(Func<IMaybe<TValue>> orElseFn);
         IMaybe<TResult> And<TResult>(IMaybe<TResult> mAnd);
-        IMaybe<TResult> AndThen<TResult>(Func<TValue, TResult> andThenFn);
-        IMaybe<TResult> Chain<TResult>(Func<TValue, TResult> chainFn);
-        IMaybe<TResult> FlatMap<TResult>(Func<TValue, TResult> flatMapFn);
+        IMaybe<TResult> SelectMany<TResult>(Func<TValue, IMaybe<TResult>> selector);
         TValue UnsafelyUnwrap();
         TValue UnwrapOr(TValue defaultValue);
         IResult<TValue, TError> ToOkOrErr<TError>(TError error);
         IResult<TValue, TError> ToOkOrElseErr<TError>(Func<TError> elseFn);
     }
 
-    public class Maybe
+    public static class Maybe
     {
         public static IMaybe<TValue> Of<TValue>(TValue value) =>
             value != null
@@ -53,7 +51,7 @@ namespace TrueMyth
             IsJust(maybe) ? mapFn(Unwrap(maybe)) : orU;
 
         public static TResult MapOrElse<TValue, TResult>(
-            Func<TResult> orElseFn, 
+            Func<TResult> orElseFn,
             Func<TValue, TResult> mapFn,
             IMaybe<TValue> maybe
         ) => IsJust(maybe) ? mapFn(Unwrap(maybe)) : orElseFn();
@@ -61,18 +59,17 @@ namespace TrueMyth
         public static IMaybe<TResult> And<TValue, TResult>(IMaybe<TResult> andMaybe, IMaybe<TValue> maybe) =>
             IsJust(maybe) ? andMaybe : Nothing<TResult>();
 
-        public static IMaybe<TResult> AndThen<TValue, TResult>(
-            Func<TValue,
-            IMaybe<TResult>> thenFn,
+        public static IMaybe<TResult> SelectMany<TValue, TResult>(
+            Func<TValue, IMaybe<TResult>> selector,
             IMaybe<TValue> maybe
-        ) => IsJust(maybe) ? thenFn(Unwrap(maybe)) : Nothing<TResult>();
-        
+        ) => IsJust(maybe) ? selector(Unwrap(maybe)) : Nothing<TResult>();
+
         public static IMaybe<TValue> Or<TValue>(IMaybe<TValue> mOr, IMaybe<TValue> maybe) =>
             IsJust(maybe) ? maybe : mOr;
 
         public static IMaybe<TValue> OrElse<TValue>(Func<IMaybe<TValue>> elseFn, IMaybe<TValue> maybe) =>
             IsJust(maybe) ? maybe : elseFn();
-        
+
         public static TValue UnsafelyUnwrap<TValue>(IMaybe<TValue> maybeValue) => maybeValue.UnsafelyUnwrap();
 
         public static TValue UnwrapOr<TValue>(TValue defaultValue, IMaybe<TValue> maybeValue) =>
@@ -80,13 +77,14 @@ namespace TrueMyth
 
         public static TValue UnwrapOrElse<TValue>(Func<TValue> orElseFn, IMaybe<TValue> maybe) =>
             IsJust(maybe) ? Unwrap(maybe) : orElseFn();
-        
+
         public static IResult<TValue, TError> ToOkOrErr<TValue, TError>(TError error, IMaybe<TValue> maybe) =>
             IsJust(maybe)
                 ? Result.Ok<TValue, TError>(Unwrap(maybe))
                 : Result.Err<TValue, TError>(error) as IResult<TValue, TError>;
-        
-        public static IResult<TValue, TError> ToOkOrElseErr<TValue, TError>(Func<TError> elseFn, IMaybe<TValue> maybe) =>
+
+        public static IResult<TValue, TError>
+            ToOkOrElseErr<TValue, TError>(Func<TError> elseFn, IMaybe<TValue> maybe) =>
             IsJust(maybe)
                 ? Result.Ok<TValue, TError>(Unwrap(maybe))
                 : Result.Err<TValue, TError>(elseFn()) as IResult<TValue, TError>;
@@ -114,17 +112,18 @@ namespace TrueMyth
         }
 
         public bool IsJust() => true;
-        
+
         public bool IsNothing() => false;
-        
-        public IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> mapFn) => new Just<TMapped>(mapFn(_value));
-        
-        public TResult MapOr<TResult>(TResult orU, Func<TValue, TResult> mapFn) => Maybe.MapOr(orU, mapFn, this);
 
-        public TResult MapOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> mapFn) =>
-            Maybe.MapOrElse(orElseFn, mapFn, this);
+        public IMaybe<TMapped> Select<TMapped>(Func<TValue, TMapped> selector) => new Just<TMapped>(selector(_value));
 
-        public IMaybe<TValue> Or(IMaybe<TValue> mOr) => Maybe.Or(mOr, this);
+        public TResult SelectOr<TResult>(TResult orU, Func<TValue, TResult> selector) =>
+            Maybe.MapOr(orU, selector, this);
+
+        public TResult SelectOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector) =>
+            Maybe.MapOrElse(orElseFn, selector, this);
+
+        public IMaybe<TValue> Or(IMaybe<TValue> orMaybe) => Maybe.Or(orMaybe, this);
 
         public IMaybe<TValue> OrElse(Func<IMaybe<TValue>> orElseFn) => Maybe.OrElse(orElseFn, this);
 
@@ -133,20 +132,8 @@ namespace TrueMyth
             throw new NotImplementedException();
         }
 
-        public IMaybe<TResult> AndThen<TResult>(Func<TValue, TResult> andThenFn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IMaybe<TResult> Chain<TResult>(Func<TValue, TResult> chainFn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IMaybe<TResult> FlatMap<TResult>(Func<TValue, TResult> flatMapFn)
-        {
-            throw new NotImplementedException();
-        }
+        public IMaybe<TResult> SelectMany<TResult>(Func<TValue, IMaybe<TResult>> selector) =>
+            Maybe.SelectMany(selector, this);
 
         public IResult<TValue, TError> ToOkOrErr<TError>(TError error)
         {
@@ -167,42 +154,29 @@ namespace TrueMyth
         public MaybeVariant Variant => MaybeVariant.Nothing;
 
         public bool IsJust() => false;
-        
+
         public bool IsNothing() => true;
-        
-        public IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> mapFn) => new Nothing<TMapped>();
-        
-        public TResult MapOr<TResult>(TResult orU, Func<TValue, TResult> mapFn) => Maybe.MapOr(orU, mapFn, this);
 
-        public TResult MapOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> mapFn) =>
-            Maybe.MapOrElse(orElseFn, mapFn, this);
+        public IMaybe<TMapped> Select<TMapped>(Func<TValue, TMapped> selector) => new Nothing<TMapped>();
 
-        public IMaybe<TValue> Or(IMaybe<TValue> mOr) => Maybe.Or(mOr, this);
+        public TResult SelectOr<TResult>(TResult orU, Func<TValue, TResult> selector) =>
+            Maybe.MapOr(orU, selector, this);
+
+        public TResult SelectOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector) =>
+            Maybe.MapOrElse(orElseFn, selector, this);
+
+        public IMaybe<TValue> Or(IMaybe<TValue> orMaybe) => Maybe.Or(orMaybe, this);
 
         public IMaybe<TValue> OrElse(Func<IMaybe<TValue>> orElseFn) => Maybe.OrElse(orElseFn, this);
 
-        public IMaybe<TResult> And<TResult>(IMaybe<TResult> mAnd)
-        {
-            throw new NotImplementedException();
-        }
+        public IMaybe<TResult> And<TResult>(IMaybe<TResult> mAnd) => Maybe.And(mAnd, this);
 
-        public IMaybe<TResult> AndThen<TResult>(Func<TValue, TResult> andThenFn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IMaybe<TResult> Chain<TResult>(Func<TValue, TResult> chainFn)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IMaybe<TResult> FlatMap<TResult>(Func<TValue, TResult> flatMapFn)
-        {
-            throw new NotImplementedException();
-        }
+        public IMaybe<TResult> SelectMany<TResult>(Func<TValue, IMaybe<TResult>> selector) =>
+            Maybe.SelectMany(selector, this);
 
         public TValue UnsafelyUnwrap() => throw new Exception("Tried to `unwrap(Nothing)`");
         public TValue UnwrapOr(TValue defaultValue) => defaultValue;
+
         public IResult<TValue, TError> ToOkOrErr<TError>(TError error)
         {
             throw new NotImplementedException();
