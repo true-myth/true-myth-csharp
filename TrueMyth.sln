@@ -1,9 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.0.0
-MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMyth", "TrueMyth/TrueMyth.csproj", "{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{07E3AF9E-CB1B-4AFD-A772-B883B694D8BE}"
+	ProjectSection(SolutionItems) = preProject
+		examples\README.md = examples\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{54B8B4B4-728E-4759-90A0-ACBA78731D88}"
+	ProjectSection(SolutionItems) = preProject
+		test\README.md = test\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrueMyth", "src\TrueMyth\TrueMyth.csproj", "{E5CE8FA2-E515-4B62-A1EB-271846F922FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6FDFB4BE-C098-45E6-90B4-28F31D6C92B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CC82244B-D331-4BC2-86DF-DCD0E1ED1744}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMythConsole", "samples\Console\TrueMythConsole.csproj", "{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,6 +31,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -18,5 +42,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5CE8FA2-E515-4B62-A1EB-271846F922FB} = {6FDFB4BE-C098-45E6-90B4-28F31D6C92B4}
+		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B} = {07E3AF9E-CB1B-4AFD-A772-B883B694D8BE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {099DF839-7A14-4937-BF46-D319EE23B6F0}
 	EndGlobalSection
 EndGlobal

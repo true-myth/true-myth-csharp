@@ -42,7 +42,7 @@ namespace TrueMyth
             : result as IResult<TValue, TSelectedError>;
 
         public static TValue UnsafelyUnwrap<TValue, TError>(IResult<TValue, TError> result) => result.UnsafelyUnwrap();
-        public static TError UnsafelyUnwrapErr<TValue, TError>(IResult<TValue, TError> result) => 
+        public static TError UnsafelyUnwrapErr<TValue, TError>(IResult<TValue, TError> result) =>
             result.UnsafelyUnwrapErr();
     }
 
@@ -63,7 +63,7 @@ namespace TrueMyth
 
         public IResult<TMapped, TError> Select<TMapped>(Func<TValue, TMapped> selector) =>
             Result.Select(selector, this);
-        
+
         public IResult<TSelected, TError> SelectMany<TSelected>(Func<TValue, IResult<TSelected, TError>> selector) =>
             Result.SelectMany(selector, this);
 
@@ -98,7 +98,7 @@ namespace TrueMyth
 
         public IResult<TSelected, TError> SelectMany<TSelected>(Func<TValue, IResult<TSelected, TError>> selector) =>
             Result.SelectMany(selector, this);
-        
+
         public IResult<TValue, TSelectedError> SelectErr<TSelectedError>(Func<TError, TSelectedError> selector) =>
             Result.SelectErr(selector, this);
 
