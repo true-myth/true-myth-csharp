@@ -1,6 +1,7 @@
 ﻿using System;
+using TrueMyth;
 
-namespace TrueMyth
+namespace TrueMythConsole
 {
     internal class Program
     {
