@@ -8,10 +8,13 @@ namespace TrueMyth
         Just
     }
 
-    public interface IMaybe<TValue>
+    public interface IMaybeVariant
     {
         MaybeVariant Variant { get; }
+    }
 
+    public interface IMaybe<TValue> : IMaybeVariant
+    {
         bool IsJust { get; }
         bool IsNothing { get; }
         IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> selector);
@@ -24,9 +27,11 @@ namespace TrueMyth
         IMaybe<TValue> Or(IMaybe<TValue> orMaybe);
         IMaybe<TValue> OrElse(Func<IMaybe<TValue>> orElseFn);
         IMaybe<TResult> And<TResult>(IMaybe<TResult> mAnd);
+        IMaybe<TResult> AndThen<TResult>(Func<TValue, IMaybe<TResult>> thenFn);
         IMaybe<TResult> SelectMany<TResult>(Func<TValue, IMaybe<TResult>> selector);
         TValue UnsafelyUnwrap();
         TValue UnwrapOr(TValue defaultValue);
+        TValue UnwrapOrElse(Func<TValue> orElseFn);
         IResult<TValue, TError> ToOkOrErr<TError>(TError error);
         IResult<TValue, TError> ToOkOrElseErr<TError>(Func<TError> elseFn);
         string ToString();
@@ -43,12 +48,13 @@ namespace TrueMyth
 
         private static TValue Unwrap<TValue>(IMaybe<TValue> maybeValue) => maybeValue.UnsafelyUnwrap();
 
-        public static bool IsJust<TValue>(IMaybe<TValue> maybeValue) => maybeValue.Variant == MaybeVariant.Just;
+        public static bool IsJust<TValue>(IMaybe<TValue> maybeValue) 
+            => maybeValue.Variant == MaybeVariant.Just;
 
-        public static bool IsNothing<TValue>(IMaybe<TValue> maybeValue) => maybeValue.Variant == MaybeVariant.Nothing;
+        public static bool IsNothing<TValue>(IMaybe<TValue> maybeValue) 
+            => maybeValue.Variant == MaybeVariant.Nothing;
 
         public static IMaybe<TValue> Just<TValue>(TValue value) => new Just<TValue>(value);
-
         public static IMaybe<TValue> Nothing<TValue>() => new Nothing<TValue>();
 
 

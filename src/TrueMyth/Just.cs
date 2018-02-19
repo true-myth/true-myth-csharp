@@ -51,6 +51,9 @@ namespace TrueMyth
         public IMaybe<TResult> And<TResult>(IMaybe<TResult> mAnd)
             => Maybe.And(mAnd, this);
 
+        public IMaybe<TResult> AndThen<TResult>(Func<TValue, IMaybe<TResult>> thenFn) 
+            => thenFn(_value);
+
         public IMaybe<TResult> SelectMany<TResult>(Func<TValue, IMaybe<TResult>> selector) =>
             Maybe.SelectMany(selector, this);
 
@@ -62,6 +65,7 @@ namespace TrueMyth
 
         public TValue UnsafelyUnwrap() => _value;
         public TValue UnwrapOr(TValue defaultValue) => _value;
+        public TValue UnwrapOrElse(Func<TValue> orElseFn) => UnsafelyUnwrap();
 
         public TMatched Match<TMatched>(Matcher<TValue, TMatched> matcher)
             => matcher.Just(_value);
