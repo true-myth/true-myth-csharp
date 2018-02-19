@@ -59,11 +59,11 @@ namespace TrueMythConsole
         private static void DemoStatic()
         {
             var someNumber = Maybe.Of(42);
-            var doubledJust = Maybe.Select(someNumber, Double);
+            var doubledJust = Maybe.Select(Double, someNumber);
             Console.WriteLine(Maybe.UnsafelyUnwrap(doubledJust));
 
             var aNothing = Maybe.Of<string>(null);
-            var nothingLength = Maybe.Select(aNothing, Length);
+            var nothingLength = Maybe.Select(Length, aNothing);
             Console.WriteLine(Maybe.UnsafelyUnwrap(nothingLength));
         }
 
