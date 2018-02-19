@@ -12,8 +12,8 @@ namespace TrueMyth
     {
         MaybeVariant Variant { get; }
 
-        bool IsJust();
-        bool IsNothing();
+        bool IsJust { get; }
+        bool IsNothing { get; }
         IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> selector);
         IMaybe<TMapped> Select<TMapped>(Func<TValue, TMapped> selector);
         TResult SelectOr<TResult>(TResult orU, Func<TValue, TResult> selector);

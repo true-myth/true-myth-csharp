@@ -23,9 +23,9 @@ namespace TrueMyth
         public override string ToString()
             => $"{Variant.ToString()}({_value.ToString()})";
 
-        public bool IsJust() => true;
+        public bool IsJust => true;
+        public bool IsNothing => false;
 
-        public bool IsNothing() => false;
         public IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> selector)
             => new Just<TMapped>(selector(_value));
 

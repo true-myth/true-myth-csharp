@@ -6,9 +6,8 @@ namespace TrueMyth
     {
         public MaybeVariant Variant => MaybeVariant.Nothing;
 
-        public bool IsJust() => false;
-
-        public bool IsNothing() => true;
+        public bool IsJust => false;
+        public bool IsNothing => true;
 
         public override string ToString()
             => $"{Variant.ToString()}";
