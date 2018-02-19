@@ -45,15 +45,15 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Maybe\MaybeTests.Integration.cs" />
-    <Compile Include="Maybe\MaybeTests.PureFunctions.cs" />
-    <Compile Include="Maybe\MaybeTests.Just.cs" />
-    <Compile Include="Maybe\MaybeTests.Nothing.cs" />
-    <Compile Include="Maybe\MaybeTests.Of.cs" />
+    <Compile Include="IntegrationTests.cs" />
+    <Compile Include="PureFunctionTests.cs" />
+    <Compile Include="JustTests.cs" />
+    <Compile Include="NothingTests.cs" />
+    <Compile Include="OfTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Maybe\MaybeTests.FromNullable.cs" />
+    <Compile Include="FromNullableTests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace TrueMyth.Tests
 {
-    public partial class MaybeTests
+    [TestFixture]
+    public class IntegrationTests
     {
-        [TestFixture]
-        public class Integration
+        [Test]
+        public void Interacting()
         {
-            [Test]
-            public void Interacting()
-            {
-            }
         }
     }
 }
