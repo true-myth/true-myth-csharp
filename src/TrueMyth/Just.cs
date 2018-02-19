@@ -32,8 +32,14 @@ namespace TrueMyth
         public IMaybe<TMapped> Select<TMapped>(Func<TValue, TMapped> selector) 
             => new Just<TMapped>(selector(_value));
 
+        public TResult MapOr<TResult>(TResult orU, Func<TValue, TResult> selector) =>
+            Maybe.MapOr(orU, selector, this);
+
         public TResult SelectOr<TResult>(TResult orU, Func<TValue, TResult> selector) =>
             Maybe.MapOr(orU, selector, this);
+
+        public TResult MapOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector) =>
+            Maybe.MapOrElse(orElseFn, selector, this);
 
         public TResult SelectOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector) =>
             Maybe.MapOrElse(orElseFn, selector, this);

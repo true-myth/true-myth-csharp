@@ -16,7 +16,9 @@ namespace TrueMyth
         bool IsNothing { get; }
         IMaybe<TMapped> Map<TMapped>(Func<TValue, TMapped> selector);
         IMaybe<TMapped> Select<TMapped>(Func<TValue, TMapped> selector);
+        TResult MapOr<TResult>(TResult orU, Func<TValue, TResult> selector);
         TResult SelectOr<TResult>(TResult orU, Func<TValue, TResult> selector);
+        TResult MapOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector);
         TResult SelectOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector);
         TMatched Match<TMatched>(Matcher<TValue, TMatched> matcher);
         IMaybe<TValue> Or(IMaybe<TValue> orMaybe);
