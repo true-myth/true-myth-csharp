@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TrueMyth.Tests
+namespace TrueMyth.Tests.MaybeTests
 {
     [TestFixture]
     public class NothingTests

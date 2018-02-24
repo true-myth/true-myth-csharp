@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace TrueMyth.Tests
+namespace TrueMyth.Tests.MaybeTests
 {
     [TestFixture]
     public class IntegrationTests
