@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TrueMyth
 {
@@ -31,8 +32,11 @@ namespace TrueMyth
         public TResult SelectOrElse<TResult>(Func<TResult> orElseFn, Func<TValue, TResult> selector)
             => orElseFn();
 
-        public IMaybe<TValue> Or(IMaybe<TValue> orMaybe) => orMaybe;
-        public IMaybe<TValue> OrElse(Func<IMaybe<TValue>> orElseFn) => orElseFn();
+        public IMaybe<TValue> Or(IMaybe<TValue> orMaybe) 
+            => orMaybe;
+
+        public IMaybe<TValue> OrElse(Func<IMaybe<TValue>> orElseFn) 
+            => orElseFn();
 
         public IMaybe<TResult> And<TResult>(IMaybe<TResult> mAnd) 
             => Maybe.Nothing<TResult>();
@@ -43,9 +47,14 @@ namespace TrueMyth
         public IMaybe<TResult> SelectMany<TResult>(Func<TValue, IMaybe<TResult>> selector) 
             => Maybe.SelectMany(selector, this);
 
-        public TValue UnsafelyUnwrap() => throw new Exception("Tried to `Unwrap(Nothing)`");
-        public TValue UnwrapOr(TValue defaultValue) => defaultValue;
-        public TValue UnwrapOrElse(Func<TValue> orElseFn) => orElseFn();
+        public TValue UnsafelyUnwrap() 
+            => throw new Exception("Tried to `Unwrap(Nothing)`");
+
+        public TValue UnwrapOr(TValue defaultValue) 
+            => defaultValue;
+
+        public TValue UnwrapOrElse(Func<TValue> orElseFn) 
+            => orElseFn();
 
         public IResult<TValue, TError> ToOkOrErr<TError>(TError error)
             => Maybe.ToOkOrErr(error, this);
@@ -65,5 +74,8 @@ namespace TrueMyth
 
         public override bool Equals(object obj)
             => obj is IMaybeVariant mv && Variant == mv.Variant;
+
+        public override int GetHashCode()
+            => 0;
     }
 }
