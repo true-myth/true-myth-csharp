@@ -1,7 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <Authors>Chris Krycho;Chris Riesgo;Ben Collins</Authors>
+    <Description>An implementation of IResult and IMaybe for C♯</Description>
+    <Copyright>© Chris Krycho 2018</Copyright>
+    <PackageProjectUrl>https://github.com/chriskrycho/true-myth-csharp</PackageProjectUrl>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
 </Project>
