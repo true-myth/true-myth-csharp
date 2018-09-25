@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Authors>Chris Krycho;Chris Riesgo;Ben Collins</Authors>
     <Description>An implementation of IResult and IMaybe for C♯</Description>
@@ -8,7 +7,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>net46;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
-  
 </Project>
