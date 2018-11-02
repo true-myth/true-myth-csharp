@@ -1,2 +1,4 @@
-# true-myth-cs-port
+# True Myth C♯
 A port of [True Myth](https://github.com/chriskrycho/true-myth) to C♯.
+
+[![Build status](https://ci.appveyor.com/api/projects/status/u5t8q5avhcoufimp?svg=true)](https://ci.appveyor.com/project/aggieben/true-myth)
