@@ -1,0 +1,7 @@
+version: '1.0.0-beta1-{build}'
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  assembly_version: '1.0.0.{build}'
+  file_version: '1.0.0.{build}'
