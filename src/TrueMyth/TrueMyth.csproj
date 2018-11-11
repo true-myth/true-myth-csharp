@@ -4,6 +4,9 @@
     <Description>An implementation of Result and Maybe for C♯</Description>
     <Copyright>© Chris Krycho 2018</Copyright>
     <PackageProjectUrl>https://github.com/true-myth/true-myth-csharp</PackageProjectUrl>
+    <Version></Version>
+    <AssemblyVersion></AssemblyVersion>
+    <FileVersion></FileVersion>
   </PropertyGroup>
 
   <PropertyGroup>
