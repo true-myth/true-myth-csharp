@@ -1,7 +1,4 @@
-# True Myth C♯
-A port of [True Myth](https://github.com/chriskrycho/true-myth) to C♯.
-
-<h1 align="center"><a href='https://github.com/true-myth/true-myth'>True Myth C♯</a></h1>
+<h1 align="center"><a href='https://github.com/true-myth/true-myth-csharp'>True Myth C♯</a></h1>
 
 <p align="center">A library for safer programming in C♯, with <code>Maybe</code> and <code>Result</code> types, and supporting both a functional style and a more traditional method-call style.</p>
 
