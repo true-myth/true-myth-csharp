@@ -19,5 +19,3 @@ A port of [True Myth](https://github.com/chriskrycho/true-myth) to C♯.
     <img src='https://img.shields.io/nuget/dt/TrueMyth.svg?style=flat-square' alt='Hosted on Nuget.org'>
   </a>
 </p>
-
-[![Build status](https://ci.appveyor.com/api/projects/status/u5t8q5avhcoufimp/branch/next?svg=true)](https://ci.appveyor.com/project/aggieben/true-myth)
