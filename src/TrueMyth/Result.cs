@@ -38,5 +38,8 @@ namespace TrueMyth
 
         public static implicit operator TError(Result<TValue, TError> result) =>
             !result._isOk ? result._error : throw new InvalidOperationException("Invalid conversion to error type.");
+
+        public static implicit operator Result<TValue,TError>(TValue value) => new Result<TValue,TError>(value, default(TError), true);
+        public static implicit operator Result<TValue,TError>(TError error) => new Result<TValue,TError>(default(TValue), error, false);
     }
 }
