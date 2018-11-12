@@ -10,9 +10,9 @@
     <img src='https://img.shields.io/appveyor/tests/aggieben/true-myth/next.svg?style=flat' alt='AppVeyor `next` test status'>
   </a>
   <a href='https://github.com/true-myth/true-myth/blob/master/LICENSE'>
-    <img src='https://img.shields.io/github/license/true-myth/true-myth-csharp.svg?style=flat-square'>
+    <img src='https://img.shields.io/github/license/true-myth/true-myth-csharp.svg?style=flat'>
   </a>
   <a href='https://www.nuget.org/packages/TrueMyth'>
-    <img src='https://img.shields.io/nuget/dt/TrueMyth.svg?style=flat-square' alt='Hosted on Nuget.org'>
+    <img src='https://img.shields.io/nuget/dt/TrueMyth.svg?style=flat' alt='Hosted on Nuget.org'>
   </a>
 </p>
