@@ -20,15 +20,8 @@ namespace TrueMyth
             _isOk = isOk;
         }
 
-        public static Result<TValue, TError> Ok(TValue value)
-        {
-            return new Result<TValue, TError>(value, default(TError), true);
-        }
-	
-        public static Result<TValue, TError> Err(TError err)
-        {
-            return new Result<TValue, TError>(default(TValue), err, false);
-        }
+        public static Result<TValue, TError> Ok(TValue value) => new Result<TValue, TError>(value, default(TError), true);
+        public static Result<TValue, TError> Err(TError err) => new Result<TValue, TError>(default(TValue), err, false);
 
         public TValue UnsafelyUnwrap() => _isOk ? _value : throw new InvalidOperationException("Invalid request to unwrap value.");
         public TError UnsafelyUnwrapErr() => !_isOk ? _error : throw new InvalidOperationException("Invalid request to unwrap error.");
