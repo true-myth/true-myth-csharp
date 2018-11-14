@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TrueMyth
 {
@@ -25,6 +26,70 @@ namespace TrueMyth
 
         public TValue UnsafelyUnwrap() => _isOk ? _value : throw new InvalidOperationException("Invalid request to unwrap value.");
         public TError UnsafelyUnwrapErr() => !_isOk ? _error : throw new InvalidOperationException("Invalid request to unwrap error.");
+
+        public TValue UnwrapOr(TValue defaultValue) => this._isOk ? _value : defaultValue;
+
+        public TValue UnwrapOrElse<UError>(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
+
+        public Result<UValue, TError> Select<UValue>(Func<TValue,UValue> mapFn) => this._isOk
+            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
+            : new Result<UValue,TError>(default(UValue), this._error, false);
+
+        public Result<TValue, UError> SelectErr<UError>(Func<TError,UError> mapFn) => !this._isOk
+            ? new Result<TValue,UError>(default(TValue), mapFn(this._error), false)
+            : new Result<TValue,UError>(this._value, default(UError), true);
+
+        public UValue SelectOrDefault<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk ? mapFn(this._value) : defaultValue;
+        public UValue SelectOrElse<UValue>(Func<TValue,UValue> mapFn, Func<TError,UValue> mapErrFn) => this._isOk ? mapFn(this._value) : mapErrFn(this._error);
+
+        public T Match<T>(Func<TValue,T> ok, Func<TError,T> err) => this._isOk ? ok(this._value) : err(this._error);
+
+        public Result<TValue, TError> Or(Result<TValue,TError> r1) => this._isOk ? this : r1;
+
+        public TValue OrElse(Func<Result<TValue,TError>> elseFn) => this._isOk ? this : elseFn();
+
+        public Result<TValue, TError> And(Result<TValue,TError> r1) => this._isOk ? r1 : this; 
+
+        // AndThen (SelectMany)
+        public Result<UValue, TError> SelectOk<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
+
+        // ToMaybe
+
+        // Apply (ap)
+
+        public override string ToString() => this._isOk ? $"Ok[{this._value}]" : $"Err[{this._error}]";
+
+        public override bool Equals(object o)
+        {
+            try
+            {
+                var r = (Result<TValue,TError>)o;
+                if (this._isOk)
+                {
+                    return EqualityComparer<TValue>.Default.Equals(this._value,r._value);
+                }
+                else
+                { 
+                    return EqualityComparer<TError>.Default.Equals(this._error,r._error);
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            if (this._isOk)
+            {
+                return (this._value?.GetHashCode() ?? 0) | 0xf00d;
+            }
+            else
+            {
+                return (this._error?.GetHashCode() ?? 0) | 0x0bad;
+            }
+        }
 
         public static implicit operator TValue(Result<TValue, TError> result) => 
             result._isOk ? result._value : throw new InvalidOperationException("Invalid conversion to value type.");
