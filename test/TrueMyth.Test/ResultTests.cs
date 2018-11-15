@@ -133,15 +133,110 @@ namespace TrueMyth.Test
             Assert.Equal(andResult, r);
         }
 
+        [Fact]
+        public void And_ErrReturnsThis_Ok()
+        {
+            // arrange
+            var result = SimpleResult.Err("error");
+            var andResult = SimpleResult.Ok(0);
+
+            // act
+            var r = result.And(andResult);
+
+            // assert
+            Assert.Equal(result, r);
+        }
+
         // Match
+        [Fact]
+        public void Match_OkCallsOk_Ok()
+        {
+            // arrange
+            var result = SimpleResult.Ok(7);
+
+            // act
+            var functionCalled = result.Match(
+                ok: value => "ok",
+                err: error => "error"
+            );
+
+            // Assert
+            Assert.Equal("ok", functionCalled);
+        }
 
         // Or
+        [Fact]
+        public void Or_OkReturnsThis_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+            var r2 = SimpleResult.Ok(1);
+
+            // act
+            var r = r1.Or(r2);
+
+            // assert
+            Assert.Equal(r1, r);
+        }
+
+        [Fact]
+        public void Or_ErrReturnsThat_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
+            var r2 = SimpleResult.Ok(0);
+            
+            // act
+            var r = r1.Or(r2);
+
+            // assert
+            Assert.Equal(r2, r);
+        }
 
         // OrElse
+        [Fact]
+        public void OrElse_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+            var r2 = SimpleResult.Ok(1);
 
-        // constructor (validate that no invalid states can be created)
+            // act
+            var r = r1.OrElse(() => r2);
+
+            // assert
+            Assert.Equal<SimpleResult>(r1, r);
+        }
+
+        [Fact]
+        public void OrElse_Err()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
+            var r2 = SimpleResult.Ok(0);
+
+            // act
+            var r = r1.OrElse(() => r2);
+
+            // assert
+            Assert.Equal<SimpleResult>(r2, r);
+        }
 
         // Select
+        [Fact]
+        public void Select_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+
+            // act
+            var r = r1.Select(value => value.ToString());
+
+            // assert
+            Assert.NotNull(r);
+            Assert.True(r.IsOk);
+            Assert.Equal("0", r.UnsafelyUnwrap());
+        }
 
         // SelectErr
 
