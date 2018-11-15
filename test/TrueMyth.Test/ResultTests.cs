@@ -238,11 +238,78 @@ namespace TrueMyth.Test
             Assert.Equal("0", r.UnsafelyUnwrap());
         }
 
-        // SelectErr
+        [Fact]
+        public void SelectErr_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
 
-        // SelectOk
+            // act
+            var r = r1.SelectErr(error => error.ToUpperInvariant());
 
-        // SelectOrDefault
+            // assert
+            Assert.NotNull(r);
+            Assert.True(r.IsErr);
+            Assert.Equal("ERROR", r.UnsafelyUnwrapErr());
+        }
+
+        [Fact]
+        public void  SelectErrOk_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+
+            // act
+            var r = r1.SelectErr(error => Convert.ToInt16(error));
+
+            // assert
+            Assert.NotNull(r);
+            Assert.True(r.IsOk);
+        }
+
+        [Fact]
+        public void AndThen_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+
+            // act
+            var r = r1.AndThen(() => Result<float, string>.Ok(3.7f));
+
+            // assert
+            Assert.NotNull(r);
+            Assert.True(r.IsOk);
+            Assert.Equal(3.7f, r.UnsafelyUnwrap());
+        }
+
+        [Fact]
+        public void AndThen_Err_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
+
+            // act
+            var r = r1.AndThen(() => Result<float,string>.Ok(3.7f));
+
+            // assert
+            Assert.NotNull(r);
+            Assert.True(r.IsErr);
+            Assert.Equal("error", r.UnsafelyUnwrapErr());
+        }
+
+        [Fact]
+        public void SelectOrDefaultOk_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+
+            // act
+            var r = r1.SelectOrDefault(i => i.ToString(), "default");
+
+            // assert
+            Assert.NotNull(r);
+            Assert.Equal("0", r);
+        }
 
         // SelectOrElse
 

@@ -50,8 +50,7 @@ namespace TrueMyth
 
         public Result<TValue, TError> And(Result<TValue,TError> r1) => this._isOk ? r1 : this; 
 
-        // AndThen (SelectMany)
-        public Result<UValue, TError> SelectOk<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
+        public Result<UValue, TError> AndThen<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
 
         // ToMaybe
 
