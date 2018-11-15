@@ -52,29 +52,29 @@ namespace TrueMyth
 
         public Result<UValue, TError> AndThen<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
 
-        // ToMaybe
+        public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Just(this._value) : Maybe<TValue>.Nothing;
 
-        // Apply (ap)
+        // Apply (ap) - needed?
 
-        public override string ToString() => this._isOk ? $"Ok[{this._value}]" : $"Err[{this._error}]";
+        public override string ToString() => this._isOk 
+            ? $"Ok<{typeof(TValue).Name}>[{this._value}]" 
+            : $"Err<{typeof(TError).Name}>[{this._error}]";
 
         public override bool Equals(object o)
         {
-            try
-            {
-                var r = (Result<TValue,TError>)o;
-                if (this._isOk)
-                {
-                    return EqualityComparer<TValue>.Default.Equals(this._value,r._value);
-                }
-                else
-                { 
-                    return EqualityComparer<TError>.Default.Equals(this._error,r._error);
-                }
-            }
-            catch
+            if (o == null || GetType() != o.GetType())
             {
                 return false;
+            }
+
+            var r = o as Result<TValue,TError>;
+            if (this._isOk)
+            {
+                return EqualityComparer<TValue>.Default.Equals(this._value,r._value);
+            }
+            else
+            { 
+                return EqualityComparer<TError>.Default.Equals(this._error,r._error);
             }
         }
 
@@ -82,11 +82,11 @@ namespace TrueMyth
         {
             if (this._isOk)
             {
-                return (this._value?.GetHashCode() ?? 0) | 0xf00d;
+                return (this._value?.GetHashCode() ?? 0) | typeof(TValue).GetHashCode() | 0xf00d;
             }
             else
             {
-                return (this._error?.GetHashCode() ?? 0) | 0x0bad;
+                return (this._error?.GetHashCode() ?? 0) | typeof(TError).GetHashCode() | 0x0bad;
             }
         }
 
