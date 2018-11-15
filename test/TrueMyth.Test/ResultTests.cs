@@ -367,8 +367,58 @@ namespace TrueMyth.Test
         }
 
         // UnwrapOr
+        [Fact]
+        public void UnwrapOr_Ok_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(7);
+
+            // act
+            var r = r1.UnwrapOr(0);
+
+            // assert
+            Assert.Equal(7, r);
+        }
+
+        [Fact]
+        public void UnwrapOr_Err_Ok()
+        {
+            // arrange
+            var r1  = SimpleResult.Err("error");
+
+            // act
+            var r = r1.UnwrapOr(0);
+
+            // assert
+            Assert.Equal(0, r);
+        }
 
         // UnwrapOrElse        
+        [Fact]
+        public void UnwrapOrElse_Ok_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(7);
+
+            // act
+            var r = r1.UnwrapOrElse(err => 0);
+
+            // assert
+            Assert.Equal(7, r);
+        }
+
+        [Fact]
+        public void UnwrapOrElse_Err_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
+
+            // act
+            var r = r1.UnwrapOrElse(err => 0);
+
+            // assert
+            Assert.Equal(0, r);
+        }
 
         [Theory]
         [MemberData(nameof(GetEqualPairs))]

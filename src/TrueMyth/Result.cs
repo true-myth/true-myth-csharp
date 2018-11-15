@@ -29,7 +29,7 @@ namespace TrueMyth
 
         public TValue UnwrapOr(TValue defaultValue) => this._isOk ? _value : defaultValue;
 
-        public TValue UnwrapOrElse<UError>(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
+        public TValue UnwrapOrElse(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
 
         public Result<UValue, TError> Select<UValue>(Func<TValue,UValue> mapFn) => this._isOk
             ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
