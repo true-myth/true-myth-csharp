@@ -311,9 +311,60 @@ namespace TrueMyth.Test
             Assert.Equal("0", r);
         }
 
+        [Fact]
+        public void SelectOrDefault_Err_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
+
+            // act
+            var r = r1.SelectOrDefault(i => i.ToString(), "default");
+
+            // assert
+            Assert.NotNull(r);
+            Assert.Equal("default", r);
+        }
+
         // SelectOrElse
+        [Fact]
+        public void SelectOrElse_Ok_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Ok(0);
+
+            // act
+            var r = r1.SelectOrElse(i => i, s => -1);
+
+            // arrange
+            Assert.Equal(0, r);
+        }
+
+        [Fact]
+        public void SelectOrElse_Err_Ok()
+        {
+            // arrange
+            var r1 = SimpleResult.Err("error");
+
+            // act
+            var r = r1.SelectOrElse(i => i, s => -1);
+
+            // assert
+            Assert.Equal(-1, r);
+        }
 
         // ToString
+        [Theory]
+        [MemberData(nameof(GetToStringTests))]
+        public void ToString_Ok(SimpleResult r1, string expectedString)
+        {
+            // arrange - in theory
+            // act
+            var r = r1.ToString();
+
+            // assert
+            Assert.NotNull(r);
+            Assert.Equal(expectedString, r);
+        }
 
         // UnwrapOr
 

@@ -22,5 +22,11 @@ namespace TrueMyth.Test
             yield return new[] {SimpleResult.Err("err1"), SimpleResult.Ok(2)};
             yield return new[] {SimpleResult.Err("err1"), SimpleResult.Err("err2")};
         }
+
+        public static IEnumerable<object[]> GetToStringTests()
+        {
+            yield return new object[] { SimpleResult.Ok(7), "Ok: 7"};
+            yield return new object[] { SimpleResult.Err("error"), "Err: error"};
+        }
     }
 }
