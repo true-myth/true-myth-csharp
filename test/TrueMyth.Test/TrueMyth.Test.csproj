@@ -13,8 +13,13 @@
     <ProjectReference Include="..\..\src\TrueMyth\TrueMyth.csproj" />
   </ItemGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net461'">
+    <FrameworkPathOverride>$(NuGetPackageRoot)microsoft.targetingpack.netframework.v4.6.1\1.0.1\lib\net461\</FrameworkPathOverride>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(TargetFramework)' == 'net461'">
     <Reference  Include="System.Threading.Tasks"/>
+    <PackageReference Include="Microsoft.TargetingPack.NETFramework.v4.6.1" Version="1.0.1" ExcludeAssets="All" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,5 +29,4 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
-  <Import Project="..\..\TrueMyth.props" />
 </Project>
