@@ -228,7 +228,7 @@ namespace TrueMyth
         /// Other things to note:
         /// <list>
         ///   <item>The return type may be different than the type of <c>this</c>.</item>
-        ///   <item>Unlike in <see cref="Map{UValue}(Func{TValue,UValue})"/> the original <c>Maybe&lt;TValue&gt;</c> is not involved in constructing the new <c>Maybe&lt;UValue&gt;</c>.</item>
+        ///   <item>Unlike in <see cref="Select{UValue}(Func{TValue,UValue})"/> the original <c>Maybe&lt;TValue&gt;</c> is not involved in constructing the new <c>Maybe&lt;UValue&gt;</c>.</item>
         /// </list>
         /// </para>
         /// </summary>
@@ -241,7 +241,7 @@ namespace TrueMyth
         /// you provide a function that returns a <c>Maybe</c>.
         /// </summary>
         /// <param name="thenFn">Function that returns a <c>Maybe&lt;UValue&gt;</c></param>
-        /// <typeparam name="UValue">Any type supported by C♯; it needn't be the same as <c>TV
+        /// <typeparam name="UValue">Any type supported by C♯; it needn't be the same as <c>TValue</c>.</typeparam>
         public Maybe<UValue> And<UValue>(Func<TValue,Maybe<UValue>> thenFn) => this._isJust ? thenFn(this._value) : Maybe<UValue>.Nothing;
         
         /// <summary>
@@ -273,31 +273,79 @@ namespace TrueMyth
         /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the result of <c>elseFn</c>.</returns>
         public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn, Func<UValue> elseFn) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Of(elseFn());
         
+        /// <summary>
+        /// Provides the same basic functionality as <see cref="Unwrap(Func{TValue})"/>, but instead of simply unwrapping the value if it is "JUst" and applyiung a value to genearte
+        /// the same default type if it is "Nothing", lets you supply functions which may transform the wrapped type if it is "Just" or get a default value for "Nothing".
+        /// </summary>
+        /// <param name="just">The function to apply if <c>this</c> is "Just".</param>
+        /// <param name="nothing">The function to apply if <c>this</c> is "Nothing".</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <example>
+        /// var maybeValue = fromSomeMethod();
+        /// var stringValue = maybeValue.Match(
+        ///     just: val => val.ToString(),
+        ///     nothing: val => "nothing"
+        /// );
+        /// </example>
         public T Match<T>(Func<TValue,T> just, Func<T> nothing) => this._isJust ? just(this._value) : nothing();
 
+        /// <summary>
+        /// Provide a fallback for <c>this</c>.  Behaves like a logical "or": if the <c>Maybe</c> is "Just", returns that; otherwise,
+        /// returns the provided <c>maybe</c>.
+        /// </summary>
+        /// <param name="maybe">Fallback value.</param>
+        /// <returns>If <c>this</c> is "Just", return <c>this</c>; otherwise return <c>maybe</c>.</returns>
         public Maybe<TValue> Or(Maybe<TValue> maybe) => this._isJust ? this : maybe;
 
-        // OrElse
+        /// <summary>
+        /// Like <see cref="Or(Maybe{TValue})"/>, but using a function to construct the fallback <c>Maybe</c>.
+        /// </summary>
+        /// <param name="elseFn">Function used to construct fallback <c>Maybe</c>.</param>
+        /// <returns>If <c>this</c> is "Just", returns <c>this</c>.  Otherwise, returns result of <c>elseFn</c>.</returns>
         public Maybe<TValue> Or(Func<Maybe<TValue>> elseFn) => this._isJust ? this : elseFn();
         
-        // toOkOrElseErr
-        public Result<TValue, TError> ToResult<TError>(Func<TError> errFn) => this._isJust ? Result<TValue,TError>.Ok(this._value) : Result<TValue,TError>.Err(errFn());
-
-        // toOkOrErr
+        /// <summary>
+        /// Transform the <c>Maybe</c> into a <see cref="Result{TValue,TError}"/>, using the wrapped value as the "Ok" value if "Just"; otherwise using the supplied 
+        /// <c>error</c> value for "Err".
+        /// </summary>
+        /// <param name="error">The error value to use if the <c>Maybe</c> is "Nothing".</param>
+        /// <typeparam name="TError">The wrapped value type.</typeparam>
         public Result<TValue, TError> ToResult<TError>(TError error) => this._isJust ? Result<TValue, TError>.Ok(this._value) : Result<TValue, TError>.Err(error);
 
-        // unsafelyUnwrap
+        /// <summary>
+        /// Very similar to <see cref="ToResult{TError}(TError)"/>, but using a function to construct the error result.
+        /// </summary>
+        public Result<TValue, TError> ToResult<TError>(Func<TError> errFn) => this._isJust ? Result<TValue,TError>.Ok(this._value) : Result<TValue,TError>.Err(errFn());
+
+
+        /// <summary>
+        /// Get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of a "Just", but <em>throws if the <c>Maybe</c> is "Nothing"</em>.
+        /// Prefer to use <see cref="Unwrap(TValue)"/> or <see cref="Unwrap(Func{TValue})"/>.
+        /// </summary>
         public TValue UnsafelyUnwrap() => this._isJust ? this._value : throw new InvalidOperationException($"Invalid attempt to unwrap {GetType().Name}.Nothing");
         
+        /// <summary>
+        /// Safely get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of "Just" or <c>defaultValue</c> if <c>this</c> is "Nothing".
+        /// This is the recommended way to get a value out of a <c>Maybe</c> most of the time.
+        /// </summary>
         public TValue Unwrap(TValue defaultValue) => this._isJust ? this._value : defaultValue;
         
+        /// <summary>
+        /// Safely get the value out of a <c>Maybe</c> by returning the wrapped value if it is "Just", oir by applying
+        /// <c>elseFn</c> if it's "Nothing".  This is useful when you need to <em>generate</em> a value (e.g. by using current values in the environment
+        /// — whether preloaded or by local closure) instead of having a default value available as in <see cref="Unwrap(TValue)"/>.
+        /// </summary>
         public TValue Unwrap(Func<TValue> elseFn) => this._isJust ? this._value : elseFn();
 
-        // #### object stuff
+        /// <summary>
+        /// Produces a string format like the following: "Just&lt;TValue&gt;[value]" or "Nothing&lt;TValue&gt;".
+        /// </summary>
         public override string ToString() => this._isJust
             ? $"Just<{typeof(TValue)}>[{this._value}]"
             : $"Nothing<{typeof(TValue)}>[]";
 
+        /// <exclude/>
         public override bool Equals(object obj)
         {   
             if (obj == null || GetType() != obj.GetType())
@@ -315,6 +363,7 @@ namespace TrueMyth
             return EqualityComparer<TValue>.Default.Equals(this._value, m._value);
         }
         
+        /// <exclude/>
         public override int GetHashCode()
         {
             unchecked
@@ -330,8 +379,56 @@ namespace TrueMyth
             }
         }
 
+        /// <summary>
+        /// Equivalent of <see cref="UnsafelyUnwrap"/>.  Follows usual C♯ semantics of throwing 
+        /// an exception at runtime if the conversion is invalid.
+        /// </summary>
         public static implicit operator TValue(Maybe<TValue> maybe) => maybe.UnsafelyUnwrap();
-        public static implicit operator Maybe<TValue>(TValue value) => new Maybe<TValue>(value);
+        
+        /// <summary>
+        /// Constructs a <c>Maybe&lt;TValue&gt;</c> implicitly. Equivalent of <see cref="Maybe{TValue}.Of(TValue)"/>.
+        /// </summary>
+        /// <example>
+        /// This is useful for reducing ceremony when using TrueMyth, particularly when refactoring into existing
+        /// code.  Without TrueMyth at all, you might have a method like this:
+        /// <code>
+        /// string GetTranslation(string sourceText)
+        /// {
+        ///     string result = null;
+        ///     result = translationService.Lookup(sourceText);
+        ///     if (result == null) throw new Exception($"didn't find translation of '{sourceText}'.");
+        /// 
+        ///     return result;
+        /// }
+        /// </code>
+        /// 
+        /// But since TrueMyth wants to help you stop using exceptions for control flow, you might rewrite it like this:
+        /// <code>
+        /// Maybe&lt;string&gt; GetTranslation(string sourceText)
+        /// {
+        ///     string result = null;
+        ///     // lookup translation
+        ///     result = translationService.Lookup(sourceText);
+        /// 
+        ///     return Maybe&lt;string&gt;.Of(result);
+        /// }
+        /// </code>
+        /// 
+        /// However, this is somewhat verbose.  It's annoying to have to specify to the type system what you mean when it 
+        /// should already know. Instead, using the type system and this implicit operator, you can write the following.
+        /// 
+        /// <code>
+        /// Maybe&lt;string&gt; GetTranslation(string sourceText)
+        /// {
+        ///     string result = null;
+        ///     // lookup translation
+        ///     result = translationService.Lookup(sourceText);
+        /// 
+        ///     return result;
+        /// }
+        /// </code>
+        /// </example>
+        public static implicit operator Maybe<TValue>(TValue value) => Maybe<TValue>.Of(value);
 
         // TODO: implicit for Nothing?
     }
