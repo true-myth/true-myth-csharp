@@ -300,19 +300,22 @@ namespace TrueMyth
         
         public override int GetHashCode()
         {
-            if (this._isJust)
+            unchecked
             {
-                return (this._value?.GetHashCode() ?? 0) | typeof(TValue).GetHashCode() | 0xbeef;
-            }
-            else
-            {
-                return typeof(TValue).GetHashCode() | 0xdead;
+                int hash = 17;
+                hash = hash * 23 + typeof(TValue).GetHashCode();
+                hash = hash * 23 + this._isJust.GetHashCode();
+                if (this._isJust)
+                {
+                    hash = hash * 23 + this._value.GetHashCode();
+                }
+                return hash;
             }
         }
 
-        // #### implicits (instead of .of)
         public static implicit operator TValue(Maybe<TValue> maybe) => maybe.UnsafelyUnwrap();
         public static implicit operator Maybe<TValue>(TValue value) => new Maybe<TValue>(value);
-        // TODO: need an implicit for Nothing
+
+        // TODO: implicit for Nothing?
     }
 }

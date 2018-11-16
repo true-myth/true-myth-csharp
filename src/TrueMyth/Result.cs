@@ -85,13 +85,21 @@ namespace TrueMyth
 
         public override int GetHashCode()
         {
-            if (this._isOk)
+            unchecked
             {
-                return (this._value?.GetHashCode() ?? 0) | typeof(TValue).GetHashCode() | 0xf00d;
-            }
-            else
-            {
-                return (this._error?.GetHashCode() ?? 0) | typeof(TError).GetHashCode() | 0x0bad;
+                int hash = 17;
+                hash = hash * 23 + typeof(TValue).GetHashCode();
+                hash = hash * 23 + typeof(TError).GetHashCode();
+                hash = hash * 23 + this._isOk.GetHashCode();
+                if (this._isOk)
+                {
+                    hash = hash + 23 + this._value.GetHashCode();
+                }
+                else
+                {
+                    hash = hash + 23 + this._error.GetHashCode();
+                }
+                return hash;
             }
         }
 
