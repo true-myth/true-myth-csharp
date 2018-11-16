@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace TrueMyth
 {
+    /// <summary>
+    /// Something
+    /// </summary>
+    /// <typeparam name="TValue"></typeparam>
+    /// <typeparam name="TError"></typeparam>
     public sealed class Result<TValue, TError>
     {
         private readonly TValue _value;
@@ -52,7 +57,7 @@ namespace TrueMyth
 
         public Result<UValue, TError> AndThen<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
 
-        public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Just(this._value) : Maybe<TValue>.Nothing;
+        public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
 
         // Apply (ap) - needed?
 
