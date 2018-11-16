@@ -25,8 +25,8 @@ namespace TrueMyth.Test
 
         public static IEnumerable<object[]> GetToStringTests()
         {
-            yield return new object[] { SimpleResult.Ok(7), "Ok[7]"};
-            yield return new object[] { SimpleResult.Err("error"), "Err[error]"};
+            yield return new object[] { SimpleResult.Ok(7), $"Ok<{7.GetType().Name}>[7]"};
+            yield return new object[] { SimpleResult.Err("error"), $"Err<{"error".GetType().Name}>[error]"};
         }
     }
 }
