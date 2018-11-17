@@ -167,6 +167,24 @@ namespace TrueMyth
 
         private Result(TValue value, TError error, bool isOk)
         {
+            // basically just a defense against result instances that don't make sense.
+            // e.g., new Result<int,string>(0, "error", true) doesn't make sense, and
+            // neither does new Result<int,string>(7, null, false);
+            if (isOk)
+            {
+                if (EqualityComparer<TValue>.Default.Equals(value, default(TValue)) && !EqualityComparer<TError>.Default.Equals(error, default(TError)))
+                {
+                    throw new ArgumentException("Invalid state for Ok result.", nameof(value));
+                }
+            }
+            else
+            {
+                if (!EqualityComparer<TValue>.Default.Equals(value, default(TValue)) && EqualityComparer<TError>.Default.Equals(error, default(TError)))
+                {
+                    throw new ArgumentException("Invalid state for Err result.", nameof(error));
+                }
+            }
+
             _value = value;
             _error = error;
             _isOk = isOk;
@@ -187,43 +205,235 @@ namespace TrueMyth
         /// <param name="err">The error value wrapped by the <c>Result</c></param>
         public static Result<TValue, TError> Err(TError err) => new Result<TValue, TError>(default(TValue), err, false);
 
-
+        /// <summary>
+        /// Get the value out of the <c>Result</c>. Returns the content of an "Ok" but <em>throws if the result is "Err"</em>.
+        /// Prefer to use <see cref="Unwrap(TValue)"/> or <see cref="Unwrap(Func{TError,TValue})"/>
+        /// </summary>
         public TValue UnsafelyUnwrap() => _isOk ? _value : throw new InvalidOperationException("Invalid request to unwrap value.");
+
+        /// <summary>
+        /// Get the error out of the <c>Result</c>. Returns the content of an "Err", but <em>throws if the result is "Ok"</em>.
+        /// Prefer to use <see cref="Unwrap(Func{TError,TValue})"/>.
+        /// </summary>
         public TError UnsafelyUnwrapErr() => !_isOk ? _error : throw new InvalidOperationException("Invalid request to unwrap error.");
 
-        public TValue UnwrapOr(TValue defaultValue) => this._isOk ? _value : defaultValue;
+        /// <summary>
+        /// Safely get the value out of the "Ok" variant of a <c>Result</c>. This is the recommended way to get a value
+        /// out of a <c>Result</c> most of the time.
+        /// </summary>
+        /// <param name="defaultValue">Fallback value to be returned if <c>this</c> is "Err".</param>
+        /// <example>
+        /// <code>
+        /// var anOk = Result&lt;int,string&gt;.Ok(1);
+        /// Console.WriteLine(anOk.Unwrap(0)); // 1
+        /// 
+        /// var anErr = Result&lt;int,string&gt;.Err("error");
+        /// Console.WriteLine(anErr.Unwrap(0)); // 0
+        /// </code>
+        /// </example>
+        public TValue Unwrap(TValue defaultValue) => this._isOk ? _value : defaultValue;
 
-        public TValue UnwrapOrElse(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
+        /// <summary>
+        /// Safely get the value out of a <c>Result&lt;TValue,TError&gt;</c> by returning the wrapped value if it is "Ok"
+        /// or by applying <c>elseFn</c> if it is "Err".
+        /// 
+        /// This is useful when you need to generate a value (e.g. by using current values in the environment – whether 
+        /// preloaded or by local closure) instead of having a single default value available (as in <see cref="Unwrap(TValue)"/>).
+        /// </summary>
+        /// <param name="elseFn">Function to apply to map <c>TError</c> to <c>TVaue</c>.</param>
+        /// <example>
+        /// var someOtherValue = 2;
+        /// var handleError = (string err) => err.Length + someOtherValue;
+        /// 
+        /// var anOk = Result&lt;int,string&gt;.Ok(42);
+        /// Console.WriteLine(anOk.Unwrap(handleError)); // 42
+        /// 
+        /// var anErr = Result&lt;int,string&gt;.Err("error");
+        /// Console.WriteLine(anErr.Unwrap(handleError)); // error
+        /// </example>
+        public TValue Unwrap(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
 
+        /// <summary>
+        /// Map over a Result instance: apply the function to the wrapped value if the instance is Ok, and return the wrapped error value 
+        /// wrapped as a new Err of the correct type (Result&lt;UValue, TError&gt;) if the instance is Err.
+        /// 
+        /// <c>Result.Select</c> works a lot like it does for <see cref="IEnumerable{T}"/>, but with one important difference. Both 
+        /// <c>Result</c> and <c>IEnumerable</c> are containers for other kinds of items, but where <c>IEnumerable</c>> has 0 to n items, 
+        /// a <c>Result</c> always has exactly one item, which is either a success or an error instance.
+        /// 
+        /// Where <c>IEnumerable.Select</c> will apply the mapping function to every item in the enumeration (if there are any), 
+        /// <c>Result.Select</c> will only apply the mapping function to the (single) element if an Ok instance, if there is one.
+        /// 
+        /// If you have no items in an array of numbers named foo and call foo.Select(x => x + 1), you'll still some have an array with 
+        /// nothing in it. But if you have any items in the array (<c>{2, 3}</c>), and you call <c>foo.Select(x => x + 1)</c> on it, 
+        /// you'll get a new array with each of those items inside the array "container" transformed (<c>{3, 4}</c>).
+        /// 
+        /// With <c>Result.Select</c>, the Err variant is treated by the map function kind of the same way as the empty array case: 
+        /// it's just ignored, and you get back a new <c>Result</c> that is still just the same Err instance. But if you have an 
+        /// Ok variant, the map function is applied to it, and you get back a new <c>Result</c> with the value transformed, and still 
+        /// wrapped in an Ok.
+        /// </summary>
+        /// <param name="mapFn">Mapping function applied to Ok value.</param>
+        /// <typeparam name="UValue">Destination value type resulting from the mapping function.</typeparam>
+        /// <example>
+        /// long Double(int n) => n * 2;
+        /// 
+        /// var anOk = Result&lt;int,string&gt;.Ok(12);
+        /// var mappedOk = anOk.Select(Double);
+        /// Console.WriteLine(mappedOk.ToString()); // Ok&lt;long,string&gt;[12]
+        /// 
+        /// var anErr = Result&lt;int,string&gt;.Err("error");
+        /// var mappedErr = anErr.Select(Double);
+        /// Console.WRiteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]
+        /// </example>
         public Result<UValue, TError> Select<UValue>(Func<TValue,UValue> mapFn) => this._isOk
             ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
             : new Result<UValue,TError>(default(UValue), this._error, false);
 
+        // mapOr
+        /// <summary>
+        /// Map over a <c>Result</c> instance as in map and get out the value if result is an Ok, or return a default value if result is an Err.
+        /// </summary>
+        /// <param name="mapFn">Mapping function to apply to wrapped Ok value.</param>
+        /// <param name="defaultValue">Fallback value to return if <c>this</c> is an Err.</param>
+        /// <typeparam name="UValue">Destination type resulting from mapping function <c>mapFn</c>.</typeparam>
+        /// <returns></returns>
+        public Result<UValue,TError> Select<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk 
+            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
+            : new Result<UValue,TError>(defaultValue, default(TError), true);
+
+        // mapOrElse
+        /// <summary>
+        /// Map over a <c>Result</c> instance as in map and get out the value if result is Ok, or apply a function (<c>mapErrFn</c>) to the value 
+        /// wrapped in the Err to get a default value.
+        /// 
+        /// Like <see cref="Select{UValue}(Func{TValue,UValue},UValue)"/> but using a function to transform the error into a usable value i
+        /// nstead of simply using a default value.
+        /// </summary>
+        /// <param name="mapFn">Mapping function applied to Ok value.</param>
+        /// <param name="mapErrFn">Mapping function applied to Err value.</param>
+        /// <typeparam name="UValue">Destination type resulting from either of the mapping functions.</typeparam>
+        /// <returns></returns>
+        public Result<UValue,TError> Select<UValue>(Func<TValue,UValue> mapFn, Func<TError,UValue> mapErrFn) => this._isOk 
+            ? new Result<UValue, TError>(mapFn(this._value), default(TError), true)
+            : new Result<UValue, TError>(mapErrFn(this._error), default(TError), true);
+
+        /// <summary>
+        /// Map over a <c>Result</c>, exactly as in map, but operating on the value wrapped in an Err instead of the value wrapped in the Ok. 
+        /// This is handy for when you need to line up a bunch of different types of errors, or if you need an error of one shape to 
+        /// be in a different shape to use somewhere else in your codebase.
+        /// </summary>
+        /// <param name="mapFn">Mapping function to apply to error wrapped in Err <c>Result</c>.</param>
+        /// <typeparam name="UError">Mapped error type resulting from mapping function.</typeparam>
         public Result<TValue, UError> SelectErr<UError>(Func<TError,UError> mapFn) => !this._isOk
             ? new Result<TValue,UError>(default(TValue), mapFn(this._error), false)
             : new Result<TValue,UError>(this._value, default(UError), true);
 
-        public UValue SelectOrDefault<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk ? mapFn(this._value) : defaultValue;
-        public UValue SelectOrElse<UValue>(Func<TValue,UValue> mapFn, Func<TError,UValue> mapErrFn) => this._isOk ? mapFn(this._value) : mapErrFn(this._error);
-
+        /// <summary>
+        /// Performs the same basic functionality as <see cref="Unwrap(Func{TError,TValue})"/>, but instead of simply unwrapping the value if 
+        /// it is Ok and applying a function to generate the same type if it is Err, lets you supply functions which may transform the wrapped 
+        /// type if it is Ok or get a default value for Err.
+        /// 
+        /// This is kind of like a poor man's version of pattern matching, for which C♯ has only limited support.
+        /// </summary>
+        /// <param name="ok"></param>
+        /// <param name="err"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <example>
+        /// Instead of code like this:
+        /// <code>
+        /// var anOk = Result&lt;int,string&gt;.Ok(42);
+        /// int value;
+        /// switch(anOk.IsOk)
+        /// {
+        ///     true:
+        ///         value = anOk.UnsafelyUnwrap() * 2;
+        ///         break;
+        ///     false:
+        ///         value = anOk.UnsafelyUnwrapErr().Length + 2;
+        ///         break;
+        /// }
+        /// Console.WriteLine(value); // 84
+        /// </code>
+        /// we can write code like this:
+        /// <code>
+        /// var anOk = Result&lt;int,string&gt;.Ok(42);
+        /// 
+        /// var value = anOk.Match(
+        ///     ok: val => val * 2,
+        ///     err: errval => errval.Length + 2;
+        /// );
+        /// Console.WriteLine(value); // 84
+        /// </code>
+        /// </example>
         public T Match<T>(Func<TValue,T> ok, Func<TError,T> err) => this._isOk ? ok(this._value) : err(this._error);
 
-        public Result<TValue, TError> Or(Result<TValue,TError> r1) => this._isOk ? this : r1;
+        /// <summary>
+        /// Provide a fallback for a given <c>Result</c>. Behaves like a logical or: if the result value is an Ok, returns that result; otherwise, 
+        /// returns the <c>defaultResult</c> value.
+        /// 
+        /// This is useful when you want to make sure that something which takes a <c>Result</c> always ends up getting an Ok variant, by 
+        /// supplying a default value for the case that you currently have an Err.
+        /// </summary>
+        /// <param name="defaultResult"></param>
+        public Result<TValue, TError> Or(Result<TValue,TError> defaultResult) => this._isOk ? this : defaultResult;
 
-        public TValue OrElse(Func<Result<TValue,TError>> elseFn) => this._isOk ? this : elseFn();
+        /// <summary>
+        /// Like <see cref="Or(Result{TValue,TError})"/>, but using a function to construct the alternative Result.
+        /// 
+        /// Sometimes you need to perform an operation using other data in the environment to construct the fallback 
+        /// value. In these situations, you can pass a function (which may be a closure) as the elseFn to generate 
+        /// the fallback Result&lt;TValue,TError&gt;. It can then transform the data in the Err to something usable 
+        /// as an Ok, or generate a new Err instance as appropriate.
+        /// 
+        /// Useful for transforming failures to usable data.
+        /// </summary>
+        public TValue Or(Func<Result<TValue,TError>> elseFn) => this._isOk ? this : elseFn();
 
-        public Result<TValue, TError> And(Result<TValue,TError> r1) => this._isOk ? r1 : this; 
+        /// <summary>
+        /// You can think of this like a short-circuiting logical "and" operation on a <c>Result</c> type. If result 
+        /// is Ok, then the result is the <c>andResult</c>. If result is Err, the result is the Err.
+        /// 
+        /// This is useful when you have another <c>Result</c> value you want to provide if and only if you have an Ok 
+        /// – that is, when you need to make sure that if you Err, whatever else you're handing a <c>Result</c> to 
+        /// also gets that Err.
+        /// 
+        /// Notice that, unlike in <see cref="Select{UValue}(Func{TValue,UValue})"/> or its variants, the original 
+        /// result is not involved in constructing the new Result.
+        /// </summary>
+        /// <param name="andResult">Result returned if <c>this</c> is an Ok.</param>
+        public Result<TValue, TError> And(Result<TValue,TError> andResult) => this._isOk ? andResult : this; 
 
-        public Result<UValue, TError> AndThen<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
+        /// <summary>
+        /// Apply a function to the wrapped value if Ok and return a new Ok containing the resulting value; or if it 
+        /// is Err return it unmodified.
+        /// 
+        /// This differs from <see cref="Select{UValue}(Func{TValue,UValue})"/> in that <c>thenFn</c> returns another 
+        /// <c>Result</c>. You can use <c>andThen</c> to combine two functions which both create a Result from an 
+        /// unwrapped type.
+        /// </summary>
+        /// <param name="thenFn">Function that returns Result if <c>this</c> is an Ok.</param>
+        /// <typeparam name="UValue">Ok value type of result of <c>thenFn</c>.</typeparam>
+        public Result<UValue, TError> And<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk  ? thenFn()  : this.Select(val => default(UValue));
 
+        /// <summary>
+        /// Convert a <c>Result</c> to a <see cref="Maybe{TValue}"/>.
+        /// 
+        /// The converted type will be Just if the <c>Result</c> is Ok or Nothing if the <c>Result</c> is Err; the 
+        /// wrapped error value will be discarded.
+        /// </summary>
         public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
 
         // Apply (ap) - needed?
 
+        /// <summary>
+        /// Produces a string format like the following: "Ok&lt;TValue,TError&gt;[value]" or "Err&lt;TValue,TError&gt;[error]".
+        /// </summary>
         public override string ToString() => this._isOk 
             ? $"Ok<{typeof(TValue).Name}>[{this._value}]" 
             : $"Err<{typeof(TError).Name}>[{this._error}]";
 
+        /// <exclude/>
         public override bool Equals(object o)
         {
             if (o == null || GetType() != o.GetType())
@@ -242,6 +452,7 @@ namespace TrueMyth
             }
         }
 
+        /// <exclude/>
         public override int GetHashCode()
         {
             unchecked
@@ -262,13 +473,117 @@ namespace TrueMyth
             }
         }
 
+        /// <summary>
+        /// Implicit conversion operator from <c>Result&lt;TValue, TError&gt;</c> to <c>TValue</c>. Equivalent to <c>result.UnsafelyUnwrap</c>, but 
+        /// is helpful for eliminating unnecessary syntax.
+        /// <note>
+        /// This operator will not work if <c>TValue</c> and <c>TError</c> are the same because there will be no
+        /// way for the type inference system in C♯ to resolve them.
+        /// </note>
+        /// </summary>
+        /// <example>
+        /// This allows us to simplify code that would otherwise be needlessly verbose. For example, without this operator we might write the following:
+        /// <code>
+        /// int SomeOperation()
+        /// {
+        ///     var resultOfOtherOperation = SomeOtherOperation();
+        ///     
+        ///     if (resultOfOtherOperation.IsOk)
+        ///     {
+        ///         return resultOfOtherOperation.UnsafelyUnwrap();
+        ///     }
+        ///     else
+        ///     {
+        ///         throw new Exception("oops! SomeOtherOperation failed!");    
+        ///     }
+        /// }
+        /// </code>
+        /// Using this implicit conversion, this could be simplified:
+        /// <code>
+        /// int SomeOperation() => return SomeOtherOperation();
+        /// </code>
+        /// <note>
+        /// There are actually safer <em>and</em> more semantic methods for handling results than this, and we recommend the use 
+        /// of <see cref="Unwrap(TValue)"/> or any of the several methods provided for such use; however, we recognize that in 
+        /// spite of our desire to avoid exceptions and <c>null</c>, reality insists that sometimes we have to use them, particularly
+        /// when making changes to incumbent software.
+        /// </note>
+        /// </example>
         public static implicit operator TValue(Result<TValue, TError> result) => 
             result._isOk ? result._value : throw new InvalidOperationException("Invalid conversion to value type.");
 
+        /// <summary>
+        /// This works similarly to <see cref="implicit operator TValue(Result{TValue,TError})"/>, but instead of conversion to a <c>TValue</c>,
+        /// the implicit conversion is to a <c>TError</c>.
+        /// 
+        /// <note>
+        /// This operator will not work if <c>TValue</c> and <c>TError</c> are the same because there will be no
+        /// way for the type inference system in C♯ to resolve them.
+        /// </note>
+        /// </summary>
+        /// <param name="result"></param>
         public static implicit operator TError(Result<TValue, TError> result) =>
             !result._isOk ? result._error : throw new InvalidOperationException("Invalid conversion to error type.");
 
+        /// <summary>
+        /// Implicit conversion operator from <c>TValue</c> to <c>Result&lt;TValue,TError&gt;</c>.  As with the other operators, this
+        /// is intended to reduce boilerplate code required by the type system and allow you to achieve maximum leverage of type
+        /// inference.
+        /// 
+        /// <note>
+        /// This operator will not work if <c>TValue</c> and <c>TError</c> are the same because there will be no
+        /// way for the type inference system in C♯ to resolve them.
+        /// </note>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <example>
+        /// When constructing a <c>Result&lt;TValue,TError&gt;</c> the type system can be a little bit fussy. We might write:
+        /// <code>
+        /// Result&lt;int,string&gt; SomeOperation()
+        /// {
+        ///     try
+        ///     {
+        ///         int result = SomeOtherOperation(); // db query, file i/o, etc.
+        ///         return Result&lt;int,string&gt;.Ok(result);
+        ///     }
+        ///     catch (Exception exn)
+        ///     {
+        ///         return Result&lt;int,string&gt;.Err(exn.Message);
+        ///     }
+        /// }
+        /// </code>
+        /// Using these operators, we can write it like this:
+        /// <code>
+        /// Result&lt;int,string&gt; SomeOperation()
+        /// {
+        ///     try
+        ///     {
+        ///         int result = SomeOtherOperation(); // db query, file i/o, etc.
+        ///         return result;
+        ///     }
+        ///     catch (Exception exn)
+        ///     {
+        ///         return exn.Message;
+        ///     }
+        /// }
+        /// </code>
+        /// This will be particularly powerful when combined with similar operators defined for <see cref="Maybe{TValue}"/> when you 
+        /// have a return type like <c>Result&lt;Maybe&lt;TValue&gt;,TError&gt;</c>.
+        /// </example>
         public static implicit operator Result<TValue,TError>(TValue value) => new Result<TValue,TError>(value, default(TError), true);
+
+        /// <summary>
+        /// Implicit conversion operator from <c>TError</c> to <c>Result&lt;TValue,TError&gt;</c>.  As with the other operators, this
+        /// is intended to reduce boilerplate code required by the type system and allow you to achieve maximum leverage of type
+        /// inference.
+        /// 
+        /// <note>
+        /// This operator will not work if <c>TValue</c> and <c>TError</c> are the same because there will be no
+        /// way for the type inference system in C♯ to resolve them.
+        /// </note>
+        /// 
+        /// See examples provided with <see cref="implicit operator Result{TValue,TError}(TValue)"/>.
+        /// </summary>
         public static implicit operator Result<TValue,TError>(TError error) => new Result<TValue,TError>(default(TValue), error, false);
     }
 }

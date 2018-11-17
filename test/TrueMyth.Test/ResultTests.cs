@@ -202,7 +202,7 @@ namespace TrueMyth.Test
             var r2 = SimpleResult.Ok(1);
 
             // act
-            var r = r1.OrElse(() => r2);
+            var r = r1.Or(() => r2);
 
             // assert
             Assert.Equal<SimpleResult>(r1, r);
@@ -216,7 +216,7 @@ namespace TrueMyth.Test
             var r2 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.OrElse(() => r2);
+            var r = r1.Or(() => r2);
 
             // assert
             Assert.Equal<SimpleResult>(r2, r);
@@ -274,7 +274,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.AndThen(() => Result<float, string>.Ok(3.7f));
+            var r = r1.And(() => Result<float, string>.Ok(3.7f));
 
             // assert
             Assert.NotNull(r);
@@ -289,7 +289,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.AndThen(() => Result<float,string>.Ok(3.7f));
+            var r = r1.And(() => Result<float,string>.Ok(3.7f));
 
             // assert
             Assert.NotNull(r);
@@ -304,11 +304,11 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.SelectOrDefault(i => i.ToString(), "default");
+            var r = r1.Select(i => i.ToString(), "default");
 
             // assert
             Assert.NotNull(r);
-            Assert.Equal("0", r);
+            Assert.Equal(Result<string,string>.Ok("0"), r);
         }
 
         [Fact]
@@ -318,11 +318,11 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.SelectOrDefault(i => i.ToString(), "default");
+            var r = r1.Select(i => i.ToString(), "default");
 
             // assert
             Assert.NotNull(r);
-            Assert.Equal("default", r);
+            Assert.Equal(Result<string,string>.Ok("default"), r);
         }
 
         // SelectOrElse
@@ -333,10 +333,10 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.SelectOrElse(i => i, s => -1);
+            var r = r1.Select(i => i, s => -1);
 
             // arrange
-            Assert.Equal(0, r);
+            Assert.Equal(SimpleResult.Ok(0), r);
         }
 
         [Fact]
@@ -346,10 +346,10 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.SelectOrElse(i => i, s => -1);
+            var r = r1.Select(i => i, s => -1);
 
             // assert
-            Assert.Equal(-1, r);
+            Assert.Equal(SimpleResult.Ok(-1), r);
         }
 
         // ToString
@@ -374,7 +374,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(7);
 
             // act
-            var r = r1.UnwrapOr(0);
+            var r = r1.Unwrap(0);
 
             // assert
             Assert.Equal(7, r);
@@ -387,7 +387,7 @@ namespace TrueMyth.Test
             var r1  = SimpleResult.Err("error");
 
             // act
-            var r = r1.UnwrapOr(0);
+            var r = r1.Unwrap(0);
 
             // assert
             Assert.Equal(0, r);
@@ -401,7 +401,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(7);
 
             // act
-            var r = r1.UnwrapOrElse(err => 0);
+            var r = r1.Unwrap(err => 0);
 
             // assert
             Assert.Equal(7, r);
@@ -414,7 +414,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.UnwrapOrElse(err => 0);
+            var r = r1.Unwrap(err => 0);
 
             // assert
             Assert.Equal(0, r);

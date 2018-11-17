@@ -35,7 +35,7 @@ namespace TrueMyth
         /// <typeparam name="T">The value type of <paramref name="result"/>.</typeparam>
         /// <typeparam name="TError">The error type of <paramref name="result"/>.</typeparam>
         /// <returns>A <c>Maybe&lt;T&gt;</c> representing either a "Just" <c>T</c> or "Nothing", depending on the provided <paramref name="result"/>.</returns>
-        public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.UnwrapOrElse(e => Maybe<T>.Nothing);
+        public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.Unwrap(e => Maybe<T>.Nothing);
 
 
         /// <summary>
