@@ -10,20 +10,43 @@ namespace TrueMyth
     public static class Maybe
     {
         /// <summary>
-        /// This method is a convenience method that is equivalent to <see cref="Maybe{TValue}.Of(TValue)"/>. It constructs a
-        /// <c>Maybe&lt;T&gt;</c> from the provided value. This method can take advantage of type inference where <see cref="Maybe{TValue}.Of(TValue)"/>
-        /// cannot.
+        /// A convenience method that has the same behavior as <see cref="AsMaybe{T}(IEnumerable{Maybe{T}})"/>.
         /// </summary>
-        /// <param name="value">The value to be held by the resulting <c>Maybe&lt;T&gt;</c>.false  If <c>value</c> is <c>null</c>,
-        /// the resulting <c>Maybe&lt;T&gt;</c> will be a "Nothing".</param>
-        /// <typeparam name="T">Any type suported by C♯.</typeparam>
-        /// <returns>A <c>Maybe&lt;T&gt;</c> instance representing <c>value</c>.</returns>
-        public static Maybe<T> Of<T>(T value) => Maybe<T>.Of(value);
+        public static Maybe<IEnumerable<T>> All<T>(params Maybe<T>[] maybes) => maybes.AsMaybe();
 
         /// <summary>
-        /// This overload, specifically for <c>Nullable&lt;T&gt;</c>, behaves identically to <see cref="Maybe.Of{T}(T)"/>.
+        /// Convert the arguments to a single <c>Maybe&lt;IEnumerable&lt;T&gt;&gt;</c>, but only if all elements of the list are "Just". If any of the elements 
+        /// of the list are actually "Nothing", then the result will also be a "Nothing".
         /// </summary>
-        public static Maybe<T> Of<T>(Nullable<T> nullable) where T : struct => nullable.HasValue ? Maybe<T>.Of(nullable.Value) : Maybe<T>.Nothing;
+        /// <param name="maybes">A list of <c>Maybe&lt;T&gt;</c>s to aggregate.</param>
+        /// <typeparam name="T">The type represented by the maybe parameters.</typeparam>
+        /// <returns>A single <c>Maybe&lt;IEnumerable&lt;T&gt;&gt;</c>.</returns>
+        public static Maybe<IEnumerable<T>> AsMaybe<T>(this IEnumerable<Maybe<T>> maybes) => maybes.All(m => m.IsJust)
+            ? Maybe<IEnumerable<T>>.Of(maybes.Select(m => (T)m))
+            : Maybe<IEnumerable<T>>.Nothing;
+
+        /// <summary>
+        /// Given a tuple of <c>Maybe</c>s, return a <c>Maybe</c> of the tuple types.  This behaves similarly to <see cref="AsMaybe{T}(IEnumerable{Maybe{T}})"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the value represented by the first <c>Maybe</c> in the tuple.</typeparam>
+        /// <typeparam name="U">Type of the value reprsented by the second <c>Maybe</c> in the tuple.</typeparam>
+        public static Maybe<(T, U)> AsMaybe<T,U>(this Tuple<Maybe<T>,Maybe<U>> tuple) => tuple.Item1.IsJust && tuple.Item2.IsJust 
+            ? Maybe<(T,U)>.Of(((T)tuple.Item1, (U)tuple.Item2)) 
+            : Maybe<(T,U)>.Nothing;
+
+        /// <summary>
+        /// Similar to <see cref="AsMaybe{T,U}(Tuple{Maybe{T},Maybe{U}})"/>, but with a 3-tuple.
+        /// </summary>
+        public static Maybe<(T,U,V)> AsMaybe<T,U,V>(this Tuple<Maybe<T>,Maybe<U>,Maybe<V>> tuple) => tuple.Item1.IsJust && tuple.Item2.IsJust && tuple.Item3.IsJust
+            ? Maybe<(T,U,V)>.Of(((T)tuple.Item1, (U)tuple.Item2, (V)tuple.Item3))
+            : Maybe<(T,U,V)>.Nothing;
+
+        /// <summary>
+        /// Similar to <see cref="AsMaybe{T,U}(Tuple{Maybe{T},Maybe{U}})"/>, but with a 4-tuple.
+        /// </summary>
+        public static Maybe<(T,U,V,W)> AsMaybe<T,U,V,W>(this Tuple<Maybe<T>,Maybe<U>,Maybe<V>,Maybe<W>> tuple) => tuple.Item1.IsJust && tuple.Item2.IsJust && tuple.Item3.IsJust && tuple.Item4.IsJust
+            ? Maybe<(T,U,V,W)>.Of(((T)tuple.Item1, (U)tuple.Item2, (V)tuple.Item3, (W)tuple.Item4))
+            : Maybe<(T,U,V,W)>.Nothing;
 
         /// <summary>
         /// This method facilitates converting from a <see cref="Result{T,TError}"/> to a <see cref="Maybe{T}"/>.  The difference between this
@@ -37,23 +60,6 @@ namespace TrueMyth
         /// <returns>A <c>Maybe&lt;T&gt;</c> representing either a "Just" <c>T</c> or "Nothing", depending on the provided <paramref name="result"/>.</returns>
         public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.Unwrap(e => Maybe<T>.Nothing);
 
-
-        /// <summary>
-        /// Convert the arguments to a single <c>Maybe&lt;IEnumerable&lt;T&gt;&gt;</c>, but only if all elements of the list are "Just". If any of the elements 
-        /// of the list are actually "Nothing", then the result will also be a "Nothing".
-        /// </summary>
-        /// <param name="maybes">A list of <c>Maybe&lt;T&gt;</c>s to aggregate.</param>
-        /// <typeparam name="T">The type represented by the maybe parameters.</typeparam>
-        /// <returns>A single <c>Maybe&lt;IEnumerable&lt;T&gt;&gt;</c>.</returns>
-        public static Maybe<IEnumerable<T>> MaybeAll<T>(this IEnumerable<Maybe<T>> maybes) => maybes.All(m => m.IsJust)
-            ? Maybe<IEnumerable<T>>.Of(maybes.Select(m => (T)m))
-            : Maybe<IEnumerable<T>>.Nothing;
-
-        /// <summary>
-        /// A convenience method that has the same behavior as <see cref="MaybeAll{T}(IEnumerable{Maybe{T}})"/>.
-        /// </summary>
-        public static Maybe<IEnumerable<T>> All<T>(params Maybe<T>[] maybes) => maybes.MaybeAll();
-        
         /// <summary>
         /// A safe method for finding elements of a list for which the <c>predicate</c> returns <c>true</c>. This method guarantees a valid <c>Maybe&lt;T&gt;</c> result;
         /// it never returns null and never throws an exception.
@@ -76,6 +82,14 @@ namespace TrueMyth
         }
 
         /// <summary>
+        /// Safely get the first item from a list, returning "Just" the first item if the array has at least one item in it, or "Nothing" if it is empty.
+        /// </summary>
+        /// <param name="list">The array from which to get the first item.</param>
+        /// <typeparam name="TValue">The type of the items of <c>list</c>.</typeparam>
+        /// <returns>A <c>Maybe&lt;TValue&gt;</c> of the first item of the list (which might be "Nothing" if the list is empty).</returns>
+        public static Maybe<TValue> MaybeFirst<TValue>(this IEnumerable<TValue> list) => list.Any() ? Maybe<TValue>.Of(list.First()) : Maybe<TValue>.Nothing;
+
+        /// <summary>
         /// A safe way to retrieve values from key-value collections (like <see cref="Dictionary{TKey,TValue}"/>).  If the requested key does not exist, 
         /// a <c>Maybe&lt;TValue;&gt;.Nothing</c> is returned. Otherwise, a <c>Maybe&lt;TValue&gt;</c> is constructed from the value associated
         /// with <c>key</c>.
@@ -89,15 +103,7 @@ namespace TrueMyth
             collection.Any(kvp => EqualityComparer<TKey>.Default.Equals(kvp.Key, key)) 
             ? Maybe<TValue>.Of(collection.First(kvp => EqualityComparer<TKey>.Default.Equals(kvp.Key, key)).Value)
             : Maybe<TValue>.Nothing;
-        
-        /// <summary>
-        /// Safely get the first item from a list, returning "Just" the first item if the array has at least one item in it, or "Nothing" if it is empty.
-        /// </summary>
-        /// <param name="list">The array from which to get the first item.</param>
-        /// <typeparam name="TValue">The type of the items of <c>list</c>.</typeparam>
-        /// <returns>A <c>Maybe&lt;TValue&gt;</c> of the first item of the list (which might be "Nothing" if the list is empty).</returns>
-        public static Maybe<TValue> MaybeFirst<TValue>(this IEnumerable<TValue> list) => list.Any() ? Maybe<TValue>.Of(list.First()) : Maybe<TValue>.Nothing;
-        
+
         /// <summary>
         /// Safely get the last item from a list, returning "Just" the last item if the array has at least one item in it, or "Nothing" if it is empty.
         /// </summary>
@@ -105,29 +111,22 @@ namespace TrueMyth
         /// <typeparam name="TValue">The type of the items of <c>list</c>.</typeparam>
         /// <returns>A <c>Maybe&lt;TValue&gt;</c> of the last item of the list (which might be "Nothing" if the list is empty).</returns>
         public static Maybe<TValue> MaybeLast<TValue>(this IEnumerable<TValue> list) => list.Any() ? Maybe<TValue>.Of(list.Last()) : Maybe<TValue>.Nothing;
-        
-        /// <summary>
-        /// Given a tuple of <c>Maybe</c>s, return a <c>Maybe</c> of the tuple types.  This behaves similarly to <see cref="MaybeAll{T}(IEnumerable{Maybe{T}})"/>.
-        /// </summary>
-        /// <typeparam name="T">Type of the value represented by the first <c>Maybe</c> in the tuple.</typeparam>
-        /// <typeparam name="U">Type of the value reprsented by the second <c>Maybe</c> in the tuple.</typeparam>
-        public static Maybe<(T, U)> MaybeAll<T,U>(this Tuple<Maybe<T>,Maybe<U>> tuple) => tuple.Item1.IsJust && tuple.Item2.IsJust 
-            ? Maybe<(T,U)>.Of(((T)tuple.Item1, (U)tuple.Item2)) 
-            : Maybe<(T,U)>.Nothing;
 
         /// <summary>
-        /// Similar to <see cref="MaybeAll{T,U}(Tuple{Maybe{T},Maybe{U}})"/>, but with a 3-tuple.
+        /// This method is a convenience method that is equivalent to <see cref="Maybe{TValue}.Of(TValue)"/>. It constructs a
+        /// <c>Maybe&lt;T&gt;</c> from the provided value. This method can take advantage of type inference where <see cref="Maybe{TValue}.Of(TValue)"/>
+        /// cannot.
         /// </summary>
-        public static Maybe<(T,U,V)> MaybeAll<T,U,V>(this Tuple<Maybe<T>,Maybe<U>,Maybe<V>> tuple) => tuple.Item1.IsJust && tuple.Item2.IsJust && tuple.Item3.IsJust
-            ? Maybe<(T,U,V)>.Of(((T)tuple.Item1, (U)tuple.Item2, (V)tuple.Item3))
-            : Maybe<(T,U,V)>.Nothing;
+        /// <param name="value">The value to be held by the resulting <c>Maybe&lt;T&gt;</c>.false  If <c>value</c> is <c>null</c>,
+        /// the resulting <c>Maybe&lt;T&gt;</c> will be a "Nothing".</param>
+        /// <typeparam name="T">Any type suported by C♯.</typeparam>
+        /// <returns>A <c>Maybe&lt;T&gt;</c> instance representing <c>value</c>.</returns>
+        public static Maybe<T> Of<T>(T value) => Maybe<T>.Of(value);
 
         /// <summary>
-        /// Similar to <see cref="MaybeAll{T,U}(Tuple{Maybe{T},Maybe{U}})"/>, but with a 4-tuple.
+        /// This overload, specifically for <c>Nullable&lt;T&gt;</c>, behaves identically to <see cref="Maybe.Of{T}(T)"/>.
         /// </summary>
-        public static Maybe<(T,U,V,W)> MaybeAll<T,U,V,W>(this Tuple<Maybe<T>,Maybe<U>,Maybe<V>,Maybe<W>> tuple) => tuple.Item1.IsJust && tuple.Item2.IsJust && tuple.Item3.IsJust && tuple.Item4.IsJust
-            ? Maybe<(T,U,V,W)>.Of(((T)tuple.Item1, (U)tuple.Item2, (V)tuple.Item3, (W)tuple.Item4))
-            : Maybe<(T,U,V,W)>.Nothing;
+        public static Maybe<T> Of<T>(Nullable<T> nullable) where T : struct => nullable.HasValue ? Maybe<T>.Of(nullable.Value) : Maybe<T>.Nothing;
     }
 
     /// <summary>
@@ -172,8 +171,14 @@ namespace TrueMyth
     /// <typeparam name="TValue">Any type supported by the .NET type system.</typeparam>
     public sealed class Maybe<TValue>
     {
+        #region Private Fields
+
         private readonly TValue _value;
         private readonly bool _isJust;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Explicit means by which to determine if a <c>Maybe&lt;TValue&gt;</c> is a "Just".  Returns <c>true</c> if "Just"
@@ -187,6 +192,17 @@ namespace TrueMyth
         /// </summary>
         public bool IsNothing => !_isJust;
 
+        /// <summary>
+        /// Static property representing a "Nothing" of type <c>Maybe&lt;TValue&gt;</c>; only constructed once during 
+        /// static initialization of the program, so this property is effectively like a constant.
+        /// </summary>
+        /// <returns>The "Nothing" instance of type <c>Maybe&lt;TValue&gt;</c>.</returns>
+        public static Maybe<TValue> Nothing { get; } = new Maybe<TValue>();
+
+        #endregion
+
+        #region Constructors
+
         private Maybe() 
         {
             _isJust = false;
@@ -198,22 +214,9 @@ namespace TrueMyth
             _isJust = true;
         }
 
-        /// <summary>
-        /// Static factory method for creation of new "Just" <c>Maybe&lt;TValue&gt;</c>s.  If <c>value</c> is a 
-        /// reference type and is <c>null</c>, this returns a "Nothing".
-        /// </summary>
-        /// <param name="value">The value to be held by the <c>Maybe&lt;TValue&gt;</c> instance.  Of type <c>TValue</c>
-        /// (see documentation for <see cref="Maybe{TValue}"/>).</param>
-        /// <returns>A <c>Maybe&lt;TValue&gt;</c> instance.</returns>
-        public static Maybe<TValue> Of(TValue value) => value.Equals(null) ? Nothing : new Maybe<TValue>(value);
+        #endregion
 
-        /// <summary>
-        /// Static property representing a "Nothing" of type <c>Maybe&lt;TValue&gt;</c>; only constructed once during 
-        /// static initialization of the program, so this property is effectively like a constant.
-        /// </summary>
-        /// <returns>The "Nothing" instance of type <c>Maybe&lt;TValue&gt;</c>.</returns>
-        public static Maybe<TValue> Nothing { get; } = new Maybe<TValue>();
-
+        #region Public Instance Methods
         /// <summary>
         /// <para>
         /// You can think of this like a short-circuiting logical "and" operation on a <c>Mabye</c> type.  If <c>this</c> is a "Just", then
@@ -243,7 +246,48 @@ namespace TrueMyth
         /// <param name="thenFn">Function that returns a <c>Maybe&lt;UValue&gt;</c></param>
         /// <typeparam name="UValue">Any type supported by C♯; it needn't be the same as <c>TValue</c>.</typeparam>
         public Maybe<UValue> And<UValue>(Func<TValue,Maybe<UValue>> thenFn) => this._isJust ? thenFn(this._value) : Maybe<UValue>.Nothing;
-        
+
+        /// <summary>
+        /// Provides the same basic functionality as <see cref="Unwrap(Func{TValue})"/>, but instead of simply unwrapping the value if it is "JUst" and applyiung a value to genearte
+        /// the same default type if it is "Nothing", lets you supply functions which may transform the wrapped type if it is "Just" or get a default value for "Nothing".
+        /// </summary>
+        /// <param name="just">The function to apply if <c>this</c> is "Just".</param>
+        /// <param name="nothing">The function to apply if <c>this</c> is "Nothing".</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <example>
+        /// var maybeValue = fromSomeMethod();
+        /// var stringValue = maybeValue.Match(
+        ///     just: val => val.ToString(),
+        ///     nothing: val => "nothing"
+        /// );
+        /// </example>
+        public T Match<T>(Func<TValue,T> just, Func<T> nothing) => this._isJust ? just(this._value) : nothing();
+
+        /// <summary>
+        /// Static factory method for creation of new "Just" <c>Maybe&lt;TValue&gt;</c>s.  If <c>value</c> is a 
+        /// reference type and is <c>null</c>, this returns a "Nothing".
+        /// </summary>
+        /// <param name="value">The value to be held by the <c>Maybe&lt;TValue&gt;</c> instance.  Of type <c>TValue</c>
+        /// (see documentation for <see cref="Maybe{TValue}"/>).</param>
+        /// <returns>A <c>Maybe&lt;TValue&gt;</c> instance.</returns>
+        public static Maybe<TValue> Of(TValue value) => value.Equals(null) ? Nothing : new Maybe<TValue>(value);
+
+        /// <summary>
+        /// Provide a fallback for <c>this</c>.  Behaves like a logical "or": if the <c>Maybe</c> is "Just", returns that; otherwise,
+        /// returns the provided <c>maybe</c>.
+        /// </summary>
+        /// <param name="maybe">Fallback value.</param>
+        /// <returns>If <c>this</c> is "Just", return <c>this</c>; otherwise return <c>maybe</c>.</returns>
+        public Maybe<TValue> Or(Maybe<TValue> maybe) => this._isJust ? this : maybe;
+
+        /// <summary>
+        /// Like <see cref="Or(Maybe{TValue})"/>, but using a function to construct the fallback <c>Maybe</c>.
+        /// </summary>
+        /// <param name="elseFn">Function used to construct fallback <c>Maybe</c>.</param>
+        /// <returns>If <c>this</c> is "Just", returns <c>this</c>.  Otherwise, returns result of <c>elseFn</c>.</returns>
+        public Maybe<TValue> Or(Func<Maybe<TValue>> elseFn) => this._isJust ? this : elseFn();
+
         /// <summary>
         /// Map over a <c>Maybe</c> instance.static  This applies the function to the wrapped value if the instance is "Just" and returns "Nothing"
         /// if the instance is "Nothing".  This respects types, so if <c>this</c> is of type <c>Maybe&lt;int&gt;</c> and you provide a <c>mapFn</c> of type <c>Func&lt;double&gt;</c>,
@@ -272,39 +316,7 @@ namespace TrueMyth
         /// <typeparam name="UValue">The type of the result of the mapping function; any type supported by C♯ can be used here; it needn't be different than <c>TValue</c>.</typeparam>
         /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the result of <c>elseFn</c>.</returns>
         public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn, Func<UValue> elseFn) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Of(elseFn());
-        
-        /// <summary>
-        /// Provides the same basic functionality as <see cref="Unwrap(Func{TValue})"/>, but instead of simply unwrapping the value if it is "JUst" and applyiung a value to genearte
-        /// the same default type if it is "Nothing", lets you supply functions which may transform the wrapped type if it is "Just" or get a default value for "Nothing".
-        /// </summary>
-        /// <param name="just">The function to apply if <c>this</c> is "Just".</param>
-        /// <param name="nothing">The function to apply if <c>this</c> is "Nothing".</param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <example>
-        /// var maybeValue = fromSomeMethod();
-        /// var stringValue = maybeValue.Match(
-        ///     just: val => val.ToString(),
-        ///     nothing: val => "nothing"
-        /// );
-        /// </example>
-        public T Match<T>(Func<TValue,T> just, Func<T> nothing) => this._isJust ? just(this._value) : nothing();
 
-        /// <summary>
-        /// Provide a fallback for <c>this</c>.  Behaves like a logical "or": if the <c>Maybe</c> is "Just", returns that; otherwise,
-        /// returns the provided <c>maybe</c>.
-        /// </summary>
-        /// <param name="maybe">Fallback value.</param>
-        /// <returns>If <c>this</c> is "Just", return <c>this</c>; otherwise return <c>maybe</c>.</returns>
-        public Maybe<TValue> Or(Maybe<TValue> maybe) => this._isJust ? this : maybe;
-
-        /// <summary>
-        /// Like <see cref="Or(Maybe{TValue})"/>, but using a function to construct the fallback <c>Maybe</c>.
-        /// </summary>
-        /// <param name="elseFn">Function used to construct fallback <c>Maybe</c>.</param>
-        /// <returns>If <c>this</c> is "Just", returns <c>this</c>.  Otherwise, returns result of <c>elseFn</c>.</returns>
-        public Maybe<TValue> Or(Func<Maybe<TValue>> elseFn) => this._isJust ? this : elseFn();
-        
         /// <summary>
         /// Transform the <c>Maybe</c> into a <see cref="Result{TValue,TError}"/>, using the wrapped value as the "Ok" value if "Just"; otherwise using the supplied 
         /// <c>error</c> value for "Err".
@@ -317,7 +329,6 @@ namespace TrueMyth
         /// Very similar to <see cref="ToResult{TError}(TError)"/>, but using a function to construct the error result.
         /// </summary>
         public Result<TValue, TError> ToResult<TError>(Func<TError> errFn) => this._isJust ? Result<TValue,TError>.Ok(this._value) : Result<TValue,TError>.Err(errFn());
-
 
         /// <summary>
         /// Get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of a "Just", but <em>throws if the <c>Maybe</c> is "Nothing"</em>.
@@ -337,6 +348,10 @@ namespace TrueMyth
         /// — whether preloaded or by local closure) instead of having a default value available as in <see cref="Unwrap(TValue)"/>.
         /// </summary>
         public TValue Unwrap(Func<TValue> elseFn) => this._isJust ? this._value : elseFn();
+
+        #endregion
+
+        #region Object Overrides
 
         /// <summary>
         /// Produces a string format like the following: "Just&lt;TValue&gt;[value]" or "Nothing&lt;TValue&gt;".
@@ -378,6 +393,10 @@ namespace TrueMyth
                 return hash;
             }
         }
+
+        #endregion
+
+        #region Public Static Methods & Operators
 
         /// <summary>
         /// Equivalent of <see cref="UnsafelyUnwrap"/>.  Follows usual C♯ semantics of throwing 
@@ -430,6 +449,6 @@ namespace TrueMyth
         /// </example>
         public static implicit operator Maybe<TValue>(TValue value) => Maybe<TValue>.Of(value);
 
-        // TODO: implicit for Nothing?
+        #endregion
     }
 }
