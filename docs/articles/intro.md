@@ -131,3 +131,138 @@ application. For example, what if you need to treat “no value” distinctly fr
 value present, and it’s an empty string”? That’s where `Maybe` comes in handy.
 
 ## Result
+
+Another common scenario we find ourselves in is dealing with operations which might fail.
+There are a couple patterns we often use to deal with this: _callbacks_ and _exceptions_.
+There are major problems with both, especially around reusability and composability.
+
+The callback pattern (as in e.g. Node) encourages a style where literally every function starts with the exact same code:
+```csharp
+string GetMeAValue(string err, string data) {
+  if (err != null) {
+    return HandleErr(err);
+  }
+  
+  // do whatever the *actual* point of the function is
+}
+```
+There are two major problems with this:
+1. It’s incredibly repetitive – the very opposite of “Don’t Repeat Yourself”. We wouldn’t
+   do this with anything else in our codebase!
+1. It puts the error-handling right up front and not in a good way. While we want to have
+   a failure case in mind when designing the behavior of our functions, it’s not usually
+   the point of most functions – things like `HandleErr` in the above example being the
+   exception and not the rule. The actual meat of the function is always after the error
+   handling.
+
+But if we’re not using some similar kind of callback pattern, we usually resort to
+exceptions. But exceptions are unpredictable: you can’t know whether a given function
+invocation is going to throw an exception until runtime as someone calling the function.
+No big deal if it’s a small application and one person wrote all the code, but with even a
+few thousand lines of code or two developers, it’s very easy to miss that. And then this
+happens:
+
+```csharp
+// in one part of the codebase
+object GetMeAValue(sring url) {
+  if (IsMalformed(url)) {
+    throw new Exception($"The url `{url}` is malformed!");
+  }
+  
+  // do something else to load data from the URL
+  return data;
+}
+
+string RenderHtml(object toRender) {
+  // if toRender can't generate valid HTML, throw Error("invalid HTML");
+  // if it can, theRenderedHTML;
+}
+
+void WriteOutput(string html)
+{
+  // I/O
+}
+
+// somewhere else in the codebase -- throws an exception
+var badUrl = "http:/www.google.com";  // missing a slash
+var response = GetMeAValue(badUrl);  // throws here
+
+// we never get here, but it could throw too
+var htmlForPage = RenderHtml(value);
+
+// so we definitely can't get here safely
+WriteOutput(htmlForPage);
+```
+Notice: there’s no way for the caller to know that the function will throw. Perhaps you’re
+very disciplined and write good docstrings for every function – and moreover, perhaps
+everyone’s editor shows it to them and they pay attention to that briefly-available
+popover. More likely, though, this exception throws at runtime and probably as a result of
+user-entered data – and then you’re chasing down the problem through error logs. More, if
+you do want to account for the reality that any function anywhere in C♯ might
+actually throw, you’re going to write something like this:
+```csharp
+try
+{
+  var badUrl = "http:/www.google.com";  // missing a slash
+  var response = GetMeAValue(badUrl);  // throws here
+
+  // we never get here, but it could throw too
+  var htmlForPage = RenderHtml(value);
+
+  // so we definitely can't get here safely
+  WriteOutput(htmlForPage); 
+}
+catch(Exception exn)
+{
+  HandleErr(exn);
+}
+```
+This is like the first example but even worse for repetition!  Also, C♯ can’t help you
+here! There's no type signatures to say “This throws an exception!”
+
+Instead, we can use a `Result` to get us a container type, much like `Maybe`, to let us
+deal with this scenario. A `Result` is either an Ok wrapping around a value (like Just does)
+or an Err wrapping around some type defining what went wrong (not like Nothing, which has
+no contents).
+```csharp
+Result<Payload, string> GetMeAValue(string url)
+{
+  if (IsMalformed(url)) {
+    return Result<Payload, string>.Err($"The url '{url}' is malformed");
+  }
+  
+  // do something else to load data from the url
+  return Result.Ok(data);
+}
+
+Result<string, string> RenderHtml(string toRender)
+{
+  // if toRender can't generate valid HTML, return Err("invalid HTML");
+  // if it can, return Ok(theRenderedHTML);
+}
+
+void WriteOutput(string html)
+{
+  
+}
+
+// somewhere else in the codebase -- no exception this time!
+var badUrl = "http:/www.google.com";  // missing a slash
+
+// value = Err(The url '${http:/www.google.com}' is malformed)
+var value = GetMeAValue(badUrl);
+
+// htmlForPage = the same error! or, if it was Ok, could be a different
+// `Err` (because of how `andThen` works).
+var htmlForPage = value.And(RenderHtml);
+
+// we can't just invoke `setDom` because it doesn't take a `Result`.
+value.Match(
+  ok: html => WriteOutput(html);
+  err: reason => Alert($"Something went seriously wrong here! {reason}");
+)
+```
+When we have a `Result` instance, we can perform tons of operations on whether it’s Ok or
+Err, just as we could with a Just and Nothing, until we need the value. Maybe that’s right
+away. Maybe we don’t need it until somewhere else deep in our application! Either way, we
+can deal with it easily enough, and have type safety throughout!
