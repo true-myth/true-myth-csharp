@@ -19,7 +19,6 @@ I've tried to make this as complete an example as reasonably possible without ma
 big that it takes more than a minute or two to read.  
 ```csharp
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using TrueMyth;
 
 namespace MyWebApp
