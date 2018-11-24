@@ -4,6 +4,20 @@ using System.Collections.Generic;
 namespace TrueMyth
 {
     /// <summary>
+    /// A static class that provides factory and extension methods for <see cref="Result{TValue,TError}"/>.
+    /// </summary>
+    public static class Result
+    {
+        /// <summary>
+        /// Convenience method to facilitate invoking static `Result&lt;TValue,TError&gt;`
+        /// methods without type parameters.
+        /// </summary>
+        public static Result<T, TError> From<T,TError>(Maybe<T> maybe, TError error) => maybe.IsJust 
+            ? Result<T,TError>.Ok(maybe) 
+            : Result<T,TError>.Err(error);
+    }
+
+    /// <summary>
     /// <para>A <c>Result&lt;TValue,TError&gt;</c> is a type representing the value result of an operation which may fail,
     /// with a successful value type of <c>TValue</c> or an error type of <c>TError</c> (pun intended!).  If
     /// the value is present, it is "Ok", and if it's absent, it's "Err". There are several ways to check if a <c>Result</c>
