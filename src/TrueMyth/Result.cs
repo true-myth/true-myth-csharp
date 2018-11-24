@@ -375,6 +375,18 @@ namespace TrueMyth
         /// </summary>
         public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
 
+        /// <summary>
+        /// Execute the provided callback, wrapping the return value in an `Result.Ok` or `Result.Err` if there is an exception.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// var aSuccessfulOperation = () => 2 + 2;
+        /// var anOkResult = Result.Try(aSuccessfulOperation, "Oh no!"); // Ok&lt;int,string&gt;[4]
+        /// 
+        /// var aThrowingOperation = () => throw new Exception("Bummer");
+        /// var anErrResult = Result.Try(aThrowingOperation, "Oh no!"); // Err&lt;int,string&gt;[Oh no!]
+        /// </code>
+        /// </example>
         public Result<TValue, TError> Try(Func<TValue> fn, TError error)
         {
             try
@@ -387,6 +399,19 @@ namespace TrueMyth
             }
         }
 
+        /// <summary>
+        /// Execute the provided callback, wrapping the return value in an `Result.Ok`.  If there is an exception, wrap
+        /// the result of `errFn` in a `Result.Err`.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// var aSuccessfulOperation = () => 2 + 2;
+        /// var anOkResult = Result.Try(aSuccessfulOperation, () => string.Empty); // Ok&lt;int,string&gt;[4]
+        /// 
+        /// var aThrowingOperation () => throw new Exception("Bummer");
+        /// var anErrResult = Result.Try(aThrowingOperation, (exn) => exn.Message); // Err&lt;int,string&gt;[Bummer]
+        /// </code>
+        /// </example>
         public Result<TValue, TError> Try(Func<TValue> fn, Func<TError> errFn)
         {
             try
@@ -508,6 +533,14 @@ namespace TrueMyth
         /// <param name="err">The error value wrapped by the <c>Result</c></param>
         public static Result<TValue, TError> Err(TError err) => new Result<TValue, TError>(default(TValue), err, false);
 
+        /// <summary>
+        /// Transform a `Maybe&lt;T&gt;` into a `Result&lt;T,TError&gt;`. If the `Maybe`
+        /// is a Just, its value will be wrapped in the Ok variant; if it is a Nothing the
+        /// errValue will be wrapped in the Err variant.
+        /// </summary>
+        /// <param name="maybe"></param>
+        /// <param name="errValue"></param>
+        /// <returns></returns>
         public static Result<TValue,TError> From(Maybe<TValue> maybe, TError errValue) => maybe.ToResult(errValue);
 
         /// <summary>

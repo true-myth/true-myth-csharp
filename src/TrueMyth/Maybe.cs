@@ -243,9 +243,38 @@ namespace TrueMyth
         /// This work similarly to <see cref="And{UValue}(Maybe{UValue})"/>, but instead of providing a maybe that will be returned when <c>this</c> is "Just", 
         /// you provide a function that returns a <c>Maybe</c>.
         /// </summary>
-        /// <param name="thenFn">Function that returns a <c>Maybe&lt;UValue&gt;</c></param>
+        /// <param name="bindFn">Function that returns a <c>Maybe&lt;UValue&gt;</c></param>
         /// <typeparam name="UValue">Any type supported by C♯; it needn't be the same as <c>TValue</c>.</typeparam>
-        public Maybe<UValue> And<UValue>(Func<TValue,Maybe<UValue>> thenFn) => this._isJust ? thenFn(this._value) : Maybe<UValue>.Nothing;
+        public Maybe<UValue> Bind<UValue>(Func<TValue,Maybe<UValue>> bindFn) => this._isJust ? bindFn(this._value) : Maybe<UValue>.Nothing;
+
+        /// <summary>
+        /// Map over a <c>Maybe</c> instance.static  This applies the function to the wrapped value if the instance is "Just" and returns "Nothing"
+        /// if the instance is "Nothing".  This respects types, so if <c>this</c> is of type <c>Maybe&lt;int&gt;</c> and you provide a <c>mapFn</c> of type <c>Func&lt;double&gt;</c>,
+        /// the type of <c>Maybe</c> that will be returned will be <c>Maybe&lt;double&gt;</c>, irrespective of <c>this</c> being "Just" or "Nothing".
+        /// </summary>
+        /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
+        /// <typeparam name="UValue">The type of the resulting <c>Maybe</c> value.</typeparam>
+        public Maybe<UValue> Map<UValue>(Func<TValue,UValue> mapFn) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Nothing;
+
+        /// <summary>
+        /// This behaves similarly to <see cref="Map{UValue}(Func{TValue,UValue})"/>, but the difference is that a default value is supplied 
+        /// in order to safely handle the case where <c>this</c> is "Nothing".
+        /// </summary>
+        /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
+        /// <param name="defaultValue">A fallback value of type <c>UValue</c> to be returned in the case that <c>this</c> is "Nothing".</param>
+        /// <typeparam name="UValue">The type of the result of the mapping function; any type supported by C♯ can be used here; it needn't be different than <c>TValue</c>.</typeparam>
+        /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the <c>defaultValue</c>.</returns>
+        public Maybe<UValue> Map<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Of(defaultValue);
+
+        /// <summary>
+        /// Similarly to <see cref="Map{UValue}(Func{TValue,UValue},UValue)"/>, this method checks whether <c>this</c> is Just; if it is, it returns the result of <c>mapFn</c>.
+        /// If <c>this</c> is Nothing, then the method returns the result of calling the parameterless <c>elseFn</c>.
+        /// </summary>
+        /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
+        /// <param name="elseFn">The function to be invoked in the case that <c>this</c> is "Nothing".</param>
+        /// <typeparam name="UValue">The type of the result of the mapping function; any type supported by C♯ can be used here; it needn't be different than <c>TValue</c>.</typeparam>
+        /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the result of <c>elseFn</c>.</returns>
+        public Maybe<UValue> Map<UValue>(Func<TValue,UValue> mapFn, Func<UValue> elseFn) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Of(elseFn());
 
         /// <summary>
         /// Provides the same basic functionality as <see cref="Unwrap(Func{TValue})"/>, but instead of simply unwrapping the value if it is "JUst" and applyiung a value to genearte
@@ -289,33 +318,29 @@ namespace TrueMyth
         public Maybe<TValue> Or(Func<Maybe<TValue>> elseFn) => this._isJust ? this : elseFn();
 
         /// <summary>
-        /// Map over a <c>Maybe</c> instance.static  This applies the function to the wrapped value if the instance is "Just" and returns "Nothing"
-        /// if the instance is "Nothing".  This respects types, so if <c>this</c> is of type <c>Maybe&lt;int&gt;</c> and you provide a <c>mapFn</c> of type <c>Func&lt;double&gt;</c>,
-        /// the type of <c>Maybe</c> that will be returned will be <c>Maybe&lt;double&gt;</c>, irrespective of <c>this</c> being "Just" or "Nothing".
+        /// An alias for <see cref="Map{UValue}(Func{TValue,UValue})"/>; provided for familiarity for C♯ programmers.
         /// </summary>
         /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
         /// <typeparam name="UValue">The type of the resulting <c>Maybe</c> value.</typeparam>
-        public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Nothing;
+        public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn) => Map(mapFn);
         
         /// <summary>
-        /// This behaves similarly to <see cref="Select{UValue}(Func{TValue,UValue})"/>, but the difference is that the mapped value is returned 
-        /// unwrapped. A default value is supplied in order to safely handle the case where <c>this</c> is "Nothing".
+        /// An alias for <see cref="Map{UValue}(Func{TValue,UValue},UValue)"/>; provided for familiarity for C♯ programmers.
         /// </summary>
         /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
         /// <param name="defaultValue">A fallback value of type <c>UValue</c> to be returned in the case that <c>this</c> is "Nothing".</param>
         /// <typeparam name="UValue">The type of the result of the mapping function; any type supported by C♯ can be used here; it needn't be different than <c>TValue</c>.</typeparam>
         /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the <c>defaultValue</c>.</returns>
-        public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Of(defaultValue);
+        public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => Map(mapFn, defaultValue);
 
         /// <summary>
-        /// Similarly to <see cref="Select{UValue}(Func{TValue,UValue},UValue)"/>, this method checks whether <c>this</c> is "Just"; if it is, it returns the result of <c>mapFn</c>.
-        /// If <c>this</c> is "Nothing", then the method returns the result of calling the parameterless <c>elseFn</c>.
+        /// An alias for <see cref="Map{UValue}(Func{TValue,UValue}, Func{UValue})"/>; provided for familiarity for C♯ programmers.
         /// </summary>
         /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
         /// <param name="elseFn">The function to be invoked in the case that <c>this</c> is "Nothing".</param>
         /// <typeparam name="UValue">The type of the result of the mapping function; any type supported by C♯ can be used here; it needn't be different than <c>TValue</c>.</typeparam>
         /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the result of <c>elseFn</c>.</returns>
-        public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn, Func<UValue> elseFn) => this._isJust ? Maybe<UValue>.Of(mapFn(this._value)) : Maybe<UValue>.Of(elseFn());
+        public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn, Func<UValue> elseFn) => Map(mapFn, elseFn);
 
         /// <summary>
         /// Transform the <c>Maybe</c> into a <see cref="Result{TValue,TError}"/>, using the wrapped value as the "Ok" value if "Just"; otherwise using the supplied 
