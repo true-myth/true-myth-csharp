@@ -521,17 +521,18 @@ namespace TrueMyth
         {
             unchecked
             {
+                const int prime = 29;
                 int hash = 17;
-                hash = hash * 23 + typeof(TValue).GetHashCode();
-                hash = hash * 23 + typeof(TError).GetHashCode();
-                hash = hash * 23 + this._isOk.GetHashCode();
+                hash = hash * prime + typeof(TValue).GetHashCode();
+                hash = hash * prime + typeof(TError).GetHashCode();
+                hash = hash * prime + this._isOk.GetHashCode();
                 if (this._isOk)
                 {
-                    hash = hash + 23 + this._value.GetHashCode();
+                    hash = hash + prime + this._value.GetHashCode();
                 }
                 else
                 {
-                    hash = hash + 23 + this._error.GetHashCode();
+                    hash = hash + prime + this._error.GetHashCode();
                 }
                 return hash;
             }

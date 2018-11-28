@@ -408,12 +408,13 @@ namespace TrueMyth
         {
             unchecked
             {
+                const int prime = 29;
                 int hash = 17;
-                hash = hash * 23 + typeof(TValue).GetHashCode();
-                hash = hash * 23 + this._isJust.GetHashCode();
+                hash = hash * prime + typeof(TValue).GetHashCode();
+                hash = hash * prime + this._isJust.GetHashCode();
                 if (this._isJust)
                 {
-                    hash = hash * 23 + this._value.GetHashCode();
+                    hash = hash * prime + this._value.GetHashCode();
                 }
                 return hash;
             }
