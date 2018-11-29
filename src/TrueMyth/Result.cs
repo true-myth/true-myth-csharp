@@ -226,23 +226,99 @@ namespace TrueMyth
         /// – that is, when you need to make sure that if you Err, whatever else you're handing a <c>Result</c> to 
         /// also gets that Err.
         /// 
-        /// Notice that, unlike in <see cref="Select{UValue}(Func{TValue,UValue})"/> or its variants, the original 
+        /// Notice that, unlike in <see cref="Map{UValue}(Func{TValue,UValue})"/> or its variants, the original 
         /// result is not involved in constructing the new Result.
         /// </summary>
         /// <param name="andResult">Result returned if <c>this</c> is an Ok.</param>
-        public Result<TValue, TError> And(Result<TValue,TError> andResult) => this._isOk ? andResult : this; 
+        public Result<TValue, TError> And(Result<TValue,TError> andResult) => this._isOk ? andResult : this;
 
         /// <summary>
         /// Apply a function to the wrapped value if Ok and return a new Ok containing the resulting value; or if it 
         /// is Err return it unmodified.
         /// 
-        /// This differs from <see cref="Select{UValue}(Func{TValue,UValue})"/> in that <c>thenFn</c> returns another 
+        /// This differs from <see cref="Map{UValue}(Func{TValue,UValue})"/> in that <c>thenFn</c> returns another 
         /// <c>Result</c>. You can use <c>andThen</c> to combine two functions which both create a Result from an 
         /// unwrapped type.
         /// </summary>
-        /// <param name="thenFn">Function that returns Result if <c>this</c> is an Ok.</param>
+        /// <param name="bindFn">Function that returns Result if <c>this</c> is an Ok.</param>
         /// <typeparam name="UValue">Ok value type of result of <c>thenFn</c>.</typeparam>
-        public Result<UValue, TError> And<UValue>(Func<Result<UValue, TError>> thenFn) => this._isOk ? thenFn() : this.Select(val => default(UValue));
+        public Result<UValue, TError> Bind<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => this._isOk ? bindFn(this._value) : this.Map(val => default(UValue));
+
+        /// <summary>
+        /// Map over a Result instance: apply the function to the wrapped value if the instance is Ok, and return the wrapped error value 
+        /// wrapped as a new Err of the correct type (Result&lt;UValue, TError&gt;) if the instance is Err.
+        /// 
+        /// <c>Result.Select</c> works a lot like it does for <see cref="IEnumerable{T}"/>, but with one important difference. Both 
+        /// <c>Result</c> and <c>IEnumerable</c> are containers for other kinds of items, but where <c>IEnumerable</c>> has 0 to n items, 
+        /// a <c>Result</c> always has exactly one item, which is either a success or an error instance.
+        /// 
+        /// Where <c>IEnumerable.Select</c> will apply the mapping function to every item in the enumeration (if there are any), 
+        /// <c>Result.Select</c> will only apply the mapping function to the (single) element if an Ok instance, if there is one.
+        /// 
+        /// If you have no items in an array of numbers named foo and call foo.Select(x => x + 1), you'll still some have an array with 
+        /// nothing in it. But if you have any items in the array (<c>{2, 3}</c>), and you call <c>foo.Select(x => x + 1)</c> on it, 
+        /// you'll get a new array with each of those items inside the array "container" transformed (<c>{3, 4}</c>).
+        /// 
+        /// With <c>Result.Select</c>, the Err variant is treated by the map function kind of the same way as the empty array case: 
+        /// it's just ignored, and you get back a new <c>Result</c> that is still just the same Err instance. But if you have an 
+        /// Ok variant, the map function is applied to it, and you get back a new <c>Result</c> with the value transformed, and still 
+        /// wrapped in an Ok.
+        /// </summary>
+        /// <param name="mapFn">Mapping function applied to Ok value.</param>
+        /// <typeparam name="UValue">Destination value type resulting from the mapping function.</typeparam>
+        /// <example>
+        /// long Double(int n) => n * 2;
+        /// 
+        /// var anOk = Result&lt;int,string&gt;.Ok(12);
+        /// var mappedOk = anOk.Select(Double);
+        /// Console.WriteLine(mappedOk.ToString()); // Ok&lt;long,string&gt;[12]
+        /// 
+        /// var anErr = Result&lt;int,string&gt;.Err("error");
+        /// var mappedErr = anErr.Select(Double);
+        /// Console.WRiteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]
+        /// </example>
+        public Result<UValue, TError> Map<UValue>(Func<TValue,UValue> mapFn) => this._isOk
+            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
+            : new Result<UValue,TError>(default(UValue), this._error, false);
+
+        // mapOr
+        /// <summary>
+        /// Map over a <c>Result</c> instance as in map and get out the value if result is an Ok, or return a default value if result is an Err.
+        /// </summary>
+        /// <param name="mapFn">Mapping function to apply to wrapped Ok value.</param>
+        /// <param name="defaultValue">Fallback value to return if <c>this</c> is an Err.</param>
+        /// <typeparam name="UValue">Destination type resulting from mapping function <c>mapFn</c>.</typeparam>
+        /// <returns></returns>
+        public Result<UValue,TError> Map<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk 
+            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
+            : new Result<UValue,TError>(defaultValue, default(TError), true);
+
+        // mapOrElse
+        /// <summary>
+        /// Map over a <c>Result</c> instance as in map and get out the value if result is Ok, or apply a function (<c>mapErrFn</c>) to the value 
+        /// wrapped in the Err to get a default value.
+        /// 
+        /// Like <see cref="Map{UValue}(Func{TValue,UValue},UValue)"/> but using a function to transform the error into a usable value i
+        /// nstead of simply using a default value.
+        /// </summary>
+        /// <param name="mapFn">Mapping function applied to Ok value.</param>
+        /// <param name="mapErrFn">Mapping function applied to Err value.</param>
+        /// <typeparam name="UValue">Destination type resulting from either of the mapping functions.</typeparam>
+        /// <returns></returns>
+        public Result<UValue,TError> Map<UValue>(Func<TValue,UValue> mapFn, Func<TError,UValue> mapErrFn) => this._isOk 
+            ? new Result<UValue, TError>(mapFn(this._value), default(TError), true)
+            : new Result<UValue, TError>(mapErrFn(this._error), default(TError), true);
+
+        /// <summary>
+        /// Map over a <c>Result</c>, exactly as in map, but operating on the value wrapped in an Err instead of the value wrapped in the Ok. 
+        /// This is handy for when you need to line up a bunch of different types of errors, or if you need an error of one shape to 
+        /// be in a different shape to use somewhere else in your codebase.
+        /// </summary>
+        /// <param name="mapFn">Mapping function to apply to error wrapped in Err <c>Result</c>.</param>
+        /// <typeparam name="UError">Mapped error type resulting from mapping function.</typeparam>
+        public Result<TValue, UError> MapErr<UError>(Func<TError,UError> mapFn) => !this._isOk
+            ? new Result<TValue,UError>(default(TValue), mapFn(this._error), false)
+            : new Result<TValue,UError>(this._value, default(UError), true);
 
         /// <summary>
         /// Performs the same basic functionality as <see cref="Unwrap(Func{TError,TValue})"/>, but instead of simply unwrapping the value if 
@@ -303,83 +379,32 @@ namespace TrueMyth
         /// 
         /// Useful for transforming failures to usable data.
         /// </summary>
-        public TValue Or(Func<Result<TValue,TError>> elseFn) => this._isOk ? this : elseFn();
+        public Result<TValue, TError> Or(Func<Result<TValue,TError>> elseFn) => this._isOk ? this : elseFn();
 
         /// <summary>
-        /// Map over a Result instance: apply the function to the wrapped value if the instance is Ok, and return the wrapped error value 
-        /// wrapped as a new Err of the correct type (Result&lt;UValue, TError&gt;) if the instance is Err.
-        /// 
-        /// <c>Result.Select</c> works a lot like it does for <see cref="IEnumerable{T}"/>, but with one important difference. Both 
-        /// <c>Result</c> and <c>IEnumerable</c> are containers for other kinds of items, but where <c>IEnumerable</c>> has 0 to n items, 
-        /// a <c>Result</c> always has exactly one item, which is either a success or an error instance.
-        /// 
-        /// Where <c>IEnumerable.Select</c> will apply the mapping function to every item in the enumeration (if there are any), 
-        /// <c>Result.Select</c> will only apply the mapping function to the (single) element if an Ok instance, if there is one.
-        /// 
-        /// If you have no items in an array of numbers named foo and call foo.Select(x => x + 1), you'll still some have an array with 
-        /// nothing in it. But if you have any items in the array (<c>{2, 3}</c>), and you call <c>foo.Select(x => x + 1)</c> on it, 
-        /// you'll get a new array with each of those items inside the array "container" transformed (<c>{3, 4}</c>).
-        /// 
-        /// With <c>Result.Select</c>, the Err variant is treated by the map function kind of the same way as the empty array case: 
-        /// it's just ignored, and you get back a new <c>Result</c> that is still just the same Err instance. But if you have an 
-        /// Ok variant, the map function is applied to it, and you get back a new <c>Result</c> with the value transformed, and still 
-        /// wrapped in an Ok.
+        /// An alias for <see cref="Map{UValue}(Func{TValue, UValue})"/>.
         /// </summary>
-        /// <param name="mapFn">Mapping function applied to Ok value.</param>
-        /// <typeparam name="UValue">Destination value type resulting from the mapping function.</typeparam>
-        /// <example>
-        /// long Double(int n) => n * 2;
-        /// 
-        /// var anOk = Result&lt;int,string&gt;.Ok(12);
-        /// var mappedOk = anOk.Select(Double);
-        /// Console.WriteLine(mappedOk.ToString()); // Ok&lt;long,string&gt;[12]
-        /// 
-        /// var anErr = Result&lt;int,string&gt;.Err("error");
-        /// var mappedErr = anErr.Select(Double);
-        /// Console.WRiteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]
-        /// </example>
-        public Result<UValue, TError> Select<UValue>(Func<TValue,UValue> mapFn) => this._isOk
-            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
-            : new Result<UValue,TError>(default(UValue), this._error, false);
-
-        // mapOr
-        /// <summary>
-        /// Map over a <c>Result</c> instance as in map and get out the value if result is an Ok, or return a default value if result is an Err.
-        /// </summary>
-        /// <param name="mapFn">Mapping function to apply to wrapped Ok value.</param>
-        /// <param name="defaultValue">Fallback value to return if <c>this</c> is an Err.</param>
-        /// <typeparam name="UValue">Destination type resulting from mapping function <c>mapFn</c>.</typeparam>
-        /// <returns></returns>
-        public Result<UValue,TError> Select<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk 
-            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
-            : new Result<UValue,TError>(defaultValue, default(TError), true);
-
-        // mapOrElse
-        /// <summary>
-        /// Map over a <c>Result</c> instance as in map and get out the value if result is Ok, or apply a function (<c>mapErrFn</c>) to the value 
-        /// wrapped in the Err to get a default value.
-        /// 
-        /// Like <see cref="Select{UValue}(Func{TValue,UValue},UValue)"/> but using a function to transform the error into a usable value i
-        /// nstead of simply using a default value.
-        /// </summary>
-        /// <param name="mapFn">Mapping function applied to Ok value.</param>
-        /// <param name="mapErrFn">Mapping function applied to Err value.</param>
-        /// <typeparam name="UValue">Destination type resulting from either of the mapping functions.</typeparam>
-        /// <returns></returns>
-        public Result<UValue,TError> Select<UValue>(Func<TValue,UValue> mapFn, Func<TError,UValue> mapErrFn) => this._isOk 
-            ? new Result<UValue, TError>(mapFn(this._value), default(TError), true)
-            : new Result<UValue, TError>(mapErrFn(this._error), default(TError), true);
+        public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn) => Map(mapFn);
 
         /// <summary>
-        /// Map over a <c>Result</c>, exactly as in map, but operating on the value wrapped in an Err instead of the value wrapped in the Ok. 
-        /// This is handy for when you need to line up a bunch of different types of errors, or if you need an error of one shape to 
-        /// be in a different shape to use somewhere else in your codebase.
+        /// An alias for <see cref="Map{UValue}(Func{TValue, UValue}, UValue)"/>
         /// </summary>
-        /// <param name="mapFn">Mapping function to apply to error wrapped in Err <c>Result</c>.</param>
-        /// <typeparam name="UError">Mapped error type resulting from mapping function.</typeparam>
-        public Result<TValue, UError> SelectErr<UError>(Func<TError,UError> mapFn) => !this._isOk
-            ? new Result<TValue,UError>(default(TValue), mapFn(this._error), false)
-            : new Result<TValue,UError>(this._value, default(UError), true);
+        public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn, UValue defaultValue) => Map(mapFn, defaultValue);
+
+        /// <summary>
+        /// An alias for <see cref="Map{UValue}(Func{TValue, UValue}, Func{TError, UValue})"/>
+        /// </summary>
+        public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn, Func<TError, UValue> mapErrFn) => Map(mapFn, mapErrFn);
+
+        /// <summary>
+        /// An alias for <see cref="MapErr{UError}(Func{TError,UError})"/>
+        /// </summary>
+        public Result<TValue, UError> SelectErr<UError>(Func<TError, UError> mapFn) => MapErr(mapFn);
+
+        /// <summary>
+        /// An alias for <see cref="Bind{UValue}(Func{TValue, Result{UValue, TError}})"/>.
+        /// </summary>
+        public Result<UValue, TError> SelectMany<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => Bind(bindFn);
 
         /// <summary>
         /// Convert a <c>Result</c> to a <see cref="Maybe{TValue}"/>.

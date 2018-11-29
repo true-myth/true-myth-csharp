@@ -268,13 +268,13 @@ namespace TrueMyth.Test
         }
 
         [Fact]
-        public void AndThen_Ok()
+        public void Bind_Ok()
         {
             // arrange
             var r1 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.And(() => Result<float, string>.Ok(3.7f));
+            var r = r1.Bind(i => Result<float, string>.Ok(3.7f));
 
             // assert
             Assert.NotNull(r);
@@ -283,13 +283,13 @@ namespace TrueMyth.Test
         }
 
         [Fact]
-        public void AndThen_Err_Ok()
+        public void Bind_Err_Ok()
         {
             // arrange
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.And(() => Result<float,string>.Ok(3.7f));
+            var r = r1.Bind(i => Result<float,string>.Ok(3.7f));
 
             // assert
             Assert.NotNull(r);
