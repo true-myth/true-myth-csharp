@@ -15,6 +15,55 @@ namespace TrueMyth
         public static Result<T, TError> From<T,TError>(Maybe<T> maybe, TError error) => maybe.IsJust 
             ? Result<T,TError>.Ok(maybe) 
             : Result<T,TError>.Err(error);
+
+        /// <summary>
+        /// Execute the provided callback, wrapping the return value in an `Result.Ok` or `Result.Err` if there is an exception.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// var aSuccessfulOperation = () => 2 + 2;
+        /// var anOkResult = Result.Try(aSuccessfulOperation, "Oh no!"); // Ok&lt;int,string&gt;[4]
+        /// 
+        /// var aThrowingOperation = () => throw new Exception("Bummer");
+        /// var anErrResult = Result.Try(aThrowingOperation, "Oh no!"); // Err&lt;int,string&gt;[Oh no!]
+        /// </code>
+        /// </example>
+        public static Result<TValue, TError> Try<TValue, TError>(Func<TValue> fn, TError error)
+        {
+            try
+            {
+                return fn();
+            }
+            catch
+            {
+                return error;
+            }
+        }
+
+        /// <summary>
+        /// Execute the provided callback, wrapping the return value in an `Result.Ok`.  If there is an exception, wrap
+        /// the result of `errFn` in a `Result.Err`.
+        /// </summary>
+        /// <example>
+        /// <code>
+        /// var aSuccessfulOperation = () => 2 + 2;
+        /// var anOkResult = Result.Try(aSuccessfulOperation, () => string.Empty); // Ok&lt;int,string&gt;[4]
+        /// 
+        /// var aThrowingOperation () => throw new Exception("Bummer");
+        /// var anErrResult = Result.Try(aThrowingOperation, (exn) => exn.Message); // Err&lt;int,string&gt;[Bummer]
+        /// </code>
+        /// </example>
+        public static Result<TValue, TError> Try<TValue, TError>(Func<TValue> fn, Func<TError> errFn)
+        {
+            try
+            {
+                return fn();
+            }
+            catch
+            {
+                return errFn();
+            }
+        }
     }
 
     /// <summary>
@@ -230,7 +279,7 @@ namespace TrueMyth
         /// result is not involved in constructing the new Result.
         /// </summary>
         /// <param name="andResult">Result returned if <c>this</c> is an Ok.</param>
-        public Result<TValue, TError> And(Result<TValue,TError> andResult) => this._isOk ? andResult : this;
+        public Result<UValue, TError> And<UValue>(Result<UValue,TError> andResult) => this._isOk ? andResult : new Result<UValue,TError>(default(UValue), this._error, false);
 
         /// <summary>
         /// Apply a function to the wrapped value if Ok and return a new Ok containing the resulting value; or if it 
@@ -242,7 +291,7 @@ namespace TrueMyth
         /// </summary>
         /// <param name="bindFn">Function that returns Result if <c>this</c> is an Ok.</param>
         /// <typeparam name="UValue">Ok value type of result of <c>thenFn</c>.</typeparam>
-        public Result<UValue, TError> Bind<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => this._isOk ? bindFn(this._value) : this.Map(val => default(UValue));
+        public Result<UValue, TError> AndThen<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => this._isOk ? bindFn(this._value) : this.Map(val => default(UValue));
 
         /// <summary>
         /// Map over a Result instance: apply the function to the wrapped value if the instance is Ok, and return the wrapped error value 
@@ -289,25 +338,7 @@ namespace TrueMyth
         /// <param name="defaultValue">Fallback value to return if <c>this</c> is an Err.</param>
         /// <typeparam name="UValue">Destination type resulting from mapping function <c>mapFn</c>.</typeparam>
         /// <returns></returns>
-        public Result<UValue,TError> Map<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk 
-            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
-            : new Result<UValue,TError>(defaultValue, default(TError), true);
-
-        // mapOrElse
-        /// <summary>
-        /// Map over a <c>Result</c> instance as in map and get out the value if result is Ok, or apply a function (<c>mapErrFn</c>) to the value 
-        /// wrapped in the Err to get a default value.
-        /// 
-        /// Like <see cref="Map{UValue}(Func{TValue,UValue},UValue)"/> but using a function to transform the error into a usable value i
-        /// nstead of simply using a default value.
-        /// </summary>
-        /// <param name="mapFn">Mapping function applied to Ok value.</param>
-        /// <param name="mapErrFn">Mapping function applied to Err value.</param>
-        /// <typeparam name="UValue">Destination type resulting from either of the mapping functions.</typeparam>
-        /// <returns></returns>
-        public Result<UValue,TError> Map<UValue>(Func<TValue,UValue> mapFn, Func<TError,UValue> mapErrFn) => this._isOk 
-            ? new Result<UValue, TError>(mapFn(this._value), default(TError), true)
-            : new Result<UValue, TError>(mapErrFn(this._error), default(TError), true);
+        public UValue MapReturn<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk  ? mapFn(this._value) : defaultValue;
 
         /// <summary>
         /// Map over a <c>Result</c>, exactly as in map, but operating on the value wrapped in an Err instead of the value wrapped in the Ok. 
@@ -367,10 +398,10 @@ namespace TrueMyth
         /// supplying a default value for the case that you currently have an Err.
         /// </summary>
         /// <param name="defaultResult"></param>
-        public Result<TValue, TError> Or(Result<TValue,TError> defaultResult) => this._isOk ? this : defaultResult;
+        public Result<TValue, UError> Or<UError>(Result<TValue, UError> defaultResult) => this._isOk ? new Result<TValue,UError>(this._value, default(UError), true) : defaultResult;
 
         /// <summary>
-        /// Like <see cref="Or(Result{TValue,TError})"/>, but using a function to construct the alternative Result.
+        /// Like <see cref="Or{UError}(Result{TValue,UError})"/>, but using a function to construct the alternative Result.
         /// 
         /// Sometimes you need to perform an operation using other data in the environment to construct the fallback 
         /// value. In these situations, you can pass a function (which may be a closure) as the elseFn to generate 
@@ -379,7 +410,7 @@ namespace TrueMyth
         /// 
         /// Useful for transforming failures to usable data.
         /// </summary>
-        public Result<TValue, TError> Or(Func<Result<TValue,TError>> elseFn) => this._isOk ? this : elseFn();
+        public Result<TValue, UError> OrElse<UError>(Func<Result<TValue,UError>> elseFn) => this._isOk ? new Result<TValue,UError>(this._value, default(UError), true) : elseFn();
 
         /// <summary>
         /// An alias for <see cref="Map{UValue}(Func{TValue, UValue})"/>.
@@ -387,24 +418,14 @@ namespace TrueMyth
         public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn) => Map(mapFn);
 
         /// <summary>
-        /// An alias for <see cref="Map{UValue}(Func{TValue, UValue}, UValue)"/>
-        /// </summary>
-        public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn, UValue defaultValue) => Map(mapFn, defaultValue);
-
-        /// <summary>
-        /// An alias for <see cref="Map{UValue}(Func{TValue, UValue}, Func{TError, UValue})"/>
-        /// </summary>
-        public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn, Func<TError, UValue> mapErrFn) => Map(mapFn, mapErrFn);
-
-        /// <summary>
         /// An alias for <see cref="MapErr{UError}(Func{TError,UError})"/>
         /// </summary>
         public Result<TValue, UError> SelectErr<UError>(Func<TError, UError> mapFn) => MapErr(mapFn);
 
         /// <summary>
-        /// An alias for <see cref="Bind{UValue}(Func{TValue, Result{UValue, TError}})"/>.
+        /// An alias for <see cref="AndThen{UValue}(Func{TValue, Result{UValue, TError}})"/>.
         /// </summary>
-        public Result<UValue, TError> SelectMany<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => Bind(bindFn);
+        public Result<UValue, TError> SelectMany<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => AndThen(bindFn);
 
         /// <summary>
         /// Convert a <c>Result</c> to a <see cref="Maybe{TValue}"/>.
@@ -413,55 +434,6 @@ namespace TrueMyth
         /// wrapped error value will be discarded.
         /// </summary>
         public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
-
-        /// <summary>
-        /// Execute the provided callback, wrapping the return value in an `Result.Ok` or `Result.Err` if there is an exception.
-        /// </summary>
-        /// <example>
-        /// <code>
-        /// var aSuccessfulOperation = () => 2 + 2;
-        /// var anOkResult = Result.Try(aSuccessfulOperation, "Oh no!"); // Ok&lt;int,string&gt;[4]
-        /// 
-        /// var aThrowingOperation = () => throw new Exception("Bummer");
-        /// var anErrResult = Result.Try(aThrowingOperation, "Oh no!"); // Err&lt;int,string&gt;[Oh no!]
-        /// </code>
-        /// </example>
-        public Result<TValue, TError> Try(Func<TValue> fn, TError error)
-        {
-            try
-            {
-                return fn();
-            }
-            catch
-            {
-                return error;
-            }
-        }
-
-        /// <summary>
-        /// Execute the provided callback, wrapping the return value in an `Result.Ok`.  If there is an exception, wrap
-        /// the result of `errFn` in a `Result.Err`.
-        /// </summary>
-        /// <example>
-        /// <code>
-        /// var aSuccessfulOperation = () => 2 + 2;
-        /// var anOkResult = Result.Try(aSuccessfulOperation, () => string.Empty); // Ok&lt;int,string&gt;[4]
-        /// 
-        /// var aThrowingOperation () => throw new Exception("Bummer");
-        /// var anErrResult = Result.Try(aThrowingOperation, (exn) => exn.Message); // Err&lt;int,string&gt;[Bummer]
-        /// </code>
-        /// </example>
-        public Result<TValue, TError> Try(Func<TValue> fn, Func<TError> errFn)
-        {
-            try
-            {
-                return fn();
-            }
-            catch
-            {
-                return errFn();
-            }
-        }
 
         /// <summary>
         /// Get the value out of the <c>Result</c>. Returns the content of an "Ok" but <em>throws if the result is "Err"</em>.

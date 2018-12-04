@@ -21,6 +21,7 @@ be more idiomatic for C♯.  Below is a mapping of functions; you may find it
 useful to be able to link back to the documentation of the original library in
 cases where this documentation is lacking.
 
+### Maybe Mapping
 |                                      TypeScript                                       |                                                      C♯                                                       |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | [`all<T>(...maybes: T): All<T>`](https://true-myth.js.org/modules/_maybe_.html#all-1) | [`Maybe<IEnumerable<T>> Maybe.All<T>(params Maybe<T>[] maybes)`]()                                            |
@@ -52,3 +53,34 @@ cases where this documentation is lacking.
 | [`unsafelyUnwrap<T>(maybe: Maybe<T>): T`]()                                           | [`T Maybe<T>.UnsafelyUnwrap()`]()                                                                             |
 | [`unwrapOr<T>(defaultValue: T, maybe: Maybe<T>): T`]()                                | [`T Unwrap(T defaultValue)`]()                                                                                |
 | [`unwrapOrElse<T>(orElseFn: function, maybe: Maybe<T>): T`]()                         | [`T Maybe<T>.Unwrap(Func<TValue> elseFn)`]()                                                                  |
+
+### Result Mapping
+|                                     TypeScript                                     |                                  C♯                                   |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [`and<T,U,E>(andResult: Result<U,E>, result: Result<T,E>): Result<U,E>`]()         | [`Result<U,E> Result<T,E>.And<U>(Result<UValue,TError> andResult)`]() |
+| [`andThen<T,U,E>(thenFn: function, result: Result<T,E>): Result<U,E>`]()           | [`Result<U,E> Result<T,E>.AndThen<U>(Func<TValue, UValue> bindFn)`]() |
+| [`ap<T,U,E>(resultFn: Result<function, E>, result: Result<T,E>): Result<U,E>]()    | No equivalent.                                                        |
+| [`equals<T,E>(resultB: Result<T,E>, resultA: Result<T,E>): boolean`]()             | [`bool Object.Equals(object)`]()                                      |
+| [`err<T,E>(error: E): Result<T, E>`]()                                             | [`Result<T,E> Result<T,E>.Err(E error)`]()                            |
+| [`err<T,E>(): Result<T,E>]()                                                       | No equivalent.                                                        |
+| [`fromMaybe<T,E>(errValue: E, maybe: Maybe<T>): Result<T,E>`]()                    | [`Result<T,E> Result.From<T,E>(Maybe<T> maybe, E error)`]()           |
+| [`isErr<T,E>(result: Result<T,E>): boolean`]()                                     | [`bool Result<T,E>.IsErr`]()                                          |
+| [`isInstance<T,E>(item: any): boolean`]()                                          | Not applicable.                                                       |
+| [`isOk<T,E>(result: Result<T,E>): boolean`]()                                      | [`bool Result<T,E>.IsOk`]()                                           |
+| [`map<T,U,E>(mapFn: function, result: Result<T,E>): Result<U,E>`]()                | [`Result<U,E> Result<T,E>.Map<U>(Func<T,U> mapFn)`]()                 |
+| [`mapErr<T,E,F>(mapErrFn: function, result: Result<T,E>): Result<T,F>`]()          | [`Result<T,F> Result<T,E>.MapErr<F>(Func<E,F> mappErrFn)`]()          |
+| [`mapOr<T,U,E>(orU: U, mapFn: function, result: Result<T,E>): U`]()                | [`U Result<T,E>.MapReturn(Func<T,U> mapFn, U defaultValue)`]()        |
+| [`mapOrElse<T,U,E>(orElseFn: function, mapFn, function, result: Result<T,E>): U]() | See `match` / `Result<T,E>.Match<U>`                                  |
+| [`match<T,E,A>(matcher: Matcher<T,E,A>, result: Result<T,E>): A]()                 | [`U Result<T,E>.Match<U>(Func<T,U> okFn, Func<E,U> errFn)`]()         |
+| [`ok<T,E>() : Result<Unit,E>`]()                                                   | No equivalent.                                                        |
+| [`ok<T,E>(T value): Result<T,E>`]()                                                | [`Result<T,E>.Ok(T value)`]()                                         |
+| [`or<T,E,F>(defaultResult: Result<T,F>, result: Result<T,E>): Result<T,F>`]()      | [`Result<T,F> Result<T,E>.Or<F>(Result<T,F> defaultResult)`]()        |
+| [`orElse<T,E,F>(elseFn: function, result: Result<T,E>): Result<T,F>`]()            | [`Result<T,F> Result<T,E>.OrElse(Func<Result<T,F>> elseFn)`]()        |
+| [`toMaybe<T>(result: Result<T, any>): Maybe<T>`]()                                 | [`Maybe<T> Result<T,E>.ToMaybe()`]()                                  |
+| [`toString<T,E>(result: Result<T,E>): string`]()                                   | [`string Object.ToString()`]()                                        |
+| [`tryOr<T,E>(error: E, callback: function): Result<T,E>`]()                        | [`Result<T,E> Result.Try<T,E>(Func<T> tryFn, E error)`]()             |
+| [`tryOrElse<T,E>(onError: function, callback: function): Result<T,E>]()            | [`Result<T,E> Result.Try(Func<T> tryFn, Func<E> errFn)`]()            |
+| [`unsafelyUnwrap<T,E>(result: Result<T,E>): T`]()                                  | [`T Result<T,E>.UnsafelyUnwrap()`]()                                  |
+| [`unsafelyUnwrapErr<T,E>(result: Result<T,E>): E`]()                               | [`E Result<T,E>.UnsafelyUnwrapErr()`]()                               |
+| [`unwrapOr<T,E>(defaultValue: T, result: Result<T,E>): T`]()                       | [`T Result<T,E>.Unwrap(T defaultValue)`]()                            |
+| [`unwrapOrElse<T,E>(orElseFn: function, result: Result<T,E>)`]()                   | [`T Result<T,E>.Unwrap(Func<E,T> errFn)`]()                           |

@@ -202,7 +202,7 @@ namespace TrueMyth.Test
             var r2 = SimpleResult.Ok(1);
 
             // act
-            var r = r1.Or(() => r2);
+            var r = r1.OrElse(() => r2);
 
             // assert
             Assert.Equal<SimpleResult>(r1, r);
@@ -216,7 +216,7 @@ namespace TrueMyth.Test
             var r2 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.Or(() => r2);
+            var r = r1.OrElse(() => r2);
 
             // assert
             Assert.Equal<SimpleResult>(r2, r);
@@ -274,7 +274,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.Bind(i => Result<float, string>.Ok(3.7f));
+            var r = r1.AndThen(i => Result<float, string>.Ok(3.7f));
 
             // assert
             Assert.NotNull(r);
@@ -289,7 +289,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.Bind(i => Result<float,string>.Ok(3.7f));
+            var r = r1.AndThen(i => Result<float,string>.Ok(3.7f));
 
             // assert
             Assert.NotNull(r);
@@ -298,58 +298,31 @@ namespace TrueMyth.Test
         }
 
         [Fact]
-        public void SelectOrDefaultOk_Ok()
+        public void MapReturnOk_Ok()
         {
             // arrange
             var r1 = SimpleResult.Ok(0);
 
             // act
-            var r = r1.Select(i => i.ToString(), "default");
+            var r = r1.MapReturn(i => i.ToString(), "default");
 
             // assert
             Assert.NotNull(r);
-            Assert.Equal(Result<string,string>.Ok("0"), r);
+            Assert.Equal("0", r);
         }
 
         [Fact]
-        public void SelectOrDefault_Err_Ok()
+        public void MapReturn_Err_Ok()
         {
             // arrange
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.Select(i => i.ToString(), "default");
+            var r = r1.MapReturn(i => i.ToString(), "default");
 
             // assert
             Assert.NotNull(r);
-            Assert.Equal(Result<string,string>.Ok("default"), r);
-        }
-
-        // SelectOrElse
-        [Fact]
-        public void SelectOrElse_Ok_Ok()
-        {
-            // arrange
-            var r1 = SimpleResult.Ok(0);
-
-            // act
-            var r = r1.Select(i => i, s => -1);
-
-            // arrange
-            Assert.Equal(SimpleResult.Ok(0), r);
-        }
-
-        [Fact]
-        public void SelectOrElse_Err_Ok()
-        {
-            // arrange
-            var r1 = SimpleResult.Err("error");
-
-            // act
-            var r = r1.Select(i => i, s => -1);
-
-            // assert
-            Assert.Equal(SimpleResult.Ok(-1), r);
+            Assert.Equal("default", r);
         }
 
         // ToString
