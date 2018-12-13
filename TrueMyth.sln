@@ -3,11 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{07E3AF9E-CB1B-4AFD-A772-B883B694D8BE}"
-	ProjectSection(SolutionItems) = preProject
-		examples\README.md = examples\README.md
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{54B8B4B4-728E-4759-90A0-ACBA78731D88}"
 	ProjectSection(SolutionItems) = preProject
 		test\README.md = test\README.md
@@ -23,7 +18,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMythConsole", "samples\Console\TrueMythConsole.csproj", "{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMyth.Test", "test\TrueMyth.Test\TrueMyth.Test.csproj", "{01A60466-961C-423D-90D3-BD5D55A97EAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMyth.Test.Benchmarks", "test\TrueMyth.Test.Benchmarks\TrueMyth.Test.Benchmarks.csproj", "{89616012-E2CC-49DF-8889-BABC58EFB387}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,17 +32,22 @@ Global
 		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5CE8FA2-E515-4B62-A1EB-271846F922FB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01A60466-961C-423D-90D3-BD5D55A97EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01A60466-961C-423D-90D3-BD5D55A97EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01A60466-961C-423D-90D3-BD5D55A97EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01A60466-961C-423D-90D3-BD5D55A97EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89616012-E2CC-49DF-8889-BABC58EFB387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89616012-E2CC-49DF-8889-BABC58EFB387}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89616012-E2CC-49DF-8889-BABC58EFB387}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89616012-E2CC-49DF-8889-BABC58EFB387}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E5CE8FA2-E515-4B62-A1EB-271846F922FB} = {6FDFB4BE-C098-45E6-90B4-28F31D6C92B4}
-		{C1F68CEB-78F6-4752-BBAA-6211758B5E8B} = {07E3AF9E-CB1B-4AFD-A772-B883B694D8BE}
+		{01A60466-961C-423D-90D3-BD5D55A97EAD} = {54B8B4B4-728E-4759-90A0-ACBA78731D88}
+		{89616012-E2CC-49DF-8889-BABC58EFB387} = {54B8B4B4-728E-4759-90A0-ACBA78731D88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {099DF839-7A14-4937-BF46-D319EE23B6F0}
