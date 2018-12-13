@@ -62,26 +62,24 @@ This isn’t a big deal right here… but — and this is a big deal —�
 this everywhere we interact with this payload. The property `hopefullyAString` can always
 be `null` everywhere we interact with it, anywhere in our program. 😬
 
-`Maybe` is our escape hatch. If, instead of just naively interacting with the payload, we
-do a very small amount of work up front to normalize the data and use a `Maybe` instead of
-passing around `null` values, we can operate safely on the data throughout our
-application. If we have something, we get `Maybe` called Just — as in, “What’s in this
-field? Just a string” or “Just the string ‘hello’”. If there’s nothing there, we have a
-`Maybe` called Nothing. `Maybe` is a wrapper type that holds the actual value in it, and
-Just and Nothing are the valid states for that type. You’ll never get a
-`NullReferenceException` ("object reference not set to an instance of an object") when
-trying to use it!
+`Maybe` is our escape hatch. If, instead of just naively interacting with the payload, we do a very small amount of work
+up front to normalize the data and use a `Maybe` instead of passing around `null` values, we can operate safely on the
+data throughout our application. If we have something, we get `Maybe` called **Just** — as in, “What’s in this field?
+Just a string” or “Just the string ‘hello’”. If there’s nothing there, we have a `Maybe` called **Nothing**. `Maybe` is
+a wrapper type that holds the actual value in it, and **Just** and **Nothing** are the valid states for that type.
+You’ll never get a `NullReferenceException` ("object reference not set to an instance of an object") when trying to use
+it!
 
-Importantly, you can do a bunch of neat things with a `Maybe` instance without checking
-whether it’s a Nothing or a Just. For example, if you want to double a number if it’s
-present and do nothing if it isn’t, you can use the Maybe.Select function:
+Importantly, you can do a bunch of neat things with a `Maybe` instance without checking whether it’s a **Nothing** or a
+**Just**. For example, if you want to double a number if it’s present and do nothing if it isn’t, you can use the
+`Maybe.Map` function:
 ```csharp
 var hereIsANumber = Maybe.Of(42); // Maybe<int>
 var hereIsNothing = Maybe<int>.Nothing;
 
-int Double = n => n * 2;
-hereIsANumber.Select(Double); // Just 84
-hereIsNothing.Select(Dboule); // Nothing
+int doubleFn = n => n * 2;
+hereIsANumber.Map(doubleFn); // Just 84
+hereIsNothing.Map(doubleFn); // Nothing
 ```
 There are a lot of those [helper functions and methods]()! Just about any way you would
 need to interact with a Maybe is there.
@@ -107,7 +105,7 @@ async Task<Payload> Normalize(PayloadDto dto) =>
 
 void LogValue(Payload payload)
 {
-  var length = payload.HopefullyAString.Select(s => s.Length, 0);
+  var length = payload.HopefullyAString.MapReturn(s => s.Length, 0);
   loger.Debug("Payload length: {length}", length);
 }
 
@@ -119,48 +117,24 @@ async Task RequestFromApi()
 }
 
 ```
-Now, you might be thinking, _Sure, but we could get the same effect by just supplying a
-default value when we deserialize the data._ That’s true, you could! Here, for example,
-you could just normalize it to an empty string. And of course, if just supplying a default
-value at the API boundary is the right move, you can still do that. `Maybe` is another tool
-in your toolbox, not something you’re obligated to use everywhere you can.
+Now, you might be thinking, _Sure, but we could get the same effect by just supplying a default value when we
+deserialize the data._ That’s true, you could! Here, for example, you could just normalize it to an empty string. And of
+course, if just supplying a default value at the API boundary is the right move, you can still do that. `Maybe` is
+another tool in your toolbox, not something you’re obligated to use everywhere you can.
 
-However, sometimes there isn’t a single correct default value to use at the API boundary.
-You might need to handle that missing data in a variety of ways throughout your
-application. For example, what if you need to treat “no value” distinctly from “there’s a
-value present, and it’s an empty string”? That’s where `Maybe` comes in handy.
+However, sometimes there isn’t a single correct default value to use at the API boundary. You might need to handle that
+missing data in a variety of ways throughout your application. For example, what if you need to treat “no value”
+distinctly from “there’s a value present, and it’s an empty string”? That’s where `Maybe` comes in handy.
 
 ## Result
 
-Another common scenario we find ourselves in is dealing with operations which might fail.
-There are a couple patterns we often use to deal with this: _callbacks_ and _exceptions_.
-There are major problems with both, especially around reusability and composability.
+Another common scenario we find ourselves in is dealing with operations which might fail. The most common pattern in
+.NET for dealing with this: _exceptions_. There are major problems with exception, especially around reusability and
+composability.
 
-The callback pattern (as in e.g. Node) encourages a style where literally every function starts with the exact same code:
-```csharp
-string GetMeAValue(string err, string data) {
-  if (err != null) {
-    return HandleErr(err);
-  }
-  
-  // do whatever the *actual* point of the function is
-}
-```
-There are two major problems with this:
-1. It’s incredibly repetitive – the very opposite of “Don’t Repeat Yourself”. We wouldn’t
-   do this with anything else in our codebase!
-1. It puts the error-handling right up front and not in a good way. While we want to have
-   a failure case in mind when designing the behavior of our functions, it’s not usually
-   the point of most functions – things like `HandleErr` in the above example being the
-   exception and not the rule. The actual meat of the function is always after the error
-   handling.
-
-But if we’re not using some similar kind of callback pattern, we usually resort to
-exceptions. But exceptions are unpredictable: you can’t know whether a given function
-invocation is going to throw an exception until runtime as someone calling the function.
-No big deal if it’s a small application and one person wrote all the code, but with even a
-few thousand lines of code or two developers, it’s very easy to miss that. And then this
-happens:
+Exceptions are unpredictable: you can’t know whether a given function invocation is going to throw an exception until
+runtime as someone calling the function. No big deal if it’s a small application and one person wrote all the code, but
+with even a few thousand lines of code or two developers, it’s very easy to miss that. And then this happens:
 
 ```csharp
 // in one part of the codebase
@@ -217,13 +191,12 @@ catch(Exception exn)
   HandleErr(exn);
 }
 ```
-This is like the first example but even worse for repetition!  Also, C♯ can’t help you
-here! There's no type signatures to say “This throws an exception!”
+This kind of universal boilerplate works against the Don't Repeat Yourself principle, and C♯ can’t help you here!
+There's no type signatures to say “This throws an exception!”
 
-Instead, we can use a `Result` to get us a container type, much like `Maybe`, to let us
-deal with this scenario. A `Result` is either an Ok wrapping around a value (like Just does)
-or an Err wrapping around some type defining what went wrong (not like Nothing, which has
-no contents).
+Instead, we can use a `Result` to get us a container type, much like `Maybe`, to let us deal with this scenario. A
+`Result` is either an **Ok** wrapping around a value (like **Just** does) or an **Err** wrapping around some type
+defining what went wrong (unlike **Nothing**, which has no contents).
 ```csharp
 Result<Payload, string> GetMeAValue(string url)
 {
@@ -262,7 +235,6 @@ value.Match(
   err: reason => Alert($"Something went seriously wrong here! {reason}");
 )
 ```
-When we have a `Result` instance, we can perform tons of operations on whether it’s Ok or
-Err, just as we could with a Just and Nothing, until we need the value. Maybe that’s right
-away. Maybe we don’t need it until somewhere else deep in our application! Either way, we
-can deal with it easily enough, and have type safety throughout!
+When we have a `Result` instance, we can perform tons of operations on whether it’s **Ok** or **Err**, just as we could
+with a **Just** and **Nothing**, until we need the value. Maybe that’s right away. Maybe we don’t need it until
+somewhere else deep in our application! Either way, we can deal with it easily enough, and have type safety throughout!

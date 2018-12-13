@@ -272,7 +272,7 @@ namespace TrueMyth
         public UValue MapReturn<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isJust ? mapFn(this._value) : defaultValue;
 
         /// <summary>
-        /// Provides the same basic functionality as <see cref="Unwrap(Func{TValue})"/>, but instead of simply unwrapping the value if it is "JUst" and applyiung a value to genearte
+        /// Provides the same basic functionality as <see cref="UnwrapOrElse(Func{TValue})"/>, but instead of simply unwrapping the value if it is "JUst" and applyiung a value to genearte
         /// the same default type if it is "Nothing", lets you supply functions which may transform the wrapped type if it is "Just" or get a default value for "Nothing".
         /// </summary>
         /// <param name="just">The function to apply if <c>this</c> is "Just".</param>
@@ -332,7 +332,7 @@ namespace TrueMyth
 
         /// <summary>
         /// Get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of a "Just", but <em>throws if the <c>Maybe</c> is "Nothing"</em>.
-        /// Prefer to use <see cref="Unwrap(TValue)"/> or <see cref="Unwrap(Func{TValue})"/>.
+        /// Prefer to use <see cref="UnwrapOr(TValue)"/> or <see cref="UnwrapOrElse(Func{TValue})"/>.
         /// </summary>
         public TValue UnsafelyUnwrap() => this._isJust ? this._value : throw new InvalidOperationException($"Invalid attempt to unwrap {GetType().Name}.Nothing");
         
@@ -340,14 +340,14 @@ namespace TrueMyth
         /// Safely get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of "Just" or <c>defaultValue</c> if <c>this</c> is "Nothing".
         /// This is the recommended way to get a value out of a <c>Maybe</c> most of the time.
         /// </summary>
-        public TValue Unwrap(TValue defaultValue) => this._isJust ? this._value : defaultValue;
+        public TValue UnwrapOr(TValue defaultValue) => this._isJust ? this._value : defaultValue;
         
         /// <summary>
         /// Safely get the value out of a <c>Maybe</c> by returning the wrapped value if it is "Just", oir by applying
         /// <c>elseFn</c> if it's "Nothing".  This is useful when you need to <em>generate</em> a value (e.g. by using current values in the environment
-        /// — whether preloaded or by local closure) instead of having a default value available as in <see cref="Unwrap(TValue)"/>.
+        /// — whether preloaded or by local closure) instead of having a default value available as in <see cref="UnwrapOr(TValue)"/>.
         /// </summary>
-        public TValue Unwrap(Func<TValue> elseFn) => this._isJust ? this._value : elseFn();
+        public TValue UnwrapOrElse(Func<TValue> elseFn) => this._isJust ? this._value : elseFn();
 
         #endregion
 

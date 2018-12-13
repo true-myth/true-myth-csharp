@@ -52,8 +52,8 @@ cases where this documentation is lacking.
 | [`toString<T>(maybe: Maybe<T>): string`](https://true-myth.js.org/modules/_maybe_.html#tostring)                                     | [`string Object.ToString()`]()                                                                                |
 | [`tuple<T>(maybes: Maybe<T>): Maybe<[T]>`](https://true-myth.js.org/modules/_maybe_.html#tuple)                                      | [`Maybe<(T,U)> Maybe.MaybeAll<T,U>(this Tuple<Maybe<T>, Maybe<U>> tuple)`]() and similarly for up to 4-tuples |
 | [`unsafelyUnwrap<T>(maybe: Maybe<T>): T`](https://true-myth.js.org/modules/_maybe_.html#unsafelyunwrap)                              | [`T Maybe<T>.UnsafelyUnwrap()`]()                                                                             |
-| [`unwrapOr<T>(defaultValue: T, maybe: Maybe<T>): T`](https://true-myth.js.org/modules/_maybe_.html#unwrapor)                         | [`T Unwrap(T defaultValue)`]()                                                                                |
-| [`unwrapOrElse<T>(orElseFn: function, maybe: Maybe<T>): T`](https://true-myth.js.org/modules/_maybe_.html#unwraporelse)              | [`T Maybe<T>.Unwrap(Func<TValue> elseFn)`]()                                                                  |
+| [`unwrapOr<T>(defaultValue: T, maybe: Maybe<T>): T`](https://true-myth.js.org/modules/_maybe_.html#unwrapor)                         | [`T Maybe<T>.UnwrapOr(T defaultValue)`]()                                                                                |
+| [`unwrapOrElse<T>(orElseFn: function, maybe: Maybe<T>): T`](https://true-myth.js.org/modules/_maybe_.html#unwraporelse)              | [`T Maybe<T>.UnwrapOrElse(Func<T> elseFn)`]()                                                                  |
 
 ### Result Mapping
 |                                                                 TypeScript                                                                  |                                  C♯                                   |
