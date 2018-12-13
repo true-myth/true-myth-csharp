@@ -229,9 +229,8 @@ var value = GetMeAValue(badUrl);
 // `Err` (because of how `andThen` works).
 var htmlForPage = value.AndThen(RenderHtml);
 
-// we can't just invoke `setDom` because it doesn't take a `Result`.
 value.Match(
-  ok: html => WriteOutput(html);
+  ok: html => WriteOutput(html.UnwrapOr(string.Empty));
   err: reason => Alert($"Something went seriously wrong here! {reason}");
 )
 ```
