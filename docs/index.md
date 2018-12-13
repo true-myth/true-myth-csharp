@@ -254,7 +254,7 @@ var value = GetMeAValue(badUrl);
 
 // htmlForPage = the same error! or, if it was Ok, could be a different
 // `Err` (because of how `andThen` works).
-var htmlForPage = value.And(RenderHtml);
+var htmlForPage = value.AndThen(RenderHtml);
 
 // we can't just invoke `setDom` because it doesn't take a `Result`.
 value.Match(
