@@ -54,7 +54,8 @@
     "globalMetadata": {
       "_appTitle": "True Myth",
       "_appLogoPath": "images/logo_header.png",
-      "_enableSearch": true
+      "_enableSearch": true,
+      "_appFaviconPath": "images/logo_header.png"
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
