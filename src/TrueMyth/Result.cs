@@ -67,13 +67,14 @@ namespace TrueMyth
     }
 
     /// <summary>
-    /// <para>A <c>Result&lt;TValue,TError&gt;</c> is a type representing the value result of an operation which may fail,
-    /// with a successful value type of <c>TValue</c> or an error type of <c>TError</c> (pun intended!).  If
-    /// the value is present, it is "Ok", and if it's absent, it's "Err". There are several ways to check if a <c>Result</c>
+    /// <para>A <c>Result&lt;TValue,TError&gt;</c> is a type representing the value result of an operation which may
+    /// fail, with a successful value type of <c>TValue</c> or an error type of <c>TError</c> (pun intended!).  If the
+    /// value is present, it is **Ok**, and if absent, it's **Err**. There are several ways to check if a <c>Result</c>
     /// is Ok or Err, but the most direct and explicit are the <see cref="IsOk"/> and <see cref="IsErr"/> properties. 
     /// </para>
     /// <para>
-    /// This provides a type-safe container for dealing with the possibility that an error occurred, without needing to scatter
+    /// This provides a type-safe container for dealing with the possibility that an error occurred, without needing to
+    /// scatter
     /// <c>try</c>/<c>catch</c> blocks throughout your codebase. This has two major advantages:
     /// <list type="bullet">
     ///   <item>
@@ -84,90 +85,74 @@ namespace TrueMyth
     ///   </item>
     ///   <item>
     ///     <description>
-    ///     The error scenario is a first-class citizen, and the provided helper functions and methods allow you
-    ///     to deal with the type in much the same way as you might an array — transforming values if present,
-    ///     or dealing with errors instead of necessary.
+    ///     The error scenario is a first-class citizen, and the provided helper functions and methods allow you to deal
+    ///     with the type in much the same way as you might an array — transforming values if present, or dealing with
+    ///     errors instead of necessary.
     ///     </description>
     ///   </item>
     /// </list>
     /// </para>
     /// </summary>
     /// <example>
-    /// To make this concrete, let's look at an example.see  Without TrueMyth, you might have the following
-    /// C♯:
+    /// To make this concrete, let's look at an example.see  Without TrueMyth, you might have the following C♯:
     /// <code>
-    /// int MightSucceed(bool doesSucceed)
-    /// {
-    ///     if (!doesSucceed) throw new Exception("hey guess what? it didn't succeed.see");
-    /// 
-    ///     return 42;
-    /// }
-    /// 
-    /// int Main(string[] args)
-    /// {
-    ///     var doubleTheAnswer = MightSucceed(true) * 2;
-    ///     Console.WriteLine(doubleTheAnswer); // 84; this is fine
-    /// 
-    ///     var doubleAnError = MightSucceed(false) * 2;
-    ///     Console.Write(doubleAnError); // oops!  we never even get here.
-    /// }
+    /// int MightSucceed(bool doesSucceed) {if (!doesSucceed) throw new Exception("hey guess what? it didn't
+    /// succeed.see");
+    ///
+    ///     return 42;}
+    ///
+    /// int Main(string[] args) {var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer); //
+    /// 84; this is fine
+    ///
+    ///     var doubleAnError = MightSucceed(false) * 2; Console.Write(doubleAnError); // oops!  we never even get
+    ///     here.}
     /// </code>
-    /// If we wanted to <em>handle</em> that error, we'd need to first of all know that the function could
-    /// throw an error. Assuming we knew that — progbably we'd figure it out via painful discovery at runtime —
-    /// then we'd need to wrap it up in a <c>try</c>/<c>catch</c> block:
+    /// If we wanted to <em>handle</em> that error, we'd need to first of all know that the function could throw an
+    /// error. Assuming we knew that — progbably we'd figure it out via painful discovery at runtime — then we'd need to
+    /// wrap it up in a <c>try</c>/<c>catch</c> block:
     /// <code>
-    /// int Main(string[] args)
-    /// {
-    ///     try
-    ///     {
-    ///         var doubleTheAnswer = MightSucceed(true) * 2;
-    ///         Console.WriteLine(doubleTheAnswer); // 84; this is fine
-    /// 
-    ///         var doubleAnError = MightSucceed(false) * 2;
-    ///         Console.WriteLine(doubleAnError);
-    ///     }
-    ///     catch(Exception exn)
-    ///     {
-    ///         Console.WriteLine(exn.Message);
-    ///     }
-    /// }
+    /// int Main(string[] args) {try {var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer);
+    /// // 84; this is fine
+    ///
+    ///         var doubleAnError = MightSucceed(false) * 2; Console.WriteLine(doubleAnError);} catch(Exception exn)
+    ///         {Console.WriteLine(exn.Message);}}
     /// </code>
     /// This is a pain to work with!
-    /// 
+    ///
     /// The next thing we might try is returning an error code and mutating an object passed in (e.g. 
     /// <c>bool TryMightSucceed(bool doesSucceed, out int result)</c>). But that has a few problems:
     /// <list type="bullet">
     ///   <item>
     ///     <description>
-    ///     You have to mutate an object. This doesn't work for simple items like numbers, and it can also
-    ///     be pretty unexpected behavior at times — you want to <em>know</em> when something is going to change,
-    ///     and mutating freely throughout a library or application makes that impossible.
+    ///     You have to mutate an object. This doesn't work for simple items like numbers, and it can also be pretty
+    ///     unexpected behavior at times — you want to <em>know</em> when something is going to change, and mutating
+    ///     freely throughout a library or application makes that impossible.
     ///     </description>
     ///   </item>
     ///   <item>
     ///     <description>
-    ///     You have to make sure to actually check the return code to make sure it's valid. In theory,
-    ///     we're all disciplined enough to always do that. In practice, we often end up reasoning,
-    ///     <em>Well, this particular call can never fail... </em> (but of course, it probably can, just not 
-    ///     in the way we expect).
+    ///     You have to make sure to actually check the return code to make sure it's valid. In theory, we're all
+    ///     disciplined enough to always do that. In practice, we often end up reasoning,
+    ///     <em>Well, this particular call can never fail... </em> (but of course, it probably can, just not in the way
+    ///     we expect).
     ///     </description>
     ///   </item>
     ///   <item>
     ///     <description>
-    ///     We don't have a good way to return a <em>reason</em> for the error. We end up needing to introduce
-    ///     another parameter, designed to be mutated, to make sure that's possible.
+    ///     We don't have a good way to return a <em>reason</em> for the error. We end up needing to introduce another
+    ///     parameter, designed to be mutated, to make sure that's possible.
     ///     </description>
     ///   </item>
     ///   <item>
     ///     <description>
-    ///     Even if you go to all the trouble of doing all that, you need to make sure — every time — that you
-    ///     use only the error value if the return code specified an error, and only the success value if the
-    ///     return code specified that it succeeded.
+    ///     Even if you go to all the trouble of doing all that, you need to make sure — every time — that you use only
+    ///     the error value if the return code specified an error, and only the success value if the return code
+    ///     specified that it succeeded.
     ///     </description>
     ///   </item>
     /// </list>
-    /// Our way out is <c>Result&lt;TValue,TError&gt;</c>. It lets us just return one thing from a function, 
-    /// which encapsulates the possiblility of failure in the very thing we return. We get:
+    /// Our way out is <c>Result&lt;TValue,TError&gt;</c>. It lets us just return one thing from a function, which
+    /// encapsulates the possiblility of failure in the very thing we return. We get:
     /// <list>
     ///   <item>
     ///     <description>
@@ -189,26 +174,21 @@ namespace TrueMyth
     /// Here's what that same example from above would look like using <c>Result</c>:
     /// <code>
     /// Result&lt;int,string&gt; MightSucceed(bool doesSucceed) => 
-    ///     doesSucceed 
-    ///         ? Result&lt;int,string&gt;.Ok(42) 
-    ///         : Result&lt;int,string&gt;.Err("something went wrong!");
-    /// 
-    /// int Main(string[] args)
-    /// {
-    ///     int Double(int x) = x * 2;
-    /// 
-    ///     var doubleTheAnswer = MightSucceed(true).Select(Double);
-    ///     Console.WriteLine(doubleTheAnswer); // Ok&lt;int,string&gt;[84]
-    /// 
-    ///     var doubleAnErr = MightSucceed(false).Select(Double);
-    ///     Console.WriteLine(doubleAnErr); // Err&lt;int,string&gt;[something went wrong]
-    /// }
+    ///     doesSucceed? Result&lt;int,string&gt;.Ok(42) : Result&lt;int,string&gt;.Err("something went wrong!");
+    ///
+    /// int Main(string[] args) {int Double(int x) = x * 2;
+    ///
+    ///     var doubleTheAnswer = MightSucceed(true).Select(Double); Console.WriteLine(doubleTheAnswer); //
+    ///     Ok&lt;int,string&gt;[84]
+    ///
+    ///     var doubleAnErr = MightSucceed(false).Select(Double); Console.WriteLine(doubleAnErr); //
+    ///     Err&lt;int,string&gt;[something went wrong]}
     /// </code>
-    /// Note that if we tried to call <c>MightSucceed(true)*2</c> here, we'd get a type error — this wouldn't make it 
+    /// Note that if we tried to call <c>MightSucceed(true)*2</c> here, we'd get a type error — this wouldn't make it
     /// past the compile step.
     /// </example>
-    /// <typeparam name="TValue">The value type for "Ok" values.</typeparam>
-    /// <typeparam name="TError">The value type for "Err" values.</typeparam>
+    /// <typeparam name="TValue">The value type for **Ok** values.</typeparam>
+    /// <typeparam name="TError">The value type for **Err** values.</typeparam>
     
     public sealed class Result<TValue, TError>
     {

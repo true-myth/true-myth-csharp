@@ -53,7 +53,8 @@
     "dest": "_site",
     "globalMetadata": {
       "_appTitle": "True Myth",
-      "_appLogoPath": "images/logo_header.png"
+      "_appLogoPath": "images/logo_header.png",
+      "_enableSearch": true
     },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],

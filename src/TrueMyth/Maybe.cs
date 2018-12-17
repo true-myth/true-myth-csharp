@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -131,40 +131,36 @@ namespace TrueMyth
 
     /// <summary>
     ///   <para>
-    ///     A <c>Maybe&lt;T&gt;</c> represents a value of type <c>T</c> which may, or may not, be present.
-    ///     If the value is present, it is "Just" a value.  If it's absent, it's "Nothing".  This provides a type-safe
-    ///     container for dealing with the possibility that there's nothing here — a container you can do many of the
-    ///     same things you might with an array — so that you can avoid nasty <c>null</c> checks throughout your codebase.
+    ///     A <c>Maybe&lt;T&gt;</c> represents a value of type <c>T</c> which may, or may not, be present. If the value
+    ///     is present, it is **Just** a value.  If it's absent, it's **Nothing**.  This provides a type-safe container
+    ///     for dealing with the possibility that there's nothing here — a container you can do many of the same things
+    ///     you might with an array — so that you can avoid nasty <c>null</c> checks throughout your codebase.
     ///   </para>
     ///   <para>
-    ///     The behavior of this type is checked by the C♯ compiler and bears no runtime overhead other than the very small 
-    ///     cost of the container object and some lightweight wrap/unwrap functionality.
-    ///     The "Nothing" and "Just" variants are represented internally to the <c>Maybe&lt;T&gt;</c> object and is exposed 
-    ///     in several ways.  The most explicit way to check if a <c>Maybe&lt;T&gt;</c> is "Just" or "Nothing" is through the 
+    ///     The behavior of this type is checked by the C♯ compiler and bears no runtime overhead other than the very
+    ///     small cost of the container object and some lightweight wrap/unwrap functionality. The **Nothing** and
+    ///     **Just** variants are represented internally to the <c>Maybe&lt;T&gt;</c> object and is exposed in several
+    ///     ways.  The most explicit way to check if a <c>Maybe&lt;T&gt;</c> is **Just** or **Nothing** is through the 
     ///     <see cref="IsJust"/> and <see cref="IsNothing"/> properties, respectively.
     ///   </para>
     /// </summary>
     /// <example>
     ///   <code>
-    ///     // simple way to construct a Maybe &lt;int&gt;
-    ///     var aKnownNumber = Maybe&lt;int&gt;.Just(7);
-    ///     
-    ///     // once you have it, you can apply methods to it
-    ///     var fromMappedJust = aKnownNumber.Select(x => x * 2).Unwrap(0);
-    ///     Console.WriteLine(fromMappedJust); // "Just&lt;int&gt;[14]"
-    ///     
-    ///     // construct a Nothing where you don't have a value to use, but the function requires a value
-    ///     var aKnownNothing = Maybe&lt;int&gt;.Nothing;
-    ///     
-    ///     // the same operations will behave as safely on a Nothing as on a Just:
-    ///     var fromMappedNothing = aKnownNothing.Select(x => x * 2).Unwrap(0);
-    ///     Console.WriteLine(fromMappedNothing); // "Just&lt;int&gt;[0]"
-    /// 
-    ///     // construct a Maybe where you don't know where the value will exist or not, using a null check to
-    ///     // decide which to construct
-    ///     string unknownValue = someFunction();
-    ///     var wrappedUnkonwn = unknownValue == null ? Maybe&lt;string&gt;.Just(unknownValue) : Maybe&lt;string&gt;.Nothing;
-    /// 
+    ///     // simple way to construct a Maybe &lt;int&gt; var aKnownNumber = Maybe&lt;int&gt;.Just(7);
+    ///
+    ///     // once you have it, you can apply methods to it var fromMappedJust = aKnownNumber.Select(x => x *
+    ///     2).Unwrap(0); Console.WriteLine(fromMappedJust); // "Just&lt;int&gt;[14]"
+    ///
+    ///     // construct a Nothing where you don't have a value to use, but the function requires a value var
+    ///     aKnownNothing = Maybe&lt;int&gt;.Nothing;
+    ///
+    ///     // the same operations will behave as safely on a Nothing as on a Just: var fromMappedNothing =
+    ///     aKnownNothing.Select(x => x * 2).Unwrap(0); Console.WriteLine(fromMappedNothing); // "Just&lt;int&gt;[0]"
+    ///
+    ///     // construct a Maybe where you don't know where the value will exist or not, using a null check to // decide
+    ///     which to construct string unknownValue = someFunction(); var wrappedUnkonwn = unknownValue == null ?
+    ///     Maybe&lt;string&gt;.Just(unknownValue) : Maybe&lt;string&gt;.Nothing;
+    ///
     ///     Console.WriteLine(wrappedUnknown); // either "Just&lt;string&gt;[...]" or "Nothing&lt;string&gt;"
     ///   </code>
     /// </example>
