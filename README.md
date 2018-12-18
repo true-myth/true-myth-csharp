@@ -3,17 +3,20 @@
 <p align="center">A library for safer programming in C♯, with <code>Maybe</code> and <code>Result</code> types, and supporting both a functional style and a more traditional method-call style.</p>
 
 <p align="center">
-  <a href='https://ci.appveyor.com/project/aggieben/true-myth'>
-    <img src='https://img.shields.io/appveyor/ci/aggieben/true-myth/next.svg?style=flat' alt='AppVeyor `next` build status'>
+  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1?branchName=master&view=results'>
+    <img src='https://img.shields.io/azure-devops/build/true-myth/TrueMyth/1/master.svg?style=flat&logo=azuredevops' alt='Azure Pipelines `master` build status' />
   </a>
-  <a href='https://ci.appveyor.com/project/aggieben/true-myth/build/tests'>
-    <img src='https://img.shields.io/appveyor/tests/aggieben/true-myth/next.svg?style=flat' alt='AppVeyor `next` test status'>
+  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1?branchName=master&view=ms.vss-test-web.test-result-details'>
+    <img src='https://img.shields.io/azure-devops/tests/true-myth/TrueMyth/1/master.svg?style=flat&logo=azuredevops' />
+  </a>
+  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1?branchName=master&view=results'>
+    <img src='https://img.shields.io/azure-devops/coverage/true-myth/TrueMyth/1/master.svg?style=flag&logo=azuredevops' />
   </a>
   <a href='https://github.com/true-myth/true-myth/blob/master/LICENSE'>
     <img src='https://img.shields.io/github/license/true-myth/true-myth-csharp.svg?style=flat'>
   </a>
   <a href='https://www.nuget.org/packages/TrueMyth'>
-    <img src='https://img.shields.io/nuget/dt/TrueMyth.svg?style=flat' alt='Hosted on Nuget.org'>
+    <img src='https://img.shields.io/nuget/dt/TrueMyth.svg?style=flat' alt='Hosted on Nuget.org' />
   </a>
 </p>
 
