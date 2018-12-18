@@ -2,3 +2,5 @@
   href: articles/
 - name: API Documentation
   href: api/TrueMyth.html
+- name: Repository
+  href: https://github.com/true-myth/true-myth-csharp

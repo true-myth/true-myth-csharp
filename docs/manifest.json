@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe-1.html",
-          "hash": "VXaYDaQb3iR/ZnW/2Jqv8g=="
+          "hash": "xlZEkRC/F7YU+H8K5+kz8A=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe.html",
-          "hash": "+/jeEwNgxEKXwsjKB6193w=="
+          "hash": "6Ed7upZ852RbSpXK+0S8FA=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result-2.html",
-          "hash": "inJ/KXtlXX+ylKQEQIuj+Q=="
+          "hash": "06lS8m1tvnDQgWb3otKgJA=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result.html",
-          "hash": "rSHXZHf81kZitaJvAc2qfg=="
+          "hash": "t3v3GHdj5z9v0gCaHlXxLg=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.html",
-          "hash": "T2hzc8IGewVq3YOWvjl8jA=="
+          "hash": "9Lpv0rgo1tsWBA/OcJExEw=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started.html",
-          "hash": "SGVLc4Ji69MxaySpJO8zhw=="
+          "hash": "0bKtJlvEmtfHUenl5rLFAQ=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/manual.html",
-          "hash": "6rxqvz+Ex8iOfut99cfPZQ=="
+          "hash": "fh3xjjlcdnL+5fIVejZlQw=="
         }
       },
       "is_incremental": false,
@@ -148,7 +148,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "TB/ljSFOWWh93y6dPdLzkQ=="
+          "hash": "nlj86/Sd52dvsdqG4YKPKA=="
         }
       },
       "is_incremental": false,
@@ -163,7 +163,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "XqhK9Y257QejXk2ReaYZlA=="
+          "hash": "cxwDyULb26jQbmQ5xgolWQ=="
         }
       },
       "is_incremental": false,
@@ -173,27 +173,26 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because config changed.",
+        "can_incremental": true,
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build"
         }
       }
