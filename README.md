@@ -3,13 +3,13 @@
 <p align="center">A library for safer programming in C♯, with <code>Maybe</code> and <code>Result</code> types, and supporting both a functional style and a more traditional method-call style.</p>
 
 <p align="center">
-  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1?branchName=master&view=results'>
+  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1&branchName=master&view=results'>
     <img src='https://img.shields.io/azure-devops/build/true-myth/TrueMyth/1/master.svg?style=flat&logo=azuredevops' alt='Azure Pipelines `master` build status' />
   </a>
-  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1?branchName=master&view=ms.vss-test-web.test-result-details'>
+  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1&branchName=master&view=ms.vss-test-web.test-result-details'>
     <img src='https://img.shields.io/azure-devops/tests/true-myth/TrueMyth/1/master.svg?style=flat&logo=azuredevops' />
   </a>
-  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1?branchName=master&view=results'>
+  <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1&branchName=master&view=results'>
     <img src='https://img.shields.io/azure-devops/coverage/true-myth/TrueMyth/1/master.svg?style=flag&logo=azuredevops' />
   </a>
   <a href='https://github.com/true-myth/true-myth/blob/master/LICENSE'>
