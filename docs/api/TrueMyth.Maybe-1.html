@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Maybe&lt;TValue&gt;
    | True Myth ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 2.40.5.0">
     
     <link rel="shortcut icon" href="../images/logo_header.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -85,15 +85,15 @@
   </h1>
   <div class="markdown level0 summary"><p>
   A <code>Maybe&lt;T></code> represents a value of type <code>T</code> which may, or may not, be present. If the value
-  is present, it is **Just** a value.  If it&apos;s absent, it&apos;s **Nothing**.  This provides a type-safe container
+  is present, it is <strong>Just</strong> a value.  If it&apos;s absent, it&apos;s <strong>Nothing</strong>.  This provides a type-safe container
   for dealing with the possibility that there&apos;s nothing here — a container you can do many of the same things
   you might with an array — so that you can avoid nasty <code>null</code> checks throughout your codebase.
 </p>
 <p>
   The behavior of this type is checked by the C♯ compiler and bears no runtime overhead other than the very
-  small cost of the container object and some lightweight wrap/unwrap functionality. The **Nothing** and
-  **Just** variants are represented internally to the <code>Maybe&lt;T></code> object and is exposed in several
-  ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is **Just** or **Nothing** is through the 
+  small cost of the container object and some lightweight wrap/unwrap functionality. The <strong>Nothing</strong> and
+<strong>Just</strong> variants are represented internally to the <code>Maybe&lt;T></code> object and is exposed in several
+ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is <strong>Just</strong> or <strong>Nothing</strong> is through the 
 <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsJust">IsJust</a> and <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsNothing">IsNothing</a> properties, respectively.
 </p>
 </div>
@@ -141,36 +141,42 @@
     </tbody>
   </table>
   <h5 id="TrueMyth_Maybe_1_examples"><strong>Examples</strong></h5>
-  <pre><code>  // simple way to construct a Maybe &lt;int> var aKnownNumber = Maybe&lt;int>.Just(7);
+  <pre><code>  // simple way to construct a Maybe &lt;int> 
+  var aKnownNumber = Maybe&lt;int>.Just(7);
 
-  // once you have it, you can apply methods to it var fromMappedJust = aKnownNumber.Select(x => x *
-  2).Unwrap(0); Console.WriteLine(fromMappedJust); // &quot;Just&lt;int>[14]&quot;
+  // once you have it, you can apply methods to it 
+  var fromMappedJust = aKnownNumber.Select(x => x * 2).Unwrap(0); 
+  Console.WriteLine(fromMappedJust); // &quot;Just&lt;int>[14]&quot;
 
-  // construct a Nothing where you don&apos;t have a value to use, but the function requires a value var
-  aKnownNothing = Maybe&lt;int>.Nothing;
+  // construct a Nothing where you don&apos;t have a value to use, but the function 
+  // requires a value 
+  var aKnownNothing = Maybe&lt;int>.Nothing;
 
-  // the same operations will behave as safely on a Nothing as on a Just: var fromMappedNothing =
-  aKnownNothing.Select(x => x * 2).Unwrap(0); Console.WriteLine(fromMappedNothing); // &quot;Just&lt;int>[0]&quot;
+  // the same operations will behave as safely on a Nothing as on a Just: 
+  var fromMappedNothing = aKnownNothing.Select(x => x * 2).Unwrap(0); 
+  Console.WriteLine(fromMappedNothing); // &quot;Just&lt;int>[0]&quot;
 
-  // construct a Maybe where you don&apos;t know where the value will exist or not, using a null check to // decide
-  which to construct string unknownValue = someFunction(); var wrappedUnkonwn = unknownValue == null ?
-  Maybe&lt;string>.Just(unknownValue) : Maybe&lt;string>.Nothing;
-
-  Console.WriteLine(wrappedUnknown); // either &quot;Just&lt;string>[...]&quot; or &quot;Nothing&lt;string>&quot;</code></pre>
+  // construct a Maybe where you don&apos;t know where the value will exist or not, using a 
+  // null check to decide which to construct 
+  string unknownValue = someFunction(); 
+  var wrappedUnkonwn = unknownValue == null 
+      ? Maybe&lt;string>.Just(unknownValue) 
+      : Maybe&lt;string>.Nothing;
+  Console.WriteLine(wrappedUnknown);// either &quot;Just&lt;string>[...]&quot; or &quot;Nothing&lt;string>&quot; </code></pre>
 
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_IsJust.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.IsJust%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_IsJust.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.IsJust%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L183">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L189">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_IsJust_" data-uid="TrueMyth.Maybe`1.IsJust*"></a>
   <h4 id="TrueMyth_Maybe_1_IsJust" data-uid="TrueMyth.Maybe`1.IsJust">IsJust</h4>
-  <div class="markdown level1 summary"><p>Explicit means by which to determine if a <code>Maybe&lt;TValue&gt;</code> is a &quot;Just&quot;.  Returns <code>true</code> if &quot;Just&quot;
-and <code>false</code> if &quot;Nothing&quot;.  Opposite of <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsNothing">IsNothing</a>.</p>
+  <div class="markdown level1 summary"><p>Explicit means by which to determine if a <code>Maybe&lt;TValue&gt;</code> is a <strong>Just</strong>.  Returns <code>true</code> if <strong>Just</strong>
+and <code>false</code> if <strong>Nothing</strong>.  Opposite of <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsNothing">IsNothing</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -194,15 +200,16 @@ and <code>false</code> if &quot;Nothing&quot;.  Opposite of <a class="xref" href
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_IsNothing.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.IsNothing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_IsNothing.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.IsNothing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L189">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L196">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_IsNothing_" data-uid="TrueMyth.Maybe`1.IsNothing*"></a>
   <h4 id="TrueMyth_Maybe_1_IsNothing" data-uid="TrueMyth.Maybe`1.IsNothing">IsNothing</h4>
-  <div class="markdown level1 summary"><p>Explicit means by which to determin if a <code>Maybe&lt;TValue&gt;</code> is a &quot;Nothing&quot;.  Returns <code>true</code> if &quot;Nothing&quot;
-and <code>false</code> if &quot;Just&quot;.  Exactly the opposite of <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsJust">IsJust</a>.</p>
+  <div class="markdown level1 summary"><p>Explicit means by which to determin if a <code>Maybe&lt;TValue&gt;</code> is a
+<strong>Nothing</strong>.  Returns <code>true</code> if <strong>Nothing</strong> and <code>false</code> if
+<strong>Just</strong>. Exactly the opposite of <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsJust">IsJust</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -226,14 +233,14 @@ and <code>false</code> if &quot;Just&quot;.  Exactly the opposite of <a class="x
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Nothing.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Nothing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Nothing.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Nothing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L196">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L203">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Nothing_" data-uid="TrueMyth.Maybe`1.Nothing*"></a>
   <h4 id="TrueMyth_Maybe_1_Nothing" data-uid="TrueMyth.Maybe`1.Nothing">Nothing</h4>
-  <div class="markdown level1 summary"><p>Static property representing a &quot;Nothing&quot; of type <code>Maybe&lt;TValue&gt;</code>; only constructed once during
+  <div class="markdown level1 summary"><p>Static property representing a <strong>Nothing</strong> of type <code>Maybe&lt;TValue&gt;</code>; only constructed once during
 static initialization of the program, so this property is effectively like a constant.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -252,7 +259,7 @@ static initialization of the program, so this property is effectively like a con
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
-        <td><p>The &quot;Nothing&quot; instance of type <code>Maybe&lt;TValue&gt;</code>.</p>
+        <td><p>The <strong>Nothing</strong> instance of type <code>Maybe&lt;TValue&gt;</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -261,21 +268,21 @@ static initialization of the program, so this property is effectively like a con
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.And%60%601(TrueMyth.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.And%60%601(TrueMyth.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L236">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L243">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_And_" data-uid="TrueMyth.Maybe`1.And*"></a>
   <h4 id="TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__" data-uid="TrueMyth.Maybe`1.And``1(TrueMyth.Maybe{``0})">And&lt;UValue&gt;(Maybe&lt;UValue&gt;)</h4>
   <div class="markdown level1 summary"><p>
-You can think of this like a short-circuiting logical &quot;and&quot; operation on a <code>Mabye</code> type.  If <code>this</code> is a &quot;Just&quot;, then
-the result is the <code>andMaybe</code>.  If <code>this</code> is &quot;Nothing&quot;, then the result will also be &quot;Nothing&quot; for the destination type
+You can think of this like a short-circuiting logical &quot;and&quot; operation on a <code>Mabye</code> type.  If <code>this</code> is a <strong>Just</strong>, then
+the result is the <code>andMaybe</code>.  If <code>this</code> is <strong>Nothing</strong>, then the result will also be <strong>Nothing</strong> for the destination type
 <code>Maybe&lt;UValue></code>.
 </p>
 <p>
-This is useful when you have another <code>Maybe</code> value you want to provide <em>iff</em> you have a &quot;Just&quot; — that is, when you
-need to make sure that if you have &quot;Nothing&quot;, whatever else you&apos;re handing a <code>Maybe</code> <em>also</em> gets a &quot;Nothing&quot;.
+This is useful when you have another <code>Maybe</code> value you want to provide <em>iff</em> you have a <strong>Just</strong> — that is, when you
+need to make sure that if you have <strong>Nothing</strong>, whatever else you&apos;re handing a <code>Maybe</code> <em>also</em> gets a <strong>Nothing</strong>.
 </p>
 <p>
 Other things to note:
@@ -335,14 +342,14 @@ Other things to note:
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_AndThen__1_System_Func__0_TrueMyth_Maybe___0___.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.AndThen%60%601(System.Func%7B%600%2CTrueMyth.Maybe%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_AndThen__1_System_Func__0_TrueMyth_Maybe___0___.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.AndThen%60%601(System.Func%7B%600%2CTrueMyth.Maybe%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L244">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L251">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_AndThen_" data-uid="TrueMyth.Maybe`1.AndThen*"></a>
   <h4 id="TrueMyth_Maybe_1_AndThen__1_System_Func__0_TrueMyth_Maybe___0___" data-uid="TrueMyth.Maybe`1.AndThen``1(System.Func{`0,TrueMyth.Maybe{``0}})">AndThen&lt;UValue&gt;(Func&lt;TValue, Maybe&lt;UValue&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>This work similarly to <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__">And&lt;UValue&gt;(Maybe&lt;UValue&gt;)</a>, but instead of providing a maybe that will be returned when <code>this</code> is &quot;Just&quot;,
+  <div class="markdown level1 summary"><p>This work similarly to <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__">And&lt;UValue&gt;(Maybe&lt;UValue&gt;)</a>, but instead of providing a maybe that will be returned when <code>this</code> is <strong>Just</strong>,
 you provide a function that returns a <code>Maybe</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -401,10 +408,10 @@ you provide a function that returns a <code>Maybe</code>.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Equals_System_Object_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Equals_System_Object_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L360">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L366">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Equals_" data-uid="TrueMyth.Maybe`1.Equals*"></a>
   <h4 id="TrueMyth_Maybe_1_Equals_System_Object_" data-uid="TrueMyth.Maybe`1.Equals(System.Object)">Equals(Object)</h4>
@@ -450,10 +457,10 @@ you provide a function that returns a <code>Maybe</code>.</p>
   <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_GetHashCode.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_GetHashCode.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L378">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L384">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_GetHashCode_" data-uid="TrueMyth.Maybe`1.GetHashCode*"></a>
   <h4 id="TrueMyth_Maybe_1_GetHashCode" data-uid="TrueMyth.Maybe`1.GetHashCode">GetHashCode()</h4>
@@ -482,16 +489,16 @@ you provide a function that returns a <code>Maybe</code>.</p>
   <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L253">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L260">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Map_" data-uid="TrueMyth.Maybe`1.Map*"></a>
   <h4 id="TrueMyth_Maybe_1_Map__1_System_Func__0___0__" data-uid="TrueMyth.Maybe`1.Map``1(System.Func{`0,``0})">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Map over a <code>Maybe</code> instance.static  This applies the function to the wrapped value if the instance is &quot;Just&quot; and returns &quot;Nothing&quot;
-if the instance is &quot;Nothing&quot;.  This respects types, so if <code>this</code> is of type <code>Maybe&lt;int&gt;</code> and you provide a <code>mapFn</code> of type <code>Func&lt;double&gt;</code>,
-the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;double&gt;</code>, irrespective of <code>this</code> being &quot;Just&quot; or &quot;Nothing&quot;.</p>
+  <div class="markdown level1 summary"><p>Map over a <code>Maybe</code> instance.static  This applies the function to the wrapped value if the instance is <strong>Just</strong> and returns <strong>Nothing</strong>
+if the instance is <strong>Nothing</strong>.  This respects types, so if <code>this</code> is of type <code>Maybe&lt;int&gt;</code> and you provide a <code>mapFn</code> of type <code>Func&lt;double&gt;</code>,
+the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;double&gt;</code>, irrespective of <code>this</code> being <strong>Just</strong> or <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -549,15 +556,15 @@ the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;doub
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_MapReturn__1_System_Func__0___0____0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.MapReturn%60%601(System.Func%7B%600%2C%60%600%7D%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_MapReturn__1_System_Func__0___0____0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.MapReturn%60%601(System.Func%7B%600%2C%60%600%7D%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L268">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L274">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_MapReturn_" data-uid="TrueMyth.Maybe`1.MapReturn*"></a>
   <h4 id="TrueMyth_Maybe_1_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Maybe`1.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, UValue)</h4>
-  <div class="markdown level1 summary"><p>Map over a <code>Maybe&amp;lt;TValue&gt;</code> instance and get out the value if it's a Just, or return a default value if
-it's a Nohting. It differs from <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a> in that the result is the
+  <div class="markdown level1 summary"><p>Map over a <code>Maybe&lt;TValue&gt;</code> instance and get out the value if it's a <strong>Just</strong>, or return a default value if
+it's a <strong>Nothing</strong>&gt;. It differs from <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a> in that the result is the
 value type itself (or a mapped type).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -585,7 +592,7 @@ value type itself (or a mapped type).</p>
         <td><span class="xref">UValue</span></td>
         <td><span class="parametername">defaultValue</span></td>
         <td><p>A fallback value of type <code>UValue</code> to be returned in the case that
-<code>this</code> is &quot;Nothing&quot;.</p>
+<code>this</code> is <strong>Nothing</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -601,7 +608,7 @@ value type itself (or a mapped type).</p>
     <tbody>
       <tr>
         <td><span class="xref">UValue</span></td>
-        <td><p>A <code>UValue</code> as computed by <code>mapFn</code> if <code>this</code> is &quot;Just&quot;; otherwise, the
+        <td><p>A <code>UValue</code> as computed by <code>mapFn</code> if <code>this</code> is <strong>Just</strong>; otherwise, the
 <code>defaultValue</code>.</p>
 </td>
       </tr>
@@ -626,15 +633,15 @@ used here; it needn't be different than <code>TValue</code>.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L283">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L289">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Match_" data-uid="TrueMyth.Maybe`1.Match*"></a>
   <h4 id="TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__" data-uid="TrueMyth.Maybe`1.Match``1(System.Func{`0,``0},System.Func{``0})">Match&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, Func&lt;UValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Provides the same basic functionality as <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TValue&gt;)</a>, but instead of simply unwrapping the value if it is &quot;JUst&quot; and applyiung a value to genearte
-the same default type if it is &quot;Nothing&quot;, lets you supply functions which may transform the wrapped type if it is &quot;Just&quot; or get a default value for &quot;Nothing&quot;.</p>
+  <div class="markdown level1 summary"><p>Provides the same basic functionality as <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TValue&gt;)</a>, but instead of simply unwrapping the value if it is <strong>Just</strong> and applyiung a value to genearte
+the same default type if it is <strong>Nothing</strong>, lets you supply functions which may transform the wrapped type if it is <strong>Just</strong> or get a default value for <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -654,13 +661,13 @@ the same default type if it is &quot;Nothing&quot;, lets you supply functions wh
       <tr>
         <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
         <td><span class="parametername">just</span></td>
-        <td><p>The function to apply if <code>this</code> is &quot;Just&quot;.</p>
+        <td><p>The function to apply if <code>this</code> is <strong>Just</strong>.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;UValue&gt;</td>
         <td><span class="parametername">nothing</span></td>
-        <td><p>The function to apply if <code>this</code> is &quot;Nothing&quot;.</p>
+        <td><p>The function to apply if <code>this</code> is <strong>Nothing</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -704,15 +711,15 @@ nothing: val =&gt; &quot;nothing&quot;
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Of__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Of(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Of__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Of(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L292">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L298">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Of_" data-uid="TrueMyth.Maybe`1.Of*"></a>
   <h4 id="TrueMyth_Maybe_1_Of__0_" data-uid="TrueMyth.Maybe`1.Of(`0)">Of(TValue)</h4>
-  <div class="markdown level1 summary"><p>Static factory method for creation of new &quot;Just&quot; <code>Maybe&lt;TValue&gt;</code>s.  If <code>value</code> is a
-reference type and is <code>null</code>, this returns a &quot;Nothing&quot;.</p>
+  <div class="markdown level1 summary"><p>Static factory method for creation of new <strong>Just</strong> <code>Maybe&lt;TValue&gt;</code>s.  If <code>value</code> is a
+reference type and is <code>null</code>, this returns a <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -756,14 +763,14 @@ reference type and is <code>null</code>, this returns a &quot;Nothing&quot;.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Or(TrueMyth.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Or(TrueMyth.Maybe%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L300">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L306">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Or_" data-uid="TrueMyth.Maybe`1.Or*"></a>
   <h4 id="TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__" data-uid="TrueMyth.Maybe`1.Or(TrueMyth.Maybe{`0})">Or(Maybe&lt;TValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Provide a fallback for <code>this</code>.  Behaves like a logical &quot;or&quot;: if the <code>Maybe</code> is &quot;Just&quot;, returns that; otherwise,
+  <div class="markdown level1 summary"><p>Provide a fallback for <code>this</code>.  Behaves like a logical &quot;or&quot;: if the <code>Maybe</code> is <strong>Just</strong>, returns that; otherwise,
 returns the provided <code>maybe</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -800,17 +807,17 @@ returns the provided <code>maybe</code>.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
-        <td><p>If <code>this</code> is &quot;Just&quot;, return <code>this</code>; otherwise return <code>maybe</code>.</p>
+        <td><p>If <code>this</code> is <strong>Just</strong>, return <code>this</code>; otherwise return <code>maybe</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_OrElse_System_Func_TrueMyth_Maybe__0___.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.OrElse(System.Func%7BTrueMyth.Maybe%7B%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_OrElse_System_Func_TrueMyth_Maybe__0___.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.OrElse(System.Func%7BTrueMyth.Maybe%7B%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L307">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L313">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_OrElse_" data-uid="TrueMyth.Maybe`1.OrElse*"></a>
   <h4 id="TrueMyth_Maybe_1_OrElse_System_Func_TrueMyth_Maybe__0___" data-uid="TrueMyth.Maybe`1.OrElse(System.Func{TrueMyth.Maybe{`0}})">OrElse(Func&lt;Maybe&lt;TValue&gt;&gt;)</h4>
@@ -850,17 +857,17 @@ returns the provided <code>maybe</code>.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
-        <td><p>If <code>this</code> is &quot;Just&quot;, returns <code>this</code>.  Otherwise, returns result of <code>elseFn</code>.</p>
+        <td><p>If <code>this</code> is <strong>Just</strong>, returns <code>this</code>.  Otherwise, returns result of <code>elseFn</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_Select__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Select%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_Select__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.Select%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L314">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L320">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Select_" data-uid="TrueMyth.Maybe`1.Select*"></a>
   <h4 id="TrueMyth_Maybe_1_Select__1_System_Func__0___0__" data-uid="TrueMyth.Maybe`1.Select``1(System.Func{`0,``0})">Select&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
@@ -922,14 +929,14 @@ returns the provided <code>maybe</code>.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_ToResult__1___0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.ToResult%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_ToResult__1___0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.ToResult%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L322">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L328">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_ToResult_" data-uid="TrueMyth.Maybe`1.ToResult*"></a>
   <h4 id="TrueMyth_Maybe_1_ToResult__1___0_" data-uid="TrueMyth.Maybe`1.ToResult``1(``0)">ToResult&lt;TError&gt;(TError)</h4>
-  <div class="markdown level1 summary"><p>Transform the <code>Maybe</code> into a <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TValue, TError&gt;</a>, using the wrapped value as the &quot;Ok&quot; value if &quot;Just&quot;; otherwise using the supplied
+  <div class="markdown level1 summary"><p>Transform the <code>Maybe</code> into a <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TValue, TError&gt;</a>, using the wrapped value as the &quot;Ok&quot; value if <strong>Just</strong>; otherwise using the supplied
 <code>error</code> value for &quot;Err&quot;.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -950,7 +957,7 @@ returns the provided <code>maybe</code>.</p>
       <tr>
         <td><span class="xref">TError</span></td>
         <td><span class="parametername">error</span></td>
-        <td><p>The error value to use if the <code>Maybe</code> is &quot;Nothing&quot;.</p>
+        <td><p>The error value to use if the <code>Maybe</code> is <strong>Nothing</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -988,10 +995,10 @@ returns the provided <code>maybe</code>.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_ToResult__1_System_Func___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.ToResult%60%601(System.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_ToResult__1_System_Func___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.ToResult%60%601(System.Func%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L327">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L333">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_ToResult_" data-uid="TrueMyth.Maybe`1.ToResult*"></a>
   <h4 id="TrueMyth_Maybe_1_ToResult__1_System_Func___0__" data-uid="TrueMyth.Maybe`1.ToResult``1(System.Func{``0})">ToResult&lt;TError&gt;(Func&lt;TError&gt;)</h4>
@@ -1051,10 +1058,10 @@ returns the provided <code>maybe</code>.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_ToString.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_ToString.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L355">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L361">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_ToString_" data-uid="TrueMyth.Maybe`1.ToString*"></a>
   <h4 id="TrueMyth_Maybe_1_ToString" data-uid="TrueMyth.Maybe`1.ToString">ToString()</h4>
@@ -1084,14 +1091,14 @@ returns the provided <code>maybe</code>.</p>
   <div><span class="xref">System.Object.ToString()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_UnsafelyUnwrap.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.UnsafelyUnwrap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_UnsafelyUnwrap.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.UnsafelyUnwrap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L333">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L339">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_UnsafelyUnwrap_" data-uid="TrueMyth.Maybe`1.UnsafelyUnwrap*"></a>
   <h4 id="TrueMyth_Maybe_1_UnsafelyUnwrap" data-uid="TrueMyth.Maybe`1.UnsafelyUnwrap">UnsafelyUnwrap()</h4>
-  <div class="markdown level1 summary"><p>Get the <code>TValue</code> value out of the <code>Maybe&lt;TValue&gt;</code>. Returns the content of a &quot;Just&quot;, but <em>throws if the <code>Maybe</code> is &quot;Nothing&quot;</em>.
+  <div class="markdown level1 summary"><p>Get the <code>TValue</code> value out of the <code>Maybe&lt;TValue&gt;</code>. Returns the content of a <strong>Just</strong>, but <em>throws if the <code>Maybe</code> is <strong>Nothing</strong></em>.
 Prefer to use <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_">UnwrapOr(TValue)</a> or <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TValue&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1116,14 +1123,14 @@ Prefer to use <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Unwra
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_UnwrapOr__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.UnwrapOr(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_UnwrapOr__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.UnwrapOr(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L339">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L345">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_UnwrapOr_" data-uid="TrueMyth.Maybe`1.UnwrapOr*"></a>
   <h4 id="TrueMyth_Maybe_1_UnwrapOr__0_" data-uid="TrueMyth.Maybe`1.UnwrapOr(`0)">UnwrapOr(TValue)</h4>
-  <div class="markdown level1 summary"><p>Safely get the <code>TValue</code> value out of the <code>Maybe&lt;TValue&gt;</code>. Returns the content of &quot;Just&quot; or <code>defaultValue</code> if <code>this</code> is &quot;Nothing&quot;.
+  <div class="markdown level1 summary"><p>Safely get the <code>TValue</code> value out of the <code>Maybe&lt;TValue&gt;</code>. Returns the content of <strong>Just</strong> or <code>defaultValue</code> if <code>this</code> is <strong>Nothing</strong>.
 This is the recommended way to get a value out of a <code>Maybe</code> most of the time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1165,15 +1172,15 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.UnwrapOrElse(System.Func%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.UnwrapOrElse(System.Func%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L346">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L352">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_UnwrapOrElse_" data-uid="TrueMyth.Maybe`1.UnwrapOrElse*"></a>
   <h4 id="TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__" data-uid="TrueMyth.Maybe`1.UnwrapOrElse(System.Func{`0})">UnwrapOrElse(Func&lt;TValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Safely get the value out of a <code>Maybe</code> by returning the wrapped value if it is &quot;Just&quot;, oir by applying
-<code>elseFn</code> if it's &quot;Nothing&quot;.  This is useful when you need to <em>generate</em> a value (e.g. by using current values in the environment
+  <div class="markdown level1 summary"><p>Safely get the value out of a <code>Maybe</code> by returning the wrapped value if it is <strong>Just</strong>, oir by applying
+<code>elseFn</code> if it's <strong>Nothing</strong>.  This is useful when you need to <em>generate</em> a value (e.g. by using current values in the environment
 — whether preloaded or by local closure) instead of having a default value available as in <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_">UnwrapOr(TValue)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1217,10 +1224,10 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_op_Implicit__0__TrueMyth_Maybe__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.op_Implicit(%600)~TrueMyth.Maybe%7B%600%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_op_Implicit__0__TrueMyth_Maybe__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.op_Implicit(%600)~TrueMyth.Maybe%7B%600%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L447">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L456">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_op_Implicit_" data-uid="TrueMyth.Maybe`1.op_Implicit*"></a>
   <h4 id="TrueMyth_Maybe_1_op_Implicit__0__TrueMyth_Maybe__0_" data-uid="TrueMyth.Maybe`1.op_Implicit(`0)~TrueMyth.Maybe{`0}">Implicit(TValue to Maybe&lt;TValue&gt;)</h4>
@@ -1270,7 +1277,10 @@ code.  Without TrueMyth at all, you might have a method like this:</p>
 {
     string result = null;
     result = translationService.Lookup(sourceText);
-    if (result == null) throw new Exception($&quot;didn&apos;t find translation of &apos;{sourceText}&apos;.&quot;);
+    if (result == null)
+    {
+        throw new Exception($&quot;didn&apos;t find translation of &apos;{sourceText}&apos;.&quot;);
+    }
 
     return result;
 }</code></pre>
@@ -1296,10 +1306,10 @@ should already know. Instead, using the type system and this implicit operator, 
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1_op_Implicit_TrueMyth_Maybe__0____0.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.op_Implicit(TrueMyth.Maybe%7B%600%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1_op_Implicit_TrueMyth_Maybe__0____0.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601.op_Implicit(TrueMyth.Maybe%7B%600%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L402">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L408">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_op_Implicit_" data-uid="TrueMyth.Maybe`1.op_Implicit*"></a>
   <h4 id="TrueMyth_Maybe_1_op_Implicit_TrueMyth_Maybe__0____0" data-uid="TrueMyth.Maybe`1.op_Implicit(TrueMyth.Maybe{`0})~`0">Implicit(Maybe&lt;TValue&gt; to TValue)</h4>
@@ -1351,10 +1361,10 @@ an exception at runtime if the conversion is invalid.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Maybe_1.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/true-myth/true-myth-csharp/new/features/documentation/apiSpec/new?filename=TrueMyth_Maybe_1.md&amp;value=---%0Auid%3A%20TrueMyth.Maybe%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L168" class="contribution-link">View Source</a>
+                    <a href="https://github.com/true-myth/true-myth-csharp/blob/features/documentation/src/TrueMyth/Maybe.cs/#L174" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

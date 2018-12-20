@@ -360,8 +360,8 @@ namespace TrueMyth
         /// 
         /// This is kind of like a poor man's version of pattern matching, for which C♯ has only limited support.
         /// </summary>
-        /// <param name=<b>Ok</b>></param>
-        /// <param name=<b>Err</b>></param>
+        /// <param name="ok"></param>
+        /// <param name="err"></param>
         /// <typeparam name="T"></typeparam>
         /// <example>
         /// Instead of code like this:
@@ -546,7 +546,7 @@ namespace TrueMyth
         /// <summary>
         /// A factory method for creating <b>Err</b> <c>Result</c> instances.
         /// </summary>
-        /// <param name=<b>Err</b>>The error value wrapped by the <c>Result</c></param>
+        /// <param name="err">The error value wrapped by the <c>Result</c></param>
         public static Result<TValue, TError> Err(TError err) => new Result<TValue, TError>(default(TValue), err, false);
 
         /// <summary>

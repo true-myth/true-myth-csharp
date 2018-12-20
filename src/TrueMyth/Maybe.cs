@@ -277,13 +277,13 @@ namespace TrueMyth
         /// Provides the same basic functionality as <see cref="UnwrapOrElse(Func{TValue})"/>, but instead of simply unwrapping the value if it is <b>Just</b> and applyiung a value to genearte
         /// the same default type if it is <b>Nothing</b>, lets you supply functions which may transform the wrapped type if it is <b>Just</b> or get a default value for <b>Nothing</b>.
         /// </summary>
-        /// <param name=<b>Just</b>>The function to apply if <c>this</c> is <b>Just</b>.</param>
-        /// <param name=<b>Nothing</b>>The function to apply if <c>this</c> is <b>Nothing</b>.</param>
+        /// <param name="just">The function to apply if <c>this</c> is <b>Just</b>.</param>
+        /// <param name="nothing">The function to apply if <c>this</c> is <b>Nothing</b>.</param>
         /// <example>
         /// var maybeValue = fromSomeMethod();
         /// var stringValue = maybeValue.Match(
         ///     just: val => val.ToString(),
-        ///     nothing: val => <b>Nothing</b>
+        ///     nothing: val => "nothing"
         /// );
         /// </example>
         public UValue Match<UValue>(Func<TValue,UValue> just, Func<UValue> nothing) => this._isJust ? just(this._value) : nothing();
