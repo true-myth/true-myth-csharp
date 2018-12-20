@@ -9,7 +9,7 @@ namespace TrueMyth
     public static class Result
     {
         /// <summary>
-        /// Convenience method to facilitate invoking static `Result&lt;TValue,TError&gt;`
+        /// Convenience method to facilitate invoking static <c>Result&lt;TValue,TError&gt;</c>
         /// methods without type parameters.
         /// </summary>
         public static Result<T, TError> From<T,TError>(Maybe<T> maybe, TError error) => maybe.IsJust 
@@ -69,8 +69,8 @@ namespace TrueMyth
     /// <summary>
     /// <para>A <c>Result&lt;TValue,TError&gt;</c> is a type representing the value result of an operation which may
     /// fail, with a successful value type of <c>TValue</c> or an error type of <c>TError</c> (pun intended!).  If the
-    /// value is present, it is **Ok**, and if absent, it's **Err**. There are several ways to check if a <c>Result</c>
-    /// is Ok or Err, but the most direct and explicit are the <see cref="IsOk"/> and <see cref="IsErr"/> properties. 
+    /// value is present, it is <b>Ok</b>, and if absent, it's <b>Err</b>. There are several ways to check if a <c>Result</c>
+    /// is <b>Ok</b> or <b>Err</b>, but the most direct and explicit are the <see cref="IsOk"/> and <see cref="IsErr"/> properties. 
     /// </para>
     /// <para>
     /// This provides a type-safe container for dealing with the possibility that an error occurred, without needing to
@@ -96,26 +96,42 @@ namespace TrueMyth
     /// <example>
     /// To make this concrete, let's look at an example.see  Without TrueMyth, you might have the following C♯:
     /// <code>
-    /// int MightSucceed(bool doesSucceed) {if (!doesSucceed) throw new Exception("hey guess what? it didn't
-    /// succeed.see");
+    /// int MightSucceed(bool doesSucceed) 
+    /// {
+    ///     if (!doesSucceed) 
+    ///         throw new Exception("hey guess what? it didn't succeed.see");
     ///
-    ///     return 42;}
+    ///     return 42;
+    /// }
     ///
-    /// int Main(string[] args) {var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer); //
-    /// 84; this is fine
+    /// int Main(string[] args) 
+    /// {
+    ///     var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer); 
+    ///     // 84; this is fine
     ///
-    ///     var doubleAnError = MightSucceed(false) * 2; Console.Write(doubleAnError); // oops!  we never even get
-    ///     here.}
+    ///     var doubleAnError = MightSucceed(false) * 2; Console.Write(doubleAnError); 
+    ///     // oops!  we never even get here.
+    /// }
     /// </code>
     /// If we wanted to <em>handle</em> that error, we'd need to first of all know that the function could throw an
     /// error. Assuming we knew that — progbably we'd figure it out via painful discovery at runtime — then we'd need to
     /// wrap it up in a <c>try</c>/<c>catch</c> block:
     /// <code>
-    /// int Main(string[] args) {try {var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer);
-    /// // 84; this is fine
+    /// int Main(string[] args) 
+    /// {
+    ///     try 
+    ///     {
+    ///         var doubleTheAnswer = MightSucceed(true) * 2; 
+    ///         Console.WriteLine(doubleTheAnswer); // 84; this is fine
     ///
-    ///         var doubleAnError = MightSucceed(false) * 2; Console.WriteLine(doubleAnError);} catch(Exception exn)
-    ///         {Console.WriteLine(exn.Message);}}
+    ///         var doubleAnError = MightSucceed(false) * 2; 
+    ///         Console.WriteLine(doubleAnError);
+    ///     } 
+    ///     catch(Exception exn)
+    ///     {
+    ///         Console.WriteLine(exn.Message);
+    ///     }
+    /// }
     /// </code>
     /// This is a pain to work with!
     ///
@@ -173,16 +189,20 @@ namespace TrueMyth
     /// </list>
     /// Here's what that same example from above would look like using <c>Result</c>:
     /// <code>
-    /// Result&lt;int,string&gt; MightSucceed(bool doesSucceed) => 
-    ///     doesSucceed? Result&lt;int,string&gt;.Ok(42) : Result&lt;int,string&gt;.Err("something went wrong!");
+    /// Result&lt;int,string&gt; MightSucceed(bool doesSucceed) => doesSucceed 
+    ///     ? Result&lt;int,string&gt;.Ok(42) 
+    ///     : Result&lt;int,string&gt;.Err("something went wrong!");
     ///
-    /// int Main(string[] args) {int Double(int x) = x * 2;
+    /// int Main(string[] args) 
+    /// {
+    ///     int Double(int x) = x * 2;
     ///
-    ///     var doubleTheAnswer = MightSucceed(true).Select(Double); Console.WriteLine(doubleTheAnswer); //
-    ///     Ok&lt;int,string&gt;[84]
+    ///     var doubleTheAnswer = MightSucceed(true).Select(Double); 
+    ///     Console.WriteLine(doubleTheAnswer); // Ok&lt;int,string&gt;[84]
     ///
-    ///     var doubleAnErr = MightSucceed(false).Select(Double); Console.WriteLine(doubleAnErr); //
-    ///     Err&lt;int,string&gt;[something went wrong]}
+    ///     var doubleAnErr = MightSucceed(false).Select(Double); 
+    ///     Console.WriteLine(doubleAnErr); // Err&lt;int,string&gt;[something went wrong]
+    /// }
     /// </code>
     /// Note that if we tried to call <c>MightSucceed(true)*2</c> here, we'd get a type error — this wouldn't make it
     /// past the compile step.
@@ -203,12 +223,12 @@ namespace TrueMyth
         #region Public Properties
 
         /// <summary>
-        /// Is this <c>Result</c> an "Ok"? This property is <c>true</c> if so.
+        /// Is this <c>Result</c> an <b>Ok</b>? This property is <c>true</c> if so.
         /// </summary>
         public bool IsOk => _isOk;
 
         /// <summary>
-        /// This is merely the reverse of <see cref="IsOk"/>; if <c>this</c> is an "Err", then
+        /// This is merely the reverse of <see cref="IsOk"/>; if <c>this</c> is an <b>Err</b>, then
         /// the property is <c>true</c>.
         /// </summary>
         public bool IsErr => !_isOk;
@@ -296,6 +316,7 @@ namespace TrueMyth
         /// <param name="mapFn">Mapping function applied to Ok value.</param>
         /// <typeparam name="UValue">Destination value type resulting from the mapping function.</typeparam>
         /// <example>
+        /// <code>
         /// long Double(int n) => n * 2;
         /// 
         /// var anOk = Result&lt;int,string&gt;.Ok(12);
@@ -304,7 +325,8 @@ namespace TrueMyth
         /// 
         /// var anErr = Result&lt;int,string&gt;.Err("error");
         /// var mappedErr = anErr.Select(Double);
-        /// Console.WRiteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]
+        /// Console.WriteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]
+        /// </code>
         /// </example>
         public Result<UValue, TError> Map<UValue>(Func<TValue,UValue> mapFn) => this._isOk
             ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
@@ -338,8 +360,8 @@ namespace TrueMyth
         /// 
         /// This is kind of like a poor man's version of pattern matching, for which C♯ has only limited support.
         /// </summary>
-        /// <param name="ok"></param>
-        /// <param name="err"></param>
+        /// <param name=<b>Ok</b>></param>
+        /// <param name=<b>Err</b>></param>
         /// <typeparam name="T"></typeparam>
         /// <example>
         /// Instead of code like this:
@@ -416,22 +438,22 @@ namespace TrueMyth
         public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
 
         /// <summary>
-        /// Get the value out of the <c>Result</c>. Returns the content of an "Ok" but <em>throws if the result is "Err"</em>.
+        /// Get the value out of the <c>Result</c>. Returns the content of an <b>Ok</b> but <em>throws if the result is <b>Err</b></em>.
         /// Prefer to use <see cref="Unwrap(TValue)"/> or <see cref="Unwrap(Func{TError,TValue})"/>
         /// </summary>
         public TValue UnsafelyUnwrap() => _isOk ? _value : throw new InvalidOperationException("Invalid request to unwrap value.");
 
         /// <summary>
-        /// Get the error out of the <c>Result</c>. Returns the content of an "Err", but <em>throws if the result is "Ok"</em>.
+        /// Get the error out of the <c>Result</c>. Returns the content of an <b>Err</b>, but <em>throws if the result is <b>Ok</b></em>.
         /// Prefer to use <see cref="Unwrap(Func{TError,TValue})"/>.
         /// </summary>
         public TError UnsafelyUnwrapErr() => !_isOk ? _error : throw new InvalidOperationException("Invalid request to unwrap error.");
 
         /// <summary>
-        /// Safely get the value out of the "Ok" variant of a <c>Result</c>. This is the recommended way to get a value
+        /// Safely get the value out of the <b>Ok</b> variant of a <c>Result</c>. This is the recommended way to get a value
         /// out of a <c>Result</c> most of the time.
         /// </summary>
-        /// <param name="defaultValue">Fallback value to be returned if <c>this</c> is "Err".</param>
+        /// <param name="defaultValue">Fallback value to be returned if <c>this</c> is <b>Err</b>.</param>
         /// <example>
         /// <code>
         /// var anOk = Result&lt;int,string&gt;.Ok(1);
@@ -444,14 +466,15 @@ namespace TrueMyth
         public TValue Unwrap(TValue defaultValue) => this._isOk ? _value : defaultValue;
 
         /// <summary>
-        /// Safely get the value out of a <c>Result&lt;TValue,TError&gt;</c> by returning the wrapped value if it is "Ok"
-        /// or by applying <c>elseFn</c> if it is "Err".
+        /// Safely get the value out of a <c>Result&lt;TValue,TError&gt;</c> by returning the wrapped value if it is <b>Ok</b>
+        /// or by applying <c>elseFn</c> if it is <b>Err</b>.
         /// 
         /// This is useful when you need to generate a value (e.g. by using current values in the environment – whether 
         /// preloaded or by local closure) instead of having a single default value available (as in <see cref="Unwrap(TValue)"/>).
         /// </summary>
         /// <param name="elseFn">Function to apply to map <c>TError</c> to <c>TVaue</c>.</param>
         /// <example>
+        /// <code>
         /// var someOtherValue = 2;
         /// var handleError = (string err) => err.Length + someOtherValue;
         /// 
@@ -460,6 +483,7 @@ namespace TrueMyth
         /// 
         /// var anErr = Result&lt;int,string&gt;.Err("error");
         /// Console.WriteLine(anErr.Unwrap(handleError)); // error
+        /// </code>
         /// </example>
         public TValue Unwrap(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
 
@@ -520,15 +544,15 @@ namespace TrueMyth
         #region Static Methods & Operators
 
         /// <summary>
-        /// A factory method for creating "Err" <c>Result</c> instances.
+        /// A factory method for creating <b>Err</b> <c>Result</c> instances.
         /// </summary>
-        /// <param name="err">The error value wrapped by the <c>Result</c></param>
+        /// <param name=<b>Err</b>>The error value wrapped by the <c>Result</c></param>
         public static Result<TValue, TError> Err(TError err) => new Result<TValue, TError>(default(TValue), err, false);
 
         /// <summary>
-        /// Transform a `Maybe&lt;T&gt;` into a `Result&lt;T,TError&gt;`. If the `Maybe`
-        /// is a Just, its value will be wrapped in the Ok variant; if it is a Nothing the
-        /// errValue will be wrapped in the Err variant.
+        /// Transform a <c>Maybe&lt;T&gt;</c> into a <c>Result&lt;T,TError&gt;</c>. If the <c>Maybe</c>
+        /// is a <b>Just</b>, its value will be wrapped in the <b>Ok</b> variant; if it is a <b>Nothing</b> the
+        /// <c>errValue</c> will be wrapped in the <b>Err</b> variant.
         /// </summary>
         /// <param name="maybe"></param>
         /// <param name="errValue"></param>
@@ -536,7 +560,7 @@ namespace TrueMyth
         public static Result<TValue,TError> From(Maybe<TValue> maybe, TError errValue) => maybe.ToResult(errValue);
 
         /// <summary>
-        /// A factory method for creating "Ok" <c>Result</c> instances.
+        /// A factory method for creating <b>Ok</b> <c>Result</c> instances.
         /// <note><c>null</c> is allowed by the type signature, but it is highly recommended
         /// to use <see cref="Maybe{TValue}"/> rather than a <c>null</c> as a result.
         /// </note>
