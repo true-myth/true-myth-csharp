@@ -58,7 +58,7 @@ namespace TrueMyth
         /// <typeparam name="T">The value type of <paramref name="result"/>.</typeparam>
         /// <typeparam name="TError">The error type of <paramref name="result"/>.</typeparam>
         /// <returns>A <c>Maybe&lt;T&gt;</c> representing either a "Just" <c>T</c> or "Nothing", depending on the provided <paramref name="result"/>.</returns>
-        public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.Unwrap(e => Maybe<T>.Nothing);
+        public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.IsOk ? (Maybe<T>)result.UnsafelyUnwrap() : Maybe<T>.Nothing;
 
         /// <summary>
         /// A safe method for finding elements of a list for which the <c>predicate</c> returns <c>true</c>. This method guarantees a valid <c>Maybe&lt;T&gt;</c> result;
@@ -244,9 +244,9 @@ namespace TrueMyth
         public Maybe<UValue> AndThen<UValue>(Func<TValue,Maybe<UValue>> bindFn) => this._isJust ? bindFn(this._value) : Maybe<UValue>.Nothing;
 
         /// <summary>
-        /// Map over a <c>Maybe</c> instance.static  This applies the function to the wrapped value if the instance is "Just" and returns "Nothing"
-        /// if the instance is "Nothing".  This respects types, so if <c>this</c> is of type <c>Maybe&lt;int&gt;</c> and you provide a <c>mapFn</c> of type <c>Func&lt;double&gt;</c>,
-        /// the type of <c>Maybe</c> that will be returned will be <c>Maybe&lt;double&gt;</c>, irrespective of <c>this</c> being "Just" or "Nothing".
+        /// Map over a <c>Maybe</c> instance.  This applies the function to the wrapped value if the instance is <b>Just</b> and returns <b>Nothing</b>
+        /// if the instance is <b>Nothing</b>.  This respects types, so if <c>this</c> is of type <c>Maybe&lt;int&gt;</c> and you provide a <c>mapFn</c> of type <c>Func&lt;double&gt;</c>,
+        /// the type of <c>Maybe</c> that will be returned will be <c>Maybe&lt;double&gt;</c>, irrespective of <c>this</c> being <b>Just</b> or <b>Nothing</b>.
         /// </summary>
         /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
         /// <typeparam name="UValue">The type of the resulting <c>Maybe</c> value.</typeparam>
@@ -254,8 +254,8 @@ namespace TrueMyth
 
         // mapOr
         /// <summary>
-        /// Map over a `Maybe&lt;TValue&gt;` instance and get out the value if it's a Just, or return a default value if
-        /// it's a Nohting. It differs from <see cref="Map{UValue}(Func{TValue,UValue})"/> in that the result is the
+        /// Map over a `Maybe&lt;TValue&gt;` instance and get out the value if it's a <b>Just</b>, or return a default value if
+        /// it's a <b>Nothing</b>. It differs from <see cref="Map{UValue}(Func{TValue,UValue})"/> in that the result is the
         /// value type itself (or a mapped type).
         /// </summary>
         /// <param name="mapFn">The mapping function to be applied to the wrapped value.</param>
@@ -263,7 +263,7 @@ namespace TrueMyth
         /// <c>this</c> is "Nothing".</param>
         /// <typeparam name="UValue">The type of the result of the mapping function; any type supported by C♯ can be
         /// used here; it needn't be different than <c>TValue</c>.</typeparam>
-        /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is "Just"; otherwise, the
+        /// <returns>A <c>UValue</c> as computed by <c>mapFn</c> if <c>this</c> is <b>Just</b>; otherwise, the
         /// <c>defaultValue</c>.</returns>
         public UValue MapReturn<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isJust ? mapFn(this._value) : defaultValue;
 
@@ -283,27 +283,27 @@ namespace TrueMyth
         public UValue Match<UValue>(Func<TValue,UValue> just, Func<UValue> nothing) => this._isJust ? just(this._value) : nothing();
 
         /// <summary>
-        /// Static factory method for creation of new "Just" <c>Maybe&lt;TValue&gt;</c>s.  If <c>value</c> is a 
-        /// reference type and is <c>null</c>, this returns a "Nothing".
+        /// Static factory method for creation of new <c>Maybe&lt;TValue&gt;</c>s.  If <c>value</c> is a 
+        /// reference type and is <c>null</c>, this returns a <b>Nothing</b>.  Otherwise, it returns a <b>Just</b>.
         /// </summary>
         /// <param name="value">The value to be held by the <c>Maybe&lt;TValue&gt;</c> instance.  Of type <c>TValue</c>
         /// (see documentation for <see cref="Maybe{TValue}"/>).</param>
         /// <returns>A <c>Maybe&lt;TValue&gt;</c> instance.</returns>
-        public static Maybe<TValue> Of(TValue value) => value.Equals(null) ? Nothing : new Maybe<TValue>(value);
+        public static Maybe<TValue> Of(TValue value) => value == null ? Nothing : new Maybe<TValue>(value);
 
         /// <summary>
-        /// Provide a fallback for <c>this</c>.  Behaves like a logical "or": if the <c>Maybe</c> is "Just", returns that; otherwise,
-        /// returns the provided <c>maybe</c>.
+        /// Provide a fallback for <c>this</c>.  Behaves like a logical "or": if the <c>Maybe</c> is <b>Just</b>, returns that; otherwise,
+        /// returns the provided <c>Maybe</c>.
         /// </summary>
         /// <param name="maybe">Fallback value.</param>
-        /// <returns>If <c>this</c> is "Just", return <c>this</c>; otherwise return <c>maybe</c>.</returns>
+        /// <returns>If <c>this</c> is <b>Just</b>, return <c>this</c>; otherwise return <c>maybe</c>.</returns>
         public Maybe<TValue> Or(Maybe<TValue> maybe) => this._isJust ? this : maybe;
 
         /// <summary>
         /// Like <see cref="Or(Maybe{TValue})"/>, but using a function to construct the fallback <c>Maybe</c>.
         /// </summary>
         /// <param name="elseFn">Function used to construct fallback <c>Maybe</c>.</param>
-        /// <returns>If <c>this</c> is "Just", returns <c>this</c>.  Otherwise, returns result of <c>elseFn</c>.</returns>
+        /// <returns>If <c>this</c> is <b>Just</b>, returns <c>this</c>.  Otherwise, returns result of <c>elseFn</c>.</returns>
         public Maybe<TValue> OrElse(Func<Maybe<TValue>> elseFn) => this._isJust ? this : elseFn();
 
         /// <summary>
@@ -314,10 +314,10 @@ namespace TrueMyth
         public Maybe<UValue> Select<UValue>(Func<TValue,UValue> mapFn) => Map(mapFn);
 
         /// <summary>
-        /// Transform the <c>Maybe</c> into a <see cref="Result{TValue,TError}"/>, using the wrapped value as the "Ok" value if "Just"; otherwise using the supplied 
-        /// <c>error</c> value for "Err".
+        /// Transform the <c>Maybe</c> into a <see cref="Result{TValue,TError}"/>, using the wrapped value as the <b>Ok</b> value if <b>Just</b>; otherwise using the supplied 
+        /// <c>error</c> value for <b>Err</b>.
         /// </summary>
-        /// <param name="error">The error value to use if the <c>Maybe</c> is "Nothing".</param>
+        /// <param name="error">The error value to use if the <c>Maybe</c> is <b>Nothing</b>.</param>
         /// <typeparam name="TError">The wrapped value type.</typeparam>
         public Result<TValue, TError> ToResult<TError>(TError error) => this._isJust ? Result<TValue, TError>.Ok(this._value) : Result<TValue, TError>.Err(error);
 
@@ -327,10 +327,10 @@ namespace TrueMyth
         public Result<TValue, TError> ToResult<TError>(Func<TError> errFn) => this._isJust ? Result<TValue,TError>.Ok(this._value) : Result<TValue,TError>.Err(errFn());
 
         /// <summary>
-        /// Get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of a "Just", but <em>throws if the <c>Maybe</c> is "Nothing"</em>.
+        /// Get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of a <b>Just</b>, but <em>throws if the <c>Maybe</c> is <b>Nothing</b></em>.
         /// Prefer to use <see cref="UnwrapOr(TValue)"/> or <see cref="UnwrapOrElse(Func{TValue})"/>.
         /// </summary>
-        public TValue UnsafelyUnwrap() => this._isJust ? this._value : throw new InvalidOperationException($"Invalid attempt to unwrap {GetType().Name}.Nothing");
+        public TValue UnsafelyUnwrap() => this._isJust ? this._value : throw new InvalidOperationException($"Invalid attempt to unwrap {GetType().Name}.Nothing as {typeof(TValue).Name}");
         
         /// <summary>
         /// Safely get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of "Just" or <c>defaultValue</c> if <c>this</c> is "Nothing".
@@ -354,7 +354,7 @@ namespace TrueMyth
         /// </summary>
         public override string ToString() => this._isJust
             ? $"Just<{typeof(TValue)}>[{this._value}]"
-            : $"Nothing<{typeof(TValue)}>[]";
+            : $"Nothing<{typeof(TValue)}>";
 
         /// <exclude/>
         public override bool Equals(object obj)
@@ -399,10 +399,10 @@ namespace TrueMyth
         /// Equivalent of <see cref="UnsafelyUnwrap"/>.  Follows usual C♯ semantics of throwing 
         /// an exception at runtime if the conversion is invalid.
         /// </summary>
-        public static implicit operator TValue(Maybe<TValue> maybe) => maybe.UnsafelyUnwrap();
+        public static explicit operator TValue(Maybe<TValue> maybe) => maybe.UnsafelyUnwrap();
         
         /// <summary>
-        /// Constructs a <c>Maybe&lt;TValue&gt;</c> implicitly. Equivalent of <see cref="Maybe{TValue}.Of(TValue)"/>.
+        /// Constructs a <c>Maybe&lt;TValue&gt;</c> explicitly. Equivalent of <see cref="Maybe{TValue}.Of(TValue)"/>.
         /// </summary>
         /// <example>
         /// This is useful for reducing ceremony when using TrueMyth, particularly when refactoring into existing
@@ -412,7 +412,8 @@ namespace TrueMyth
         /// {
         ///     string result = null;
         ///     result = translationService.Lookup(sourceText);
-        ///     if (result == null) throw new Exception($"didn't find translation of '{sourceText}'.");
+        ///     if (result == null) 
+        ///         throw new Exception($"didn't find translation of '{sourceText}'.");
         /// 
         ///     return result;
         /// }
