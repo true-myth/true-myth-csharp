@@ -58,7 +58,7 @@ namespace TrueMyth
         /// <typeparam name="T">The value type of <paramref name="result"/>.</typeparam>
         /// <typeparam name="TError">The error type of <paramref name="result"/>.</typeparam>
         /// <returns>A <c>Maybe&lt;T&gt;</c> representing either a <b>Just</b> <c>T</c> or <b>Nothing</b>, depending on the provided <paramref name="result"/>.</returns>
-        public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.Unwrap(e => Maybe<T>.Nothing);
+        public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.ToMaybe();
 
         /// <summary>
         /// A safe method for finding elements of a list for which the <c>predicate</c> returns <c>true</c>. This method guarantees a valid <c>Maybe&lt;T&gt;</c> result;
