@@ -378,6 +378,25 @@ references:
   fullName.vb: TrueMyth.Maybe(Of TValue).Of
   nameWithType: Maybe<TValue>.Of
   nameWithType.vb: Maybe(Of TValue).Of
+- uid: TrueMyth.Maybe`1.op_Explicit(TrueMyth.Maybe{`0})~`0
+  name: Explicit(Maybe<TValue> to TValue)
+  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_op_Explicit_TrueMyth_Maybe__0____0
+  commentId: M:TrueMyth.Maybe`1.op_Explicit(TrueMyth.Maybe{`0})~`0
+  name.vb: Narrowing(Maybe(Of TValue) to TValue)
+  fullName: TrueMyth.Maybe<TValue>.Explicit(TrueMyth.Maybe<TValue> to TValue)
+  fullName.vb: TrueMyth.Maybe(Of TValue).Narrowing(TrueMyth.Maybe(Of TValue) to TValue)
+  nameWithType: Maybe<TValue>.Explicit(Maybe<TValue> to TValue)
+  nameWithType.vb: Maybe(Of TValue).Narrowing(Maybe(Of TValue) to TValue)
+- uid: TrueMyth.Maybe`1.op_Explicit*
+  name: Explicit
+  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_op_Explicit_
+  commentId: Overload:TrueMyth.Maybe`1.op_Explicit
+  isSpec: "True"
+  name.vb: Narrowing
+  fullName: TrueMyth.Maybe<TValue>.Explicit
+  fullName.vb: TrueMyth.Maybe(Of TValue).Narrowing
+  nameWithType: Maybe<TValue>.Explicit
+  nameWithType.vb: Maybe(Of TValue).Narrowing
 - uid: TrueMyth.Maybe`1.op_Implicit(`0)~TrueMyth.Maybe{`0}
   name: Implicit(TValue to Maybe<TValue>)
   href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_op_Implicit__0__TrueMyth_Maybe__0_
@@ -387,15 +406,6 @@ references:
   fullName.vb: TrueMyth.Maybe(Of TValue).Widening(TValue to TrueMyth.Maybe(Of TValue))
   nameWithType: Maybe<TValue>.Implicit(TValue to Maybe<TValue>)
   nameWithType.vb: Maybe(Of TValue).Widening(TValue to Maybe(Of TValue))
-- uid: TrueMyth.Maybe`1.op_Implicit(TrueMyth.Maybe{`0})~`0
-  name: Implicit(Maybe<TValue> to TValue)
-  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_op_Implicit_TrueMyth_Maybe__0____0
-  commentId: M:TrueMyth.Maybe`1.op_Implicit(TrueMyth.Maybe{`0})~`0
-  name.vb: Widening(Maybe(Of TValue) to TValue)
-  fullName: TrueMyth.Maybe<TValue>.Implicit(TrueMyth.Maybe<TValue> to TValue)
-  fullName.vb: TrueMyth.Maybe(Of TValue).Widening(TrueMyth.Maybe(Of TValue) to TValue)
-  nameWithType: Maybe<TValue>.Implicit(Maybe<TValue> to TValue)
-  nameWithType.vb: Maybe(Of TValue).Widening(Maybe(Of TValue) to TValue)
 - uid: TrueMyth.Maybe`1.op_Implicit*
   name: Implicit
   href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_op_Implicit_
@@ -840,6 +850,34 @@ references:
   fullName.vb: TrueMyth.Result(Of TValue, TError).Ok
   nameWithType: Result<TValue, TError>.Ok
   nameWithType.vb: Result(Of TValue, TError).Ok
+- uid: TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`0
+  name: Explicit(Result<TValue, TError> to TValue)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0
+  commentId: M:TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`0
+  name.vb: Narrowing(Result(Of TValue, TError) to TValue)
+  fullName: TrueMyth.Result<TValue, TError>.Explicit(TrueMyth.Result<TValue, TError> to TValue)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).Narrowing(TrueMyth.Result(Of TValue, TError) to TValue)
+  nameWithType: Result<TValue, TError>.Explicit(Result<TValue, TError> to TValue)
+  nameWithType.vb: Result(Of TValue, TError).Narrowing(Result(Of TValue, TError) to TValue)
+- uid: TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`1
+  name: Explicit(Result<TValue, TError> to TError)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____1
+  commentId: M:TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`1
+  name.vb: Narrowing(Result(Of TValue, TError) to TError)
+  fullName: TrueMyth.Result<TValue, TError>.Explicit(TrueMyth.Result<TValue, TError> to TError)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).Narrowing(TrueMyth.Result(Of TValue, TError) to TError)
+  nameWithType: Result<TValue, TError>.Explicit(Result<TValue, TError> to TError)
+  nameWithType.vb: Result(Of TValue, TError).Narrowing(Result(Of TValue, TError) to TError)
+- uid: TrueMyth.Result`2.op_Explicit*
+  name: Explicit
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Explicit_
+  commentId: Overload:TrueMyth.Result`2.op_Explicit
+  isSpec: "True"
+  name.vb: Narrowing
+  fullName: TrueMyth.Result<TValue, TError>.Explicit
+  fullName.vb: TrueMyth.Result(Of TValue, TError).Narrowing
+  nameWithType: Result<TValue, TError>.Explicit
+  nameWithType.vb: Result(Of TValue, TError).Narrowing
 - uid: TrueMyth.Result`2.op_Implicit(`0)~TrueMyth.Result{`0,`1}
   name: Implicit(TValue to Result<TValue, TError>)
   href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_
@@ -858,24 +896,6 @@ references:
   fullName.vb: TrueMyth.Result(Of TValue, TError).Widening(TError to TrueMyth.Result(Of TValue, TError))
   nameWithType: Result<TValue, TError>.Implicit(TError to Result<TValue, TError>)
   nameWithType.vb: Result(Of TValue, TError).Widening(TError to Result(Of TValue, TError))
-- uid: TrueMyth.Result`2.op_Implicit(TrueMyth.Result{`0,`1})~`0
-  name: Implicit(Result<TValue, TError> to TValue)
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____0
-  commentId: M:TrueMyth.Result`2.op_Implicit(TrueMyth.Result{`0,`1})~`0
-  name.vb: Widening(Result(Of TValue, TError) to TValue)
-  fullName: TrueMyth.Result<TValue, TError>.Implicit(TrueMyth.Result<TValue, TError> to TValue)
-  fullName.vb: TrueMyth.Result(Of TValue, TError).Widening(TrueMyth.Result(Of TValue, TError) to TValue)
-  nameWithType: Result<TValue, TError>.Implicit(Result<TValue, TError> to TValue)
-  nameWithType.vb: Result(Of TValue, TError).Widening(Result(Of TValue, TError) to TValue)
-- uid: TrueMyth.Result`2.op_Implicit(TrueMyth.Result{`0,`1})~`1
-  name: Implicit(Result<TValue, TError> to TError)
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____1
-  commentId: M:TrueMyth.Result`2.op_Implicit(TrueMyth.Result{`0,`1})~`1
-  name.vb: Widening(Result(Of TValue, TError) to TError)
-  fullName: TrueMyth.Result<TValue, TError>.Implicit(TrueMyth.Result<TValue, TError> to TError)
-  fullName.vb: TrueMyth.Result(Of TValue, TError).Widening(TrueMyth.Result(Of TValue, TError) to TError)
-  nameWithType: Result<TValue, TError>.Implicit(Result<TValue, TError> to TError)
-  nameWithType.vb: Result(Of TValue, TError).Widening(Result(Of TValue, TError) to TError)
 - uid: TrueMyth.Result`2.op_Implicit*
   name: Implicit
   href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit_

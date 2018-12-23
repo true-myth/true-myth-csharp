@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Maybe
    | True Myth ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 2.40.6.0">
     
     <link rel="shortcut icon" href="../images/logo_header.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -195,8 +195,8 @@
   </span>
   <a id="TrueMyth_Maybe_AsMaybe_" data-uid="TrueMyth.Maybe.AsMaybe*"></a>
   <h4 id="TrueMyth_Maybe_AsMaybe__1_System_Collections_Generic_IEnumerable_TrueMyth_Maybe___0___" data-uid="TrueMyth.Maybe.AsMaybe``1(System.Collections.Generic.IEnumerable{TrueMyth.Maybe{``0}})">AsMaybe&lt;T&gt;(IEnumerable&lt;Maybe&lt;T&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>Convert the arguments to a single <code>Maybe&lt;IEnumerable&lt;T&gt;&gt;</code>, but only if all elements of the list are &quot;Just&quot;. If any of the elements
-of the list are actually &quot;Nothing&quot;, then the result will also be a &quot;Nothing&quot;.</p>
+  <div class="markdown level1 summary"><p>Convert the arguments to a single <code>Maybe&lt;IEnumerable&lt;T&gt;&gt;</code>, but only if all elements of the list are <strong>Just</strong>. If any of the elements
+of the list are actually <strong>Nothing</strong>, then the result will also be a <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -480,7 +480,7 @@ of the list are actually &quot;Nothing&quot;, then the result will also be a &qu
   <div class="markdown level1 summary"><p>This method facilitates converting from a <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TValue, TError&gt;</a> to a <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a>.  The difference between this
 and <a class="xref" href="TrueMyth.Maybe.html#TrueMyth_Maybe_Of__1___0_">Of&lt;T&gt;(T)</a> is that the resulting <code>Mabye</code> is a <code>Maybe&lt;T&gt;</code> rather than a <code>Maybe&lt;Result&lt;T,TError&gt;&gt;</code>.
 If the provided <code>Result</code> is actually an error result (e.g., <code>result.IsErr == true</code>), then the returned <code>Maybe</code> will
-be a &quot;Nothing&quot;.</p>
+be a <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -516,7 +516,7 @@ be a &quot;Nothing&quot;.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
-        <td><p>A <code>Maybe&lt;T&gt;</code> representing either a &quot;Just&quot; <code>T</code> or &quot;Nothing&quot;, depending on the provided <code data-dev-comment-type="paramref" class="paramref">result</code>.</p>
+        <td><p>A <code>Maybe&lt;T&gt;</code> representing either a <strong>Just</strong> <code>T</code> or <strong>Nothing</strong>, depending on the provided <code data-dev-comment-type="paramref" class="paramref">result</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -623,7 +623,7 @@ it never returns null and never throws an exception.</p>
   </span>
   <a id="TrueMyth_Maybe_MaybeFirst_" data-uid="TrueMyth.Maybe.MaybeFirst*"></a>
   <h4 id="TrueMyth_Maybe_MaybeFirst__1_System_Collections_Generic_IEnumerable___0__" data-uid="TrueMyth.Maybe.MaybeFirst``1(System.Collections.Generic.IEnumerable{``0})">MaybeFirst&lt;TValue&gt;(IEnumerable&lt;TValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Safely get the first item from a list, returning &quot;Just&quot; the first item if the array has at least one item in it, or &quot;Nothing&quot; if it is empty.</p>
+  <div class="markdown level1 summary"><p>Safely get the first item from a list, returning <strong>Just</strong> the first item if the array has at least one item in it, or <strong>Nothing</strong> if it is empty.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -659,7 +659,7 @@ it never returns null and never throws an exception.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
-        <td><p>A <code>Maybe&lt;TValue&gt;</code> of the first item of the list (which might be &quot;Nothing&quot; if the list is empty).</p>
+        <td><p>A <code>Maybe&lt;TValue&gt;</code> of the first item of the list (which might be <strong>Nothing</strong> if the list is empty).</p>
 </td>
       </tr>
     </tbody>
@@ -733,7 +733,7 @@ with <code>key</code>.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
-        <td><p>A <code>Maybe&lt;TValue&gt;</code>.Nothing if no value exists associated with the given key; a &quot;Just&quot; otherwise.</p>
+        <td><p>A <code>Maybe&lt;TValue&gt;</code>.Nothing if no value exists associated with the given key; a <strong>Just</strong> otherwise.</p>
 </td>
       </tr>
     </tbody>
@@ -768,7 +768,7 @@ with <code>key</code>.</p>
   </span>
   <a id="TrueMyth_Maybe_MaybeLast_" data-uid="TrueMyth.Maybe.MaybeLast*"></a>
   <h4 id="TrueMyth_Maybe_MaybeLast__1_System_Collections_Generic_IEnumerable___0__" data-uid="TrueMyth.Maybe.MaybeLast``1(System.Collections.Generic.IEnumerable{``0})">MaybeLast&lt;TValue&gt;(IEnumerable&lt;TValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Safely get the last item from a list, returning &quot;Just&quot; the last item if the array has at least one item in it, or &quot;Nothing&quot; if it is empty.</p>
+  <div class="markdown level1 summary"><p>Safely get the last item from a list, returning <strong>Just</strong> the last item if the array has at least one item in it, or <strong>Nothing</strong> if it is empty.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -804,7 +804,7 @@ with <code>key</code>.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
-        <td><p>A <code>Maybe&lt;TValue&gt;</code> of the last item of the list (which might be &quot;Nothing&quot; if the list is empty).</p>
+        <td><p>A <code>Maybe&lt;TValue&gt;</code> of the last item of the list (which might be <strong>Nothing</strong> if the list is empty).</p>
 </td>
       </tr>
     </tbody>
@@ -857,7 +857,7 @@ cannot.</p>
         <td><span class="xref">T</span></td>
         <td><span class="parametername">value</span></td>
         <td><p>The value to be held by the resulting <code>Maybe&lt;T&gt;</code>.false  If <code>value</code> is <code>null</code>,
-the resulting <code>Maybe&lt;T&gt;</code> will be a &quot;Nothing&quot;.</p>
+the resulting <code>Maybe&lt;T&gt;</code> will be a <strong>Nothing</strong>.</p>
 </td>
       </tr>
     </tbody>

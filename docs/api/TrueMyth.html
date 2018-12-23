@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace TrueMyth
    | True Myth ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 2.40.6.0">
     
     <link rel="shortcut icon" href="../images/logo_header.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -93,15 +93,15 @@
       <h4><a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a></h4>
       <section><p>
   A <code>Maybe&lt;T></code> represents a value of type <code>T</code> which may, or may not, be present. If the value
-  is present, it is **Just** a value.  If it&apos;s absent, it&apos;s **Nothing**.  This provides a type-safe container
+  is present, it is <strong>Just</strong> a value.  If it&apos;s absent, it&apos;s <strong>Nothing</strong>.  This provides a type-safe container
   for dealing with the possibility that there&apos;s nothing here — a container you can do many of the same things
   you might with an array — so that you can avoid nasty <code>null</code> checks throughout your codebase.
 </p>
 <p>
   The behavior of this type is checked by the C♯ compiler and bears no runtime overhead other than the very
-  small cost of the container object and some lightweight wrap/unwrap functionality. The **Nothing** and
-  **Just** variants are represented internally to the <code>Maybe&lt;T></code> object and is exposed in several
-  ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is **Just** or **Nothing** is through the 
+  small cost of the container object and some lightweight wrap/unwrap functionality. The <strong>Nothing</strong> and
+<strong>Just</strong> variants are represented internally to the <code>Maybe&lt;T></code> object and is exposed in several
+ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is <strong>Just</strong> or <strong>Nothing</strong> is through the 
 <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsJust">IsJust</a> and <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_IsNothing">IsNothing</a> properties, respectively.
 </p>
 </section>
@@ -111,8 +111,8 @@
       <h4><a class="xref" href="TrueMyth.Result-2.html">Result&lt;TValue, TError&gt;</a></h4>
       <section><p>A <code>Result&lt;TValue,TError></code> is a type representing the value result of an operation which may
 fail, with a successful value type of <code>TValue</code> or an error type of <code>TError</code> (pun intended!).  If the
-value is present, it is **Ok**, and if absent, it&apos;s **Err**. There are several ways to check if a <code>Result</code>
-is Ok or Err, but the most direct and explicit are the <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsOk">IsOk</a> and <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsErr">IsErr</a> properties. 
+value is present, it is <strong>Ok</strong>, and if absent, it&apos;s <strong>Err</strong>. There are several ways to check if a <code>Result</code>
+is <strong>Ok</strong> or <strong>Err</strong>, but the most direct and explicit are the <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsOk">IsOk</a> and <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsErr">IsErr</a> properties. 
 </p>
 <p>
 This provides a type-safe container for dealing with the possibility that an error occurred, without needing to

@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/ben/proj/oss/true-myth-csharp/docsrc",
+  "source_base_path": "/Users/ben/proj/oss/true-myth-csharp/docsrc",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe-1.html",
-          "hash": "xlZEkRC/F7YU+H8K5+kz8A=="
+          "hash": "b4dMdWjKqipOdyQNfgCWpg=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe.html",
-          "hash": "6Ed7upZ852RbSpXK+0S8FA=="
+          "hash": "MEp/r2tmBIfpT3MMZIJ74g=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result-2.html",
-          "hash": "06lS8m1tvnDQgWb3otKgJA=="
+          "hash": "/sWrU+nbAtoD2S32KOLVxw=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result.html",
-          "hash": "t3v3GHdj5z9v0gCaHlXxLg=="
+          "hash": "AGlW2SOG3MytWy9VtVVoTw=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.html",
-          "hash": "9Lpv0rgo1tsWBA/OcJExEw=="
+          "hash": "Y1vFfPrucPNQwNMT+coLYw=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started.html",
-          "hash": "0bKtJlvEmtfHUenl5rLFAQ=="
+          "hash": "9N+Q9Sh2IAwOAfxc62TyIw=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/manual.html",
-          "hash": "fh3xjjlcdnL+5fIVejZlQw=="
+          "hash": "GGYLaVsKfYjTwpmUbHpluw=="
         }
       },
       "is_incremental": false,
@@ -148,16 +148,13 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "nlj86/Sd52dvsdqG4YKPKA=="
+          "hash": "9blf0meMxd1wDcgsIGR//A=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "toc.yml",
       "output": {
