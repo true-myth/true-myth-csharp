@@ -584,9 +584,8 @@ namespace TrueMyth
             result._isOk ? result._value : throw new InvalidOperationException("Invalid conversion to value type.");
 
         /// <summary>
-        /// This works similarly to <see cref="implicit operator TValue(Result{TValue,TError})"/>, but instead of conversion to a <c>TValue</c>,
+        /// This works similarly to <see cref="explicit operator TValue(Result{TValue,TError})"/>, but instead of conversion to a <c>TValue</c>,
         /// the implicit conversion is to a <c>TError</c>.
-        /// 
         /// <note>
         /// This operator will not work if <c>TValue</c> and <c>TError</c> are the same because there will be no
         /// way for the type inference system in C♯ to resolve them.
