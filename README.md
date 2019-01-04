@@ -1,6 +1,6 @@
 <h1 align="center"><a href='https://github.com/true-myth/true-myth-csharp'>True Myth C♯</a></h1>
 
-<p align="center">A library for safer programming in C♯, with <code>Maybe</code> and <code>Result</code> types, and supporting both a functional style and a more traditional method-call style.</p>
+<p align="center">A library for safer programming in C♯, with <code>Maybe</code> and <code>Result</code> types with a traditional method-call style.</p>
 
 <p align="center">
   <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1&branchName=master&view=results'>
@@ -11,6 +11,9 @@
   </a>
   <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1&branchName=master&view=results'>
     <img src='https://img.shields.io/azure-devops/coverage/true-myth/TrueMyth/1/master.svg?style=flag&logo=azuredevops' />
+  </a>
+  <a href='https://github.com/true-myth/true-myth-csharp'>
+    <img src='https://img.shields.io/github/release/true-myth/true-myth-csharp.svg?style=flat' />
   </a>
   <a href='https://github.com/true-myth/true-myth/blob/master/LICENSE'>
     <img src='https://img.shields.io/github/license/true-myth/true-myth-csharp.svg?style=flat'>
