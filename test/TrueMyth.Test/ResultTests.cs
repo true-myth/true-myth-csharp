@@ -31,7 +31,7 @@ namespace TrueMyth.Test
         }
 
         [Fact]
-        public void Implict_Value_Ok()
+        public void Explicit_Value_Ok()
         {
             // act
             var result = SimpleResult.Ok(7);
@@ -39,11 +39,11 @@ namespace TrueMyth.Test
             // assert
             Assert.True(result.IsOk);
             Assert.False(result.IsErr);
-            Assert.Equal<int>(7, result);
+            Assert.Equal<int>(7, (int)result);
         }
 
         [Fact]
-        public void Implicit_Error_Ok()
+        public void Explicit_Error_Ok()
         {
             // act
             var result = SimpleResult.Err("message");
@@ -51,7 +51,7 @@ namespace TrueMyth.Test
             // assert
             Assert.True(result.IsErr);
             Assert.False(result.IsOk);
-            Assert.Equal("message", result);
+            Assert.Equal("message", (string)result);
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace TrueMyth.Test
             // assert
             Assert.True(result.IsOk);
             Assert.False(result.IsErr);
-            Assert.Equal<int>(7, result);
+            Assert.Equal<int>(7, (int)result);
         }
 
         [Fact]

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class Result&lt;TValue, TError&gt;
    | True Myth ">
-    <meta name="generator" content="docfx 2.40.1.0">
+    <meta name="generator" content="docfx 2.40.6.0">
     
     <link rel="shortcut icon" href="../images/logo_header.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -85,8 +85,8 @@
   </h1>
   <div class="markdown level0 summary"><p>A <code>Result&lt;TValue,TError></code> is a type representing the value result of an operation which may
 fail, with a successful value type of <code>TValue</code> or an error type of <code>TError</code> (pun intended!).  If the
-value is present, it is **Ok**, and if absent, it&apos;s **Err**. There are several ways to check if a <code>Result</code>
-is Ok or Err, but the most direct and explicit are the <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsOk">IsOk</a> and <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsErr">IsErr</a> properties. 
+value is present, it is <strong>Ok</strong>, and if absent, it&apos;s <strong>Err</strong>. There are several ways to check if a <code>Result</code>
+is <strong>Ok</strong> or <strong>Err</strong>, but the most direct and explicit are the <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsOk">IsOk</a> and <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsErr">IsErr</a> properties. 
 </p>
 <p>
 This provides a type-safe container for dealing with the possibility that an error occurred, without needing to
@@ -152,24 +152,40 @@ errors instead of necessary.
   </table>
   <h5 id="TrueMyth_Result_2_examples"><strong>Examples</strong></h5>
   <p>To make this concrete, let's look at an example.see  Without TrueMyth, you might have the following C♯:</p>
-<pre><code>int MightSucceed(bool doesSucceed) {if (!doesSucceed) throw new Exception(&quot;hey guess what? it didn&apos;t
-succeed.see&quot;);
+<pre><code>int MightSucceed(bool doesSucceed) 
+{
+    if (!doesSucceed) 
+        throw new Exception(&quot;hey guess what? it didn&apos;t succeed.see&quot;);
 
-    return 42;}
+    return 42;
+}
 
-int Main(string[] args) {var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer); //
-84; this is fine
+int Main(string[] args) 
+{
+    var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer); 
+    // 84; this is fine
 
-    var doubleAnError = MightSucceed(false) * 2; Console.Write(doubleAnError); // oops!  we never even get
-    here.}</code></pre>
+    var doubleAnError = MightSucceed(false) * 2; Console.Write(doubleAnError); 
+    // oops!  we never even get here.
+}</code></pre>
 <p>If we wanted to <em>handle</em> that error, we'd need to first of all know that the function could throw an
 error. Assuming we knew that — progbably we'd figure it out via painful discovery at runtime — then we'd need to
 wrap it up in a <code>try</code>/<code>catch</code> block:</p>
-<pre><code>int Main(string[] args) {try {var doubleTheAnswer = MightSucceed(true) * 2; Console.WriteLine(doubleTheAnswer);
-// 84; this is fine
+<pre><code>int Main(string[] args) 
+{
+    try 
+    {
+        var doubleTheAnswer = MightSucceed(true) * 2; 
+        Console.WriteLine(doubleTheAnswer); // 84; this is fine
 
-        var doubleAnError = MightSucceed(false) * 2; Console.WriteLine(doubleAnError);} catch(Exception exn)
-        {Console.WriteLine(exn.Message);}}</code></pre>
+        var doubleAnError = MightSucceed(false) * 2; 
+        Console.WriteLine(doubleAnError);
+    } 
+    catch(Exception exn)
+    {
+        Console.WriteLine(exn.Message);
+    }
+}</code></pre>
 <p>This is a pain to work with!</p>
 <p>The next thing we might try is returning an error code and mutating an object passed in (e.g.
 <code>bool TryMightSucceed(bool doesSucceed, out int result)</code>). But that has a few problems:</p>
@@ -193,16 +209,20 @@ specified that it succeeded.
 Our way out is <code>Result&lt;TValue,TError></code>. It lets us just return one thing from a function, which
 encapsulates the possiblility of failure in the very thing we return. We get:
 <p>Here's what that same example from above would look like using <code>Result</code>:</p>
-<pre><code>Result&lt;int,string> MightSucceed(bool doesSucceed) => 
-    doesSucceed? Result&lt;int,string>.Ok(42) : Result&lt;int,string>.Err(&quot;something went wrong!&quot;);
+<pre><code>Result&lt;int,string> MightSucceed(bool doesSucceed) => doesSucceed 
+    ? Result&lt;int,string>.Ok(42) 
+    : Result&lt;int,string>.Err(&quot;something went wrong!&quot;);
 
-int Main(string[] args) {int Double(int x) = x * 2;
+int Main(string[] args) 
+{
+    int Double(int x) = x * 2;
 
-    var doubleTheAnswer = MightSucceed(true).Select(Double); Console.WriteLine(doubleTheAnswer); //
-    Ok&lt;int,string>[84]
+    var doubleTheAnswer = MightSucceed(true).Select(Double); 
+    Console.WriteLine(doubleTheAnswer); // Ok&lt;int,string>[84]
 
-    var doubleAnErr = MightSucceed(false).Select(Double); Console.WriteLine(doubleAnErr); //
-    Err&lt;int,string>[something went wrong]}</code></pre>
+    var doubleAnErr = MightSucceed(false).Select(Double); 
+    Console.WriteLine(doubleAnErr); // Err&lt;int,string>[something went wrong]
+}</code></pre>
 <p>Note that if we tried to call <code>MightSucceed(true)*2</code> here, we'd get a type error — this wouldn't make it
 past the compile step.</p>
 
@@ -213,11 +233,11 @@ past the compile step.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_IsErr.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.IsErr%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L214">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L234">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_IsErr_" data-uid="TrueMyth.Result`2.IsErr*"></a>
   <h4 id="TrueMyth_Result_2_IsErr" data-uid="TrueMyth.Result`2.IsErr">IsErr</h4>
-  <div class="markdown level1 summary"><p>This is merely the reverse of <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsOk">IsOk</a>; if <code>this</code> is an &quot;Err&quot;, then
+  <div class="markdown level1 summary"><p>This is merely the reverse of <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_IsOk">IsOk</a>; if <code>this</code> is an <strong>Err</strong>, then
 the property is <code>true</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -245,11 +265,11 @@ the property is <code>true</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_IsOk.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.IsOk%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L208">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L228">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_IsOk_" data-uid="TrueMyth.Result`2.IsOk*"></a>
   <h4 id="TrueMyth_Result_2_IsOk" data-uid="TrueMyth.Result`2.IsOk">IsOk</h4>
-  <div class="markdown level1 summary"><p>Is this <code>Result</code> an &quot;Ok&quot;? This property is <code>true</code> if so.</p>
+  <div class="markdown level1 summary"><p>Is this <code>Result</code> an <strong>Ok</strong>? This property is <code>true</code> if so.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -278,7 +298,7 @@ the property is <code>true</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_And__1_TrueMyth_Result___0__1__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.And%60%601(TrueMyth.Result%7B%60%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L262">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L282">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_And_" data-uid="TrueMyth.Result`2.And*"></a>
   <h4 id="TrueMyth_Result_2_And__1_TrueMyth_Result___0__1__" data-uid="TrueMyth.Result`2.And``1(TrueMyth.Result{``0,`1})">And&lt;UValue&gt;(Result&lt;UValue, TError&gt;)</h4>
@@ -348,7 +368,7 @@ result is not involved in constructing the new Result.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_AndThen__1_System_Func__0_TrueMyth_Result___0__1___.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.AndThen%60%601(System.Func%7B%600%2CTrueMyth.Result%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L274">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L294">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_AndThen_" data-uid="TrueMyth.Result`2.AndThen*"></a>
   <h4 id="TrueMyth_Result_2_AndThen__1_System_Func__0_TrueMyth_Result___0__1___" data-uid="TrueMyth.Result`2.AndThen``1(System.Func{`0,TrueMyth.Result{``0,`1}})">AndThen&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt;)</h4>
@@ -417,7 +437,7 @@ unwrapped type.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Equals_System_Object_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L478">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L502">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Equals_" data-uid="TrueMyth.Result`2.Equals*"></a>
   <h4 id="TrueMyth_Result_2_Equals_System_Object_" data-uid="TrueMyth.Result`2.Equals(System.Object)">Equals(Object)</h4>
@@ -466,11 +486,11 @@ unwrapped type.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Err__1_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Err(%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L526">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L550">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Err_" data-uid="TrueMyth.Result`2.Err*"></a>
   <h4 id="TrueMyth_Result_2_Err__1_" data-uid="TrueMyth.Result`2.Err(`1)">Err(TError)</h4>
-  <div class="markdown level1 summary"><p>A factory method for creating &quot;Err&quot; <code>Result</code> instances.</p>
+  <div class="markdown level1 summary"><p>A factory method for creating <strong>Err</strong> <code>Result</code> instances.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -515,13 +535,13 @@ unwrapped type.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_From_TrueMyth_Maybe__0___1_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.From(TrueMyth.Maybe%7B%600%7D%2C%601)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L536">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L560">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_From_" data-uid="TrueMyth.Result`2.From*"></a>
   <h4 id="TrueMyth_Result_2_From_TrueMyth_Maybe__0___1_" data-uid="TrueMyth.Result`2.From(TrueMyth.Maybe{`0},`1)">From(Maybe&lt;TValue&gt;, TError)</h4>
-  <div class="markdown level1 summary"><p>Transform a <code>Maybe&amp;lt;T&gt;</code> into a <code>Result&amp;lt;T,TError&gt;</code>. If the <code>Maybe</code>
-is a Just, its value will be wrapped in the Ok variant; if it is a Nothing the
-errValue will be wrapped in the Err variant.</p>
+  <div class="markdown level1 summary"><p>Transform a <code>Maybe&lt;T&gt;</code> into a <code>Result&lt;T,TError&gt;</code>. If the <code>Maybe</code>
+is a <strong>Just</strong>, its value will be wrapped in the <strong>Ok</strong> variant; if it is a <strong>Nothing</strong> the
+<code>errValue</code> will be wrapped in the <strong>Err</strong> variant.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -570,7 +590,7 @@ errValue will be wrapped in the Err variant.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_GetHashCode.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L497">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L521">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_GetHashCode_" data-uid="TrueMyth.Result`2.GetHashCode*"></a>
   <h4 id="TrueMyth_Result_2_GetHashCode" data-uid="TrueMyth.Result`2.GetHashCode">GetHashCode()</h4>
@@ -602,7 +622,7 @@ errValue will be wrapped in the Err variant.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L309">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L331">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Map_" data-uid="TrueMyth.Result`2.Map*"></a>
   <h4 id="TrueMyth_Result_2_Map__1_System_Func__0___0__" data-uid="TrueMyth.Result`2.Map``1(System.Func{`0,``0})">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
@@ -676,20 +696,22 @@ wrapped in an Ok.</p>
     </tbody>
   </table>
   <h5 id="TrueMyth_Result_2_Map__1_System_Func__0___0___examples">Examples</h5>
-  <p>long Double(int n) =&gt; n * 2;</p>
-<p>var anOk = Result&lt;int,string&gt;.Ok(12);
+  <pre><code>long Double(int n) => n * 2;
+
+var anOk = Result&lt;int,string>.Ok(12);
 var mappedOk = anOk.Select(Double);
-Console.WriteLine(mappedOk.ToString()); // Ok&lt;long,string&gt;[12]</p>
-<p>var anErr = Result&lt;int,string&gt;.Err(&quot;error&quot;);
+Console.WriteLine(mappedOk.ToString()); // Ok&lt;long,string>[12]
+
+var anErr = Result&lt;int,string>.Err(&quot;error&quot;);
 var mappedErr = anErr.Select(Double);
-Console.WRiteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]</p>
+Console.WriteLine(mappedErr.ToString()); // Err&lt;long,string>[error]</code></pre>
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_MapErr__1_System_Func__1___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.MapErr%60%601(System.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L330">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L352">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_MapErr_" data-uid="TrueMyth.Result`2.MapErr*"></a>
   <h4 id="TrueMyth_Result_2_MapErr__1_System_Func__1___0__" data-uid="TrueMyth.Result`2.MapErr``1(System.Func{`1,``0})">MapErr&lt;UError&gt;(Func&lt;TError, UError&gt;)</h4>
@@ -756,7 +778,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_MapReturn__1_System_Func__0___0____0_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.MapReturn%60%601(System.Func%7B%600%2C%60%600%7D%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L321">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L343">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_MapReturn_" data-uid="TrueMyth.Result`2.MapReturn*"></a>
   <h4 id="TrueMyth_Result_2_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Result`2.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, UValue)</h4>
@@ -827,7 +849,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Match__1_System_Func__0___0__System_Func__1___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L371">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L393">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Match_" data-uid="TrueMyth.Result`2.Match*"></a>
   <h4 id="TrueMyth_Result_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="TrueMyth.Result`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">Match&lt;T&gt;(Func&lt;TValue, T&gt;, Func&lt;TError, T&gt;)</h4>
@@ -921,11 +943,11 @@ Console.WriteLine(value); // 84</code></pre>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Ok__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Ok(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L545">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L569">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Ok_" data-uid="TrueMyth.Result`2.Ok*"></a>
   <h4 id="TrueMyth_Result_2_Ok__0_" data-uid="TrueMyth.Result`2.Ok(`0)">Ok(TValue)</h4>
-  <div class="markdown level1 summary"><p>A factory method for creating &quot;Ok&quot; <code>Result</code> instances.</p>
+  <div class="markdown level1 summary"><p>A factory method for creating <strong>Ok</strong> <code>Result</code> instances.</p>
 <div class="NOTE"><h5>note</h5><p><code>null</code> is allowed by the type signature, but it is highly recommended
 to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> rather than a <code>null</code> as a result.
 </p></div>
@@ -973,7 +995,7 @@ to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> rath
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Or__1_TrueMyth_Result__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Or%60%601(TrueMyth.Result%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L381">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L403">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Or_" data-uid="TrueMyth.Result`2.Or*"></a>
   <h4 id="TrueMyth_Result_2_Or__1_TrueMyth_Result__0___0__" data-uid="TrueMyth.Result`2.Or``1(TrueMyth.Result{`0,``0})">Or&lt;UError&gt;(Result&lt;TValue, UError&gt;)</h4>
@@ -1039,7 +1061,7 @@ supplying a default value for the case that you currently have an Err.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_OrElse__1_System_Func_TrueMyth_Result__0___0___.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.OrElse%60%601(System.Func%7BTrueMyth.Result%7B%600%2C%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L393">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L415">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_OrElse_" data-uid="TrueMyth.Result`2.OrElse*"></a>
   <h4 id="TrueMyth_Result_2_OrElse__1_System_Func_TrueMyth_Result__0___0___" data-uid="TrueMyth.Result`2.OrElse``1(System.Func{TrueMyth.Result{`0,``0}})">OrElse&lt;UError&gt;(Func&lt;Result&lt;TValue, UError&gt;&gt;)</h4>
@@ -1107,7 +1129,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Select__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Select%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L398">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L420">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Select_" data-uid="TrueMyth.Result`2.Select*"></a>
   <h4 id="TrueMyth_Result_2_Select__1_System_Func__0___0__" data-uid="TrueMyth.Result`2.Select``1(System.Func{`0,``0})">Select&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
@@ -1170,7 +1192,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_SelectErr__1_System_Func__1___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.SelectErr%60%601(System.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L403">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L425">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_SelectErr_" data-uid="TrueMyth.Result`2.SelectErr*"></a>
   <h4 id="TrueMyth_Result_2_SelectErr__1_System_Func__1___0__" data-uid="TrueMyth.Result`2.SelectErr``1(System.Func{`1,``0})">SelectErr&lt;UError&gt;(Func&lt;TError, UError&gt;)</h4>
@@ -1233,7 +1255,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_SelectMany__1_System_Func__0_TrueMyth_Result___0__1___.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.SelectMany%60%601(System.Func%7B%600%2CTrueMyth.Result%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L408">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L430">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_SelectMany_" data-uid="TrueMyth.Result`2.SelectMany*"></a>
   <h4 id="TrueMyth_Result_2_SelectMany__1_System_Func__0_TrueMyth_Result___0__1___" data-uid="TrueMyth.Result`2.SelectMany``1(System.Func{`0,TrueMyth.Result{``0,`1}})">SelectMany&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt;)</h4>
@@ -1296,7 +1318,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_ToMaybe.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.ToMaybe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L416">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L438">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_ToMaybe_" data-uid="TrueMyth.Result`2.ToMaybe*"></a>
   <h4 id="TrueMyth_Result_2_ToMaybe" data-uid="TrueMyth.Result`2.ToMaybe">ToMaybe()</h4>
@@ -1329,7 +1351,7 @@ wrapped error value will be discarded.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_ToString.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L473">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L497">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_ToString_" data-uid="TrueMyth.Result`2.ToString*"></a>
   <h4 id="TrueMyth_Result_2_ToString" data-uid="TrueMyth.Result`2.ToString">ToString()</h4>
@@ -1362,11 +1384,11 @@ wrapped error value will be discarded.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_UnsafelyUnwrap.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.UnsafelyUnwrap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L422">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L444">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_UnsafelyUnwrap_" data-uid="TrueMyth.Result`2.UnsafelyUnwrap*"></a>
   <h4 id="TrueMyth_Result_2_UnsafelyUnwrap" data-uid="TrueMyth.Result`2.UnsafelyUnwrap">UnsafelyUnwrap()</h4>
-  <div class="markdown level1 summary"><p>Get the value out of the <code>Result</code>. Returns the content of an &quot;Ok&quot; but <em>throws if the result is &quot;Err&quot;</em>.
+  <div class="markdown level1 summary"><p>Get the value out of the <code>Result</code>. Returns the content of an <strong>Ok</strong> but <em>throws if the result is <strong>Err</strong></em>.
 Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap__0_">Unwrap(TValue)</a> or <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap_System_Func__1__0__">Unwrap(Func&lt;TError, TValue&gt;)</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1394,11 +1416,11 @@ Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unw
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_UnsafelyUnwrapErr.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.UnsafelyUnwrapErr%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L428">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L450">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_UnsafelyUnwrapErr_" data-uid="TrueMyth.Result`2.UnsafelyUnwrapErr*"></a>
   <h4 id="TrueMyth_Result_2_UnsafelyUnwrapErr" data-uid="TrueMyth.Result`2.UnsafelyUnwrapErr">UnsafelyUnwrapErr()</h4>
-  <div class="markdown level1 summary"><p>Get the error out of the <code>Result</code>. Returns the content of an &quot;Err&quot;, but <em>throws if the result is &quot;Ok&quot;</em>.
+  <div class="markdown level1 summary"><p>Get the error out of the <code>Result</code>. Returns the content of an <strong>Err</strong>, but <em>throws if the result is <strong>Ok</strong></em>.
 Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap_System_Func__1__0__">Unwrap(Func&lt;TError, TValue&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1426,11 +1448,11 @@ Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unw
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Unwrap__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Unwrap(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L444">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L466">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Unwrap_" data-uid="TrueMyth.Result`2.Unwrap*"></a>
   <h4 id="TrueMyth_Result_2_Unwrap__0_" data-uid="TrueMyth.Result`2.Unwrap(`0)">Unwrap(TValue)</h4>
-  <div class="markdown level1 summary"><p>Safely get the value out of the &quot;Ok&quot; variant of a <code>Result</code>. This is the recommended way to get a value
+  <div class="markdown level1 summary"><p>Safely get the value out of the <strong>Ok</strong> variant of a <code>Result</code>. This is the recommended way to get a value
 out of a <code>Result</code> most of the time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1451,7 +1473,7 @@ out of a <code>Result</code> most of the time.</p>
       <tr>
         <td><span class="xref">TValue</span></td>
         <td><span class="parametername">defaultValue</span></td>
-        <td><p>Fallback value to be returned if <code>this</code> is &quot;Err&quot;.</p>
+        <td><p>Fallback value to be returned if <code>this</code> is <strong>Err</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -1483,12 +1505,12 @@ Console.WriteLine(anErr.Unwrap(0)); // 0</code></pre>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_Unwrap_System_Func__1__0__.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.Unwrap(System.Func%7B%601%2C%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L464">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L488">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Unwrap_" data-uid="TrueMyth.Result`2.Unwrap*"></a>
   <h4 id="TrueMyth_Result_2_Unwrap_System_Func__1__0__" data-uid="TrueMyth.Result`2.Unwrap(System.Func{`1,`0})">Unwrap(Func&lt;TError, TValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Safely get the value out of a <code>Result&lt;TValue,TError&gt;</code> by returning the wrapped value if it is &quot;Ok&quot;
-or by applying <code>elseFn</code> if it is &quot;Err&quot;.</p>
+  <div class="markdown level1 summary"><p>Safely get the value out of a <code>Result&lt;TValue,TError&gt;</code> by returning the wrapped value if it is <strong>Ok</strong>
+or by applying <code>elseFn</code> if it is <strong>Err</strong>.</p>
 <p>This is useful when you need to generate a value (e.g. by using current values in the environment – whether
 preloaded or by local closure) instead of having a single default value available (as in <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap__0_">Unwrap(TValue)</a>).</p>
 </div>
@@ -1531,21 +1553,153 @@ preloaded or by local closure) instead of having a single default value availabl
     </tbody>
   </table>
   <h5 id="TrueMyth_Result_2_Unwrap_System_Func__1__0___examples">Examples</h5>
-  <p>var someOtherValue = 2;
-var handleError = (string err) =&gt; err.Length + someOtherValue;</p>
-<p>var anOk = Result&lt;int,string&gt;.Ok(42);
-Console.WriteLine(anOk.Unwrap(handleError)); // 42</p>
-<p>var anErr = Result&lt;int,string&gt;.Err(&quot;error&quot;);
-Console.WriteLine(anErr.Unwrap(handleError)); // error</p>
+  <pre><code>var someOtherValue = 2;
+var handleError = (string err) => err.Length + someOtherValue;
+
+var anOk = Result&lt;int,string>.Ok(42);
+Console.WriteLine(anOk.Unwrap(handleError)); // 42
+
+var anErr = Result&lt;int,string>.Err(&quot;error&quot;);
+Console.WriteLine(anErr.Unwrap(handleError)); // error</code></pre>
 
   <h3 id="operators">Operators
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.op_Explicit(TrueMyth.Result%7B%600%2C%601%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L607">View Source</a>
+  </span>
+  <a id="TrueMyth_Result_2_op_Explicit_" data-uid="TrueMyth.Result`2.op_Explicit*"></a>
+  <h4 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0" data-uid="TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`0">Explicit(Result&lt;TValue, TError&gt; to TValue)</h4>
+  <div class="markdown level1 summary"><p>Implicit conversion operator from <code>Result&lt;TValue, TError&gt;</code> to <code>TValue</code>. Equivalent to <code>result.UnsafelyUnwrap</code>, but
+is helpful for eliminating unnecessary syntax.</p>
+<div class="NOTE"><h5>note</h5><p>
+This operator will not work if <code>TValue</code> and <code>TError</code> are the same because there will be no
+way for the type inference system in C♯ to resolve them.
+</p></div>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator TValue(Result&lt;TValue, TError&gt; result)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0_examples">Examples</h5>
+  <p>This allows us to simplify code that would otherwise be needlessly verbose. For example, without this operator we might write the following:</p>
+<pre><code>int SomeOperation()
+{
+    var resultOfOtherOperation = SomeOtherOperation();
+
+    if (resultOfOtherOperation.IsOk)
+    {
+        return resultOfOtherOperation.UnsafelyUnwrap();
+    }
+    else
+    {
+        throw new Exception(&quot;oops! SomeOtherOperation failed!&quot;);    
+    }
+}</code></pre>
+<p>Using this implicit conversion, this could be simplified:</p>
+<pre><code>int SomeOperation() => return SomeOtherOperation();</code></pre>
+<div class="NOTE"><h5>note</h5><p>
+There are actually safer <em>and</em> more semantic methods for handling results than this, and we recommend the use 
+of <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap__0_">Unwrap(TValue)</a> or any of the several methods provided for such use; however, we recognize that in 
+spite of our desire to avoid exceptions and <code>null</code>, reality insists that sometimes we have to use them, particularly
+when making changes to incumbent software.
+</p></div>
+
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____1.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.op_Explicit(TrueMyth.Result%7B%600%2C%601%7D)~%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L619">View Source</a>
+  </span>
+  <a id="TrueMyth_Result_2_op_Explicit_" data-uid="TrueMyth.Result`2.op_Explicit*"></a>
+  <h4 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____1" data-uid="TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`1">Explicit(Result&lt;TValue, TError&gt; to TError)</h4>
+  <div class="markdown level1 summary"><p>This works similarly to <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0">Explicit(Result&lt;TValue, TError&gt; to TValue)</a>, but instead of conversion to a <code>TValue</code>,
+the implicit conversion is to a <code>TError</code>.</p>
+<div class="NOTE"><h5>note</h5><p>
+This operator will not work if <code>TValue</code> and <code>TError</code> are the same because there will be no
+way for the type inference system in C♯ to resolve them.
+</p></div>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static explicit operator TError(Result&lt;TValue, TError&gt; result)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TError</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.op_Implicit(%600)~TrueMyth.Result%7B%600%2C%601%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L644">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L667">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_op_Implicit_" data-uid="TrueMyth.Result`2.op_Implicit*"></a>
   <h4 id="TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_" data-uid="TrueMyth.Result`2.op_Implicit(`0)~TrueMyth.Result{`0,`1}">Implicit(TValue to Result&lt;TValue, TError&gt;)</h4>
@@ -1629,7 +1783,7 @@ have a return type like <code>Result&lt;Maybe&lt;TValue&gt;,TError&gt;</code>.</
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_op_Implicit__1__TrueMyth_Result__0__1_.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.op_Implicit(%601)~TrueMyth.Result%7B%600%2C%601%7D%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L658">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L681">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_op_Implicit_" data-uid="TrueMyth.Result`2.op_Implicit*"></a>
   <h4 id="TrueMyth_Result_2_op_Implicit__1__TrueMyth_Result__0__1_" data-uid="TrueMyth.Result`2.op_Implicit(`1)~TrueMyth.Result{`0,`1}">Implicit(TError to Result&lt;TValue, TError&gt;)</h4>
@@ -1679,136 +1833,6 @@ way for the type inference system in C♯ to resolve them.
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____0.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.op_Implicit(TrueMyth.Result%7B%600%2C%601%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L583">View Source</a>
-  </span>
-  <a id="TrueMyth_Result_2_op_Implicit_" data-uid="TrueMyth.Result`2.op_Implicit*"></a>
-  <h4 id="TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____0" data-uid="TrueMyth.Result`2.op_Implicit(TrueMyth.Result{`0,`1})~`0">Implicit(Result&lt;TValue, TError&gt; to TValue)</h4>
-  <div class="markdown level1 summary"><p>Implicit conversion operator from <code>Result&lt;TValue, TError&gt;</code> to <code>TValue</code>. Equivalent to <code>result.UnsafelyUnwrap</code>, but
-is helpful for eliminating unnecessary syntax.</p>
-<div class="NOTE"><h5>note</h5><p>
-This operator will not work if <code>TValue</code> and <code>TError</code> are the same because there will be no
-way for the type inference system in C♯ to resolve them.
-</p></div>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static implicit operator TValue(Result&lt;TValue, TError&gt; result)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
-        <td><span class="parametername">result</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TValue</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____0_examples">Examples</h5>
-  <p>This allows us to simplify code that would otherwise be needlessly verbose. For example, without this operator we might write the following:</p>
-<pre><code>int SomeOperation()
-{
-    var resultOfOtherOperation = SomeOtherOperation();
-
-    if (resultOfOtherOperation.IsOk)
-    {
-        return resultOfOtherOperation.UnsafelyUnwrap();
-    }
-    else
-    {
-        throw new Exception(&quot;oops! SomeOtherOperation failed!&quot;);    
-    }
-}</code></pre>
-<p>Using this implicit conversion, this could be simplified:</p>
-<pre><code>int SomeOperation() => return SomeOtherOperation();</code></pre>
-<div class="NOTE"><h5>note</h5><p>
-There are actually safer <em>and</em> more semantic methods for handling results than this, and we recommend the use 
-of <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap__0_">Unwrap(TValue)</a> or any of the several methods provided for such use; however, we recognize that in 
-spite of our desire to avoid exceptions and <code>null</code>, reality insists that sometimes we have to use them, particularly
-when making changes to incumbent software.
-</p></div>
-
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____1.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602.op_Implicit(TrueMyth.Result%7B%600%2C%601%7D)~%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L596">View Source</a>
-  </span>
-  <a id="TrueMyth_Result_2_op_Implicit_" data-uid="TrueMyth.Result`2.op_Implicit*"></a>
-  <h4 id="TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____1" data-uid="TrueMyth.Result`2.op_Implicit(TrueMyth.Result{`0,`1})~`1">Implicit(Result&lt;TValue, TError&gt; to TError)</h4>
-  <div class="markdown level1 summary"><p>This works similarly to <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit_TrueMyth_Result__0__1____0">Implicit(Result&lt;TValue, TError&gt; to TValue)</a>, but instead of conversion to a <code>TValue</code>,
-the implicit conversion is to a <code>TError</code>.</p>
-<div class="NOTE"><h5>note</h5><p>
-This operator will not work if <code>TValue</code> and <code>TError</code> are the same because there will be no
-way for the type inference system in C♯ to resolve them.
-</p></div>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static implicit operator TError(Result&lt;TValue, TError&gt; result)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
-        <td><span class="parametername">result</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">TError</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           
@@ -1820,7 +1844,7 @@ way for the type inference system in C♯ to resolve them.
                     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Result_2.md&amp;value=---%0Auid%3A%20TrueMyth.Result%602%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L193" class="contribution-link">View Source</a>
+                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L213" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
