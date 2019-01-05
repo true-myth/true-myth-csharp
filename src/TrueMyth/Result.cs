@@ -210,7 +210,7 @@ namespace TrueMyth
     /// <typeparam name="TValue">The value type for **Ok** values.</typeparam>
     /// <typeparam name="TError">The value type for **Err** values.</typeparam>
     
-    public sealed class Result<TValue, TError>
+    public sealed class Result<TValue, TError> : IComparable, IComparable<Result<TValue,TError>>
     {
         #region Private Fields
 
@@ -537,6 +537,70 @@ namespace TrueMyth
                 }
                 return hash;
             }
+        }
+
+        #endregion
+
+        #region IComparable Implementation
+        
+        /// <exclude/>
+        public int CompareTo(Result<TValue,TError> otherResult)
+        {
+            if (otherResult == null)
+            {
+                return 1;
+            }
+
+            if (object.ReferenceEquals(this, otherResult))
+            {
+                return 0;
+            }
+
+            if (this.IsErr)
+            {
+                if (otherResult.IsOk)
+                {
+                    return -1;
+                }
+                else if(typeof(IComparable).IsAssignableFrom(typeof(TError)))
+                {
+                    var thisErr = UnsafelyUnwrapErr() as IComparable;
+                    var thatErr = otherResult.UnsafelyUnwrapErr();
+                    return thisErr.CompareTo(thatErr);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                if (otherResult.IsErr)
+                {
+                    return 1;
+                }
+                else if (typeof(IComparable).IsAssignableFrom(typeof(TValue)))
+                {
+                    var thisValue = UnsafelyUnwrap() as IComparable;
+                    var thatValue = otherResult.UnsafelyUnwrap();
+                    return thisValue.CompareTo(thatValue);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        /// <exclude/>
+        public int CompareTo(object obj)
+        {
+            if (GetType() != obj.GetType())
+            {
+                throw new ArgumentException($"Parameter of different type: {obj.GetType()}", nameof(obj));
+            }
+
+            return CompareTo((Result<TValue,TError>)obj);
         }
 
         #endregion

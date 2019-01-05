@@ -362,5 +362,131 @@ namespace TrueMyth.Test
             Assert.True(maybeList.IsNothing);
             Assert.False(maybeList.IsJust);
         }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_AtoA_Zero(bool useGenerics)
+        {
+            // arrange
+            var a = Maybe<int>.Of(0);
+            var a_obj = (object)a;
+            
+            // act
+            var result = useGenerics
+                ? a.CompareTo(a)
+                : a.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(0, result);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Symmetry_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = Maybe<int>.Of(0);
+            var a_obj = (object)a;
+            var b = Maybe<int>.Of(0);
+            var b_obj = (object)b;
+            
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(0, abResult);
+            Assert.Equal(0, baResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Transitive_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = Maybe<int>.Of(0);
+            var a_obj = (object)a;
+            var b = Maybe<int>.Of(0);
+            var b_obj = (object)b;
+            var c = Maybe<int>.Of(0);
+            var c_obj = (object)c;
+            
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+            var acResult = useGenerics
+                ? a.CompareTo(c)
+                : a.CompareTo(c_obj);
+
+            // assert
+            Assert.Equal(0, abResult);
+            Assert.Equal(0, baResult);
+            Assert.Equal(0, acResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Inverse_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = Maybe<int>.Of(0);
+            var a_obj = (object)a;
+            var b = Maybe<int>.Of(1);
+            var b_obj = (object)b;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(-1, abResult);
+            Assert.Equal(1, baResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Inductive_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = Maybe<int>.Of(0);
+            var a_obj = (object)a;
+            var b = Maybe<int>.Of(1);
+            var b_obj = (object)b;
+            var c = Maybe<int>.Of(2);
+            var c_obj = (object)c;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var bcResult = useGenerics
+                ? b.CompareTo(c)
+                : b.CompareTo(c_obj);
+            var acResult = useGenerics
+                ? a.CompareTo(c)
+                : a.CompareTo(c_obj);
+
+            // assert
+            Assert.Equal(-1, abResult);
+            Assert.Equal(-1, bcResult);
+            Assert.Equal(-1, acResult);
+        }
     }
 }

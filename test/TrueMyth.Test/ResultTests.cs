@@ -443,5 +443,252 @@ namespace TrueMyth.Test
             // assert
             Assert.NotEqual(hc1, hc2);
         }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Ok_AtoA_Zero(bool useGenerics)
+        {
+            // arrange
+            var a = SimpleResult.Ok(0);
+            var a_obj = (object)a;
+
+            // act
+            var result = useGenerics
+                ? a.CompareTo(a)
+                : a.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(0, result);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Err_AtoA_Zero(bool useGenerics)
+        {
+            // arrange
+            var a = SimpleResult.Err("test");
+            var a_obj = (object)a;
+
+            // act
+            var result = useGenerics
+                ? a.CompareTo(a)
+                : a.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(0, result);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Ok_Symmetry_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = SimpleResult.Ok(0);
+            var a_obj = (object)a;
+            var b = SimpleResult.Ok(0);
+            var b_obj = (object)b;
+
+            // act
+            var abResult = useGenerics 
+                ? a.CompareTo(b) 
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics 
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(0, abResult);
+            Assert.Equal(0, baResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Err_Symmetry_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = SimpleResult.Err("test");
+            var a_obj = (object)a;
+            var b = SimpleResult.Err("test");
+            var b_obj = (object)b;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(0, abResult);
+            Assert.Equal(0, baResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Ok_Transitive_Ok(bool useGenerics)
+        {
+            // arrange
+            var a = SimpleResult.Ok(0);
+            var a_obj = (object)a;
+            var b = SimpleResult.Ok(0);
+            var b_obj = (object)b;
+            var c = SimpleResult.Ok(0);
+            var c_obj = (object)c;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+            var acResult = useGenerics
+                ? a.CompareTo(c)
+                : a.CompareTo(c_obj);
+
+            // assert
+            Assert.Equal(0, abResult);
+            Assert.Equal(0, baResult);
+            Assert.Equal(0, acResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Err_Transitive_Ok(bool useGenerics)
+        {
+            var a = SimpleResult.Err("test");
+            var b = SimpleResult.Err("test");
+            var c = SimpleResult.Err("test");
+            var a_obj = (object)a;
+            var b_obj = (object)b;
+            var c_obj = (object)c;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+            var acResult = useGenerics
+                ? a.CompareTo(c)
+                : a.CompareTo(c_obj);
+
+            // assert
+            Assert.Equal(0, abResult);
+            Assert.Equal(0, baResult);
+            Assert.Equal(0, acResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Ok_Inverse_Ok(bool useGenerics)
+        {
+            var a = SimpleResult.Ok(0);
+            var b = SimpleResult.Ok(1);
+            var a_obj = (object)a;
+            var b_obj = (object)b;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(-1, abResult);
+            Assert.Equal(1, baResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Err_Inverse_Ok(bool useGenerics)
+        {
+            var a = SimpleResult.Err("test");
+            var b = SimpleResult.Err("xyz");
+            var a_obj = (object)a;
+            var b_obj = (object)b;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var baResult = useGenerics
+                ? b.CompareTo(a)
+                : b.CompareTo(a_obj);
+
+            // assert
+            Assert.Equal(-1, abResult);
+            Assert.Equal(1, baResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Ok_Inductive_Ok(bool useGenerics)
+        {
+            var a = SimpleResult.Ok(0);
+            var b = SimpleResult.Ok(1);
+            var c = SimpleResult.Ok(2);
+            var a_obj = (object)a;
+            var b_obj = (object)b;
+            var c_obj = (object)c;
+
+            // act
+            var abResult = useGenerics
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var bcResult = useGenerics
+                ? b.CompareTo(c)
+                : b.CompareTo(c_obj);
+            var acResult = useGenerics
+                ? a.CompareTo(c)
+                : a.CompareTo(c_obj);
+
+            // assert
+            Assert.Equal(-1, abResult);
+            Assert.Equal(-1, bcResult);
+            Assert.Equal(-1, acResult);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IComparable_Err_Inductive_Ok(bool useGenerics)
+        {
+            var a = SimpleResult.Ok(0);
+            var b = SimpleResult.Ok(1);
+            var c = SimpleResult.Ok(2);
+            var a_obj = (object)a;
+            var b_obj = (object)b;
+            var c_obj = (object)c;
+
+            // act
+            var abResult = useGenerics 
+                ? a.CompareTo(b)
+                : a.CompareTo(b_obj);
+            var bcResult = useGenerics
+                ? b.CompareTo(c)
+                : b.CompareTo(c_obj);
+            var acResult = useGenerics
+                ? a.CompareTo(c)
+                : a.CompareTo(c_obj);
+
+            // assert
+            Assert.Equal(-1, abResult);
+            Assert.Equal(-1, bcResult);
+            Assert.Equal(-1, acResult);
+        }
     }
 }
