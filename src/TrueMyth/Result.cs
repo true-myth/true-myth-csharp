@@ -210,7 +210,7 @@ namespace TrueMyth
     /// <typeparam name="TValue">The value type for **Ok** values.</typeparam>
     /// <typeparam name="TError">The value type for **Err** values.</typeparam>
     
-    public sealed class Result<TValue, TError> : IComparable
+    public sealed class Result<TValue, TError> : IComparable, IComparable<Result<TValue,TError>>
     {
         #region Private Fields
 
@@ -544,19 +544,12 @@ namespace TrueMyth
         #region IComparable Implementation
         
         /// <exclude/>
-        public int CompareTo(object obj)
+        public int CompareTo(Result<TValue,TError> otherResult)
         {
-            if (obj == null)
+            if (otherResult == null)
             {
                 return 1;
             }
-
-            if (GetType() != obj.GetType())
-            {
-                throw new ArgumentException($"Parameter of different type: {obj.GetType()}", nameof(obj));
-            }
-
-            var otherResult = obj as Result<TValue, TError>;
 
             if (object.ReferenceEquals(this, otherResult))
             {
@@ -580,6 +573,34 @@ namespace TrueMyth
                     return 0;
                 }
             }
+            else
+            {
+                if (otherResult.IsErr)
+                {
+                    return 1;
+                }
+                else if (typeof(IComparable).IsAssignableFrom(typeof(TValue)))
+                {
+                    var thisValue = UnsafelyUnwrap() as IComparable;
+                    var thatValue = otherResult.UnsafelyUnwrap();
+                    return thisValue.CompareTo(thatValue);
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
+        /// <exclude/>
+        public int CompareTo(object obj)
+        {
+            if (GetType() != obj.GetType())
+            {
+                throw new ArgumentException($"Parameter of different type: {obj.GetType()}", nameof(obj));
+            }
+
+            return CompareTo((Result<TValue,TError>)obj);
         }
 
         #endregion
