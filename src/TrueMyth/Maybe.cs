@@ -171,7 +171,7 @@ namespace TrueMyth
     ///   </code>
     /// </example>
     /// <typeparam name="TValue">Any type supported by the .NET type system.</typeparam>
-    public sealed class Maybe<TValue>
+    public sealed class Maybe<TValue> : IComparable, IComparable<Maybe<TValue>>
     {
         #region Private Fields
 
@@ -395,6 +395,60 @@ namespace TrueMyth
                 }
                 return hash;
             }
+        }
+
+        #endregion
+
+        #region IComparable implementation
+
+        /// <exclude/>
+        public int CompareTo(Maybe<TValue> otherMaybe)
+        {
+            if (otherMaybe == null) 
+            {
+                return 1;
+            }
+
+            if (object.ReferenceEquals(this, otherMaybe))
+            {
+                return 0;
+            }
+
+            if (this.IsNothing)
+            {
+                return otherMaybe.IsJust ? -1 : 0;
+            } 
+            else
+            {
+                if (otherMaybe.IsNothing)
+                {
+                    return 1;
+                }
+                else
+                {
+                    if (typeof(IComparable).IsAssignableFrom(typeof(TValue)))
+                    {
+                        var justThis = UnsafelyUnwrap() as IComparable;
+                        var justThat = otherMaybe.UnsafelyUnwrap();
+                        return justThis.CompareTo(justThat);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            }
+        }
+
+        /// <exclude/>
+        public int CompareTo(object obj)
+        {
+            if (GetType() != obj.GetType())
+            {
+                throw new ArgumentException($"Parameter of different type: {obj.GetType()}", nameof(obj));
+            }
+
+            return CompareTo((Maybe<TValue>)obj);
         }
 
         #endregion
