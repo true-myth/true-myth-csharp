@@ -48,6 +48,14 @@ namespace TrueMyth
             ? Maybe<(T,U,V,W)>.Of(((T)tuple.Item1, (U)tuple.Item2, (V)tuple.Item3, (W)tuple.Item4))
             : Maybe<(T,U,V,W)>.Nothing;
 
+
+        /// <summary>
+        /// Converts a <c>Maybe&lt;T&gt;</c> to a <see cref="Nullable{T}"/>.  If <c>this</c> is a **Just**, then the result will be a <c>Nullable&lt;T&gt;</c>
+        /// where <c>HasValue</c> is <c>true</c> and whose value is the value of the maybe.  If <c>this</c> is a **Nothing**, then the result will be a <c>Nullable&lt;T&gt;</c> where <c>HasValue</c> is
+        /// <c>false</c> and whose value is <c>null</c>.
+        /// </summary>
+        public static T? AsNullable<T>(this Maybe<T> maybe) where T : struct => maybe.MapReturn(t => new Nullable<T>(t), (T?)null);
+
         /// <summary>
         /// This method facilitates converting from a <see cref="Result{T,TError}"/> to a <see cref="Maybe{T}"/>.  The difference between this
         /// and <see cref="Maybe.Of{T}(T)"/> is that the resulting <c>Mabye</c> is a <c>Maybe&lt;T&gt;</c> rather than a <c>Maybe&lt;Result&lt;T,TError&gt;&gt;</c>.
@@ -59,6 +67,12 @@ namespace TrueMyth
         /// <typeparam name="TError">The error type of <paramref name="result"/>.</typeparam>
         /// <returns>A <c>Maybe&lt;T&gt;</c> representing either a <b>Just</b> <c>T</c> or <b>Nothing</b>, depending on the provided <paramref name="result"/>.</returns>
         public static Maybe<T> From<T,TError>(Result<T, TError> result) => result.ToMaybe();
+
+        /// <summary>
+        /// Creates a new <c>Maybe&lt;T&gt;</c> from a <see cref="Nullable{T}"/>. If the <c>Nullable&lt;T&gt;</c> is <c>null</c>, then the resulting
+        /// maybe will be a **Nothing**; otherwise, the resulting maybe will be a **Just** and its value will be the value of the <c>Nullable&lt;T&gt;</c>.
+        /// </summary>
+        public static Maybe<T> From<T>(T? nullable) where T : struct => nullable.HasValue ? Maybe.Of(nullable.Value) : Maybe<T>.Nothing;
 
         /// <summary>
         /// A safe method for finding elements of a list for which the <c>predicate</c> returns <c>true</c>. This method guarantees a valid <c>Maybe&lt;T&gt;</c> result;
