@@ -488,5 +488,32 @@ namespace TrueMyth.Test
             Assert.Equal(-1, bcResult);
             Assert.Equal(-1, acResult);
         }
+
+        [Fact]
+        public void Maybe_ToNullable_Ok()
+        {
+            // arrange
+            int? a = 0;
+
+            // act
+            var maybe = Maybe.From(a);
+
+            // assert
+            Assert.True(maybe.IsJust);
+            Assert.Equal(a.Value, (int)maybe);
+        }
+
+        [Fact]
+        public void Maybe_FromNullable_Ok()
+        {
+            // arrange
+            int? a = null;
+
+            // act
+            var maybe = Maybe.From(a);
+
+            // assert
+            Assert.True(maybe.IsNothing);
+        }
     }
 }
