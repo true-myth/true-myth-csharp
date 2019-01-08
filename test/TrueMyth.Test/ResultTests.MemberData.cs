@@ -28,5 +28,11 @@ namespace TrueMyth.Test
             yield return new object[] { SimpleResult.Ok(7), $"Ok<{7.GetType().Name}>[7]"};
             yield return new object[] { SimpleResult.Err("error"), $"Err<{"error".GetType().Name}>[error]"};
         }
+
+        public static IEnumerable<object[]> GetResultTheoryData1()
+        {
+            yield return new object[] { SimpleResult.Ok(7) };
+            yield return new object[] { SimpleResult.Err("test") };
+        }
     }
 }

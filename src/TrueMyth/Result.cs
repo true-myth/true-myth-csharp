@@ -393,6 +393,21 @@ namespace TrueMyth
         public T Match<T>(Func<TValue,T> ok, Func<TError,T> err) => this._isOk ? ok(this._value) : err(this._error);
 
         /// <summary>
+        /// Provides similar functionality as <see cref="Match{T}(Func{TValue,T}, Func{TError,T})"/>, but with no return type.
+        /// </summary>
+        public void Match(Action<TValue> ok, Action<TError> err) 
+        {
+            if (this.IsOk)
+            {
+                ok(this._value);
+            }
+            else
+            {
+                err(this._error);
+            }
+        }
+
+        /// <summary>
         /// Provide a fallback for a given <c>Result</c>. Behaves like a logical or: if the result value is an Ok, returns that result; otherwise, 
         /// returns the <c>defaultResult</c> value.
         /// 

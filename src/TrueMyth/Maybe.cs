@@ -303,6 +303,21 @@ namespace TrueMyth
         public UValue Match<UValue>(Func<TValue,UValue> just, Func<UValue> nothing) => this._isJust ? just(this._value) : nothing();
 
         /// <summary>
+        /// Provides a similar functionality as <see cref="Match{UValue}(Func{TValue,UValue}, Func{UValue})"/>, but without return types.
+        /// </summary>
+        public void Match(Action<TValue> just, Action nothing) 
+        {
+            if (this._isJust)
+            {
+                just(this._value);
+            }
+            else
+            {
+                nothing();
+            }
+        }
+
+        /// <summary>
         /// Static factory method for creation of new <b>Just</b> <c>Maybe&lt;TValue&gt;</c>s.  If <c>value</c> is a 
         /// reference type and is <c>null</c>, this returns a <b>Nothing</b>.
         /// </summary>
