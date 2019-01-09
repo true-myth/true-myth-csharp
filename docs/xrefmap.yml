@@ -72,6 +72,22 @@ references:
   fullName.vb: TrueMyth.Maybe.AsMaybe(Of T, U, V, W)(System.Tuple(Of TrueMyth.Maybe(Of T), TrueMyth.Maybe(Of U), TrueMyth.Maybe(Of V), TrueMyth.Maybe(Of W)))
   nameWithType: Maybe.AsMaybe<T, U, V, W>(Tuple<Maybe<T>, Maybe<U>, Maybe<V>, Maybe<W>>)
   nameWithType.vb: Maybe.AsMaybe(Of T, U, V, W)(Tuple(Of Maybe(Of T), Maybe(Of U), Maybe(Of V), Maybe(Of W)))
+- uid: TrueMyth.Maybe.AsNullable*
+  name: AsNullable
+  href: api/TrueMyth.Maybe.html#TrueMyth_Maybe_AsNullable_
+  commentId: Overload:TrueMyth.Maybe.AsNullable
+  isSpec: "True"
+  fullName: TrueMyth.Maybe.AsNullable
+  nameWithType: Maybe.AsNullable
+- uid: TrueMyth.Maybe.AsNullable``1(TrueMyth.Maybe{``0})
+  name: AsNullable<T>(Maybe<T>)
+  href: api/TrueMyth.Maybe.html#TrueMyth_Maybe_AsNullable__1_TrueMyth_Maybe___0__
+  commentId: M:TrueMyth.Maybe.AsNullable``1(TrueMyth.Maybe{``0})
+  name.vb: AsNullable(Of T)(Maybe(Of T))
+  fullName: TrueMyth.Maybe.AsNullable<T>(TrueMyth.Maybe<T>)
+  fullName.vb: TrueMyth.Maybe.AsNullable(Of T)(TrueMyth.Maybe(Of T))
+  nameWithType: Maybe.AsNullable<T>(Maybe<T>)
+  nameWithType.vb: Maybe.AsNullable(Of T)(Maybe(Of T))
 - uid: TrueMyth.Maybe.From*
   name: From
   href: api/TrueMyth.Maybe.html#TrueMyth_Maybe_From_
@@ -79,6 +95,15 @@ references:
   isSpec: "True"
   fullName: TrueMyth.Maybe.From
   nameWithType: Maybe.From
+- uid: TrueMyth.Maybe.From``1(System.Nullable{``0})
+  name: From<T>(Nullable<T>)
+  href: api/TrueMyth.Maybe.html#TrueMyth_Maybe_From__1_System_Nullable___0__
+  commentId: M:TrueMyth.Maybe.From``1(System.Nullable{``0})
+  name.vb: From(Of T)(Nullable(Of T))
+  fullName: TrueMyth.Maybe.From<T>(System.Nullable<T>)
+  fullName.vb: TrueMyth.Maybe.From(Of T)(System.Nullable(Of T))
+  nameWithType: Maybe.From<T>(Nullable<T>)
+  nameWithType.vb: Maybe.From(Of T)(Nullable(Of T))
 - uid: TrueMyth.Maybe.From``2(TrueMyth.Result{``0,``1})
   name: From<T, TError>(Result<T, TError>)
   href: api/TrueMyth.Maybe.html#TrueMyth_Maybe_From__2_TrueMyth_Result___0___1__
@@ -222,6 +247,32 @@ references:
   fullName.vb: TrueMyth.Maybe(Of TValue).AndThen(Of UValue)(System.Func(Of TValue, TrueMyth.Maybe(Of UValue)))
   nameWithType: Maybe<TValue>.AndThen<UValue>(Func<TValue, Maybe<UValue>>)
   nameWithType.vb: Maybe(Of TValue).AndThen(Of UValue)(Func(Of TValue, Maybe(Of UValue)))
+- uid: TrueMyth.Maybe`1.CompareTo(System.Object)
+  name: CompareTo(Object)
+  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_CompareTo_System_Object_
+  commentId: M:TrueMyth.Maybe`1.CompareTo(System.Object)
+  fullName: TrueMyth.Maybe<TValue>.CompareTo(System.Object)
+  fullName.vb: TrueMyth.Maybe(Of TValue).CompareTo(System.Object)
+  nameWithType: Maybe<TValue>.CompareTo(Object)
+  nameWithType.vb: Maybe(Of TValue).CompareTo(Object)
+- uid: TrueMyth.Maybe`1.CompareTo(TrueMyth.Maybe{`0})
+  name: CompareTo(Maybe<TValue>)
+  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_CompareTo_TrueMyth_Maybe__0__
+  commentId: M:TrueMyth.Maybe`1.CompareTo(TrueMyth.Maybe{`0})
+  name.vb: CompareTo(Maybe(Of TValue))
+  fullName: TrueMyth.Maybe<TValue>.CompareTo(TrueMyth.Maybe<TValue>)
+  fullName.vb: TrueMyth.Maybe(Of TValue).CompareTo(TrueMyth.Maybe(Of TValue))
+  nameWithType: Maybe<TValue>.CompareTo(Maybe<TValue>)
+  nameWithType.vb: Maybe(Of TValue).CompareTo(Maybe(Of TValue))
+- uid: TrueMyth.Maybe`1.CompareTo*
+  name: CompareTo
+  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_CompareTo_
+  commentId: Overload:TrueMyth.Maybe`1.CompareTo
+  isSpec: "True"
+  fullName: TrueMyth.Maybe<TValue>.CompareTo
+  fullName.vb: TrueMyth.Maybe(Of TValue).CompareTo
+  nameWithType: Maybe<TValue>.CompareTo
+  nameWithType.vb: Maybe(Of TValue).CompareTo
 - uid: TrueMyth.Maybe`1.Equals(System.Object)
   name: Equals(Object)
   href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Equals_System_Object_
@@ -326,6 +377,15 @@ references:
   fullName.vb: TrueMyth.Maybe(Of TValue).MapReturn(Of UValue)(System.Func(Of TValue, UValue), UValue)
   nameWithType: Maybe<TValue>.MapReturn<UValue>(Func<TValue, UValue>, UValue)
   nameWithType.vb: Maybe(Of TValue).MapReturn(Of UValue)(Func(Of TValue, UValue), UValue)
+- uid: TrueMyth.Maybe`1.Match(System.Action{`0},System.Action)
+  name: Match(Action<TValue>, Action)
+  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Match_System_Action__0__System_Action_
+  commentId: M:TrueMyth.Maybe`1.Match(System.Action{`0},System.Action)
+  name.vb: Match(Action(Of TValue), Action)
+  fullName: TrueMyth.Maybe<TValue>.Match(System.Action<TValue>, System.Action)
+  fullName.vb: TrueMyth.Maybe(Of TValue).Match(System.Action(Of TValue), System.Action)
+  nameWithType: Maybe<TValue>.Match(Action<TValue>, Action)
+  nameWithType.vb: Maybe(Of TValue).Match(Action(Of TValue), Action)
 - uid: TrueMyth.Maybe`1.Match*
   name: Match
   href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Match_
@@ -514,23 +574,6 @@ references:
   fullName.vb: TrueMyth.Maybe(Of TValue).ToString
   nameWithType: Maybe<TValue>.ToString
   nameWithType.vb: Maybe(Of TValue).ToString
-- uid: TrueMyth.Maybe`1.UnsafelyUnwrap
-  name: UnsafelyUnwrap()
-  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnsafelyUnwrap
-  commentId: M:TrueMyth.Maybe`1.UnsafelyUnwrap
-  fullName: TrueMyth.Maybe<TValue>.UnsafelyUnwrap()
-  fullName.vb: TrueMyth.Maybe(Of TValue).UnsafelyUnwrap()
-  nameWithType: Maybe<TValue>.UnsafelyUnwrap()
-  nameWithType.vb: Maybe(Of TValue).UnsafelyUnwrap()
-- uid: TrueMyth.Maybe`1.UnsafelyUnwrap*
-  name: UnsafelyUnwrap
-  href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnsafelyUnwrap_
-  commentId: Overload:TrueMyth.Maybe`1.UnsafelyUnwrap
-  isSpec: "True"
-  fullName: TrueMyth.Maybe<TValue>.UnsafelyUnwrap
-  fullName.vb: TrueMyth.Maybe(Of TValue).UnsafelyUnwrap
-  nameWithType: Maybe<TValue>.UnsafelyUnwrap
-  nameWithType.vb: Maybe(Of TValue).UnsafelyUnwrap
 - uid: TrueMyth.Maybe`1.UnwrapOr(`0)
   name: UnwrapOr(TValue)
   href: api/TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_
@@ -658,6 +701,32 @@ references:
   fullName.vb: TrueMyth.Result(Of TValue, TError).AndThen(Of UValue)(System.Func(Of TValue, TrueMyth.Result(Of UValue, TError)))
   nameWithType: Result<TValue, TError>.AndThen<UValue>(Func<TValue, Result<UValue, TError>>)
   nameWithType.vb: Result(Of TValue, TError).AndThen(Of UValue)(Func(Of TValue, Result(Of UValue, TError)))
+- uid: TrueMyth.Result`2.CompareTo(System.Object)
+  name: CompareTo(Object)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_CompareTo_System_Object_
+  commentId: M:TrueMyth.Result`2.CompareTo(System.Object)
+  fullName: TrueMyth.Result<TValue, TError>.CompareTo(System.Object)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).CompareTo(System.Object)
+  nameWithType: Result<TValue, TError>.CompareTo(Object)
+  nameWithType.vb: Result(Of TValue, TError).CompareTo(Object)
+- uid: TrueMyth.Result`2.CompareTo(TrueMyth.Result{`0,`1})
+  name: CompareTo(Result<TValue, TError>)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_CompareTo_TrueMyth_Result__0__1__
+  commentId: M:TrueMyth.Result`2.CompareTo(TrueMyth.Result{`0,`1})
+  name.vb: CompareTo(Result(Of TValue, TError))
+  fullName: TrueMyth.Result<TValue, TError>.CompareTo(TrueMyth.Result<TValue, TError>)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).CompareTo(TrueMyth.Result(Of TValue, TError))
+  nameWithType: Result<TValue, TError>.CompareTo(Result<TValue, TError>)
+  nameWithType.vb: Result(Of TValue, TError).CompareTo(Result(Of TValue, TError))
+- uid: TrueMyth.Result`2.CompareTo*
+  name: CompareTo
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_CompareTo_
+  commentId: Overload:TrueMyth.Result`2.CompareTo
+  isSpec: "True"
+  fullName: TrueMyth.Result<TValue, TError>.CompareTo
+  fullName.vb: TrueMyth.Result(Of TValue, TError).CompareTo
+  nameWithType: Result<TValue, TError>.CompareTo
+  nameWithType.vb: Result(Of TValue, TError).CompareTo
 - uid: TrueMyth.Result`2.Equals(System.Object)
   name: Equals(Object)
   href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_Equals_System_Object_
@@ -815,6 +884,15 @@ references:
   fullName.vb: TrueMyth.Result(Of TValue, TError).MapReturn(Of UValue)(System.Func(Of TValue, UValue), UValue)
   nameWithType: Result<TValue, TError>.MapReturn<UValue>(Func<TValue, UValue>, UValue)
   nameWithType.vb: Result(Of TValue, TError).MapReturn(Of UValue)(Func(Of TValue, UValue), UValue)
+- uid: TrueMyth.Result`2.Match(System.Action{`0},System.Action{`1})
+  name: Match(Action<TValue>, Action<TError>)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_Match_System_Action__0__System_Action__1__
+  commentId: M:TrueMyth.Result`2.Match(System.Action{`0},System.Action{`1})
+  name.vb: Match(Action(Of TValue), Action(Of TError))
+  fullName: TrueMyth.Result<TValue, TError>.Match(System.Action<TValue>, System.Action<TError>)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).Match(System.Action(Of TValue), System.Action(Of TError))
+  nameWithType: Result<TValue, TError>.Match(Action<TValue>, Action<TError>)
+  nameWithType.vb: Result(Of TValue, TError).Match(Action(Of TValue), Action(Of TError))
 - uid: TrueMyth.Result`2.Match*
   name: Match
   href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_Match_
@@ -1030,63 +1108,91 @@ references:
   fullName.vb: TrueMyth.Result(Of TValue, TError).ToString
   nameWithType: Result<TValue, TError>.ToString
   nameWithType.vb: Result(Of TValue, TError).ToString
-- uid: TrueMyth.Result`2.UnsafelyUnwrap
-  name: UnsafelyUnwrap()
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnsafelyUnwrap
-  commentId: M:TrueMyth.Result`2.UnsafelyUnwrap
-  fullName: TrueMyth.Result<TValue, TError>.UnsafelyUnwrap()
-  fullName.vb: TrueMyth.Result(Of TValue, TError).UnsafelyUnwrap()
-  nameWithType: Result<TValue, TError>.UnsafelyUnwrap()
-  nameWithType.vb: Result(Of TValue, TError).UnsafelyUnwrap()
-- uid: TrueMyth.Result`2.UnsafelyUnwrap*
+- uid: TrueMyth.Result`2.UnwrapOr(`0)
+  name: UnwrapOr(TValue)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_
+  commentId: M:TrueMyth.Result`2.UnwrapOr(`0)
+  fullName: TrueMyth.Result<TValue, TError>.UnwrapOr(TValue)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).UnwrapOr(TValue)
+  nameWithType: Result<TValue, TError>.UnwrapOr(TValue)
+  nameWithType.vb: Result(Of TValue, TError).UnwrapOr(TValue)
+- uid: TrueMyth.Result`2.UnwrapOr*
+  name: UnwrapOr
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr_
+  commentId: Overload:TrueMyth.Result`2.UnwrapOr
+  isSpec: "True"
+  fullName: TrueMyth.Result<TValue, TError>.UnwrapOr
+  fullName.vb: TrueMyth.Result(Of TValue, TError).UnwrapOr
+  nameWithType: Result<TValue, TError>.UnwrapOr
+  nameWithType.vb: Result(Of TValue, TError).UnwrapOr
+- uid: TrueMyth.Result`2.UnwrapOrElse(System.Func{`1,`0})
+  name: UnwrapOrElse(Func<TError, TValue>)
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__
+  commentId: M:TrueMyth.Result`2.UnwrapOrElse(System.Func{`1,`0})
+  name.vb: UnwrapOrElse(Func(Of TError, TValue))
+  fullName: TrueMyth.Result<TValue, TError>.UnwrapOrElse(System.Func<TError, TValue>)
+  fullName.vb: TrueMyth.Result(Of TValue, TError).UnwrapOrElse(System.Func(Of TError, TValue))
+  nameWithType: Result<TValue, TError>.UnwrapOrElse(Func<TError, TValue>)
+  nameWithType.vb: Result(Of TValue, TError).UnwrapOrElse(Func(Of TError, TValue))
+- uid: TrueMyth.Result`2.UnwrapOrElse*
+  name: UnwrapOrElse
+  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_
+  commentId: Overload:TrueMyth.Result`2.UnwrapOrElse
+  isSpec: "True"
+  fullName: TrueMyth.Result<TValue, TError>.UnwrapOrElse
+  fullName.vb: TrueMyth.Result(Of TValue, TError).UnwrapOrElse
+  nameWithType: Result<TValue, TError>.UnwrapOrElse
+  nameWithType.vb: Result(Of TValue, TError).UnwrapOrElse
+- uid: TrueMyth.Unsafe
+  name: TrueMyth.Unsafe
+  href: api/TrueMyth.Unsafe.html
+  commentId: N:TrueMyth.Unsafe
+  fullName: TrueMyth.Unsafe
+  nameWithType: TrueMyth.Unsafe
+- uid: TrueMyth.Unsafe.UnsafeExtensions
+  name: UnsafeExtensions
+  href: api/TrueMyth.Unsafe.UnsafeExtensions.html
+  commentId: T:TrueMyth.Unsafe.UnsafeExtensions
+  fullName: TrueMyth.Unsafe.UnsafeExtensions
+  nameWithType: UnsafeExtensions
+- uid: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap*
   name: UnsafelyUnwrap
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnsafelyUnwrap_
-  commentId: Overload:TrueMyth.Result`2.UnsafelyUnwrap
+  href: api/TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap_
+  commentId: Overload:TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap
   isSpec: "True"
-  fullName: TrueMyth.Result<TValue, TError>.UnsafelyUnwrap
-  fullName.vb: TrueMyth.Result(Of TValue, TError).UnsafelyUnwrap
-  nameWithType: Result<TValue, TError>.UnsafelyUnwrap
-  nameWithType.vb: Result(Of TValue, TError).UnsafelyUnwrap
-- uid: TrueMyth.Result`2.UnsafelyUnwrapErr
-  name: UnsafelyUnwrapErr()
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnsafelyUnwrapErr
-  commentId: M:TrueMyth.Result`2.UnsafelyUnwrapErr
-  fullName: TrueMyth.Result<TValue, TError>.UnsafelyUnwrapErr()
-  fullName.vb: TrueMyth.Result(Of TValue, TError).UnsafelyUnwrapErr()
-  nameWithType: Result<TValue, TError>.UnsafelyUnwrapErr()
-  nameWithType.vb: Result(Of TValue, TError).UnsafelyUnwrapErr()
-- uid: TrueMyth.Result`2.UnsafelyUnwrapErr*
+  fullName: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap
+  nameWithType: UnsafeExtensions.UnsafelyUnwrap
+- uid: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``1(TrueMyth.Maybe{``0})
+  name: UnsafelyUnwrap<T>(Maybe<T>)
+  href: api/TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__1_TrueMyth_Maybe___0__
+  commentId: M:TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``1(TrueMyth.Maybe{``0})
+  name.vb: UnsafelyUnwrap(Of T)(Maybe(Of T))
+  fullName: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap<T>(TrueMyth.Maybe<T>)
+  fullName.vb: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap(Of T)(TrueMyth.Maybe(Of T))
+  nameWithType: UnsafeExtensions.UnsafelyUnwrap<T>(Maybe<T>)
+  nameWithType.vb: UnsafeExtensions.UnsafelyUnwrap(Of T)(Maybe(Of T))
+- uid: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``2(TrueMyth.Result{``0,``1})
+  name: UnsafelyUnwrap<T, E>(Result<T, E>)
+  href: api/TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__2_TrueMyth_Result___0___1__
+  commentId: M:TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``2(TrueMyth.Result{``0,``1})
+  name.vb: UnsafelyUnwrap(Of T, E)(Result(Of T, E))
+  fullName: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap<T, E>(TrueMyth.Result<T, E>)
+  fullName.vb: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap(Of T, E)(TrueMyth.Result(Of T, E))
+  nameWithType: UnsafeExtensions.UnsafelyUnwrap<T, E>(Result<T, E>)
+  nameWithType.vb: UnsafeExtensions.UnsafelyUnwrap(Of T, E)(Result(Of T, E))
+- uid: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr*
   name: UnsafelyUnwrapErr
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_UnsafelyUnwrapErr_
-  commentId: Overload:TrueMyth.Result`2.UnsafelyUnwrapErr
+  href: api/TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr_
+  commentId: Overload:TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr
   isSpec: "True"
-  fullName: TrueMyth.Result<TValue, TError>.UnsafelyUnwrapErr
-  fullName.vb: TrueMyth.Result(Of TValue, TError).UnsafelyUnwrapErr
-  nameWithType: Result<TValue, TError>.UnsafelyUnwrapErr
-  nameWithType.vb: Result(Of TValue, TError).UnsafelyUnwrapErr
-- uid: TrueMyth.Result`2.Unwrap(`0)
-  name: Unwrap(TValue)
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap__0_
-  commentId: M:TrueMyth.Result`2.Unwrap(`0)
-  fullName: TrueMyth.Result<TValue, TError>.Unwrap(TValue)
-  fullName.vb: TrueMyth.Result(Of TValue, TError).Unwrap(TValue)
-  nameWithType: Result<TValue, TError>.Unwrap(TValue)
-  nameWithType.vb: Result(Of TValue, TError).Unwrap(TValue)
-- uid: TrueMyth.Result`2.Unwrap(System.Func{`1,`0})
-  name: Unwrap(Func<TError, TValue>)
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap_System_Func__1__0__
-  commentId: M:TrueMyth.Result`2.Unwrap(System.Func{`1,`0})
-  name.vb: Unwrap(Func(Of TError, TValue))
-  fullName: TrueMyth.Result<TValue, TError>.Unwrap(System.Func<TError, TValue>)
-  fullName.vb: TrueMyth.Result(Of TValue, TError).Unwrap(System.Func(Of TError, TValue))
-  nameWithType: Result<TValue, TError>.Unwrap(Func<TError, TValue>)
-  nameWithType.vb: Result(Of TValue, TError).Unwrap(Func(Of TError, TValue))
-- uid: TrueMyth.Result`2.Unwrap*
-  name: Unwrap
-  href: api/TrueMyth.Result-2.html#TrueMyth_Result_2_Unwrap_
-  commentId: Overload:TrueMyth.Result`2.Unwrap
-  isSpec: "True"
-  fullName: TrueMyth.Result<TValue, TError>.Unwrap
-  fullName.vb: TrueMyth.Result(Of TValue, TError).Unwrap
-  nameWithType: Result<TValue, TError>.Unwrap
-  nameWithType.vb: Result(Of TValue, TError).Unwrap
+  fullName: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr
+  nameWithType: UnsafeExtensions.UnsafelyUnwrapErr
+- uid: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr``2(TrueMyth.Result{``0,``1})
+  name: UnsafelyUnwrapErr<T, E>(Result<T, E>)
+  href: api/TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr__2_TrueMyth_Result___0___1__
+  commentId: M:TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr``2(TrueMyth.Result{``0,``1})
+  name.vb: UnsafelyUnwrapErr(Of T, E)(Result(Of T, E))
+  fullName: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr<T, E>(TrueMyth.Result<T, E>)
+  fullName.vb: TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr(Of T, E)(TrueMyth.Result(Of T, E))
+  nameWithType: UnsafeExtensions.UnsafelyUnwrapErr<T, E>(Result<T, E>)
+  nameWithType.vb: UnsafeExtensions.UnsafelyUnwrapErr(Of T, E)(Result(Of T, E))

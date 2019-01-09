@@ -356,7 +356,7 @@ namespace TrueMyth
             : new Result<TValue,UError>(this._value, default(UError), true);
 
         /// <summary>
-        /// Performs the same basic functionality as <see cref="Unwrap(Func{TError,TValue})"/>, but instead of simply unwrapping the value if 
+        /// Performs the same basic functionality as <see cref="UnwrapOrElse(Func{TError,TValue})"/>, but instead of simply unwrapping the value if 
         /// it is Ok and applying a function to generate the same type if it is Err, lets you supply functions which may transform the wrapped 
         /// type if it is Ok or get a default value for Err.
         /// 
@@ -475,7 +475,7 @@ namespace TrueMyth
         /// or by applying <c>elseFn</c> if it is <b>Err</b>.
         /// 
         /// This is useful when you need to generate a value (e.g. by using current values in the environment – whether 
-        /// preloaded or by local closure) instead of having a single default value available (as in <see cref="Unwrap(TValue)"/>).
+        /// preloaded or by local closure) instead of having a single default value available (as in <see cref="UnwrapOr(TValue)"/>).
         /// </summary>
         /// <param name="elseFn">Function to apply to map <c>TError</c> to <c>TVaue</c>.</param>
         /// <example>
@@ -668,7 +668,7 @@ namespace TrueMyth
         /// </code>
         /// <note>
         /// There are actually safer <em>and</em> more semantic methods for handling results than this, and we recommend the use 
-        /// of <see cref="Unwrap(TValue)"/> or any of the several methods provided for such use; however, we recognize that in 
+        /// of <see cref="UnwrapOr(TValue)"/> or any of the several methods provided for such use; however, we recognize that in 
         /// spite of our desire to avoid exceptions and <c>null</c>, reality insists that sometimes we have to use them, particularly
         /// when making changes to incumbent software.
         /// </note>

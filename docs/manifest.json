@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/Users/ben/proj/oss/true-myth-csharp/docsrc",
+  "source_base_path": "C:/Users/ben/proj/oss/true-myth-csharp/docsrc",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe-1.html",
-          "hash": "b4dMdWjKqipOdyQNfgCWpg=="
+          "hash": "sstY+6U5DAQlCLcjrrbEqQ=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe.html",
-          "hash": "MEp/r2tmBIfpT3MMZIJ74g=="
+          "hash": "K4i7Y1vZ2UDvajtg383eNg=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result-2.html",
-          "hash": "/sWrU+nbAtoD2S32KOLVxw=="
+          "hash": "9B866D5BEs7ULIpeYsqIaQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,31 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result.html",
-          "hash": "AGlW2SOG3MytWy9VtVVoTw=="
+          "hash": "K8Mp3Ho/fguTsgBz6XqXfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Unsafe.UnsafeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Unsafe.UnsafeExtensions.html",
+          "hash": "Ah+oeR+vxrUHEQhlWzyIeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Unsafe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Unsafe.html",
+          "hash": "ZRWmxaixWSsiMMuFkvyJvg=="
         }
       },
       "is_incremental": false,
@@ -66,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.html",
-          "hash": "Y1vFfPrucPNQwNMT+coLYw=="
+          "hash": "98ciuMjpe2UHjtdv8v+B7Q=="
         }
       },
       "is_incremental": false,
@@ -78,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "CuDkzHPERcXqYtdcuVO0Og=="
+          "hash": "lOdZQbqajuslQ07xAIdtVg=="
         }
       },
       "is_incremental": false,
@@ -90,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started.html",
-          "hash": "9N+Q9Sh2IAwOAfxc62TyIw=="
+          "hash": "QPHbq/WhXnKKM7WOr4WFUg=="
         }
       },
       "is_incremental": false,
@@ -102,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/manual.html",
-          "hash": "GGYLaVsKfYjTwpmUbHpluw=="
+          "hash": "hgObFBzdV7jGUBkYJ2N9hg=="
         }
       },
       "is_incremental": false,
@@ -148,7 +172,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "9blf0meMxd1wDcgsIGR//A=="
+          "hash": "K7vlHNbpnlm3ZAYOPgftoQ=="
         }
       },
       "is_incremental": false,
@@ -170,26 +194,27 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": true,
+        "can_incremental": false,
+        "details": "Cannot build incrementally because docfx version changed from 2.40.1.0 to 2.40.7.0.",
         "incrementalPhase": "build"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
+          "can_incremental": false,
+          "incrementalPhase": "build"
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
           "incrementalPhase": "build"
         }
       }
