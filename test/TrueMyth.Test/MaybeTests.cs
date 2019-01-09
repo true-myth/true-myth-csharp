@@ -185,6 +185,20 @@ namespace TrueMyth.Test
         }
 
         [Theory]
+        [MemberData(nameof(GetEqualityTheoryData1Param))]
+        public void Match_Void_Theory(Maybe<int> m1)
+        {
+            m1.Match(
+                just: _ => {
+                    Assert.True(m1.IsJust);
+                },
+                nothing: () => {
+                    Assert.True(m1.IsNothing);
+                }
+            );
+        }
+
+        [Theory]
         [MemberData(nameof(GetOrTheoryData))]
         public void Or_Theory(Maybe<int> m1, Maybe<int> m2, Maybe<int> expectation)
         {

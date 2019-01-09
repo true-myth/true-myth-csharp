@@ -164,6 +164,16 @@ namespace TrueMyth.Test
             Assert.Equal("ok", functionCalled);
         }
 
+        [Theory]
+        [MemberData(nameof(GetResultTheoryData1))]
+        public void Match_Void_Theory(SimpleResult r)
+        {
+            r.Match(
+                ok: _ => Assert.True(r.IsOk),
+                err: _ => Assert.True(r.IsErr)
+            );
+        }
+
         // Or
         [Fact]
         public void Or_OkReturnsThis_Ok()
