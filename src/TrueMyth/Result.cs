@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace TrueMyth
 {
+    using Unsafe;
+
     /// <summary>
     /// A static class that provides factory and extension methods for <see cref="Result{TValue,TError}"/>.
     /// </summary>
@@ -453,18 +455,6 @@ namespace TrueMyth
         public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
 
         /// <summary>
-        /// Get the value out of the <c>Result</c>. Returns the content of an <b>Ok</b> but <em>throws if the result is <b>Err</b></em>.
-        /// Prefer to use <see cref="Unwrap(TValue)"/> or <see cref="Unwrap(Func{TError,TValue})"/>
-        /// </summary>
-        public TValue UnsafelyUnwrap() => _isOk ? _value : throw new InvalidOperationException("Invalid request to unwrap value.");
-
-        /// <summary>
-        /// Get the error out of the <c>Result</c>. Returns the content of an <b>Err</b>, but <em>throws if the result is <b>Ok</b></em>.
-        /// Prefer to use <see cref="Unwrap(Func{TError,TValue})"/>.
-        /// </summary>
-        public TError UnsafelyUnwrapErr() => !_isOk ? _error : throw new InvalidOperationException("Invalid request to unwrap error.");
-
-        /// <summary>
         /// Safely get the value out of the <b>Ok</b> variant of a <c>Result</c>. This is the recommended way to get a value
         /// out of a <c>Result</c> most of the time.
         /// </summary>
@@ -472,13 +462,13 @@ namespace TrueMyth
         /// <example>
         /// <code>
         /// var anOk = Result&lt;int,string&gt;.Ok(1);
-        /// Console.WriteLine(anOk.Unwrap(0)); // 1
+        /// Console.WriteLine(anOk.UnwrapOr(0)); // 1
         /// 
         /// var anErr = Result&lt;int,string&gt;.Err("error");
-        /// Console.WriteLine(anErr.Unwrap(0)); // 0
+        /// Console.WriteLine(anErr.UnwrapOr(0)); // 0
         /// </code>
         /// </example>
-        public TValue Unwrap(TValue defaultValue) => this._isOk ? _value : defaultValue;
+        public TValue UnwrapOr(TValue defaultValue) => this._isOk ? _value : defaultValue;
 
         /// <summary>
         /// Safely get the value out of a <c>Result&lt;TValue,TError&gt;</c> by returning the wrapped value if it is <b>Ok</b>
@@ -494,13 +484,13 @@ namespace TrueMyth
         /// var handleError = (string err) => err.Length + someOtherValue;
         /// 
         /// var anOk = Result&lt;int,string&gt;.Ok(42);
-        /// Console.WriteLine(anOk.Unwrap(handleError)); // 42
+        /// Console.WriteLine(anOk.UnwrapOrElse(handleError)); // 42
         /// 
         /// var anErr = Result&lt;int,string&gt;.Err("error");
-        /// Console.WriteLine(anErr.Unwrap(handleError)); // error
+        /// Console.WriteLine(anErr.UnwrapOrElse(handleError)); // error
         /// </code>
         /// </example>
-        public TValue Unwrap(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
+        public TValue UnwrapOrElse(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
 
         #endregion
 
@@ -579,7 +569,7 @@ namespace TrueMyth
                 }
                 else if(typeof(IComparable).IsAssignableFrom(typeof(TError)))
                 {
-                    var thisErr = UnsafelyUnwrapErr() as IComparable;
+                    var thisErr = this.UnsafelyUnwrapErr() as IComparable;
                     var thatErr = otherResult.UnsafelyUnwrapErr();
                     return thisErr.CompareTo(thatErr);
                 }
@@ -596,7 +586,7 @@ namespace TrueMyth
                 }
                 else if (typeof(IComparable).IsAssignableFrom(typeof(TValue)))
                 {
-                    var thisValue = UnsafelyUnwrap() as IComparable;
+                    var thisValue = this.UnsafelyUnwrap() as IComparable;
                     var thatValue = otherResult.UnsafelyUnwrap();
                     return thisValue.CompareTo(thatValue);
                 }
