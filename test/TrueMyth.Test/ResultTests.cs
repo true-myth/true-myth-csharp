@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using TrueMyth;
+using TrueMyth.Unsafe;
 
 namespace TrueMyth.Test
 {
@@ -357,7 +358,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(7);
 
             // act
-            var r = r1.Unwrap(0);
+            var r = r1.UnwrapOr(0);
 
             // assert
             Assert.Equal(7, r);
@@ -370,7 +371,7 @@ namespace TrueMyth.Test
             var r1  = SimpleResult.Err("error");
 
             // act
-            var r = r1.Unwrap(0);
+            var r = r1.UnwrapOr(0);
 
             // assert
             Assert.Equal(0, r);
@@ -384,7 +385,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Ok(7);
 
             // act
-            var r = r1.Unwrap(err => 0);
+            var r = r1.UnwrapOrElse(err => 0);
 
             // assert
             Assert.Equal(7, r);
@@ -397,7 +398,7 @@ namespace TrueMyth.Test
             var r1 = SimpleResult.Err("error");
 
             // act
-            var r = r1.Unwrap(err => 0);
+            var r = r1.UnwrapOrElse(err => 0);
 
             // assert
             Assert.Equal(0, r);

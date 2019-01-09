@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace TrueMyth
 {
+    using Unsafe;
+
     /// <summary>
     /// A static class that provides factory and extension methods for <see cref="Maybe{TValue}"/>.
     /// </summary>
@@ -362,12 +364,6 @@ namespace TrueMyth
         public Result<TValue, TError> ToResult<TError>(Func<TError> errFn) => this._isJust ? Result<TValue,TError>.Ok(this._value) : Result<TValue,TError>.Err(errFn());
 
         /// <summary>
-        /// Get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of a <b>Just</b>, but <em>throws if the <c>Maybe</c> is <b>Nothing</b></em>.
-        /// Prefer to use <see cref="UnwrapOr(TValue)"/> or <see cref="UnwrapOrElse(Func{TValue})"/>.
-        /// </summary>
-        public TValue UnsafelyUnwrap() => this._isJust ? this._value : throw new InvalidOperationException($"Invalid attempt to unwrap {GetType().Name}.Nothing as {typeof(TValue).Name}");
-        
-        /// <summary>
         /// Safely get the <c>TValue</c> value out of the <c>Maybe&lt;TValue&gt;</c>. Returns the content of <b>Just</b> or <c>defaultValue</c> if <c>this</c> is <b>Nothing</b>.
         /// This is the recommended way to get a value out of a <c>Maybe</c> most of the time.
         /// </summary>
@@ -457,7 +453,7 @@ namespace TrueMyth
                 {
                     if (typeof(IComparable).IsAssignableFrom(typeof(TValue)))
                     {
-                        var justThis = UnsafelyUnwrap() as IComparable;
+                        var justThis = this.UnsafelyUnwrap() as IComparable;
                         var justThat = otherMaybe.UnsafelyUnwrap();
                         return justThis.CompareTo(justThat);
                     }
@@ -485,8 +481,8 @@ namespace TrueMyth
         #region Public Static Methods & Operators
 
         /// <summary>
-        /// Equivalent of <see cref="UnsafelyUnwrap"/>.  Follows usual C♯ semantics of throwing 
-        /// an exception at runtime if the conversion is invalid.
+        /// Equivalent of <see cref="Unsafe.UnsafeExtensions.UnsafelyUnwrap{T}(Maybe{T})"/>.  Follows usual C♯ semantics
+        /// of throwing an exception at runtime if the conversion is invalid.
         /// </summary>
         public static explicit operator TValue(Maybe<TValue> maybe) => maybe.UnsafelyUnwrap();
         
