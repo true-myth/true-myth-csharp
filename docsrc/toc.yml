@@ -1,6 +1,6 @@
 - name: Articles
   href: articles/
 - name: API Documentation
-  href: api/TrueMyth.yml
+  href: api/
 - name: Repository
   href: https://github.com/true-myth/true-myth-csharp

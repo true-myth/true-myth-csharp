@@ -15,6 +15,7 @@ variables:
   majorVersion: '1'
   minorVersion: '0'
   patchVersion: '0'
+  docfxVersion: '2.40.11'
 
 jobs:
   - job: Windows
@@ -87,6 +88,20 @@ jobs:
         nuGetFeedType: external
         publishFeedCredentials: 'myget/true-myth'
         includeSymbols: true
+
+    - task: NuGetCommand@2
+      condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+      displayName: 'Install DocFx'
+      inputs:
+        command: custom
+        arguments: 'install nuget.console -Version $(docfxVersion)'
+
+    - task: PowerShell@2
+      condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
+      displayName: 'Build DocFx Project'
+      inputs:
+        filePath: 'docsrc\build.ps1'
+        arguments: '-DocFxVersion $(docfxVersion)'
 
   - job: Linux
     pool:

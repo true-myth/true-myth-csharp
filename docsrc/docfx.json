@@ -39,30 +39,17 @@
         ]
       }
     ],
-    "overwrite": [
-      {
-        "files": [
-          "apidoc/**.md"
-        ],
-        "exclude": [
-          "obj/**",
-          "_site/**"
-        ]
-      }
-    ],
-    "dest": "_site",
+    "overwrite": "apidoc/**.md",
     "globalMetadata": {
       "_appTitle": "True Myth",
       "_appLogoPath": "images/logo_header.png",
       "_enableSearch": true,
       "_appFaviconPath": "images/logo_header.png"
     },
-    "globalMetadataFiles": [],
-    "fileMetadataFiles": [],
     "template": [
       "default"
     ],
-    "postProcessors": [],
+    "dest": "_site",
     "markdownEngineName": "markdig",
     "noLangKeyword": false,
     "keepFileLink": false,
