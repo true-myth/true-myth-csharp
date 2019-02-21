@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Overview | True Myth </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Overview | True Myth ">
+    <meta name="generator" content="docfx 2.40.7.0">
+    
+    <link rel="shortcut icon" href="../images/logo_header.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo_header.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="overview">Overview</h1>
+
+<p>True Myth provides idiomatic, type-safe wrappers and helper functions to help
+help you with two extremely common cases in programming:</p>
+<ul>
+<li>not having a value</li>
+<li>having a result where you need to deal with either success or failure</li>
+</ul>
+<p>You could implement all of these yourself – it's not hard! – but it's much
+easier to just have one extremely well-tested library you can use everywhere to
+solve this problem once and for all.</p>
+<h1 id="comparison-to-other-libraries">Comparison to other Libraries</h1>
+<h2 id="truemyth-typescript">TrueMyth TypeScript</h2>
+<p>This TrueMyth library is derived from the original
+<a href="https://github.com/true-myth/true-myth">TrueMyth</a>, which was designed for
+TypeScript.  It was initially ported, but then later was redesigned somewhat to
+be more idiomatic for C♯.  Below is a mapping of functions; you may find it
+useful to be able to link back to the documentation of the original library in
+cases where this documentation is lacking.</p>
+<h3 id="maybe-mapping">Maybe Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>TypeScript</th>
+<th>C♯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#all-1"><code>all&lt;T&gt;(...maybes: T): All&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;IEnumerable&lt;T&gt;&gt; Maybe.All&lt;T&gt;(params Maybe&lt;T&gt;[] maybes)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#and"><code>and&lt;T,U&gt;(andMaybe: Maybe&lt;U&gt;, maybe: Maybe&lt;T&gt;): Maybe&lt;U&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;U&gt; Maybe&lt;T&gt;.And&lt;U&gt;(Maybe&lt;U&gt; andMaybe)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#andthen"><code>andThen&lt;T,U&gt;(thenFn: function, maybe: Maybe&lt;T&gt;): Maybe&lt;U&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;U&gt; Maybe&lt;T&gt;.AndThen&lt;U&gt;(Func&lt;TValue, Maybe&lt;U&gt;&gt; bindFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#ap"><code>ap&lt;T,U&gt;(maybeFn: Maybe&lt;function&gt;, maybe: Maybe&lt;T&gt;): Maybe&lt;U&gt;</code></a></td>
+<td>No equivalent</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#equals"><code>equals&lt;T&gt;(mb: Maybe&lt;T&gt;, ma: Maybe&lt;T&gt;): boolean</code></a></td>
+<td><a href=""><code>bool Object.Equals(object obj)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#find"><code>find&lt;T&gt;(predicate: Result&lt;T,any&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;IEnumerable&lt;T&gt;&gt; Maybe.MaybeFind&lt;T&gt;(this IEnumerable&lt;T&gt; list, Func&lt;T,bool&gt; predicate)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#fromresult"><code>fromResult&lt;T&gt;(result: Result&lt;T,any&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe.From&lt;T,E&gt;(Result&lt;T,E&gt; result)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#get"><code>get&lt;T,K&gt;(key: K, maybeObj: Maybe&lt;T&gt;): Maybe&lt;Required&lt;T&gt;[K]&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe.MaybeGet&lt;K,V&gt;(this ICollection&lt;KeyValuePair&lt;T,K&gt;&gt; collection, T key)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#head"><code>head&lt;T&gt;(array: Array&lt;T + null + undefined&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe.MaybeFirst&lt;T&gt;(this IEnumerable&lt;T&gt; list)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#isinstance"><code>isInstance&lt;T&gt;(item: any): boolean</code></a></td>
+<td>Not applicable</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#isjust"><code>isJust&lt;T&gt;(maybe: Maybe&lt;T&gt;)</code></a></td>
+<td><a href=""><code>bool Maybe&lt;T&gt;.IsJust</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#isnothing"><code>isNothing&lt;T&gt;(maybe: Maybe&lt;T&gt;)</code></a></td>
+<td><a href=""><code>bool Maybe&lt;T&gt;.IsNothing</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#just-2"><code>just&lt;T&gt;(value?: T + null): Maybe&lt;T&gt;</code></a></td>
+<td>No equivalent.</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#last"><code>last&lt;T&gt;(array: Array&lt;T + null + undefined&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe.MaybeLast&lt;T&gt;(this IEnumerable&lt;T&gt; list)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#map"><code>map&lt;T,U&gt;(mapFn: function, maybe: Maybe&lt;T&gt;): Maybe&lt;U&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;U&gt; Maybe&lt;T&gt;.Map&lt;U&gt;(Func&lt;T,U&gt; mapFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#mapor"><code>mapOr&lt;T,U&gt;(orU: U, mapFn: function, maybe: Maybe&lt;T&gt;): U</code></a></td>
+<td><a href=""><code>U Maybe&lt;T&gt;.MapReturn&lt;U&gt;(Func&lt;T,U&gt; mapFn, U defaultValue)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#maporelse"><code>mapOrElse&lt;T,U&gt;(orElseFn: function, mapFn: function, maybe: Maybe&lt;T&gt;): U</code></a></td>
+<td>See <code>match</code> / <code>Maybe&lt;T&gt;.Match&lt;U&gt;</code></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#match"><code>match&lt;T,A&gt;(matcher: Matcher&lt;T,A&gt;, maybe: Maybe&lt;T&gt;): A</code></a></td>
+<td><a href=""><code>U Maybe&lt;T&gt;.Match&lt;U&gt;(Func&lt;T,U&gt; just, Func&lt;T&gt; nothing)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#nothing-2"><code>nothing&lt;T&gt;(_?: undefined + null): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe&lt;T&gt;.Nothing</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#of"><code>of&lt;T&gt;(value?: T + null): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe.Of(T value)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#or"><code>or&lt;T&gt;(defaultMaybe: Maybe&lt;T&gt;, maybe: Maybe&lt;T&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe&lt;T&gt;.Or(Maybe&lt;T&gt; maybe)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#orelse"><code>orElse&lt;T&gt;(elseFn: function, maybe: Maybe&lt;T&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Maybe&lt;T&gt;.OrElse(Func&lt;Maybe&lt;T&gt;&gt; elseFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#property"><code>property&lt;T,K&gt;(key: K, obj: T):Maybe&lt;Required&lt;T&gt;[K]&gt;</code></a></td>
+<td>See <code>get</code> / <code>Maybe.MaybeGet</code></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#tookorelseerr"><code>toOkOrElse&lt;T,E&gt;(elseFn: function, maybe: Maybe&lt;T&gt;): Result&lt;T,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt; Maybe&lt;T&gt;.ToResult&lt;E&gt;(Func&lt;E&gt; errFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#tookorerr"><code>toOkOrErr&lt;T,E&gt;(error: E, maybe: Maybe&lt;T&gt;): Result&lt;T,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt; Maybe&lt;T&gt;.ToResult&lt;E&gt;(E error)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#tostring"><code>toString&lt;T&gt;(maybe: Maybe&lt;T&gt;): string</code></a></td>
+<td><a href=""><code>string Object.ToString()</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#tuple"><code>tuple&lt;T&gt;(maybes: Maybe&lt;T&gt;): Maybe&lt;[T]&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;(T,U)&gt; Maybe.MaybeAll&lt;T,U&gt;(this Tuple&lt;Maybe&lt;T&gt;, Maybe&lt;U&gt;&gt; tuple)</code></a> and similarly for up to 4-tuples</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#unsafelyunwrap"><code>unsafelyUnwrap&lt;T&gt;(maybe: Maybe&lt;T&gt;): T</code></a></td>
+<td><a href=""><code>T Maybe&lt;T&gt;.UnsafelyUnwrap()</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#unwrapor"><code>unwrapOr&lt;T&gt;(defaultValue: T, maybe: Maybe&lt;T&gt;): T</code></a></td>
+<td><a href=""><code>T Maybe&lt;T&gt;.UnwrapOr(T defaultValue)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_maybe_.html#unwraporelse"><code>unwrapOrElse&lt;T&gt;(orElseFn: function, maybe: Maybe&lt;T&gt;): T</code></a></td>
+<td><a href=""><code>T Maybe&lt;T&gt;.UnwrapOrElse(Func&lt;T&gt; elseFn)</code></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="result-mapping">Result Mapping</h3>
+<table>
+<thead>
+<tr>
+<th>TypeScript</th>
+<th>C♯</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#and"><code>and&lt;T,U,E&gt;(andResult: Result&lt;U,E&gt;, result: Result&lt;T,E&gt;): Result&lt;U,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;U,E&gt; Result&lt;T,E&gt;.And&lt;U&gt;(Result&lt;UValue,TError&gt; andResult)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#andthen"><code>andThen&lt;T,U,E&gt;(thenFn: function, result: Result&lt;T,E&gt;): Result&lt;U,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;U,E&gt; Result&lt;T,E&gt;.AndThen&lt;U&gt;(Func&lt;TValue, UValue&gt; bindFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#ap"><code>ap&lt;T,U,E&gt;(resultFn: Result&lt;function, E&gt;, result: Result&lt;T,E&gt;): Result&lt;U,E&gt;</code></a></td>
+<td>No equivalent.</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#equals"><code>equals&lt;T,E&gt;(resultB: Result&lt;T,E&gt;, resultA: Result&lt;T,E&gt;): boolean</code></a></td>
+<td><a href=""><code>bool Object.Equals(object)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#err-2"><code>err&lt;T,E&gt;(error: E): Result&lt;T, E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt; Result&lt;T,E&gt;.Err(E error)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#err-2"><code>err&lt;T,E&gt;(): Result&lt;T,E&gt;</code></a></td>
+<td>No equivalent.</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#frommaybe"><code>fromMaybe&lt;T,E&gt;(errValue: E, maybe: Maybe&lt;T&gt;): Result&lt;T,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt; Result.From&lt;T,E&gt;(Maybe&lt;T&gt; maybe, E error)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#iserr"><code>isErr&lt;T,E&gt;(result: Result&lt;T,E&gt;): boolean</code></a></td>
+<td><a href=""><code>bool Result&lt;T,E&gt;.IsErr</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#isinstance"><code>isInstance&lt;T,E&gt;(item: any): boolean</code></a></td>
+<td>Not applicable.</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#isok"><code>isOk&lt;T,E&gt;(result: Result&lt;T,E&gt;): boolean</code></a></td>
+<td><a href=""><code>bool Result&lt;T,E&gt;.IsOk</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#map"><code>map&lt;T,U,E&gt;(mapFn: function, result: Result&lt;T,E&gt;): Result&lt;U,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;U,E&gt; Result&lt;T,E&gt;.Map&lt;U&gt;(Func&lt;T,U&gt; mapFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#maperr"><code>mapErr&lt;T,E,F&gt;(mapErrFn: function, result: Result&lt;T,E&gt;): Result&lt;T,F&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,F&gt; Result&lt;T,E&gt;.MapErr&lt;F&gt;(Func&lt;E,F&gt; mappErrFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#mapor"><code>mapOr&lt;T,U,E&gt;(orU: U, mapFn: function, result: Result&lt;T,E&gt;): U</code></a></td>
+<td><a href=""><code>U Result&lt;T,E&gt;.MapReturn(Func&lt;T,U&gt; mapFn, U defaultValue)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#maporelse"><code>mapOrElse&lt;T,U,E&gt;(orElseFn: function, mapFn, function, result: Result&lt;T,E&gt;): U</code></a></td>
+<td>See <code>match</code> / <code>Result&lt;T,E&gt;.Match&lt;U&gt;</code></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#match"><code>match&lt;T,E,A&gt;(matcher: Matcher&lt;T,E,A&gt;, result: Result&lt;T,E&gt;): A</code></a></td>
+<td><a href=""><code>U Result&lt;T,E&gt;.Match&lt;U&gt;(Func&lt;T,U&gt; okFn, Func&lt;E,U&gt; errFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#ok-2"><code>ok&lt;T,E&gt;() : Result&lt;Unit,E&gt;</code></a></td>
+<td>No equivalent.</td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#ok-2"><code>ok&lt;T,E&gt;(T value): Result&lt;T,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt;.Ok(T value)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#or"><code>or&lt;T,E,F&gt;(defaultResult: Result&lt;T,F&gt;, result: Result&lt;T,E&gt;): Result&lt;T,F&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,F&gt; Result&lt;T,E&gt;.Or&lt;F&gt;(Result&lt;T,F&gt; defaultResult)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#orelse"><code>orElse&lt;T,E,F&gt;(elseFn: function, result: Result&lt;T,E&gt;): Result&lt;T,F&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,F&gt; Result&lt;T,E&gt;.OrElse(Func&lt;Result&lt;T,F&gt;&gt; elseFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#tomaybe"><code>toMaybe&lt;T&gt;(result: Result&lt;T, any&gt;): Maybe&lt;T&gt;</code></a></td>
+<td><a href=""><code>Maybe&lt;T&gt; Result&lt;T,E&gt;.ToMaybe()</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#tostring"><code>toString&lt;T,E&gt;(result: Result&lt;T,E&gt;): string</code></a></td>
+<td><a href=""><code>string Object.ToString()</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#tryor"><code>tryOr&lt;T,E&gt;(error: E, callback: function): Result&lt;T,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt; Result.Try&lt;T,E&gt;(Func&lt;T&gt; tryFn, E error)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#tryorelse"><code>tryOrElse&lt;T,E&gt;(onError: function, callback: function): Result&lt;T,E&gt;</code></a></td>
+<td><a href=""><code>Result&lt;T,E&gt; Result.Try(Func&lt;T&gt; tryFn, Func&lt;E&gt; errFn)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#unsafelyunwrap"><code>unsafelyUnwrap&lt;T,E&gt;(result: Result&lt;T,E&gt;): T</code></a></td>
+<td><a href=""><code>T Result&lt;T,E&gt;.UnsafelyUnwrap()</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#unsafelyunwraperr"><code>unsafelyUnwrapErr&lt;T,E&gt;(result: Result&lt;T,E&gt;): E</code></a></td>
+<td><a href=""><code>E Result&lt;T,E&gt;.UnsafelyUnwrapErr()</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#unwrapor"><code>unwrapOr&lt;T,E&gt;(defaultValue: T, result: Result&lt;T,E&gt;): T</code></a></td>
+<td><a href=""><code>T Result&lt;T,E&gt;.Unwrap(T defaultValue)</code></a></td>
+</tr>
+<tr>
+<td><a href="https://true-myth.js.org/modules/_result_.html#unwraporelse"><code>unwrapOrElse&lt;T,E&gt;(orElseFn: function, result: Result&lt;T,E&gt;)</code></a></td>
+<td><a href=""><code>T Result&lt;T,E&gt;.Unwrap(Func&lt;E,T&gt; errFn)</code></a></td>
+</tr>
+</tbody>
+</table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/docsrc/articles/manual.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
