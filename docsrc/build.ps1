@@ -17,7 +17,14 @@ $commit = git rev-parse HEAD
 
 Write-Host "[docfx] Building documentation into $tmpPath for $commit"
 
-&"docfx.console.$DocFxVersion/tools/docfx.exe" docsrc\docfx.json -o $tmpPath
+Write-Host "[docfx] Generate metadata..."
+&"docfx.console.$DocFxVersion/tools/docfx.exe" metadata docsrc\docfx.json
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "DocFx Error"
+}
+
+Write-Host "[docfx] Build content..."
+&"docfx.console.$DocFxVersion/tools/docfx.exe" build docsrc\docfx.json -o $tmpPath
 if ($LASTEXITCODE -ne 0) {
     Write-Error "DocFx Error"
 }
@@ -28,7 +35,6 @@ if ($Safe) {
 }
 
 Write-Host "[git] Checking out gh-pages ..."
-
 git checkout gh-pages
 if ($LASTEXITCODE -ne 0) {
     Write-Error "Git Error: LASTEXITCODE=$LASTEXITCODE"
