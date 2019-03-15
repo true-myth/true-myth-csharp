@@ -16,7 +16,7 @@ Function New-TemporaryDirectory {
 }
 
 Function Run-Docfx {
-    if ($IsWindows) {
+    if ($PSVersionTable.Platform -eq 'Windows') {
         Write-Verbose "Executing $docfx $args"
         &$docfx @args
     } else {
