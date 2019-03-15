@@ -6,27 +6,45 @@ Param(
     $Safe
 )
 
+$scriptPath = Split-Path $MyInvocation.MyCommand.Path -Parent
+$docfx = Resolve-Path "$scriptPath/../docfx.console.$DocFxVersion/tools/docfx.exe"
+
 Function New-TemporaryDirectory {
     $parent = [System.IO.Path]::GetTempPath()
     $name = [System.IO.Path]::GetRandomFileName()
     New-Item -ItemType Directory -Path (Join-Path $parent $name)
 }
 
+Function Run-Docfx {
+    if ($IsWindows) {
+        Write-Verbose "Executing $docfx $args"
+        &$docfx @args
+    } else {
+        Write-Verbose "Executing mono $docfx $args"
+        mono $docfx @args
+    }
+}
+
+Write-Verbose "Set docfx path to $docfx"
+if (-not (Test-Path $docfx)) {
+    Write-Error "Failed to locate docfx.exe"
+}
+
 $tmpPath = New-TemporaryDirectory
 $commit = git rev-parse HEAD
 
 Write-Host "[docfx] Building documentation into $tmpPath for $commit"
-
 Write-Host "[docfx] Generate metadata..."
-&"docfx.console.$DocFxVersion/tools/docfx.exe" metadata docsrc\docfx.json
+$docfxJson = Resolve-Path "$scriptPath\docfx.json"
+Run-DocFx metadata $docfxJson
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "DocFx Error"
+    Write-Error "DocFx Error: exit code $LASTEXITCODE"
 }
 
 Write-Host "[docfx] Build content..."
-&"docfx.console.$DocFxVersion/tools/docfx.exe" build docsrc\docfx.json -o $tmpPath
+Run-DocFx build $docfxJson -o $tmpPath
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "DocFx Error"
+    Write-Error "DocFx Error: exit code $LASTEXITCODE"
 }
 
 if ($Safe) {
