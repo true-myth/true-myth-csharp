@@ -6,6 +6,8 @@ Param(
     $Safe
 )
 
+Write-Host $PSVersionTable
+
 $scriptPath = Split-Path $MyInvocation.MyCommand.Path -Parent
 $docfx = Resolve-Path "$scriptPath/../docfx.console.$DocFxVersion/tools/docfx.exe"
 
