@@ -15,7 +15,7 @@ variables:
   majorVersion: '1'
   minorVersion: '0'
   patchVersion: '0'
-  docfxVersion: '2.40.11'
+  docfxVersion: '2.40.12'
 
 jobs:
   - job: Windows
@@ -31,7 +31,7 @@ jobs:
       displayName: "Install NuGet"
 
     - task: NuGetCommand@2
-      displayName: 'NuGet restore'
+      displayName: 'NuGet Restore'
       inputs:
         command: 'restore'
         restoreSolution: '$(solution)'
@@ -94,7 +94,7 @@ jobs:
       displayName: 'Install DocFx'
       inputs:
         command: custom
-        arguments: 'install nuget.console -Version $(docfxVersion)'
+        arguments: 'install docfx.console -Version $(docfxVersion)'
 
     - task: PowerShell@2
       condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
