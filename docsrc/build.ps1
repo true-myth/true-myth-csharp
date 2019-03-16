@@ -32,6 +32,9 @@ if (-not (Test-Path $docfx)) {
     Write-Error "Failed to locate docfx.exe"
 }
 
+git config --global user.name "TrueMyth CI"
+git config --global user.email '<>'
+
 $tmpPath = New-TemporaryDirectory
 $commit = git rev-parse HEAD
 
