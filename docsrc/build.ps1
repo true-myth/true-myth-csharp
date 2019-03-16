@@ -81,6 +81,8 @@ Copy-Item -rec -force $tmpPath\_site\* .
 Write-Host "[git] commit updates ..."
 git add .
 git commit -m "CI Update on gh-pages for $commit"
+
+Write-Host "[git] pushing back to origin"
 git push
 
 Write-Host "Done."
