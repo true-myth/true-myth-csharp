@@ -100,6 +100,7 @@ jobs:
       condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
       displayName: 'Build DocFx Project'
       inputs:
+        pwsh: true
         filePath: 'docsrc\build.ps1'
         arguments: '-DocFxVersion $(docfxVersion)'
 
