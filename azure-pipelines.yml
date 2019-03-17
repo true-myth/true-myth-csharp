@@ -85,24 +85,9 @@ jobs:
       displayName: 'NuGet Push'
       inputs:
         command: push
-        nuGetFeedType: external
-        publishFeedCredentials: 'myget/true-myth'
+        nuGetFeedType: internal
+        publishVstsFeed: true-myth-ci
         includeSymbols: true
-
-    - task: NuGetCommand@2
-      condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
-      displayName: 'Install DocFx'
-      inputs:
-        command: custom
-        arguments: 'install docfx.console -Version $(docfxVersion)'
-
-    - task: PowerShell@2
-      condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
-      displayName: 'Build DocFx Project'
-      inputs:
-        pwsh: true
-        filePath: 'docsrc\build.ps1'
-        arguments: '-DocFxVersion $(docfxVersion)'
 
   - job: Linux
     pool:
