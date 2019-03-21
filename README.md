@@ -12,10 +12,10 @@
   <a href='https://dev.azure.com/true-myth/TrueMyth/_build/latest?definitionId=1&branchName=master&view=results'>
     <img src='https://img.shields.io/azure-devops/coverage/true-myth/TrueMyth/1/master.svg?style=flag&logo=azuredevops' />
   </a>
-  <a href='https://github.com/true-myth/true-myth-csharp/releases'>
+  <a href='https://github.com/true-myth/true-myth-csharp/releases' title="releases">
     <img src='https://img.shields.io/github/release/true-myth/true-myth-csharp.svg?style=flat' />
   </a>
-  <a href='https://github.com/true-myth/true-myth-csharp/releases'>
+  <a href='https://github.com/true-myth/true-myth-csharp/releases' title="pre-releases">
     <img src='https://img.shields.io/github/release-pre/true-myth/true-myth-csharp.svg?style=flat' />
   </a>
   <a href='https://github.com/true-myth/true-myth/blob/master/LICENSE'>
