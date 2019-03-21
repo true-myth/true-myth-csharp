@@ -83,6 +83,6 @@ git add .
 git commit -m "CI Update on gh-pages for $commit"
 
 Write-Host "[git] pushing back to origin"
-git push
+#git push 
 
 Write-Host "Done."
