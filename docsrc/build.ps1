@@ -87,6 +87,6 @@ New-Item -ItemType Directory -Path ~\.ssh
 Copy-Item "$env:DOWNLOADSECUREFILE_SECUREFILEPATH" ~\.ssh\id_rsa
 
 Write-Host "[git] pushing back to origin"
-git push 'git@github.com/true-myth/true-myth-csharp.git'
+git push 'git@github.com:true-myth/true-myth-csharp.git'
 
 Write-Host "Done."
