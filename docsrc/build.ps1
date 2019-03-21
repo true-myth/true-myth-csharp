@@ -7,6 +7,7 @@ Param(
 )
 
 $PSVersionTable | Out-String | Write-Host 
+git remote show origin
 
 $scriptPath = Split-Path $MyInvocation.MyCommand.Path -Parent
 $docfx = Resolve-Path "$scriptPath/../docfx.console.$DocFxVersion/tools/docfx.exe"
