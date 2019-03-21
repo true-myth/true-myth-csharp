@@ -84,7 +84,8 @@ git commit -m "CI Update on gh-pages for $commit"
 
 Write-Host "[git] copying SSH key to ~\.ssh\id_rsa"
 New-Item -ItemType Directory -Path ~\.ssh
-Copy-Item "$env:DOWNLOADSECUREFILE_SECUREFILEPATH" ~\.ssh\id_rsa
+Copy-Item "$env:DOWNLOADSECUREFILE1_SECUREFILEPATH" ~\.ssh\id_rsa
+Copy-Item "$env:DOWNLOADSECUREFILE2_SECUREFILEPATH" ~\.ssh\id_rsa.pub
 
 Write-Host "[git] adding github.com keys to known_hosts"
 Set-Content ~\.ssh\known_hosts "# github.com:22 SSH-2.0-babeld-9d924d26
