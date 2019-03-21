@@ -1,9 +1,3 @@
-resources:
-  repositories:
-  - repository: true-myth
-    type: github
-    name: true-myth/true-myth-csharp
-
 trigger:
   branches:
     include:
