@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/ben/proj/oss/true-myth-csharp/docsrc",
+  "source_base_path": "D:/a/1/s/docsrc",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe-1.html",
-          "hash": "sstY+6U5DAQlCLcjrrbEqQ=="
+          "hash": "ZXAsRT0vgM8SAUie89kYyQ=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe.html",
-          "hash": "K4i7Y1vZ2UDvajtg383eNg=="
+          "hash": "shPstoIFtViRFYKTgqK0LQ=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result-2.html",
-          "hash": "9B866D5BEs7ULIpeYsqIaQ=="
+          "hash": "GlUpWW7L1XyMbkV0tOAThQ=="
         }
       },
       "is_incremental": false,
@@ -54,7 +54,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result.html",
-          "hash": "K8Mp3Ho/fguTsgBz6XqXfA=="
+          "hash": "3GOi/DhSafdpFM2PblGjKw=="
         }
       },
       "is_incremental": false,
@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Unsafe.UnsafeExtensions.html",
-          "hash": "Ah+oeR+vxrUHEQhlWzyIeA=="
+          "hash": "vno7qd/iBVbFClluowKJTQ=="
         }
       },
       "is_incremental": false,
@@ -78,7 +78,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Unsafe.html",
-          "hash": "ZRWmxaixWSsiMMuFkvyJvg=="
+          "hash": "DlYbKv8z3nd8f5Eyga3MPQ=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.html",
-          "hash": "98ciuMjpe2UHjtdv8v+B7Q=="
+          "hash": "UPG2y0JXx23B8bjlhe+fFA=="
         }
       },
       "is_incremental": false,
@@ -114,7 +114,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/getting-started.html",
-          "hash": "QPHbq/WhXnKKM7WOr4WFUg=="
+          "hash": "tv2SD1s4/6LgPylwDeFiPw=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/manual.html",
-          "hash": "hgObFBzdV7jGUBkYJ2N9hg=="
+          "hash": "SvpIUGM6WKJvcAt4lGvbRA=="
         }
       },
       "is_incremental": false,
@@ -172,7 +172,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "K7vlHNbpnlm3ZAYOPgftoQ=="
+          "hash": "05rmcZE20QjzxNCYxbz91Q=="
         }
       },
       "is_incremental": false,
@@ -184,7 +184,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "cxwDyULb26jQbmQ5xgolWQ=="
+          "hash": "rhN2kYG1yYWq7Mh5NT6OOw=="
         }
       },
       "is_incremental": false,
@@ -195,27 +195,38 @@
     {
       "status": {
         "can_incremental": false,
-        "details": "Cannot build incrementally because docfx version changed from 2.40.1.0 to 2.40.7.0.",
-        "incrementalPhase": "build"
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
+          "incrementalPhase": "build",
+          "total_file_count": 7,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
-        "ManagedReferenceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "incrementalPhase": "build"
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build"
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
         }
       }
     },
@@ -223,7 +234,9 @@
       "status": {
         "can_incremental": false,
         "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
-        "incrementalPhase": "postProcessing"
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
       },
       "processors": {}
     }
