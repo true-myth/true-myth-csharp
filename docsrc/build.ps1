@@ -7,7 +7,6 @@ Param(
 )
 
 $PSVersionTable | Out-String | Write-Host 
-git remote show origin
 
 $scriptPath = Split-Path $MyInvocation.MyCommand.Path -Parent
 $docfx = Resolve-Path "$scriptPath/../docfx.console.$DocFxVersion/tools/docfx.exe"
@@ -83,7 +82,11 @@ Write-Host "[git] commit updates ..."
 git add .
 git commit -m "CI Update on gh-pages for $commit"
 
+Write-Host "[git] copying SSH key to ~\.ssh\id_rsa"
+New-Item -ItemType Directory -Path ~\.ssh
+Copy-Item "$env:DOWNLOADSECUREFILE_SECUREFILEPATH" ~\.ssh\id_rsa
+
 Write-Host "[git] pushing back to origin"
-#git push 
+git push 'git@github.com/true-myth/true-myth-csharp.git'
 
 Write-Host "Done."
