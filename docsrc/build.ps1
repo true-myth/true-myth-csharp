@@ -82,14 +82,27 @@ Write-Host "[git] commit updates ..."
 git add .
 git commit -m "CI Update on gh-pages for $commit"
 
-Write-Host "[git] copying SSH key to ~\.ssh\id_rsa"
+Write-Host "[ssh] copying SSH key to ~\.ssh\id_rsa"
 New-Item -ItemType Directory -Path ~\.ssh
 Copy-Item "$env:DOWNLOADSECUREFILE1_SECUREFILEPATH" ~\.ssh\id_rsa
 Copy-Item "$env:DOWNLOADSECUREFILE2_SECUREFILEPATH" ~\.ssh\id_rsa.pub
 
-Write-Host "[git] adding github.com keys to known_hosts"
+Write-Host "[ssh] setting up config"
+Set-Content ~\.ssh\config @"
+Host github.com
+    IdentityFile $home/.ssh/id_rsa
+    IdentitiesOnly yes
+"@
+
+Get-Content ~\.ssh\id_rsa.pub
+Get-Content ~\.ssh\config
+
+Write-Host "[ssh] adding github.com keys to known_hosts"
 Set-Content ~\.ssh\known_hosts "# github.com:22 SSH-2.0-babeld-9d924d26
 github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
+
+Write-Host "[ssh] testing key"
+ssh -vT git@github.com
 
 Write-Host "[git] pushing back to origin"
 git push 'git@github.com:true-myth/true-myth-csharp.git'
