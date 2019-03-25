@@ -6,17 +6,17 @@ namespace TrueMyth
     using Unsafe;
 
     /// <summary>
-    /// A static class that provides factory and extension methods for <see cref="Result{TValue,TError}"/>.
+    /// A static class that provides factory and extension methods for <see cref="Result{TVal,TErr}"/>.
     /// </summary>
     public static class Result
     {
         /// <summary>
-        /// Convenience method to facilitate invoking static <c>Result&lt;TValue,TError&gt;</c>
+        /// Convenience method to facilitate invoking static <c>Result&lt;TVal,TErr&gt;</c>
         /// methods without type parameters.
         /// </summary>
-        public static Result<T, TError> From<T,TError>(Maybe<T> maybe, TError error) => maybe.IsJust 
-            ? Result<T,TError>.Ok((T)maybe)
-            : Result<T,TError>.Err(error);
+        public static Result<T, TErr> From<T,TErr>(Maybe<T> maybe, TErr error) => maybe.IsJust 
+            ? Result<T,TErr>.Ok((T)maybe)
+            : Result<T,TErr>.Err(error);
 
         /// <summary>
         /// Execute the provided callback, wrapping the return value in an `Result.Ok` or `Result.Err` if there is an exception.
@@ -30,7 +30,7 @@ namespace TrueMyth
         /// var anErrResult = Result.Try(aThrowingOperation, "Oh no!"); // Err&lt;int,string&gt;[Oh no!]
         /// </code>
         /// </example>
-        public static Result<TValue, TError> Try<TValue, TError>(Func<TValue> fn, TError error)
+        public static Result<TVal, TErr> Try<TVal, TErr>(Func<TVal> fn, TErr error)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace TrueMyth
         /// var anErrResult = Result.Try(aThrowingOperation, (exn) => exn.Message); // Err&lt;int,string&gt;[Bummer]
         /// </code>
         /// </example>
-        public static Result<TValue, TError> Try<TValue, TError>(Func<TValue> fn, Func<TError> errFn)
+        public static Result<TVal, TErr> Try<TVal, TErr>(Func<TVal> fn, Func<TErr> errFn)
         {
             try
             {
@@ -209,15 +209,15 @@ namespace TrueMyth
     /// Note that if we tried to call <c>MightSucceed(true)*2</c> here, we'd get a type error — this wouldn't make it
     /// past the compile step.
     /// </example>
-    /// <typeparam name="TValue">The value type for **Ok** values.</typeparam>
-    /// <typeparam name="TError">The value type for **Err** values.</typeparam>
+    /// <typeparam name="TVal">The value type for **Ok** values.</typeparam>
+    /// <typeparam name="TErr">The value type for **Err** values.</typeparam>
     
-    public sealed class Result<TValue, TError> : IComparable, IComparable<Result<TValue,TError>>
+    public sealed class Result<TVal, TErr> : IComparable, IComparable<Result<TVal,TErr>>
     {
         #region Private Fields
 
-        private readonly TValue _value;
-        private readonly TError _error;
+        private readonly TVal _value;
+        private readonly TErr _error;
         private readonly bool _isOk;
 
         #endregion
@@ -241,21 +241,21 @@ namespace TrueMyth
 
         private Result() {}
 
-        private Result(TValue value, TError error, bool isOk)
+        private Result(TVal value, TErr error, bool isOk)
         {
             // basically just a defense against result instances that don't make sense.
             // e.g., new Result<int,string>(0, "error", true) doesn't make sense, and
             // neither does new Result<int,string>(7, null, false);
             if (isOk)
             {
-                if (EqualityComparer<TValue>.Default.Equals(value, default(TValue)) && !EqualityComparer<TError>.Default.Equals(error, default(TError)))
+                if (EqualityComparer<TVal>.Default.Equals(value, default(TVal)) && !EqualityComparer<TErr>.Default.Equals(error, default(TErr)))
                 {
                     throw new ArgumentException("Invalid state for Ok result.", nameof(value));
                 }
             }
             else
             {
-                if (!EqualityComparer<TValue>.Default.Equals(value, default(TValue)) && EqualityComparer<TError>.Default.Equals(error, default(TError)))
+                if (!EqualityComparer<TVal>.Default.Equals(value, default(TVal)) && EqualityComparer<TErr>.Default.Equals(error, default(TErr)))
                 {
                     throw new ArgumentException("Invalid state for Err result.", nameof(error));
                 }
@@ -277,23 +277,23 @@ namespace TrueMyth
         /// – that is, when you need to make sure that if you Err, whatever else you're handing a <c>Result</c> to 
         /// also gets that Err.
         /// 
-        /// Notice that, unlike in <see cref="Map{UValue}(Func{TValue,UValue})"/> or its variants, the original 
+        /// Notice that, unlike in <see cref="Map{UValue}(Func{TVal,UValue})"/> or its variants, the original 
         /// result is not involved in constructing the new Result.
         /// </summary>
         /// <param name="andResult">Result returned if <c>this</c> is an Ok.</param>
-        public Result<UValue, TError> And<UValue>(Result<UValue,TError> andResult) => this._isOk ? andResult : new Result<UValue,TError>(default(UValue), this._error, false);
+        public Result<T, TErr> And<T>(Result<T,TErr> andResult) => this._isOk ? andResult : new Result<T,TErr>(default(T), this._error, false);
 
         /// <summary>
         /// Apply a function to the wrapped value if Ok and return a new Ok containing the resulting value; or if it 
         /// is Err return it unmodified.
         /// 
-        /// This differs from <see cref="Map{UValue}(Func{TValue,UValue})"/> in that <c>thenFn</c> returns another 
+        /// This differs from <see cref="Map{UValue}(Func{TVal,UValue})"/> in that <c>thenFn</c> returns another 
         /// <c>Result</c>. You can use <c>andThen</c> to combine two functions which both create a Result from an 
         /// unwrapped type.
         /// </summary>
         /// <param name="bindFn">Function that returns Result if <c>this</c> is an Ok.</param>
-        /// <typeparam name="UValue">Ok value type of result of <c>thenFn</c>.</typeparam>
-        public Result<UValue, TError> AndThen<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => this._isOk ? bindFn(this._value) : this.Map(val => default(UValue));
+        /// <typeparam name="T">Ok value type of result of <c>thenFn</c>.</typeparam>
+        public Result<T, TErr> AndThen<T>(Func<TVal, Result<T, TErr>> bindFn) => this._isOk ? bindFn(this._value) : this.Map(val => default(T));
 
         /// <summary>
         /// Map over a Result instance: apply the function to the wrapped value if the instance is Ok, and return the wrapped error value 
@@ -316,7 +316,7 @@ namespace TrueMyth
         /// wrapped in an Ok.
         /// </summary>
         /// <param name="mapFn">Mapping function applied to Ok value.</param>
-        /// <typeparam name="UValue">Destination value type resulting from the mapping function.</typeparam>
+        /// <typeparam name="T">Destination value type resulting from the mapping function.</typeparam>
         /// <example>
         /// <code>
         /// long Double(int n) => n * 2;
@@ -330,9 +330,9 @@ namespace TrueMyth
         /// Console.WriteLine(mappedErr.ToString()); // Err&lt;long,string&gt;[error]
         /// </code>
         /// </example>
-        public Result<UValue, TError> Map<UValue>(Func<TValue,UValue> mapFn) => this._isOk
-            ? new Result<UValue,TError>(mapFn(this._value), default(TError), true)
-            : new Result<UValue,TError>(default(UValue), this._error, false);
+        public Result<T, TErr> Map<T>(Func<TVal,T> mapFn) => this._isOk
+            ? new Result<T,TErr>(mapFn(this._value), default(TErr), true)
+            : new Result<T,TErr>(default(T), this._error, false);
 
         // mapOr
         /// <summary>
@@ -340,9 +340,9 @@ namespace TrueMyth
         /// </summary>
         /// <param name="mapFn">Mapping function to apply to wrapped Ok value.</param>
         /// <param name="defaultValue">Fallback value to return if <c>this</c> is an Err.</param>
-        /// <typeparam name="UValue">Destination type resulting from mapping function <c>mapFn</c>.</typeparam>
+        /// <typeparam name="T">Destination type resulting from mapping function <c>mapFn</c>.</typeparam>
         /// <returns></returns>
-        public UValue MapReturn<UValue>(Func<TValue,UValue> mapFn, UValue defaultValue) => this._isOk  ? mapFn(this._value) : defaultValue;
+        public T MapReturn<T>(Func<TVal,T> mapFn, T defaultValue) => this._isOk  ? mapFn(this._value) : defaultValue;
 
         /// <summary>
         /// Map over a <c>Result</c>, exactly as in map, but operating on the value wrapped in an Err instead of the value wrapped in the Ok. 
@@ -350,13 +350,13 @@ namespace TrueMyth
         /// be in a different shape to use somewhere else in your codebase.
         /// </summary>
         /// <param name="mapFn">Mapping function to apply to error wrapped in Err <c>Result</c>.</param>
-        /// <typeparam name="UError">Mapped error type resulting from mapping function.</typeparam>
-        public Result<TValue, UError> MapErr<UError>(Func<TError,UError> mapFn) => !this._isOk
-            ? new Result<TValue,UError>(default(TValue), mapFn(this._error), false)
-            : new Result<TValue,UError>(this._value, default(UError), true);
+        /// <typeparam name="T">Mapped error type resulting from mapping function.</typeparam>
+        public Result<TVal, T> MapErr<T>(Func<TErr,T> mapFn) => !this._isOk
+            ? new Result<TVal,T>(default(TVal), mapFn(this._error), false)
+            : new Result<TVal,T>(this._value, default(T), true);
 
         /// <summary>
-        /// Performs the same basic functionality as <see cref="UnwrapOrElse(Func{TError,TValue})"/>, but instead of simply unwrapping the value if 
+        /// Performs the same basic functionality as <see cref="UnwrapOrElse(Func{TErr,TVal})"/>, but instead of simply unwrapping the value if 
         /// it is Ok and applying a function to generate the same type if it is Err, lets you supply functions which may transform the wrapped 
         /// type if it is Ok or get a default value for Err.
         /// 
@@ -392,12 +392,12 @@ namespace TrueMyth
         /// Console.WriteLine(value); // 84
         /// </code>
         /// </example>
-        public T Match<T>(Func<TValue,T> ok, Func<TError,T> err) => this._isOk ? ok(this._value) : err(this._error);
+        public T Match<T>(Func<TVal,T> ok, Func<TErr,T> err) => this._isOk ? ok(this._value) : err(this._error);
 
         /// <summary>
-        /// Provides similar functionality as <see cref="Match{T}(Func{TValue,T}, Func{TError,T})"/>, but with no return type.
+        /// Provides similar functionality as <see cref="Match{T}(Func{TVal,T}, Func{TErr,T})"/>, but with no return type.
         /// </summary>
-        public void Match(Action<TValue> ok, Action<TError> err) 
+        public void Match(Action<TVal> ok, Action<TErr> err) 
         {
             if (this.IsOk)
             {
@@ -417,10 +417,10 @@ namespace TrueMyth
         /// supplying a default value for the case that you currently have an Err.
         /// </summary>
         /// <param name="defaultResult"></param>
-        public Result<TValue, UError> Or<UError>(Result<TValue, UError> defaultResult) => this._isOk ? new Result<TValue,UError>(this._value, default(UError), true) : defaultResult;
+        public Result<TVal, T> Or<T>(Result<TVal, T> defaultResult) => this._isOk ? new Result<TVal,T>(this._value, default(T), true) : defaultResult;
 
         /// <summary>
-        /// Like <see cref="Or{UError}(Result{TValue,UError})"/>, but using a function to construct the alternative Result.
+        /// Like <see cref="Or{UError}(Result{TVal,UError})"/>, but using a function to construct the alternative Result.
         /// 
         /// Sometimes you need to perform an operation using other data in the environment to construct the fallback 
         /// value. In these situations, you can pass a function (which may be a closure) as the elseFn to generate 
@@ -429,22 +429,22 @@ namespace TrueMyth
         /// 
         /// Useful for transforming failures to usable data.
         /// </summary>
-        public Result<TValue, UError> OrElse<UError>(Func<Result<TValue,UError>> elseFn) => this._isOk ? new Result<TValue,UError>(this._value, default(UError), true) : elseFn();
+        public Result<TVal, T> OrElse<T>(Func<Result<TVal,T>> elseFn) => this._isOk ? new Result<TVal,T>(this._value, default(T), true) : elseFn();
 
         /// <summary>
-        /// An alias for <see cref="Map{UValue}(Func{TValue, UValue})"/>.
+        /// An alias for <see cref="Map{UValue}(Func{TVal, UValue})"/>.
         /// </summary>
-        public Result<UValue, TError> Select<UValue>(Func<TValue, UValue> mapFn) => Map(mapFn);
+        public Result<T, TErr> Select<T>(Func<TVal, T> mapFn) => Map(mapFn);
 
         /// <summary>
-        /// An alias for <see cref="MapErr{UError}(Func{TError,UError})"/>
+        /// An alias for <see cref="MapErr{UError}(Func{TErr,UError})"/>
         /// </summary>
-        public Result<TValue, UError> SelectErr<UError>(Func<TError, UError> mapFn) => MapErr(mapFn);
+        public Result<TVal, T> SelectErr<T>(Func<TErr, T> mapFn) => MapErr(mapFn);
 
         /// <summary>
-        /// An alias for <see cref="AndThen{UValue}(Func{TValue, Result{UValue, TError}})"/>.
+        /// An alias for <see cref="AndThen{UValue}(Func{TVal, Result{UValue, TErr}})"/>.
         /// </summary>
-        public Result<UValue, TError> SelectMany<UValue>(Func<TValue, Result<UValue, TError>> bindFn) => AndThen(bindFn);
+        public Result<T, TErr> SelectMany<T>(Func<TVal, Result<T, TErr>> bindFn) => AndThen(bindFn);
 
         /// <summary>
         /// Convert a <c>Result</c> to a <see cref="Maybe{TValue}"/>.
@@ -452,7 +452,7 @@ namespace TrueMyth
         /// The converted type will be Just if the <c>Result</c> is Ok or Nothing if the <c>Result</c> is Err; the 
         /// wrapped error value will be discarded.
         /// </summary>
-        public Maybe<TValue> ToMaybe() => this._isOk ? Maybe<TValue>.Of(this._value) : Maybe<TValue>.Nothing;
+        public Maybe<TVal> ToMaybe() => this._isOk ? Maybe<TVal>.Of(this._value) : Maybe<TVal>.Nothing;
 
         /// <summary>
         /// Safely get the value out of the <b>Ok</b> variant of a <c>Result</c>. This is the recommended way to get a value
@@ -468,14 +468,14 @@ namespace TrueMyth
         /// Console.WriteLine(anErr.UnwrapOr(0)); // 0
         /// </code>
         /// </example>
-        public TValue UnwrapOr(TValue defaultValue) => this._isOk ? _value : defaultValue;
+        public TVal UnwrapOr(TVal defaultValue) => this._isOk ? _value : defaultValue;
 
         /// <summary>
         /// Safely get the value out of a <c>Result&lt;TValue,TError&gt;</c> by returning the wrapped value if it is <b>Ok</b>
         /// or by applying <c>elseFn</c> if it is <b>Err</b>.
         /// 
         /// This is useful when you need to generate a value (e.g. by using current values in the environment – whether 
-        /// preloaded or by local closure) instead of having a single default value available (as in <see cref="UnwrapOr(TValue)"/>).
+        /// preloaded or by local closure) instead of having a single default value available (as in <see cref="UnwrapOr(TVal)"/>).
         /// </summary>
         /// <param name="elseFn">Function to apply to map <c>TError</c> to <c>TVaue</c>.</param>
         /// <example>
@@ -490,7 +490,7 @@ namespace TrueMyth
         /// Console.WriteLine(anErr.UnwrapOrElse(handleError)); // error
         /// </code>
         /// </example>
-        public TValue UnwrapOrElse(Func<TError,TValue> elseFn) => this._isOk ? _value : elseFn(this._error);
+        public TVal UnwrapOrElse(Func<TErr,TVal> elseFn) => this._isOk ? _value : elseFn(this._error);
 
         #endregion
 
@@ -500,8 +500,8 @@ namespace TrueMyth
         /// Produces a string format like the following: "Ok&lt;TValue,TError&gt;[value]" or "Err&lt;TValue,TError&gt;[error]".
         /// </summary>
         public override string ToString() => this._isOk 
-            ? $"Ok<{typeof(TValue).Name}>[{this._value}]" 
-            : $"Err<{typeof(TError).Name}>[{this._error}]";
+            ? $"Ok<{typeof(TVal).Name}>[{this._value}]" 
+            : $"Err<{typeof(TErr).Name}>[{this._error}]";
 
         /// <exclude/>
         public override bool Equals(object o)
@@ -511,14 +511,14 @@ namespace TrueMyth
                 return false;
             }
 
-            var r = o as Result<TValue,TError>;
+            var r = o as Result<TVal,TErr>;
             if (this._isOk)
             {
-                return EqualityComparer<TValue>.Default.Equals(this._value,r._value);
+                return EqualityComparer<TVal>.Default.Equals(this._value,r._value);
             }
             else
             { 
-                return EqualityComparer<TError>.Default.Equals(this._error,r._error);
+                return EqualityComparer<TErr>.Default.Equals(this._error,r._error);
             }
         }
 
@@ -529,8 +529,8 @@ namespace TrueMyth
             {
                 const int prime = 29;
                 int hash = 17;
-                hash = hash * prime + typeof(TValue).GetHashCode();
-                hash = hash * prime + typeof(TError).GetHashCode();
+                hash = hash * prime + typeof(TVal).GetHashCode();
+                hash = hash * prime + typeof(TErr).GetHashCode();
                 hash = hash * prime + this._isOk.GetHashCode();
                 if (this._isOk)
                 {
@@ -549,7 +549,7 @@ namespace TrueMyth
         #region IComparable Implementation
         
         /// <exclude/>
-        public int CompareTo(Result<TValue,TError> otherResult)
+        public int CompareTo(Result<TVal,TErr> otherResult)
         {
             if (otherResult == null)
             {
@@ -567,7 +567,7 @@ namespace TrueMyth
                 {
                     return -1;
                 }
-                else if(typeof(IComparable).IsAssignableFrom(typeof(TError)))
+                else if(typeof(IComparable).IsAssignableFrom(typeof(TErr)))
                 {
                     var thisErr = this.UnsafelyUnwrapErr() as IComparable;
                     var thatErr = otherResult.UnsafelyUnwrapErr();
@@ -584,7 +584,7 @@ namespace TrueMyth
                 {
                     return 1;
                 }
-                else if (typeof(IComparable).IsAssignableFrom(typeof(TValue)))
+                else if (typeof(IComparable).IsAssignableFrom(typeof(TVal)))
                 {
                     var thisValue = this.UnsafelyUnwrap() as IComparable;
                     var thatValue = otherResult.UnsafelyUnwrap();
@@ -605,7 +605,7 @@ namespace TrueMyth
                 throw new ArgumentException($"Parameter of different type: {obj.GetType()}", nameof(obj));
             }
 
-            return CompareTo((Result<TValue,TError>)obj);
+            return CompareTo((Result<TVal,TErr>)obj);
         }
 
         #endregion
@@ -616,7 +616,7 @@ namespace TrueMyth
         /// A factory method for creating <b>Err</b> <c>Result</c> instances.
         /// </summary>
         /// <param name="err">The error value wrapped by the <c>Result</c></param>
-        public static Result<TValue, TError> Err(TError err) => new Result<TValue, TError>(default(TValue), err, false);
+        public static Result<TVal, TErr> Err(TErr err) => new Result<TVal, TErr>(default(TVal), err, false);
 
         /// <summary>
         /// Transform a <c>Maybe&lt;T&gt;</c> into a <c>Result&lt;T,TError&gt;</c>. If the <c>Maybe</c>
@@ -626,7 +626,7 @@ namespace TrueMyth
         /// <param name="maybe"></param>
         /// <param name="errValue"></param>
         /// <returns></returns>
-        public static Result<TValue,TError> From(Maybe<TValue> maybe, TError errValue) => maybe.ToResult(errValue);
+        public static Result<TVal,TErr> From(Maybe<TVal> maybe, TErr errValue) => maybe.ToResult(errValue);
 
         /// <summary>
         /// A factory method for creating <b>Ok</b> <c>Result</c> instances.
@@ -635,7 +635,7 @@ namespace TrueMyth
         /// </note>
         /// </summary>
         /// <param name="value">The success value wrapped by the <c>Result</c></param>
-        public static Result<TValue, TError> Ok(TValue value) => new Result<TValue, TError>(value, default(TError), true);
+        public static Result<TVal, TErr> Ok(TVal value) => new Result<TVal, TErr>(value, default(TErr), true);
 
         /// <summary>
         /// Implicit conversion operator from <c>Result&lt;TValue, TError&gt;</c> to <c>TValue</c>. Equivalent to <c>result.UnsafelyUnwrap</c>, but 
@@ -668,16 +668,16 @@ namespace TrueMyth
         /// </code>
         /// <note>
         /// There are actually safer <em>and</em> more semantic methods for handling results than this, and we recommend the use 
-        /// of <see cref="UnwrapOr(TValue)"/> or any of the several methods provided for such use; however, we recognize that in 
+        /// of <see cref="UnwrapOr(TVal)"/> or any of the several methods provided for such use; however, we recognize that in 
         /// spite of our desire to avoid exceptions and <c>null</c>, reality insists that sometimes we have to use them, particularly
         /// when making changes to incumbent software.
         /// </note>
         /// </example>
-        public static explicit operator TValue(Result<TValue, TError> result) => 
+        public static explicit operator TVal(Result<TVal, TErr> result) => 
             result._isOk ? result._value : throw new InvalidOperationException("Invalid conversion to value type.");
 
         /// <summary>
-        /// This works similarly to <see cref="explicit operator TValue(Result{TValue,TError})"/>, but instead of conversion to a <c>TValue</c>,
+        /// This works similarly to <see cref="explicit operator TVal(Result{TVal,TErr})"/>, but instead of conversion to a <c>TValue</c>,
         /// the implicit conversion is to a <c>TError</c>.
         /// <note>
         /// This operator will not work if <c>TValue</c> and <c>TError</c> are the same because there will be no
@@ -685,7 +685,7 @@ namespace TrueMyth
         /// </note>
         /// </summary>
         /// <param name="result"></param>
-        public static explicit operator TError(Result<TValue, TError> result) =>
+        public static explicit operator TErr(Result<TVal, TErr> result) =>
             !result._isOk ? result._error : throw new InvalidOperationException("Invalid conversion to error type.");
 
         /// <summary>
@@ -733,7 +733,7 @@ namespace TrueMyth
         /// This will be particularly powerful when combined with similar operators defined for <see cref="Maybe{TValue}"/> when you 
         /// have a return type like <c>Result&lt;Maybe&lt;TValue&gt;,TError&gt;</c>.
         /// </example>
-        public static implicit operator Result<TValue,TError>(TValue value) => new Result<TValue,TError>(value, default(TError), true);
+        public static implicit operator Result<TVal,TErr>(TVal value) => new Result<TVal,TErr>(value, default(TErr), true);
 
         /// <summary>
         /// Implicit conversion operator from <c>TError</c> to <c>Result&lt;TValue,TError&gt;</c>.  As with the other operators, this
@@ -745,9 +745,9 @@ namespace TrueMyth
         /// way for the type inference system in C♯ to resolve them.
         /// </note>
         /// 
-        /// See examples provided with <see cref="implicit operator Result{TValue,TError}(TValue)"/>.
+        /// See examples provided with <see cref="implicit operator Result{TVal,TErr}(TVal)"/>.
         /// </summary>
-        public static implicit operator Result<TValue,TError>(TError error) => new Result<TValue,TError>(default(TValue), error, false);
+        public static implicit operator Result<TVal,TErr>(TErr error) => new Result<TVal,TErr>(default(TVal), error, false);
 
         #endregion
     }
