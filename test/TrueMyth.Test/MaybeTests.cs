@@ -140,7 +140,18 @@ namespace TrueMyth.Test
             }
         }
 
-        // TODO: in RC5 need to test that x.Equals(null) == false
+        [Fact]
+        public void Equals_Null_False()
+        {
+            // arrange
+            var m = Maybe.Of(7);
+
+            // act
+            var r = m.Equals(null);
+            
+            // assert
+            Assert.False(r);
+        }
 
         [Theory]
         [MemberData(nameof(GetMapTheoryData))]
