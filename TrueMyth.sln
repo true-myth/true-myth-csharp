@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMyth.Test", "test\TrueM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMyth.Test.Benchmarks", "test\TrueMyth.Test.Benchmarks\TrueMyth.Test.Benchmarks.csproj", "{89616012-E2CC-49DF-8889-BABC58EFB387}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueMyth.Samples", "test\TrueMyth.Samples\TrueMyth.Samples.csproj", "{F852F961-31C4-4598-86D0-64535C933996}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{89616012-E2CC-49DF-8889-BABC58EFB387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89616012-E2CC-49DF-8889-BABC58EFB387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89616012-E2CC-49DF-8889-BABC58EFB387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F852F961-31C4-4598-86D0-64535C933996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F852F961-31C4-4598-86D0-64535C933996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F852F961-31C4-4598-86D0-64535C933996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F852F961-31C4-4598-86D0-64535C933996}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{E5CE8FA2-E515-4B62-A1EB-271846F922FB} = {6FDFB4BE-C098-45E6-90B4-28F31D6C92B4}
 		{01A60466-961C-423D-90D3-BD5D55A97EAD} = {54B8B4B4-728E-4759-90A0-ACBA78731D88}
 		{89616012-E2CC-49DF-8889-BABC58EFB387} = {54B8B4B4-728E-4759-90A0-ACBA78731D88}
+		{F852F961-31C4-4598-86D0-64535C933996} = {54B8B4B4-728E-4759-90A0-ACBA78731D88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {099DF839-7A14-4937-BF46-D319EE23B6F0}
