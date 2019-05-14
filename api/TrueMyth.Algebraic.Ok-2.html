@@ -1,0 +1,1259 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Ok&lt;TVal, TErr&gt;
+   | True Myth </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Ok&lt;TVal, TErr&gt;
+   | True Myth ">
+    <meta name="generator" content="docfx 2.40.12.0">
+    
+    <link rel="shortcut icon" href="../images/logo_header.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../images/logo_header.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="TrueMyth.Algebraic.Ok`2">
+  
+  
+  <h1 id="TrueMyth_Algebraic_Ok_2" data-uid="TrueMyth.Algebraic.Ok`2" class="text-break">Class Ok&lt;TVal, TErr&gt;
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Ok&lt;TVal, TErr&gt;</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, TErr&gt;</div>
+    <div><span class="xref">System.IComparable</span></div>
+    <div><span class="xref">System.IComparable</span>&lt;<a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, TErr&gt;&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="TrueMyth.Algebraic.html">TrueMyth.Algebraic</a></h6>
+  <h6><strong>Assembly</strong>: TrueMyth.dll</h6>
+  <h5 id="TrueMyth_Algebraic_Ok_2_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class Ok&lt;TVal, TErr&gt; : IResult&lt;TVal, TErr&gt;, IComparable, IComparable&lt;IResult&lt;TVal, TErr&gt;&gt;</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TVal</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TErr</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_And__1_TrueMyth_Algebraic_IResult___0__1__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.And%60%601(TrueMyth.Algebraic.IResult%7B%60%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L15">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_And_" data-uid="TrueMyth.Algebraic.Ok`2.And*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_And__1_TrueMyth_Algebraic_IResult___0__1__" data-uid="TrueMyth.Algebraic.Ok`2.And``1(TrueMyth.Algebraic.IResult{``0,`1})">And&lt;T&gt;(IResult&lt;T, TErr&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;T, TErr&gt; And&lt;T&gt;(IResult&lt;T, TErr&gt; andResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;</td>
+        <td><span class="parametername">andResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_AndThen__1_System_Func__0_TrueMyth_Algebraic_IResult___0__1___.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.AndThen%60%601(System.Func%7B%600%2CTrueMyth.Algebraic.IResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L17">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_AndThen_" data-uid="TrueMyth.Algebraic.Ok`2.AndThen*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_AndThen__1_System_Func__0_TrueMyth_Algebraic_IResult___0__1___" data-uid="TrueMyth.Algebraic.Ok`2.AndThen``1(System.Func{`0,TrueMyth.Algebraic.IResult{``0,`1}})">AndThen&lt;T&gt;(Func&lt;TVal, IResult&lt;T, TErr&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;T, TErr&gt; AndThen&lt;T&gt;(Func&lt;TVal, IResult&lt;T, TErr&gt;&gt; bindFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TVal, <a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;&gt;</td>
+        <td><span class="parametername">bindFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L119">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_CompareTo_" data-uid="TrueMyth.Algebraic.Ok`2.CompareTo*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_CompareTo_System_Object_" data-uid="TrueMyth.Algebraic.Ok`2.CompareTo(System.Object)">CompareTo(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_CompareTo_TrueMyth_Algebraic_IResult__0__1__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.CompareTo(TrueMyth.Algebraic.IResult%7B%600%2C%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L86">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_CompareTo_" data-uid="TrueMyth.Algebraic.Ok`2.CompareTo*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_CompareTo_TrueMyth_Algebraic_IResult__0__1__" data-uid="TrueMyth.Algebraic.Ok`2.CompareTo(TrueMyth.Algebraic.IResult{`0,`1})">CompareTo(IResult&lt;TVal, TErr&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CompareTo(IResult&lt;TVal, TErr&gt; otherResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, TErr&gt;</td>
+        <td><span class="parametername">otherResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_Equals_System_Object_.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L50">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_Equals_" data-uid="TrueMyth.Algebraic.Ok`2.Equals*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_Equals_System_Object_" data-uid="TrueMyth.Algebraic.Ok`2.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_GetHashCode.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L70">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_GetHashCode_" data-uid="TrueMyth.Algebraic.Ok`2.GetHashCode*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_GetHashCode" data-uid="TrueMyth.Algebraic.Ok`2.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_Map__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.Map%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L19">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_Map_" data-uid="TrueMyth.Algebraic.Ok`2.Map*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_Map__1_System_Func__0___0__" data-uid="TrueMyth.Algebraic.Ok`2.Map``1(System.Func{`0,``0})">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;T, TErr&gt; Map&lt;T&gt;(Func&lt;TVal, T&gt; mapFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
+        <td><span class="parametername">mapFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_MapErr__1_System_Func__1___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.MapErr%60%601(System.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L23">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_MapErr_" data-uid="TrueMyth.Algebraic.Ok`2.MapErr*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_MapErr__1_System_Func__1___0__" data-uid="TrueMyth.Algebraic.Ok`2.MapErr``1(System.Func{`1,``0})">MapErr&lt;T&gt;(Func&lt;TErr, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;TVal, T&gt; MapErr&lt;T&gt;(Func&lt;TErr, T&gt; mapFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TErr, T&gt;</td>
+        <td><span class="parametername">mapFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_MapReturn__1_System_Func__0___0____0_.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.MapReturn%60%601(System.Func%7B%600%2C%60%600%7D%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L21">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_MapReturn_" data-uid="TrueMyth.Algebraic.Ok`2.MapReturn*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Algebraic.Ok`2.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;T&gt;(Func&lt;TVal, T&gt;, T)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T MapReturn&lt;T&gt;(Func&lt;TVal, T&gt; mapFn, T defaultValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
+        <td><span class="parametername">mapFn</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">defaultValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_Match_System_Action__0__System_Action__1__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.Match(System.Action%7B%600%7D%2CSystem.Action%7B%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L27">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_Match_" data-uid="TrueMyth.Algebraic.Ok`2.Match*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_Match_System_Action__0__System_Action__1__" data-uid="TrueMyth.Algebraic.Ok`2.Match(System.Action{`0},System.Action{`1})">Match(Action&lt;TVal&gt;, Action&lt;TErr&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Match(Action&lt;TVal&gt; ok, Action&lt;TErr&gt; err)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;TVal&gt;</td>
+        <td><span class="parametername">ok</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Action</span>&lt;TErr&gt;</td>
+        <td><span class="parametername">err</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_Match__1_System_Func__0___0__System_Func__1___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.Match%60%601(System.Func%7B%600%2C%60%600%7D%2CSystem.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L25">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_Match_" data-uid="TrueMyth.Algebraic.Ok`2.Match*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="TrueMyth.Algebraic.Ok`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">Match&lt;T&gt;(Func&lt;TVal, T&gt;, Func&lt;TErr, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Match&lt;T&gt;(Func&lt;TVal, T&gt; ok, Func&lt;TErr, T&gt; err)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
+        <td><span class="parametername">ok</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TErr, T&gt;</td>
+        <td><span class="parametername">err</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_Or__1_TrueMyth_Algebraic_IResult__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.Or%60%601(TrueMyth.Algebraic.IResult%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L29">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_Or_" data-uid="TrueMyth.Algebraic.Ok`2.Or*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_Or__1_TrueMyth_Algebraic_IResult__0___0__" data-uid="TrueMyth.Algebraic.Ok`2.Or``1(TrueMyth.Algebraic.IResult{`0,``0})">Or&lt;T&gt;(IResult&lt;TVal, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;TVal, T&gt; Or&lt;T&gt;(IResult&lt;TVal, T&gt; defaultResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, T&gt;</td>
+        <td><span class="parametername">defaultResult</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_OrElse__1_System_Func_TrueMyth_Algebraic_IResult__0___0___.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.OrElse%60%601(System.Func%7BTrueMyth.Algebraic.IResult%7B%600%2C%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L31">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_OrElse_" data-uid="TrueMyth.Algebraic.Ok`2.OrElse*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_OrElse__1_System_Func_TrueMyth_Algebraic_IResult__0___0___" data-uid="TrueMyth.Algebraic.Ok`2.OrElse``1(System.Func{TrueMyth.Algebraic.IResult{`0,``0}})">OrElse&lt;T&gt;(Func&lt;IResult&lt;TVal, T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;TVal, T&gt; OrElse&lt;T&gt;(Func&lt;IResult&lt;TVal, T&gt;&gt; elseFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, T&gt;&gt;</td>
+        <td><span class="parametername">elseFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_Select__1_System_Func__0___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.Select%60%601(System.Func%7B%600%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L33">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_Select_" data-uid="TrueMyth.Algebraic.Ok`2.Select*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_Select__1_System_Func__0___0__" data-uid="TrueMyth.Algebraic.Ok`2.Select``1(System.Func{`0,``0})">Select&lt;T&gt;(Func&lt;TVal, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;T, TErr&gt; Select&lt;T&gt;(Func&lt;TVal, T&gt; mapFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
+        <td><span class="parametername">mapFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_SelectErr__1_System_Func__1___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.SelectErr%60%601(System.Func%7B%601%2C%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L35">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_SelectErr_" data-uid="TrueMyth.Algebraic.Ok`2.SelectErr*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_SelectErr__1_System_Func__1___0__" data-uid="TrueMyth.Algebraic.Ok`2.SelectErr``1(System.Func{`1,``0})">SelectErr&lt;T&gt;(Func&lt;TErr, T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;TVal, T&gt; SelectErr&lt;T&gt;(Func&lt;TErr, T&gt; mapFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TErr, T&gt;</td>
+        <td><span class="parametername">mapFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;TVal, T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_SelectMany__1_System_Func__0_TrueMyth_Algebraic_IResult___0__1___.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.SelectMany%60%601(System.Func%7B%600%2CTrueMyth.Algebraic.IResult%7B%60%600%2C%601%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L37">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_SelectMany_" data-uid="TrueMyth.Algebraic.Ok`2.SelectMany*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_SelectMany__1_System_Func__0_TrueMyth_Algebraic_IResult___0__1___" data-uid="TrueMyth.Algebraic.Ok`2.SelectMany``1(System.Func{`0,TrueMyth.Algebraic.IResult{``0,`1}})">SelectMany&lt;T&gt;(Func&lt;TVal, IResult&lt;T, TErr&gt;&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IResult&lt;T, TErr&gt; SelectMany&lt;T&gt;(Func&lt;TVal, IResult&lt;T, TErr&gt;&gt; bindFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TVal, <a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;&gt;</td>
+        <td><span class="parametername">bindFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, TErr&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_ToMaybe.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.ToMaybe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L39">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_ToMaybe_" data-uid="TrueMyth.Algebraic.Ok`2.ToMaybe*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_ToMaybe" data-uid="TrueMyth.Algebraic.Ok`2.ToMaybe">ToMaybe()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IMaybe&lt;TVal&gt; ToMaybe()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IMaybe-1.html">IMaybe</a>&lt;TVal&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_ToString.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L47">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_ToString_" data-uid="TrueMyth.Algebraic.Ok`2.ToString*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_ToString" data-uid="TrueMyth.Algebraic.Ok`2.ToString">ToString()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_UnwrapOr__0_.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.UnwrapOr(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L41">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_UnwrapOr_" data-uid="TrueMyth.Algebraic.Ok`2.UnwrapOr*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_UnwrapOr__0_" data-uid="TrueMyth.Algebraic.Ok`2.UnwrapOr(`0)">UnwrapOr(TVal)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TVal UnwrapOr(TVal defaultValue)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TVal</span></td>
+        <td><span class="parametername">defaultValue</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TVal</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2_UnwrapOrElse_System_Func__1__0__.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602.UnwrapOrElse(System.Func%7B%601%2C%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L43">View Source</a>
+  </span>
+  <a id="TrueMyth_Algebraic_Ok_2_UnwrapOrElse_" data-uid="TrueMyth.Algebraic.Ok`2.UnwrapOrElse*"></a>
+  <h4 id="TrueMyth_Algebraic_Ok_2_UnwrapOrElse_System_Func__1__0__" data-uid="TrueMyth.Algebraic.Ok`2.UnwrapOrElse(System.Func{`1,`0})">UnwrapOrElse(Func&lt;TErr, TVal&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TVal UnwrapOrElse(Func&lt;TErr, TVal&gt; errFn)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;TErr, TVal&gt;</td>
+        <td><span class="parametername">errFn</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TVal</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult&lt;TVal, TErr&gt;</a>
+  </div>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
+  <div>
+      <span class="xref">System.IComparable&lt;T&gt;</span>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__2_TrueMyth_Algebraic_IResult___0___1__">UnsafeExtensions.UnsafelyUnwrap&lt;T, E&gt;(IResult&lt;T, E&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr__2_TrueMyth_Algebraic_IResult___0___1__">UnsafeExtensions.UnsafelyUnwrapErr&lt;T, E&gt;(IResult&lt;T, E&gt;)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Algebraic_Ok_2.md&amp;value=---%0Auid%3A%20TrueMyth.Algebraic.Ok%602%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Algebraic/Ok.cs/#L8" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class Maybe&lt;TValue&gt;
+    <title>Class Maybe&lt;TVal&gt;
    | True Myth </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class Maybe&lt;TValue&gt;
+    <meta name="title" content="Class Maybe&lt;TVal&gt;
    | True Myth ">
     <meta name="generator" content="docfx 2.40.12.0">
     
@@ -81,7 +81,7 @@
             <article class="content wrap" id="_content" data-uid="TrueMyth.Maybe`1">
   
   
-  <h1 id="TrueMyth_Maybe_1" data-uid="TrueMyth.Maybe`1" class="text-break">Class Maybe&lt;TValue&gt;
+  <h1 id="TrueMyth_Maybe_1" data-uid="TrueMyth.Maybe`1" class="text-break">Class Maybe&lt;TVal&gt;
   </h1>
   <div class="markdown level0 summary"><p>
   A <code>Maybe&lt;T></code> represents a value of type <code>T</code> which may, or may not, be present. If the value
@@ -101,12 +101,12 @@ ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is <strong>J
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">Maybe&lt;TValue&gt;</span></div>
+    <div class="level1"><span class="xref">Maybe&lt;TVal&gt;</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">System.IComparable</span></div>
-    <div><span class="xref">System.IComparable</span>&lt;<a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;&gt;</div>
+    <div><span class="xref">System.IComparable</span>&lt;<a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -127,7 +127,7 @@ ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is <strong>J
   <h6><strong>Assembly</strong>: TrueMyth.dll</h6>
   <h5 id="TrueMyth_Maybe_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Maybe&lt;TValue&gt; : IComparable, IComparable&lt;Maybe&lt;TValue&gt;&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Maybe&lt;TVal&gt; : IComparable, IComparable&lt;Maybe&lt;TVal&gt;&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -139,7 +139,7 @@ ways.  The most explicit way to check if a <code>Maybe&lt;T></code> is <strong>J
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TValue</span></td>
+        <td><span class="parametername">TVal</span></td>
         <td><p>Any type supported by the .NET type system.</p>
 </td>
       </tr>
@@ -251,7 +251,7 @@ static initialization of the program, so this property is effectively like a con
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Maybe&lt;TValue&gt; Nothing { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static Maybe&lt;TVal&gt; Nothing { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -263,7 +263,7 @@ static initialization of the program, so this property is effectively like a con
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><p>The <strong>Nothing</strong> instance of type <code>Maybe&lt;TValue&gt;</code>.</p>
 </td>
       </tr>
@@ -279,7 +279,7 @@ static initialization of the program, so this property is effectively like a con
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L259">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_And_" data-uid="TrueMyth.Maybe`1.And*"></a>
-  <h4 id="TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__" data-uid="TrueMyth.Maybe`1.And``1(TrueMyth.Maybe{``0})">And&lt;UValue&gt;(Maybe&lt;UValue&gt;)</h4>
+  <h4 id="TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__" data-uid="TrueMyth.Maybe`1.And``1(TrueMyth.Maybe{``0})">And&lt;T&gt;(Maybe&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>
 You can think of this like a short-circuiting logical &quot;and&quot; operation on a <code>Mabye</code> type.  If <code>this</code> is a <strong>Just</strong>, then
 the result is the <code>andMaybe</code>.  If <code>this</code> is <strong>Nothing</strong>, then the result will also be <strong>Nothing</strong> for the destination type
@@ -296,7 +296,7 @@ Other things to note:
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;UValue&gt; And&lt;UValue&gt;(Maybe&lt;UValue&gt; andMaybe)</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;T&gt; And&lt;T&gt;(Maybe&lt;T&gt; andMaybe)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -309,7 +309,7 @@ Other things to note:
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;UValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
         <td><span class="parametername">andMaybe</span></td>
         <td></td>
       </tr>
@@ -325,7 +325,7 @@ Other things to note:
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;UValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -340,7 +340,7 @@ Other things to note:
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -353,14 +353,14 @@ Other things to note:
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L267">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_AndThen_" data-uid="TrueMyth.Maybe`1.AndThen*"></a>
-  <h4 id="TrueMyth_Maybe_1_AndThen__1_System_Func__0_TrueMyth_Maybe___0___" data-uid="TrueMyth.Maybe`1.AndThen``1(System.Func{`0,TrueMyth.Maybe{``0}})">AndThen&lt;UValue&gt;(Func&lt;TValue, Maybe&lt;UValue&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>This work similarly to <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__">And&lt;UValue&gt;(Maybe&lt;UValue&gt;)</a>, but instead of providing a maybe that will be returned when <code>this</code> is <strong>Just</strong>,
+  <h4 id="TrueMyth_Maybe_1_AndThen__1_System_Func__0_TrueMyth_Maybe___0___" data-uid="TrueMyth.Maybe`1.AndThen``1(System.Func{`0,TrueMyth.Maybe{``0}})">AndThen&lt;T&gt;(Func&lt;TVal, Maybe&lt;T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>This work similarly to <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_And__1_TrueMyth_Maybe___0__">And&lt;T&gt;(Maybe&lt;T&gt;)</a>, but instead of providing a maybe that will be returned when <code>this</code> is <strong>Just</strong>,
 you provide a function that returns a <code>Maybe</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;UValue&gt; AndThen&lt;UValue&gt;(Func&lt;TValue, Maybe&lt;UValue&gt;&gt; bindFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;T&gt; AndThen&lt;T&gt;(Func&lt;TVal, Maybe&lt;T&gt;&gt; bindFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -373,7 +373,7 @@ you provide a function that returns a <code>Maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, <a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;UValue&gt;&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, <a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;&gt;</td>
         <td><span class="parametername">bindFn</span></td>
         <td><p>Function that returns a <code>Maybe&lt;UValue&gt;</code></p>
 </td>
@@ -390,7 +390,7 @@ you provide a function that returns a <code>Maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;UValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -405,7 +405,7 @@ you provide a function that returns a <code>Maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>Any type supported by C♯; it needn't be the same as <code>TValue</code>.</p>
 </td>
       </tr>
@@ -466,12 +466,12 @@ you provide a function that returns a <code>Maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L430">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_CompareTo_" data-uid="TrueMyth.Maybe`1.CompareTo*"></a>
-  <h4 id="TrueMyth_Maybe_1_CompareTo_TrueMyth_Maybe__0__" data-uid="TrueMyth.Maybe`1.CompareTo(TrueMyth.Maybe{`0})">CompareTo(Maybe&lt;TValue&gt;)</h4>
+  <h4 id="TrueMyth_Maybe_1_CompareTo_TrueMyth_Maybe__0__" data-uid="TrueMyth.Maybe`1.CompareTo(TrueMyth.Maybe{`0})">CompareTo(Maybe&lt;TVal&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int CompareTo(Maybe&lt;TValue&gt; otherMaybe)</code></pre>
+    <pre><code class="lang-csharp hljs">public int CompareTo(Maybe&lt;TVal&gt; otherMaybe)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -484,7 +484,7 @@ you provide a function that returns a <code>Maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><span class="parametername">otherMaybe</span></td>
         <td></td>
       </tr>
@@ -594,7 +594,7 @@ you provide a function that returns a <code>Maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L276">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Map_" data-uid="TrueMyth.Maybe`1.Map*"></a>
-  <h4 id="TrueMyth_Maybe_1_Map__1_System_Func__0___0__" data-uid="TrueMyth.Maybe`1.Map``1(System.Func{`0,``0})">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
+  <h4 id="TrueMyth_Maybe_1_Map__1_System_Func__0___0__" data-uid="TrueMyth.Maybe`1.Map``1(System.Func{`0,``0})">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</h4>
   <div class="markdown level1 summary"><p>Map over a <code>Maybe</code> instance.static  This applies the function to the wrapped value if the instance is <strong>Just</strong> and returns <strong>Nothing</strong>
 if the instance is <strong>Nothing</strong>.  This respects types, so if <code>this</code> is of type <code>Maybe&lt;int&gt;</code> and you provide a <code>mapFn</code> of type <code>Func&lt;double&gt;</code>,
 the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;double&gt;</code>, irrespective of <code>this</code> being <strong>Just</strong> or <strong>Nothing</strong>.</p>
@@ -602,7 +602,7 @@ the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;doub
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;UValue&gt; Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt; mapFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;T&gt; Map&lt;T&gt;(Func&lt;TVal, T&gt; mapFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -615,7 +615,7 @@ the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;doub
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td><p>The mapping function to be applied to the wrapped value.</p>
 </td>
@@ -632,7 +632,7 @@ the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;doub
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;UValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -647,7 +647,7 @@ the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;doub
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>The type of the resulting <code>Maybe</code> value.</p>
 </td>
       </tr>
@@ -661,15 +661,15 @@ the type of <code>Maybe</code> that will be returned will be <code>Maybe&lt;doub
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L290">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_MapReturn_" data-uid="TrueMyth.Maybe`1.MapReturn*"></a>
-  <h4 id="TrueMyth_Maybe_1_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Maybe`1.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, UValue)</h4>
+  <h4 id="TrueMyth_Maybe_1_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Maybe`1.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;T&gt;(Func&lt;TVal, T&gt;, T)</h4>
   <div class="markdown level1 summary"><p>Map over a <code>Maybe&lt;TValue&gt;</code> instance and get out the value if it's a <strong>Just</strong>, or return a default value if
-it's a <strong>Nothing</strong>&gt;. It differs from <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a> in that the result is the
+it's a <strong>Nothing</strong>&gt;. It differs from <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Map__1_System_Func__0___0__">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</a> in that the result is the
 value type itself (or a mapped type).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UValue MapReturn&lt;UValue&gt;(Func&lt;TValue, UValue&gt; mapFn, UValue defaultValue)</code></pre>
+    <pre><code class="lang-csharp hljs">public T MapReturn&lt;T&gt;(Func&lt;TVal, T&gt; mapFn, T defaultValue)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -682,13 +682,13 @@ value type itself (or a mapped type).</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td><p>The mapping function to be applied to the wrapped value.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">UValue</span></td>
+        <td><span class="xref">T</span></td>
         <td><span class="parametername">defaultValue</span></td>
         <td><p>A fallback value of type <code>UValue</code> to be returned in the case that
 <code>this</code> is <strong>Nothing</strong>.</p>
@@ -706,7 +706,7 @@ value type itself (or a mapped type).</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">UValue</span></td>
+        <td><span class="xref">T</span></td>
         <td><p>A <code>UValue</code> as computed by <code>mapFn</code> if <code>this</code> is <strong>Just</strong>; otherwise, the
 <code>defaultValue</code>.</p>
 </td>
@@ -723,7 +723,7 @@ value type itself (or a mapped type).</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>The type of the result of the mapping function; any type supported by C♯ can be
 used here; it needn't be different than <code>TValue</code>.</p>
 </td>
@@ -738,13 +738,13 @@ used here; it needn't be different than <code>TValue</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L310">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Match_" data-uid="TrueMyth.Maybe`1.Match*"></a>
-  <h4 id="TrueMyth_Maybe_1_Match_System_Action__0__System_Action_" data-uid="TrueMyth.Maybe`1.Match(System.Action{`0},System.Action)">Match(Action&lt;TValue&gt;, Action)</h4>
-  <div class="markdown level1 summary"><p>Provides a similar functionality as <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__">Match&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, Func&lt;UValue&gt;)</a>, but without return types.</p>
+  <h4 id="TrueMyth_Maybe_1_Match_System_Action__0__System_Action_" data-uid="TrueMyth.Maybe`1.Match(System.Action{`0},System.Action)">Match(Action&lt;TVal&gt;, Action)</h4>
+  <div class="markdown level1 summary"><p>Provides a similar functionality as <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__">Match&lt;T&gt;(Func&lt;TVal, T&gt;, Func&lt;T&gt;)</a>, but without return types.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Match(Action&lt;TValue&gt; just, Action nothing)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Match(Action&lt;TVal&gt; just, Action nothing)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -757,7 +757,7 @@ used here; it needn't be different than <code>TValue</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;TValue&gt;</td>
+        <td><span class="xref">System.Action</span>&lt;TVal&gt;</td>
         <td><span class="parametername">just</span></td>
         <td></td>
       </tr>
@@ -776,14 +776,14 @@ used here; it needn't be different than <code>TValue</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L305">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Match_" data-uid="TrueMyth.Maybe`1.Match*"></a>
-  <h4 id="TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__" data-uid="TrueMyth.Maybe`1.Match``1(System.Func{`0,``0},System.Func{``0})">Match&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, Func&lt;UValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Provides the same basic functionality as <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TValue&gt;)</a>, but instead of simply unwrapping the value if it is <strong>Just</strong> and applyiung a value to genearte
+  <h4 id="TrueMyth_Maybe_1_Match__1_System_Func__0___0__System_Func___0__" data-uid="TrueMyth.Maybe`1.Match``1(System.Func{`0,``0},System.Func{``0})">Match&lt;T&gt;(Func&lt;TVal, T&gt;, Func&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Provides the same basic functionality as <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TVal&gt;)</a>, but instead of simply unwrapping the value if it is <strong>Just</strong> and applyiung a value to genearte
 the same default type if it is <strong>Nothing</strong>, lets you supply functions which may transform the wrapped type if it is <strong>Just</strong> or get a default value for <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UValue Match&lt;UValue&gt;(Func&lt;TValue, UValue&gt; just, Func&lt;UValue&gt; nothing)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Match&lt;T&gt;(Func&lt;TVal, T&gt; just, Func&lt;T&gt; nothing)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -796,13 +796,13 @@ the same default type if it is <strong>Nothing</strong>, lets you supply functio
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">just</span></td>
         <td><p>The function to apply if <code>this</code> is <strong>Just</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;T&gt;</td>
         <td><span class="parametername">nothing</span></td>
         <td><p>The function to apply if <code>this</code> is <strong>Nothing</strong>.</p>
 </td>
@@ -819,7 +819,7 @@ the same default type if it is <strong>Nothing</strong>, lets you supply functio
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">UValue</span></td>
+        <td><span class="xref">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -834,7 +834,7 @@ the same default type if it is <strong>Nothing</strong>, lets you supply functio
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -854,14 +854,14 @@ nothing: val =&gt; &quot;nothing&quot;
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L329">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Of_" data-uid="TrueMyth.Maybe`1.Of*"></a>
-  <h4 id="TrueMyth_Maybe_1_Of__0_" data-uid="TrueMyth.Maybe`1.Of(`0)">Of(TValue)</h4>
+  <h4 id="TrueMyth_Maybe_1_Of__0_" data-uid="TrueMyth.Maybe`1.Of(`0)">Of(TVal)</h4>
   <div class="markdown level1 summary"><p>Static factory method for creation of new <strong>Just</strong> <code>Maybe&lt;TValue&gt;</code>s.  If <code>value</code> is a
 reference type and is <code>null</code>, this returns a <strong>Nothing</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Maybe&lt;TValue&gt; Of(TValue value)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Maybe&lt;TVal&gt; Of(TVal value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -874,10 +874,10 @@ reference type and is <code>null</code>, this returns a <strong>Nothing</strong>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td><span class="parametername">value</span></td>
         <td><p>The value to be held by the <code>Maybe&lt;TValue&gt;</code> instance.  Of type <code>TValue</code>
-(see documentation for <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a>).</p>
+(see documentation for <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TVal&gt;</a>).</p>
 </td>
       </tr>
     </tbody>
@@ -892,7 +892,7 @@ reference type and is <code>null</code>, this returns a <strong>Nothing</strong>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><p>A <code>Maybe&lt;TValue&gt;</code> instance.</p>
 </td>
       </tr>
@@ -906,14 +906,14 @@ reference type and is <code>null</code>, this returns a <strong>Nothing</strong>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L337">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Or_" data-uid="TrueMyth.Maybe`1.Or*"></a>
-  <h4 id="TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__" data-uid="TrueMyth.Maybe`1.Or(TrueMyth.Maybe{`0})">Or(Maybe&lt;TValue&gt;)</h4>
+  <h4 id="TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__" data-uid="TrueMyth.Maybe`1.Or(TrueMyth.Maybe{`0})">Or(Maybe&lt;TVal&gt;)</h4>
   <div class="markdown level1 summary"><p>Provide a fallback for <code>this</code>.  Behaves like a logical &quot;or&quot;: if the <code>Maybe</code> is <strong>Just</strong>, returns that; otherwise,
 returns the provided <code>maybe</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;TValue&gt; Or(Maybe&lt;TValue&gt; maybe)</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;TVal&gt; Or(Maybe&lt;TVal&gt; maybe)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -926,7 +926,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><span class="parametername">maybe</span></td>
         <td><p>Fallback value.</p>
 </td>
@@ -943,7 +943,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><p>If <code>this</code> is <strong>Just</strong>, return <code>this</code>; otherwise return <code>maybe</code>.</p>
 </td>
       </tr>
@@ -957,13 +957,13 @@ returns the provided <code>maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L344">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_OrElse_" data-uid="TrueMyth.Maybe`1.OrElse*"></a>
-  <h4 id="TrueMyth_Maybe_1_OrElse_System_Func_TrueMyth_Maybe__0___" data-uid="TrueMyth.Maybe`1.OrElse(System.Func{TrueMyth.Maybe{`0}})">OrElse(Func&lt;Maybe&lt;TValue&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>Like <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__">Or(Maybe&lt;TValue&gt;)</a>, but using a function to construct the fallback <code>Maybe</code>.</p>
+  <h4 id="TrueMyth_Maybe_1_OrElse_System_Func_TrueMyth_Maybe__0___" data-uid="TrueMyth.Maybe`1.OrElse(System.Func{TrueMyth.Maybe{`0}})">OrElse(Func&lt;Maybe&lt;TVal&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Like <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Or_TrueMyth_Maybe__0__">Or(Maybe&lt;TVal&gt;)</a>, but using a function to construct the fallback <code>Maybe</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;TValue&gt; OrElse(Func&lt;Maybe&lt;TValue&gt;&gt; elseFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;TVal&gt; OrElse(Func&lt;Maybe&lt;TVal&gt;&gt; elseFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -976,7 +976,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;&gt;</td>
         <td><span class="parametername">elseFn</span></td>
         <td><p>Function used to construct fallback <code>Maybe</code>.</p>
 </td>
@@ -993,7 +993,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><p>If <code>this</code> is <strong>Just</strong>, returns <code>this</code>.  Otherwise, returns result of <code>elseFn</code>.</p>
 </td>
       </tr>
@@ -1007,13 +1007,13 @@ returns the provided <code>maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L351">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_Select_" data-uid="TrueMyth.Maybe`1.Select*"></a>
-  <h4 id="TrueMyth_Maybe_1_Select__1_System_Func__0___0__" data-uid="TrueMyth.Maybe`1.Select``1(System.Func{`0,``0})">Select&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a>; provided for familiarity for C♯ programmers.</p>
+  <h4 id="TrueMyth_Maybe_1_Select__1_System_Func__0___0__" data-uid="TrueMyth.Maybe`1.Select``1(System.Func{`0,``0})">Select&lt;T&gt;(Func&lt;TVal, T&gt;)</h4>
+  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Map__1_System_Func__0___0__">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</a>; provided for familiarity for C♯ programmers.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;UValue&gt; Select&lt;UValue&gt;(Func&lt;TValue, UValue&gt; mapFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;T&gt; Select&lt;T&gt;(Func&lt;TVal, T&gt; mapFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1026,7 +1026,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td><p>The mapping function to be applied to the wrapped value.</p>
 </td>
@@ -1043,7 +1043,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;UValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1058,7 +1058,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>The type of the resulting <code>Maybe</code> value.</p>
 </td>
       </tr>
@@ -1072,14 +1072,14 @@ returns the provided <code>maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L359">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_ToResult_" data-uid="TrueMyth.Maybe`1.ToResult*"></a>
-  <h4 id="TrueMyth_Maybe_1_ToResult__1___0_" data-uid="TrueMyth.Maybe`1.ToResult``1(``0)">ToResult&lt;TError&gt;(TError)</h4>
-  <div class="markdown level1 summary"><p>Transform the <code>Maybe</code> into a <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TValue, TError&gt;</a>, using the wrapped value as the <strong>Ok</strong> value if <strong>Just</strong>; otherwise using the supplied
+  <h4 id="TrueMyth_Maybe_1_ToResult__1___0_" data-uid="TrueMyth.Maybe`1.ToResult``1(``0)">ToResult&lt;TErr&gt;(TErr)</h4>
+  <div class="markdown level1 summary"><p>Transform the <code>Maybe</code> into a <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TVal, TErr&gt;</a>, using the wrapped value as the <strong>Ok</strong> value if <strong>Just</strong>; otherwise using the supplied
 <code>error</code> value for <strong>Err</strong>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;TValue, TError&gt; ToResult&lt;TError&gt;(TError error)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;TVal, TErr&gt; ToResult&lt;TErr&gt;(TErr error)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1092,7 +1092,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TError</span></td>
+        <td><span class="xref">TErr</span></td>
         <td><span class="parametername">error</span></td>
         <td><p>The error value to use if the <code>Maybe</code> is <strong>Nothing</strong>.</p>
 </td>
@@ -1109,7 +1109,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1124,7 +1124,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TError</span></td>
+        <td><span class="parametername">TErr</span></td>
         <td><p>The wrapped value type.</p>
 </td>
       </tr>
@@ -1138,13 +1138,13 @@ returns the provided <code>maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L364">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_ToResult_" data-uid="TrueMyth.Maybe`1.ToResult*"></a>
-  <h4 id="TrueMyth_Maybe_1_ToResult__1_System_Func___0__" data-uid="TrueMyth.Maybe`1.ToResult``1(System.Func{``0})">ToResult&lt;TError&gt;(Func&lt;TError&gt;)</h4>
-  <div class="markdown level1 summary"><p>Very similar to <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_ToResult__1___0_">ToResult&lt;TError&gt;(TError)</a>, but using a function to construct the error result.</p>
+  <h4 id="TrueMyth_Maybe_1_ToResult__1_System_Func___0__" data-uid="TrueMyth.Maybe`1.ToResult``1(System.Func{``0})">ToResult&lt;TErr&gt;(Func&lt;TErr&gt;)</h4>
+  <div class="markdown level1 summary"><p>Very similar to <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_ToResult__1___0_">ToResult&lt;TErr&gt;(TErr)</a>, but using a function to construct the error result.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;TValue, TError&gt; ToResult&lt;TError&gt;(Func&lt;TError&gt; errFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;TVal, TErr&gt; ToResult&lt;TErr&gt;(Func&lt;TErr&gt; errFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1157,7 +1157,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TError&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TErr&gt;</td>
         <td><span class="parametername">errFn</span></td>
         <td></td>
       </tr>
@@ -1173,7 +1173,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1188,7 +1188,7 @@ returns the provided <code>maybe</code>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TError</span></td>
+        <td><span class="parametername">TErr</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1234,14 +1234,14 @@ returns the provided <code>maybe</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L370">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_UnwrapOr_" data-uid="TrueMyth.Maybe`1.UnwrapOr*"></a>
-  <h4 id="TrueMyth_Maybe_1_UnwrapOr__0_" data-uid="TrueMyth.Maybe`1.UnwrapOr(`0)">UnwrapOr(TValue)</h4>
+  <h4 id="TrueMyth_Maybe_1_UnwrapOr__0_" data-uid="TrueMyth.Maybe`1.UnwrapOr(`0)">UnwrapOr(TVal)</h4>
   <div class="markdown level1 summary"><p>Safely get the <code>TValue</code> value out of the <code>Maybe&lt;TValue&gt;</code>. Returns the content of <strong>Just</strong> or <code>defaultValue</code> if <code>this</code> is <strong>Nothing</strong>.
 This is the recommended way to get a value out of a <code>Maybe</code> most of the time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TValue UnwrapOr(TValue defaultValue)</code></pre>
+    <pre><code class="lang-csharp hljs">public TVal UnwrapOr(TVal defaultValue)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1254,7 +1254,7 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td><span class="parametername">defaultValue</span></td>
         <td></td>
       </tr>
@@ -1270,7 +1270,7 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1283,15 +1283,15 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L377">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_UnwrapOrElse_" data-uid="TrueMyth.Maybe`1.UnwrapOrElse*"></a>
-  <h4 id="TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__" data-uid="TrueMyth.Maybe`1.UnwrapOrElse(System.Func{`0})">UnwrapOrElse(Func&lt;TValue&gt;)</h4>
+  <h4 id="TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__" data-uid="TrueMyth.Maybe`1.UnwrapOrElse(System.Func{`0})">UnwrapOrElse(Func&lt;TVal&gt;)</h4>
   <div class="markdown level1 summary"><p>Safely get the value out of a <code>Maybe</code> by returning the wrapped value if it is <strong>Just</strong>, oir by applying
 <code>elseFn</code> if it's <strong>Nothing</strong>.  This is useful when you need to <em>generate</em> a value (e.g. by using current values in the environment
-— whether preloaded or by local closure) instead of having a default value available as in <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_">UnwrapOr(TValue)</a>.</p>
+— whether preloaded or by local closure) instead of having a default value available as in <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_">UnwrapOr(TVal)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TValue UnwrapOrElse(Func&lt;TValue&gt; elseFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public TVal UnwrapOrElse(Func&lt;TVal&gt; elseFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1304,7 +1304,7 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal&gt;</td>
         <td><span class="parametername">elseFn</span></td>
         <td></td>
       </tr>
@@ -1320,7 +1320,7 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1335,14 +1335,14 @@ This is the recommended way to get a value out of a <code>Maybe</code> most of t
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L487">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_op_Explicit_" data-uid="TrueMyth.Maybe`1.op_Explicit*"></a>
-  <h4 id="TrueMyth_Maybe_1_op_Explicit_TrueMyth_Maybe__0____0" data-uid="TrueMyth.Maybe`1.op_Explicit(TrueMyth.Maybe{`0})~`0">Explicit(Maybe&lt;TValue&gt; to TValue)</h4>
+  <h4 id="TrueMyth_Maybe_1_op_Explicit_TrueMyth_Maybe__0____0" data-uid="TrueMyth.Maybe`1.op_Explicit(TrueMyth.Maybe{`0})~`0">Explicit(Maybe&lt;TVal&gt; to TVal)</h4>
   <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="TrueMyth.Unsafe.UnsafeExtensions.html#TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__1_TrueMyth_Maybe___0__">UnsafelyUnwrap&lt;T&gt;(Maybe&lt;T&gt;)</a>.  Follows usual C♯ semantics
 of throwing an exception at runtime if the conversion is invalid.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static explicit operator TValue(Maybe&lt;TValue&gt; maybe)</code></pre>
+    <pre><code class="lang-csharp hljs">public static explicit operator TVal(Maybe&lt;TVal&gt; maybe)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1355,7 +1355,7 @@ of throwing an exception at runtime if the conversion is invalid.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><span class="parametername">maybe</span></td>
         <td></td>
       </tr>
@@ -1371,7 +1371,7 @@ of throwing an exception at runtime if the conversion is invalid.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1384,13 +1384,13 @@ of throwing an exception at runtime if the conversion is invalid.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Maybe.cs/#L535">View Source</a>
   </span>
   <a id="TrueMyth_Maybe_1_op_Implicit_" data-uid="TrueMyth.Maybe`1.op_Implicit*"></a>
-  <h4 id="TrueMyth_Maybe_1_op_Implicit__0__TrueMyth_Maybe__0_" data-uid="TrueMyth.Maybe`1.op_Implicit(`0)~TrueMyth.Maybe{`0}">Implicit(TValue to Maybe&lt;TValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Constructs a <code>Maybe&lt;TValue&gt;</code> explicitly. Equivalent of <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Of__0_">Of(TValue)</a>.</p>
+  <h4 id="TrueMyth_Maybe_1_op_Implicit__0__TrueMyth_Maybe__0_" data-uid="TrueMyth.Maybe`1.op_Implicit(`0)~TrueMyth.Maybe{`0}">Implicit(TVal to Maybe&lt;TVal&gt;)</h4>
+  <div class="markdown level1 summary"><p>Constructs a <code>Maybe&lt;TValue&gt;</code> explicitly. Equivalent of <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Of__0_">Of(TVal)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static implicit operator Maybe&lt;TValue&gt;(TValue value)</code></pre>
+    <pre><code class="lang-csharp hljs">public static implicit operator Maybe&lt;TVal&gt;(TVal value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1403,7 +1403,7 @@ of throwing an exception at runtime if the conversion is invalid.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td><span class="parametername">value</span></td>
         <td></td>
       </tr>
@@ -1419,7 +1419,7 @@ of throwing an exception at runtime if the conversion is invalid.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td></td>
       </tr>
     </tbody>

@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class Result&lt;TValue, TError&gt;
+    <title>Class Result&lt;TVal, TErr&gt;
    | True Myth </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class Result&lt;TValue, TError&gt;
+    <meta name="title" content="Class Result&lt;TVal, TErr&gt;
    | True Myth ">
     <meta name="generator" content="docfx 2.40.12.0">
     
@@ -81,7 +81,7 @@
             <article class="content wrap" id="_content" data-uid="TrueMyth.Result`2">
   
   
-  <h1 id="TrueMyth_Result_2" data-uid="TrueMyth.Result`2" class="text-break">Class Result&lt;TValue, TError&gt;
+  <h1 id="TrueMyth_Result_2" data-uid="TrueMyth.Result`2" class="text-break">Class Result&lt;TVal, TErr&gt;
   </h1>
   <div class="markdown level0 summary"><p>A <code>Result&lt;TValue,TError></code> is a type representing the value result of an operation which may
 fail, with a successful value type of <code>TValue</code> or an error type of <code>TError</code> (pun intended!).  If the
@@ -106,12 +106,12 @@ errors instead of necessary.
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">Result&lt;TValue, TError&gt;</span></div>
+    <div class="level1"><span class="xref">Result&lt;TVal, TErr&gt;</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">System.IComparable</span></div>
-    <div><span class="xref">System.IComparable</span>&lt;<a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;&gt;</div>
+    <div><span class="xref">System.IComparable</span>&lt;<a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -132,7 +132,7 @@ errors instead of necessary.
   <h6><strong>Assembly</strong>: TrueMyth.dll</h6>
   <h5 id="TrueMyth_Result_2_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class Result&lt;TValue, TError&gt; : IComparable, IComparable&lt;Result&lt;TValue, TError&gt;&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class Result&lt;TVal, TErr&gt; : IComparable, IComparable&lt;Result&lt;TVal, TErr&gt;&gt;</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -144,12 +144,12 @@ errors instead of necessary.
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">TValue</span></td>
+        <td><span class="parametername">TVal</span></td>
         <td><p>The value type for <strong>Ok</strong> values.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="parametername">TError</span></td>
+        <td><span class="parametername">TErr</span></td>
         <td><p>The value type for <strong>Err</strong> values.</p>
 </td>
       </tr>
@@ -306,19 +306,19 @@ the property is <code>true</code>.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L284">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_And_" data-uid="TrueMyth.Result`2.And*"></a>
-  <h4 id="TrueMyth_Result_2_And__1_TrueMyth_Result___0__1__" data-uid="TrueMyth.Result`2.And``1(TrueMyth.Result{``0,`1})">And&lt;UValue&gt;(Result&lt;UValue, TError&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_And__1_TrueMyth_Result___0__1__" data-uid="TrueMyth.Result`2.And``1(TrueMyth.Result{``0,`1})">And&lt;T&gt;(Result&lt;T, TErr&gt;)</h4>
   <div class="markdown level1 summary"><p>You can think of this like a short-circuiting logical &quot;and&quot; operation on a <code>Result</code> type. If result
 is Ok, then the result is the <code>andResult</code>. If result is Err, the result is the Err.</p>
 <p>This is useful when you have another <code>Result</code> value you want to provide if and only if you have an Ok
 – that is, when you need to make sure that if you Err, whatever else you're handing a <code>Result</code> to
 also gets that Err.</p>
-<p>Notice that, unlike in <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a> or its variants, the original
+<p>Notice that, unlike in <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Map__1_System_Func__0___0__">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</a> or its variants, the original
 result is not involved in constructing the new Result.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;UValue, TError&gt; And&lt;UValue&gt;(Result&lt;UValue, TError&gt; andResult)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;T, TErr&gt; And&lt;T&gt;(Result&lt;T, TErr&gt; andResult)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -331,7 +331,7 @@ result is not involved in constructing the new Result.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;</td>
         <td><span class="parametername">andResult</span></td>
         <td><p>Result returned if <code>this</code> is an Ok.</p>
 </td>
@@ -348,7 +348,7 @@ result is not involved in constructing the new Result.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -363,7 +363,7 @@ result is not involved in constructing the new Result.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -376,17 +376,17 @@ result is not involved in constructing the new Result.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L296">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_AndThen_" data-uid="TrueMyth.Result`2.AndThen*"></a>
-  <h4 id="TrueMyth_Result_2_AndThen__1_System_Func__0_TrueMyth_Result___0__1___" data-uid="TrueMyth.Result`2.AndThen``1(System.Func{`0,TrueMyth.Result{``0,`1}})">AndThen&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_AndThen__1_System_Func__0_TrueMyth_Result___0__1___" data-uid="TrueMyth.Result`2.AndThen``1(System.Func{`0,TrueMyth.Result{``0,`1}})">AndThen&lt;T&gt;(Func&lt;TVal, Result&lt;T, TErr&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Apply a function to the wrapped value if Ok and return a new Ok containing the resulting value; or if it
 is Err return it unmodified.</p>
-<p>This differs from <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a> in that <code>thenFn</code> returns another
+<p>This differs from <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Map__1_System_Func__0___0__">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</a> in that <code>thenFn</code> returns another
 <code>Result</code>. You can use <code>andThen</code> to combine two functions which both create a Result from an
 unwrapped type.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;UValue, TError&gt; AndThen&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt; bindFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;T, TErr&gt; AndThen&lt;T&gt;(Func&lt;TVal, Result&lt;T, TErr&gt;&gt; bindFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -399,7 +399,7 @@ unwrapped type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, <a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, <a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;&gt;</td>
         <td><span class="parametername">bindFn</span></td>
         <td><p>Function that returns Result if <code>this</code> is an Ok.</p>
 </td>
@@ -416,7 +416,7 @@ unwrapped type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -431,7 +431,7 @@ unwrapped type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>Ok value type of result of <code>thenFn</code>.</p>
 </td>
       </tr>
@@ -492,12 +492,12 @@ unwrapped type.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L552">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_CompareTo_" data-uid="TrueMyth.Result`2.CompareTo*"></a>
-  <h4 id="TrueMyth_Result_2_CompareTo_TrueMyth_Result__0__1__" data-uid="TrueMyth.Result`2.CompareTo(TrueMyth.Result{`0,`1})">CompareTo(Result&lt;TValue, TError&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_CompareTo_TrueMyth_Result__0__1__" data-uid="TrueMyth.Result`2.CompareTo(TrueMyth.Result{`0,`1})">CompareTo(Result&lt;TVal, TErr&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int CompareTo(Result&lt;TValue, TError&gt; otherResult)</code></pre>
+    <pre><code class="lang-csharp hljs">public int CompareTo(Result&lt;TVal, TErr&gt; otherResult)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -510,7 +510,7 @@ unwrapped type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td><span class="parametername">otherResult</span></td>
         <td></td>
       </tr>
@@ -588,13 +588,13 @@ unwrapped type.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L619">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Err_" data-uid="TrueMyth.Result`2.Err*"></a>
-  <h4 id="TrueMyth_Result_2_Err__1_" data-uid="TrueMyth.Result`2.Err(`1)">Err(TError)</h4>
+  <h4 id="TrueMyth_Result_2_Err__1_" data-uid="TrueMyth.Result`2.Err(`1)">Err(TErr)</h4>
   <div class="markdown level1 summary"><p>A factory method for creating <strong>Err</strong> <code>Result</code> instances.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Result&lt;TValue, TError&gt; Err(TError err)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Result&lt;TVal, TErr&gt; Err(TErr err)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -607,7 +607,7 @@ unwrapped type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TError</span></td>
+        <td><span class="xref">TErr</span></td>
         <td><span class="parametername">err</span></td>
         <td><p>The error value wrapped by the <code>Result</code></p>
 </td>
@@ -624,7 +624,7 @@ unwrapped type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -637,7 +637,7 @@ unwrapped type.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L629">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_From_" data-uid="TrueMyth.Result`2.From*"></a>
-  <h4 id="TrueMyth_Result_2_From_TrueMyth_Maybe__0___1_" data-uid="TrueMyth.Result`2.From(TrueMyth.Maybe{`0},`1)">From(Maybe&lt;TValue&gt;, TError)</h4>
+  <h4 id="TrueMyth_Result_2_From_TrueMyth_Maybe__0___1_" data-uid="TrueMyth.Result`2.From(TrueMyth.Maybe{`0},`1)">From(Maybe&lt;TVal&gt;, TErr)</h4>
   <div class="markdown level1 summary"><p>Transform a <code>Maybe&lt;T&gt;</code> into a <code>Result&lt;T,TError&gt;</code>. If the <code>Maybe</code>
 is a <strong>Just</strong>, its value will be wrapped in the <strong>Ok</strong> variant; if it is a <strong>Nothing</strong> the
 <code>errValue</code> will be wrapped in the <strong>Err</strong> variant.</p>
@@ -645,7 +645,7 @@ is a <strong>Just</strong>, its value will be wrapped in the <strong>Ok</strong>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Result&lt;TValue, TError&gt; From(Maybe&lt;TValue&gt; maybe, TError errValue)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Result&lt;TVal, TErr&gt; From(Maybe&lt;TVal&gt; maybe, TErr errValue)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -658,12 +658,12 @@ is a <strong>Just</strong>, its value will be wrapped in the <strong>Ok</strong>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td><span class="parametername">maybe</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">TError</span></td>
+        <td><span class="xref">TErr</span></td>
         <td><span class="parametername">errValue</span></td>
         <td></td>
       </tr>
@@ -679,7 +679,7 @@ is a <strong>Just</strong>, its value will be wrapped in the <strong>Ok</strong>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -724,7 +724,7 @@ is a <strong>Just</strong>, its value will be wrapped in the <strong>Ok</strong>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L333">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Map_" data-uid="TrueMyth.Result`2.Map*"></a>
-  <h4 id="TrueMyth_Result_2_Map__1_System_Func__0___0__" data-uid="TrueMyth.Result`2.Map``1(System.Func{`0,``0})">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_Map__1_System_Func__0___0__" data-uid="TrueMyth.Result`2.Map``1(System.Func{`0,``0})">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</h4>
   <div class="markdown level1 summary"><p>Map over a Result instance: apply the function to the wrapped value if the instance is Ok, and return the wrapped error value
 wrapped as a new Err of the correct type (Result&lt;UValue, TError&gt;) if the instance is Err.</p>
 <p><code>Result.Select</code> works a lot like it does for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>, but with one important difference. Both
@@ -743,7 +743,7 @@ wrapped in an Ok.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;UValue, TError&gt; Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt; mapFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;T, TErr&gt; Map&lt;T&gt;(Func&lt;TVal, T&gt; mapFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -756,7 +756,7 @@ wrapped in an Ok.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td><p>Mapping function applied to Ok value.</p>
 </td>
@@ -773,7 +773,7 @@ wrapped in an Ok.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -788,7 +788,7 @@ wrapped in an Ok.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>Destination value type resulting from the mapping function.</p>
 </td>
       </tr>
@@ -813,7 +813,7 @@ Console.WriteLine(mappedErr.ToString()); // Err&lt;long,string>[error]</code></p
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L354">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_MapErr_" data-uid="TrueMyth.Result`2.MapErr*"></a>
-  <h4 id="TrueMyth_Result_2_MapErr__1_System_Func__1___0__" data-uid="TrueMyth.Result`2.MapErr``1(System.Func{`1,``0})">MapErr&lt;UError&gt;(Func&lt;TError, UError&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_MapErr__1_System_Func__1___0__" data-uid="TrueMyth.Result`2.MapErr``1(System.Func{`1,``0})">MapErr&lt;T&gt;(Func&lt;TErr, T&gt;)</h4>
   <div class="markdown level1 summary"><p>Map over a <code>Result</code>, exactly as in map, but operating on the value wrapped in an Err instead of the value wrapped in the Ok.
 This is handy for when you need to line up a bunch of different types of errors, or if you need an error of one shape to
 be in a different shape to use somewhere else in your codebase.</p>
@@ -821,7 +821,7 @@ be in a different shape to use somewhere else in your codebase.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;TValue, UError&gt; MapErr&lt;UError&gt;(Func&lt;TError, UError&gt; mapFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;TVal, T&gt; MapErr&lt;T&gt;(Func&lt;TErr, T&gt; mapFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -834,7 +834,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TError, UError&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TErr, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td><p>Mapping function to apply to error wrapped in Err <code>Result</code>.</p>
 </td>
@@ -851,7 +851,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, UError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -866,7 +866,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UError</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>Mapped error type resulting from mapping function.</p>
 </td>
       </tr>
@@ -880,13 +880,13 @@ be in a different shape to use somewhere else in your codebase.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L345">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_MapReturn_" data-uid="TrueMyth.Result`2.MapReturn*"></a>
-  <h4 id="TrueMyth_Result_2_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Result`2.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;UValue&gt;(Func&lt;TValue, UValue&gt;, UValue)</h4>
+  <h4 id="TrueMyth_Result_2_MapReturn__1_System_Func__0___0____0_" data-uid="TrueMyth.Result`2.MapReturn``1(System.Func{`0,``0},``0)">MapReturn&lt;T&gt;(Func&lt;TVal, T&gt;, T)</h4>
   <div class="markdown level1 summary"><p>Map over a <code>Result</code> instance as in map and get out the value if result is an Ok, or return a default value if result is an Err.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UValue MapReturn&lt;UValue&gt;(Func&lt;TValue, UValue&gt; mapFn, UValue defaultValue)</code></pre>
+    <pre><code class="lang-csharp hljs">public T MapReturn&lt;T&gt;(Func&lt;TVal, T&gt; mapFn, T defaultValue)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -899,13 +899,13 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td><p>Mapping function to apply to wrapped Ok value.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">UValue</span></td>
+        <td><span class="xref">T</span></td>
         <td><span class="parametername">defaultValue</span></td>
         <td><p>Fallback value to return if <code>this</code> is an Err.</p>
 </td>
@@ -922,7 +922,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">UValue</span></td>
+        <td><span class="xref">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -937,7 +937,7 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td><p>Destination type resulting from mapping function <code>mapFn</code>.</p>
 </td>
       </tr>
@@ -951,13 +951,13 @@ be in a different shape to use somewhere else in your codebase.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L400">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Match_" data-uid="TrueMyth.Result`2.Match*"></a>
-  <h4 id="TrueMyth_Result_2_Match_System_Action__0__System_Action__1__" data-uid="TrueMyth.Result`2.Match(System.Action{`0},System.Action{`1})">Match(Action&lt;TValue&gt;, Action&lt;TError&gt;)</h4>
-  <div class="markdown level1 summary"><p>Provides similar functionality as <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Match__1_System_Func__0___0__System_Func__1___0__">Match&lt;T&gt;(Func&lt;TValue, T&gt;, Func&lt;TError, T&gt;)</a>, but with no return type.</p>
+  <h4 id="TrueMyth_Result_2_Match_System_Action__0__System_Action__1__" data-uid="TrueMyth.Result`2.Match(System.Action{`0},System.Action{`1})">Match(Action&lt;TVal&gt;, Action&lt;TErr&gt;)</h4>
+  <div class="markdown level1 summary"><p>Provides similar functionality as <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Match__1_System_Func__0___0__System_Func__1___0__">Match&lt;T&gt;(Func&lt;TVal, T&gt;, Func&lt;TErr, T&gt;)</a>, but with no return type.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Match(Action&lt;TValue&gt; ok, Action&lt;TError&gt; err)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Match(Action&lt;TVal&gt; ok, Action&lt;TErr&gt; err)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -970,12 +970,12 @@ be in a different shape to use somewhere else in your codebase.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;TValue&gt;</td>
+        <td><span class="xref">System.Action</span>&lt;TVal&gt;</td>
         <td><span class="parametername">ok</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;TError&gt;</td>
+        <td><span class="xref">System.Action</span>&lt;TErr&gt;</td>
         <td><span class="parametername">err</span></td>
         <td></td>
       </tr>
@@ -989,8 +989,8 @@ be in a different shape to use somewhere else in your codebase.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L395">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Match_" data-uid="TrueMyth.Result`2.Match*"></a>
-  <h4 id="TrueMyth_Result_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="TrueMyth.Result`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">Match&lt;T&gt;(Func&lt;TValue, T&gt;, Func&lt;TError, T&gt;)</h4>
-  <div class="markdown level1 summary"><p>Performs the same basic functionality as <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__">UnwrapOrElse(Func&lt;TError, TValue&gt;)</a>, but instead of simply unwrapping the value if
+  <h4 id="TrueMyth_Result_2_Match__1_System_Func__0___0__System_Func__1___0__" data-uid="TrueMyth.Result`2.Match``1(System.Func{`0,``0},System.Func{`1,``0})">Match&lt;T&gt;(Func&lt;TVal, T&gt;, Func&lt;TErr, T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Performs the same basic functionality as <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__">UnwrapOrElse(Func&lt;TErr, TVal&gt;)</a>, but instead of simply unwrapping the value if
 it is Ok and applying a function to generate the same type if it is Err, lets you supply functions which may transform the wrapped
 type if it is Ok or get a default value for Err.</p>
 <p>This is kind of like a poor man's version of pattern matching, for which C♯ has only limited support.</p>
@@ -998,7 +998,7 @@ type if it is Ok or get a default value for Err.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public T Match&lt;T&gt;(Func&lt;TValue, T&gt; ok, Func&lt;TError, T&gt; err)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Match&lt;T&gt;(Func&lt;TVal, T&gt; ok, Func&lt;TErr, T&gt; err)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1011,12 +1011,12 @@ type if it is Ok or get a default value for Err.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, T&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">ok</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TError, T&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TErr, T&gt;</td>
         <td><span class="parametername">err</span></td>
         <td></td>
       </tr>
@@ -1083,16 +1083,16 @@ Console.WriteLine(value); // 84</code></pre>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L638">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Ok_" data-uid="TrueMyth.Result`2.Ok*"></a>
-  <h4 id="TrueMyth_Result_2_Ok__0_" data-uid="TrueMyth.Result`2.Ok(`0)">Ok(TValue)</h4>
+  <h4 id="TrueMyth_Result_2_Ok__0_" data-uid="TrueMyth.Result`2.Ok(`0)">Ok(TVal)</h4>
   <div class="markdown level1 summary"><p>A factory method for creating <strong>Ok</strong> <code>Result</code> instances.</p>
 <div class="NOTE"><h5>note</h5><p><code>null</code> is allowed by the type signature, but it is highly recommended
-to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> rather than a <code>null</code> as a result.
+to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TVal&gt;</a> rather than a <code>null</code> as a result.
 </p></div>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Result&lt;TValue, TError&gt; Ok(TValue value)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Result&lt;TVal, TErr&gt; Ok(TVal value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1105,7 +1105,7 @@ to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> rath
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td><span class="parametername">value</span></td>
         <td><p>The success value wrapped by the <code>Result</code></p>
 </td>
@@ -1122,7 +1122,7 @@ to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> rath
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1135,7 +1135,7 @@ to use <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> rath
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L420">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Or_" data-uid="TrueMyth.Result`2.Or*"></a>
-  <h4 id="TrueMyth_Result_2_Or__1_TrueMyth_Result__0___0__" data-uid="TrueMyth.Result`2.Or``1(TrueMyth.Result{`0,``0})">Or&lt;UError&gt;(Result&lt;TValue, UError&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_Or__1_TrueMyth_Result__0___0__" data-uid="TrueMyth.Result`2.Or``1(TrueMyth.Result{`0,``0})">Or&lt;T&gt;(Result&lt;TVal, T&gt;)</h4>
   <div class="markdown level1 summary"><p>Provide a fallback for a given <code>Result</code>. Behaves like a logical or: if the result value is an Ok, returns that result; otherwise,
 returns the <code>defaultResult</code> value.</p>
 <p>This is useful when you want to make sure that something which takes a <code>Result</code> always ends up getting an Ok variant, by
@@ -1144,7 +1144,7 @@ supplying a default value for the case that you currently have an Err.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;TValue, UError&gt; Or&lt;UError&gt;(Result&lt;TValue, UError&gt; defaultResult)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;TVal, T&gt; Or&lt;T&gt;(Result&lt;TVal, T&gt; defaultResult)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1157,7 +1157,7 @@ supplying a default value for the case that you currently have an Err.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, UError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, T&gt;</td>
         <td><span class="parametername">defaultResult</span></td>
         <td></td>
       </tr>
@@ -1173,7 +1173,7 @@ supplying a default value for the case that you currently have an Err.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, UError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1188,7 +1188,7 @@ supplying a default value for the case that you currently have an Err.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UError</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1201,8 +1201,8 @@ supplying a default value for the case that you currently have an Err.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L432">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_OrElse_" data-uid="TrueMyth.Result`2.OrElse*"></a>
-  <h4 id="TrueMyth_Result_2_OrElse__1_System_Func_TrueMyth_Result__0___0___" data-uid="TrueMyth.Result`2.OrElse``1(System.Func{TrueMyth.Result{`0,``0}})">OrElse&lt;UError&gt;(Func&lt;Result&lt;TValue, UError&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>Like <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Or__1_TrueMyth_Result__0___0__">Or&lt;UError&gt;(Result&lt;TValue, UError&gt;)</a>, but using a function to construct the alternative Result.</p>
+  <h4 id="TrueMyth_Result_2_OrElse__1_System_Func_TrueMyth_Result__0___0___" data-uid="TrueMyth.Result`2.OrElse``1(System.Func{TrueMyth.Result{`0,``0}})">OrElse&lt;T&gt;(Func&lt;Result&lt;TVal, T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Like <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Or__1_TrueMyth_Result__0___0__">Or&lt;T&gt;(Result&lt;TVal, T&gt;)</a>, but using a function to construct the alternative Result.</p>
 <p>Sometimes you need to perform an operation using other data in the environment to construct the fallback
 value. In these situations, you can pass a function (which may be a closure) as the elseFn to generate
 the fallback Result&lt;TValue,TError&gt;. It can then transform the data in the Err to something usable
@@ -1212,7 +1212,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;TValue, UError&gt; OrElse&lt;UError&gt;(Func&lt;Result&lt;TValue, UError&gt;&gt; elseFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;TVal, T&gt; OrElse&lt;T&gt;(Func&lt;Result&lt;TVal, T&gt;&gt; elseFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1225,7 +1225,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, UError&gt;&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;<a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, T&gt;&gt;</td>
         <td><span class="parametername">elseFn</span></td>
         <td></td>
       </tr>
@@ -1241,7 +1241,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, UError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1256,7 +1256,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UError</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1269,13 +1269,13 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L437">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_Select_" data-uid="TrueMyth.Result`2.Select*"></a>
-  <h4 id="TrueMyth_Result_2_Select__1_System_Func__0___0__" data-uid="TrueMyth.Result`2.Select``1(System.Func{`0,``0})">Select&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Map__1_System_Func__0___0__">Map&lt;UValue&gt;(Func&lt;TValue, UValue&gt;)</a>.</p>
+  <h4 id="TrueMyth_Result_2_Select__1_System_Func__0___0__" data-uid="TrueMyth.Result`2.Select``1(System.Func{`0,``0})">Select&lt;T&gt;(Func&lt;TVal, T&gt;)</h4>
+  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Map__1_System_Func__0___0__">Map&lt;T&gt;(Func&lt;TVal, T&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;UValue, TError&gt; Select&lt;UValue&gt;(Func&lt;TValue, UValue&gt; mapFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;T, TErr&gt; Select&lt;T&gt;(Func&lt;TVal, T&gt; mapFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1288,7 +1288,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, UValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td></td>
       </tr>
@@ -1304,7 +1304,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1319,7 +1319,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1332,13 +1332,13 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L442">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_SelectErr_" data-uid="TrueMyth.Result`2.SelectErr*"></a>
-  <h4 id="TrueMyth_Result_2_SelectErr__1_System_Func__1___0__" data-uid="TrueMyth.Result`2.SelectErr``1(System.Func{`1,``0})">SelectErr&lt;UError&gt;(Func&lt;TError, UError&gt;)</h4>
-  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_MapErr__1_System_Func__1___0__">MapErr&lt;UError&gt;(Func&lt;TError, UError&gt;)</a></p>
+  <h4 id="TrueMyth_Result_2_SelectErr__1_System_Func__1___0__" data-uid="TrueMyth.Result`2.SelectErr``1(System.Func{`1,``0})">SelectErr&lt;T&gt;(Func&lt;TErr, T&gt;)</h4>
+  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_MapErr__1_System_Func__1___0__">MapErr&lt;T&gt;(Func&lt;TErr, T&gt;)</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;TValue, UError&gt; SelectErr&lt;UError&gt;(Func&lt;TError, UError&gt; mapFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;TVal, T&gt; SelectErr&lt;T&gt;(Func&lt;TErr, T&gt; mapFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1351,7 +1351,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TError, UError&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TErr, T&gt;</td>
         <td><span class="parametername">mapFn</span></td>
         <td></td>
       </tr>
@@ -1367,7 +1367,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, UError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1382,7 +1382,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UError</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1395,13 +1395,13 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L447">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_SelectMany_" data-uid="TrueMyth.Result`2.SelectMany*"></a>
-  <h4 id="TrueMyth_Result_2_SelectMany__1_System_Func__0_TrueMyth_Result___0__1___" data-uid="TrueMyth.Result`2.SelectMany``1(System.Func{`0,TrueMyth.Result{``0,`1}})">SelectMany&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_AndThen__1_System_Func__0_TrueMyth_Result___0__1___">AndThen&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt;)</a>.</p>
+  <h4 id="TrueMyth_Result_2_SelectMany__1_System_Func__0_TrueMyth_Result___0__1___" data-uid="TrueMyth.Result`2.SelectMany``1(System.Func{`0,TrueMyth.Result{``0,`1}})">SelectMany&lt;T&gt;(Func&lt;TVal, Result&lt;T, TErr&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>An alias for <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_AndThen__1_System_Func__0_TrueMyth_Result___0__1___">AndThen&lt;T&gt;(Func&lt;TVal, Result&lt;T, TErr&gt;&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Result&lt;UValue, TError&gt; SelectMany&lt;UValue&gt;(Func&lt;TValue, Result&lt;UValue, TError&gt;&gt; bindFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public Result&lt;T, TErr&gt; SelectMany&lt;T&gt;(Func&lt;TVal, Result&lt;T, TErr&gt;&gt; bindFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1414,7 +1414,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TValue, <a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TVal, <a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;&gt;</td>
         <td><span class="parametername">bindFn</span></td>
         <td></td>
       </tr>
@@ -1430,7 +1430,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;UValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;T, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1445,7 +1445,7 @@ as an Ok, or generate a new Err instance as appropriate.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="parametername">UValue</span></td>
+        <td><span class="parametername">T</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1459,14 +1459,14 @@ as an Ok, or generate a new Err instance as appropriate.</p>
   </span>
   <a id="TrueMyth_Result_2_ToMaybe_" data-uid="TrueMyth.Result`2.ToMaybe*"></a>
   <h4 id="TrueMyth_Result_2_ToMaybe" data-uid="TrueMyth.Result`2.ToMaybe">ToMaybe()</h4>
-  <div class="markdown level1 summary"><p>Convert a <code>Result</code> to a <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a>.</p>
+  <div class="markdown level1 summary"><p>Convert a <code>Result</code> to a <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TVal&gt;</a>.</p>
 <p>The converted type will be Just if the <code>Result</code> is Ok or Nothing if the <code>Result</code> is Err; the
 wrapped error value will be discarded.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Maybe&lt;TValue&gt; ToMaybe()</code></pre>
+    <pre><code class="lang-csharp hljs">public Maybe&lt;TVal&gt; ToMaybe()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1478,7 +1478,7 @@ wrapped error value will be discarded.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TValue&gt;</td>
+        <td><a class="xref" href="TrueMyth.Maybe-1.html">Maybe</a>&lt;TVal&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1524,14 +1524,14 @@ wrapped error value will be discarded.</p>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L471">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_UnwrapOr_" data-uid="TrueMyth.Result`2.UnwrapOr*"></a>
-  <h4 id="TrueMyth_Result_2_UnwrapOr__0_" data-uid="TrueMyth.Result`2.UnwrapOr(`0)">UnwrapOr(TValue)</h4>
+  <h4 id="TrueMyth_Result_2_UnwrapOr__0_" data-uid="TrueMyth.Result`2.UnwrapOr(`0)">UnwrapOr(TVal)</h4>
   <div class="markdown level1 summary"><p>Safely get the value out of the <strong>Ok</strong> variant of a <code>Result</code>. This is the recommended way to get a value
 out of a <code>Result</code> most of the time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TValue UnwrapOr(TValue defaultValue)</code></pre>
+    <pre><code class="lang-csharp hljs">public TVal UnwrapOr(TVal defaultValue)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1544,7 +1544,7 @@ out of a <code>Result</code> most of the time.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td><span class="parametername">defaultValue</span></td>
         <td><p>Fallback value to be returned if <code>this</code> is <strong>Err</strong>.</p>
 </td>
@@ -1561,7 +1561,7 @@ out of a <code>Result</code> most of the time.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1581,16 +1581,16 @@ Console.WriteLine(anErr.UnwrapOr(0)); // 0</code></pre>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L493">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_UnwrapOrElse_" data-uid="TrueMyth.Result`2.UnwrapOrElse*"></a>
-  <h4 id="TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__" data-uid="TrueMyth.Result`2.UnwrapOrElse(System.Func{`1,`0})">UnwrapOrElse(Func&lt;TError, TValue&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__" data-uid="TrueMyth.Result`2.UnwrapOrElse(System.Func{`1,`0})">UnwrapOrElse(Func&lt;TErr, TVal&gt;)</h4>
   <div class="markdown level1 summary"><p>Safely get the value out of a <code>Result&lt;TValue,TError&gt;</code> by returning the wrapped value if it is <strong>Ok</strong>
 or by applying <code>elseFn</code> if it is <strong>Err</strong>.</p>
 <p>This is useful when you need to generate a value (e.g. by using current values in the environment – whether
-preloaded or by local closure) instead of having a single default value available (as in <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_">UnwrapOr(TValue)</a>).</p>
+preloaded or by local closure) instead of having a single default value available (as in <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_">UnwrapOr(TVal)</a>).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TValue UnwrapOrElse(Func&lt;TError, TValue&gt; elseFn)</code></pre>
+    <pre><code class="lang-csharp hljs">public TVal UnwrapOrElse(Func&lt;TErr, TVal&gt; elseFn)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1603,7 +1603,7 @@ preloaded or by local closure) instead of having a single default value availabl
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;TError, TValue&gt;</td>
+        <td><span class="xref">System.Func</span>&lt;TErr, TVal&gt;</td>
         <td><span class="parametername">elseFn</span></td>
         <td><p>Function to apply to map <code>TError</code> to <code>TVaue</code>.</p>
 </td>
@@ -1620,7 +1620,7 @@ preloaded or by local closure) instead of having a single default value availabl
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1645,7 +1645,7 @@ Console.WriteLine(anErr.UnwrapOrElse(handleError)); // error</code></pre>
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L676">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_op_Explicit_" data-uid="TrueMyth.Result`2.op_Explicit*"></a>
-  <h4 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0" data-uid="TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`0">Explicit(Result&lt;TValue, TError&gt; to TValue)</h4>
+  <h4 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0" data-uid="TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`0">Explicit(Result&lt;TVal, TErr&gt; to TVal)</h4>
   <div class="markdown level1 summary"><p>Implicit conversion operator from <code>Result&lt;TValue, TError&gt;</code> to <code>TValue</code>. Equivalent to <code>result.UnsafelyUnwrap</code>, but
 is helpful for eliminating unnecessary syntax.</p>
 <div class="NOTE"><h5>note</h5><p>
@@ -1656,7 +1656,7 @@ way for the type inference system in C♯ to resolve them.
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static explicit operator TValue(Result&lt;TValue, TError&gt; result)</code></pre>
+    <pre><code class="lang-csharp hljs">public static explicit operator TVal(Result&lt;TVal, TErr&gt; result)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1669,7 +1669,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td><span class="parametername">result</span></td>
         <td></td>
       </tr>
@@ -1685,7 +1685,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1709,7 +1709,7 @@ way for the type inference system in C♯ to resolve them.
 <pre><code>int SomeOperation() => return SomeOtherOperation();</code></pre>
 <div class="NOTE"><h5>note</h5><p>
 There are actually safer <em>and</em> more semantic methods for handling results than this, and we recommend the use 
-of <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_">UnwrapOr(TValue)</a> or any of the several methods provided for such use; however, we recognize that in 
+of <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_">UnwrapOr(TVal)</a> or any of the several methods provided for such use; however, we recognize that in 
 spite of our desire to avoid exceptions and <code>null</code>, reality insists that sometimes we have to use them, particularly
 when making changes to incumbent software.
 </p></div>
@@ -1722,8 +1722,8 @@ when making changes to incumbent software.
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L688">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_op_Explicit_" data-uid="TrueMyth.Result`2.op_Explicit*"></a>
-  <h4 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____1" data-uid="TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`1">Explicit(Result&lt;TValue, TError&gt; to TError)</h4>
-  <div class="markdown level1 summary"><p>This works similarly to <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0">Explicit(Result&lt;TValue, TError&gt; to TValue)</a>, but instead of conversion to a <code>TValue</code>,
+  <h4 id="TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____1" data-uid="TrueMyth.Result`2.op_Explicit(TrueMyth.Result{`0,`1})~`1">Explicit(Result&lt;TVal, TErr&gt; to TErr)</h4>
+  <div class="markdown level1 summary"><p>This works similarly to <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_op_Explicit_TrueMyth_Result__0__1____0">Explicit(Result&lt;TVal, TErr&gt; to TVal)</a>, but instead of conversion to a <code>TValue</code>,
 the implicit conversion is to a <code>TError</code>.</p>
 <div class="NOTE"><h5>note</h5><p>
 This operator will not work if <code>TValue</code> and <code>TError</code> are the same because there will be no
@@ -1733,7 +1733,7 @@ way for the type inference system in C♯ to resolve them.
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static explicit operator TError(Result&lt;TValue, TError&gt; result)</code></pre>
+    <pre><code class="lang-csharp hljs">public static explicit operator TErr(Result&lt;TVal, TErr&gt; result)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1746,7 +1746,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td><span class="parametername">result</span></td>
         <td></td>
       </tr>
@@ -1762,7 +1762,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TError</span></td>
+        <td><span class="xref">TErr</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1775,7 +1775,7 @@ way for the type inference system in C♯ to resolve them.
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L736">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_op_Implicit_" data-uid="TrueMyth.Result`2.op_Implicit*"></a>
-  <h4 id="TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_" data-uid="TrueMyth.Result`2.op_Implicit(`0)~TrueMyth.Result{`0,`1}">Implicit(TValue to Result&lt;TValue, TError&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_" data-uid="TrueMyth.Result`2.op_Implicit(`0)~TrueMyth.Result{`0,`1}">Implicit(TVal to Result&lt;TVal, TErr&gt;)</h4>
   <div class="markdown level1 summary"><p>Implicit conversion operator from <code>TValue</code> to <code>Result&lt;TValue,TError&gt;</code>.  As with the other operators, this
 is intended to reduce boilerplate code required by the type system and allow you to achieve maximum leverage of type
 inference.</p>
@@ -1787,7 +1787,7 @@ way for the type inference system in C♯ to resolve them.
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static implicit operator Result&lt;TValue, TError&gt;(TValue value)</code></pre>
+    <pre><code class="lang-csharp hljs">public static implicit operator Result&lt;TVal, TErr&gt;(TVal value)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1800,7 +1800,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TValue</span></td>
+        <td><span class="xref">TVal</span></td>
         <td><span class="parametername">value</span></td>
         <td></td>
       </tr>
@@ -1816,7 +1816,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1848,7 +1848,7 @@ way for the type inference system in C♯ to resolve them.
         return exn.Message;
     }
 }</code></pre>
-<p>This will be particularly powerful when combined with similar operators defined for <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> when you
+<p>This will be particularly powerful when combined with similar operators defined for <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TVal&gt;</a> when you
 have a return type like <code>Result&lt;Maybe&lt;TValue&gt;,TError&gt;</code>.</p>
 
   <span class="small pull-right mobile-hide">
@@ -1859,7 +1859,7 @@ have a return type like <code>Result&lt;Maybe&lt;TValue&gt;,TError&gt;</code>.</
     <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Result.cs/#L750">View Source</a>
   </span>
   <a id="TrueMyth_Result_2_op_Implicit_" data-uid="TrueMyth.Result`2.op_Implicit*"></a>
-  <h4 id="TrueMyth_Result_2_op_Implicit__1__TrueMyth_Result__0__1_" data-uid="TrueMyth.Result`2.op_Implicit(`1)~TrueMyth.Result{`0,`1}">Implicit(TError to Result&lt;TValue, TError&gt;)</h4>
+  <h4 id="TrueMyth_Result_2_op_Implicit__1__TrueMyth_Result__0__1_" data-uid="TrueMyth.Result`2.op_Implicit(`1)~TrueMyth.Result{`0,`1}">Implicit(TErr to Result&lt;TVal, TErr&gt;)</h4>
   <div class="markdown level1 summary"><p>Implicit conversion operator from <code>TError</code> to <code>Result&lt;TValue,TError&gt;</code>.  As with the other operators, this
 is intended to reduce boilerplate code required by the type system and allow you to achieve maximum leverage of type
 inference.</p>
@@ -1867,12 +1867,12 @@ inference.</p>
 This operator will not work if <code>TValue</code> and <code>TError</code> are the same because there will be no
 way for the type inference system in C♯ to resolve them.
 </p></div>
-<p>See examples provided with <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_">Implicit(TValue to Result&lt;TValue, TError&gt;)</a>.</p>
+<p>See examples provided with <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_op_Implicit__0__TrueMyth_Result__0__1_">Implicit(TVal to Result&lt;TVal, TErr&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static implicit operator Result&lt;TValue, TError&gt;(TError error)</code></pre>
+    <pre><code class="lang-csharp hljs">public static implicit operator Result&lt;TVal, TErr&gt;(TErr error)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1885,7 +1885,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TError</span></td>
+        <td><span class="xref">TErr</span></td>
         <td><span class="parametername">error</span></td>
         <td></td>
       </tr>
@@ -1901,7 +1901,7 @@ way for the type inference system in C♯ to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TValue, TError&gt;</td>
+        <td><a class="xref" href="TrueMyth.Result-2.html">Result</a>&lt;TVal, TErr&gt;</td>
         <td></td>
       </tr>
     </tbody>

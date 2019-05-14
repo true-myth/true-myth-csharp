@@ -14,11 +14,119 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.Err-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.Err-2.html",
+          "hash": "GlgD6il0S7IFoTH2ik+5Zw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.IMaybe-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.IMaybe-1.html",
+          "hash": "ikeMGRiyuuAMCqJslnKL8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.IResult-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.IResult-2.html",
+          "hash": "2xwH7eb/9WDZ4+Q9ZYPqqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.Just-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.Just-1.html",
+          "hash": "lffhGuDvkmjWfxw6vdIpeA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.Maybe.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.Maybe.html",
+          "hash": "XlpVVWZFYfyVQIfFX8zkFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.Nothing-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.Nothing-1.html",
+          "hash": "Vv92xsSNEb2bWzxbo3P3Hw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.Ok-2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.Ok-2.html",
+          "hash": "JGCjZ+2jBZrVrHWOvQIsDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.Result.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.Result.html",
+          "hash": "zHEb9tYjbtDc2d9wqyzecw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TrueMyth.Algebraic.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TrueMyth.Algebraic.html",
+          "hash": "RdBHP4/nPy6KOn6TgTzFWw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/TrueMyth.Maybe-1.yml",
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe-1.html",
-          "hash": "ZXAsRT0vgM8SAUie89kYyQ=="
+          "hash": "PIyxDcvkD/FaaZ+N5FWReg=="
         }
       },
       "is_incremental": false,
@@ -30,7 +138,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Maybe.html",
-          "hash": "shPstoIFtViRFYKTgqK0LQ=="
+          "hash": "P2hLQDJ5+w6Ok67IUgRpMg=="
         }
       },
       "is_incremental": false,
@@ -42,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result-2.html",
-          "hash": "GlUpWW7L1XyMbkV0tOAThQ=="
+          "hash": "Dhaqfi23Vb7PK4gX+nMc3g=="
         }
       },
       "is_incremental": false,
@@ -54,7 +162,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Result.html",
-          "hash": "3GOi/DhSafdpFM2PblGjKw=="
+          "hash": "yuuhUUjcleU4sBbF294Ceg=="
         }
       },
       "is_incremental": false,
@@ -66,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Unsafe.UnsafeExtensions.html",
-          "hash": "vno7qd/iBVbFClluowKJTQ=="
+          "hash": "o4o+U0EVlRn/c+SpL6R04Q=="
         }
       },
       "is_incremental": false,
@@ -78,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.Unsafe.html",
-          "hash": "DlYbKv8z3nd8f5Eyga3MPQ=="
+          "hash": "a6HNgXTDfJp9ML1zQRr1DQ=="
         }
       },
       "is_incremental": false,
@@ -90,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TrueMyth.html",
-          "hash": "UPG2y0JXx23B8bjlhe+fFA=="
+          "hash": "ZHblkWSTXKiMgW/lJeRq8g=="
         }
       },
       "is_incremental": false,
@@ -102,7 +210,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "lOdZQbqajuslQ07xAIdtVg=="
+          "hash": "YvElkORowzcDSTl/mCGUFg=="
         }
       },
       "is_incremental": false,
@@ -209,16 +317,16 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 16,
+          "skipped_file_count": 0
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 3,
-          "skipped_file_count": 0
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 7,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

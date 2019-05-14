@@ -83,7 +83,7 @@
   
   <h1 id="TrueMyth_Unsafe_UnsafeExtensions" data-uid="TrueMyth.Unsafe.UnsafeExtensions" class="text-break">Class UnsafeExtensions
   </h1>
-  <div class="markdown level0 summary"><p>Extensions to the <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TValue&gt;</a> and <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TValue, TError&gt;</a> implementations; the use of these
+  <div class="markdown level0 summary"><p>Extensions to the <a class="xref" href="TrueMyth.Maybe-1.html">Maybe&lt;TVal&gt;</a> and <a class="xref" href="TrueMyth.Result-2.html">Result&lt;TVal, TErr&gt;</a> implementations; the use of these
 methods is discouraged by organizing them this way.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -126,15 +126,77 @@ methods is discouraged by organizing them this way.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__1_TrueMyth_Algebraic_IMaybe___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap%60%601(TrueMyth.Algebraic.IMaybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L21">View Source</a>
+  </span>
+  <a id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap_" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap*"></a>
+  <h4 id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__1_TrueMyth_Algebraic_IMaybe___0__" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``1(TrueMyth.Algebraic.IMaybe{``0})">UnsafelyUnwrap&lt;T&gt;(IMaybe&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T UnsafelyUnwrap&lt;T&gt;(this IMaybe&lt;T&gt; maybe)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IMaybe-1.html">IMaybe</a>&lt;T&gt;</td>
+        <td><span class="parametername">maybe</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__1_TrueMyth_Maybe___0__.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap%60%601(TrueMyth.Maybe%7B%60%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L16">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L18">View Source</a>
   </span>
   <a id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap_" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap*"></a>
   <h4 id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__1_TrueMyth_Maybe___0__" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``1(TrueMyth.Maybe{``0})">UnsafelyUnwrap&lt;T&gt;(Maybe&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the <code>TValue</code> value out of the <code>Maybe&lt;TValue&gt;</code>. Returns the content of a <strong>Just</strong>, but <em>throws if the <code>Maybe</code> is <strong>Nothing</strong></em>.
-Prefer to use <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_">UnwrapOr(TValue)</a> or <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TValue&gt;)</a>.</p>
+Prefer to use <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOr__0_">UnwrapOr(TVal)</a> or <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_UnwrapOrElse_System_Func__0__">UnwrapOrElse(Func&lt;TVal&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -190,15 +252,81 @@ Prefer to use <a class="xref" href="TrueMyth.Maybe-1.html#TrueMyth_Maybe_1_Unwra
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__2_TrueMyth_Algebraic_IResult___0___1__.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap%60%602(TrueMyth.Algebraic.IResult%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L31">View Source</a>
+  </span>
+  <a id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap_" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap*"></a>
+  <h4 id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__2_TrueMyth_Algebraic_IResult___0___1__" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``2(TrueMyth.Algebraic.IResult{``0,``1})">UnsafelyUnwrap&lt;T, E&gt;(IResult&lt;T, E&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static T UnsafelyUnwrap&lt;T, E&gt;(this IResult&lt;T, E&gt; result)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, E&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">E</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__2_TrueMyth_Result___0___1__.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap%60%602(TrueMyth.Result%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L22">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L28">View Source</a>
   </span>
   <a id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap_" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap*"></a>
   <h4 id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrap__2_TrueMyth_Result___0___1__" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrap``2(TrueMyth.Result{``0,``1})">UnsafelyUnwrap&lt;T, E&gt;(Result&lt;T, E&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the value out of the <code>Result</code>. Returns the content of an <strong>Ok</strong> but <em>throws if the result is <strong>Err</strong></em>.
-Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_">UnwrapOr(TValue)</a> or <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__">UnwrapOrElse(Func&lt;TError, TValue&gt;)</a></p>
+Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOr__0_">UnwrapOr(TVal)</a> or <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__">UnwrapOrElse(Func&lt;TErr, TVal&gt;)</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -258,15 +386,81 @@ Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unw
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr__2_TrueMyth_Algebraic_IResult___0___1__.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr%60%602(TrueMyth.Algebraic.IResult%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L41">View Source</a>
+  </span>
+  <a id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr_" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr*"></a>
+  <h4 id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr__2_TrueMyth_Algebraic_IResult___0___1__" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr``2(TrueMyth.Algebraic.IResult{``0,``1})">UnsafelyUnwrapErr&lt;T, E&gt;(IResult&lt;T, E&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static E UnsafelyUnwrapErr&lt;T, E&gt;(this IResult&lt;T, E&gt; result)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TrueMyth.Algebraic.IResult-2.html">IResult</a>&lt;T, E&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">E</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="parametername">E</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr__2_TrueMyth_Result___0___1__.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr%60%602(TrueMyth.Result%7B%60%600%2C%60%601%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L28">View Source</a>
+    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L38">View Source</a>
   </span>
   <a id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr_" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr*"></a>
   <h4 id="TrueMyth_Unsafe_UnsafeExtensions_UnsafelyUnwrapErr__2_TrueMyth_Result___0___1__" data-uid="TrueMyth.Unsafe.UnsafeExtensions.UnsafelyUnwrapErr``2(TrueMyth.Result{``0,``1})">UnsafelyUnwrapErr&lt;T, E&gt;(Result&lt;T, E&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the error out of the <code>Result</code>. Returns the content of an <strong>Err</strong>, but <em>throws if the result is <strong>Ok</strong></em>.
-Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__">UnwrapOrElse(Func&lt;TError, TValue&gt;)</a>.</p>
+Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_UnwrapOrElse_System_Func__1__0__">UnwrapOrElse(Func&lt;TErr, TVal&gt;)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -335,7 +529,7 @@ Prefer to use <a class="xref" href="TrueMyth.Result-2.html#TrueMyth_Result_2_Unw
                     <a href="https://github.com/true-myth/true-myth-csharp/new/master/apiSpec/new?filename=TrueMyth_Unsafe_UnsafeExtensions.md&amp;value=---%0Auid%3A%20TrueMyth.Unsafe.UnsafeExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/true-myth/true-myth-csharp/blob/master/src/TrueMyth/Unsafe/UnsafeExtensions.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
